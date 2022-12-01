@@ -22,11 +22,13 @@ export function getEvents(filter: string): EventInput[] {
 
 const f = (twDate: string) => $tw.utils.parseDate(twDate);
 function mapTiddlerFieldsToFullCalendarEventObject(fields: ITiddlerFields): EventInput[] {
-  const { title, startDate, endDate, created, modified } = fields;
+  const { title, startDate, endDate, created, modified, color, tags } = fields;
+  const backgroundColor = color ?? tags?.map((tagName) => $tw.wiki.getTiddler(tagName)?.fields?.color).find(Boolean);
   const options: Partial<EventInput> = {
     title,
     id: title,
     interactive: true,
+    backgroundColor,
   };
   /**
    * CalendarEventType.Event
