@@ -2,7 +2,6 @@ import type { Widget } from 'tiddlywiki';
 import { Calendar, CalendarOptions } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
-import scrollGridPlugin from '@fullcalendar/scrollgrid';
 import adaptivePlugin from '@fullcalendar/adaptive';
 import interactionPlugin from '@fullcalendar/interaction';
 import listPlugin from '@fullcalendar/list';
@@ -18,7 +17,7 @@ export interface IContext {
 export function initCalendar(containerElement: HTMLDivElement, context: IContext) {
   const calendar = new Calendar(containerElement, {
     eventSources: [{ events: getEventOnFullCalendarViewChange, id: tiddlerEventSourceID }],
-    plugins: [dayGridPlugin, timeGridPlugin, listPlugin, scrollGridPlugin, adaptivePlugin, interactionPlugin],
+    plugins: [dayGridPlugin, timeGridPlugin, listPlugin, adaptivePlugin, interactionPlugin],
     views: {
       timeGridThreeDay: {
         type: 'timeGrid',
