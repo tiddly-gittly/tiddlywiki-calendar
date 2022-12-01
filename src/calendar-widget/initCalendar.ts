@@ -1,3 +1,4 @@
+import type { Widget } from 'tiddlywiki';
 import { Calendar } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
@@ -10,7 +11,10 @@ import { getEventOnFullCalendarViewChange } from './getEvents';
 
 const isSmallScreen = window.innerWidth <= 600;
 
-export function initCalendar(containerElement: HTMLDivElement) {
+export interface IContext {
+  parentWidget?: Widget | undefined;
+}
+export function initCalendar(containerElement: HTMLDivElement, context: IContext) {
   const calendar = new Calendar(containerElement, {
     events: getEventOnFullCalendarViewChange,
     plugins: [dayGridPlugin, timeGridPlugin, listPlugin, scrollGridPlugin, adaptivePlugin, interactionPlugin],
@@ -50,7 +54,7 @@ export function initCalendar(containerElement: HTMLDivElement) {
       : false,
     schedulerLicenseKey: 'GPL-My-Project-Is-Open-Source',
     // event handlers
-    ...getHandlers(),
+    ...getHandlers(context),
   });
   return calendar;
 }

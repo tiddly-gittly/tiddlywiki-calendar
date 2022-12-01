@@ -1,23 +1,26 @@
 import type { ModalWidget } from 'tiddlywiki';
 import type { CalendarOptions } from '@fullcalendar/core';
 import { toTWUTCString } from '../utils';
+import type { IContext } from './initCalendar';
 
 const TWModal = (require('$:/core/modules/utils/dom/modal.js') as { Modal: ModalWidget }).Modal;
 
-export function getHandlers(): CalendarOptions {
+export function getHandlers(context: IContext): CalendarOptions {
   const handlers: CalendarOptions = {
     viewDidMount(mountArgument) {
       // DEBUG: console
       console.log(`mountArg`, mountArgument);
     },
     eventClick: (info) => {
-      if (info.jsEvent.getModifierState('Control') || info.jsEvent.getModifierState('Meta')) {
-        // DEBUG: console
-        console.log(`info.event.id`, info.event.id);
-      } else {
-        // DEBUG: console
-        console.log(`info.event`, info.event);
-      }
+      // if (info.jsEvent.getModifierState('Control') || info.jsEvent.getModifierState('Meta')) {
+      context?.parentWidget?.dispatchEvent({
+        type: 'tm-navigate',
+        navigateTo: info.event.title,
+        metaKey: info.jsEvent.getModifierState('Meta'),
+        ctrlKey: info.jsEvent.getModifierState('Control'),
+        altKey: info.jsEvent.getModifierState('Alt'),
+        shiftKey: info.jsEvent.getModifierState('Shift'),
+      });
     },
     dateClick(info) {
       console.log('dateClick', info);
