@@ -1,0 +1,30 @@
+title: $:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/CreateNewTiddlerPopupFooter
+
+\define cleearAction()
+<$action-setfield
+  $tiddler="$:/state/Calendar/PageLayout/create-tiddler"
+  text=""
+  tags=""
+  draft.title=""
+  startDate=""
+  endDate=""
+/>
+\end
+
+<div class="tw-calendar-footer-buttons">
+  <$button class="tw-calendar-footer-button" message="tm-close-tiddler">
+    Close
+    <<cleearAction>>
+  </$button>
+  
+  <$button class="tw-calendar-footer-button" message="tm-close-tiddler">
+    Create
+    <$action-createtiddler
+      $basetitle={{$:/state/Calendar/PageLayout/create-tiddler!!draft.title}}
+      $template="$:/state/Calendar/PageLayout/create-tiddler"
+      draft.title=""
+      type="text/vnd.tiddlywiki"
+    />
+    <<cleearAction>>
+  </$button>
+</div>

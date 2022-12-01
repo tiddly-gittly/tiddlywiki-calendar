@@ -6,6 +6,7 @@ import scrollGridPlugin from '@fullcalendar/scrollgrid';
 import adaptivePlugin from '@fullcalendar/adaptive';
 import interactionPlugin from '@fullcalendar/interaction';
 import listPlugin from '@fullcalendar/list';
+import { toTWUTCString } from '../utils';
 
 const TWModal = (require('$:/core/modules/utils/dom/modal.js') as { Modal: ModalWidget }).Modal;
 
@@ -67,15 +68,27 @@ export function initCalendar(containerElement: HTMLDivElement) {
      * @url https://fullcalendar.io/docs/select-callback
      */
     select(info) {
-      // DEBUG: console
-      console.log(`info`, info);
-      new TWModal($tw.wiki).display('$:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/CreateNewTiddlerPopup', { maskClosable: true });
       // @ts-expect-error Property 'type' does not exist on type 'ViewApi'.ts(2339)
       if (info.view.type === 'dayGridMonth') {
-        // @ts-expect-error Property 'date' does not exist on type 'DateSelectArg'.ts(2339)
-        const start = info.date as Date;
-        const end = new Date(start);
-        end.setDate(start.getDate() - 1);
+        info.start = new Date(info.startStr);
+        info.end = new Date(info.endStr);
+        // info.end.setDate(info.start.getDate() - 1);
+      }
+      const startDate = toTWUTCString(info.start);
+      const endDate = toTWUTCString(info.end);
+      $tw.wiki.addTiddler({
+        title: '$:/state/Calendar/PageLayout/create-tiddler',
+        startDate,
+        endDate,
+        'draft.title': info.startStr,
+      });
+      new TWModal($tw.wiki).display('$:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/CreateNewTiddlerPopup', {
+        variables: { maskClosable: 'true' },
+      });
+      const titleInputElement = document.querySelector<HTMLInputElement>('.tw-calendar-layout-create-new-tiddler-popup > .tc-titlebar.tc-edit-texteditor');
+      if (titleInputElement !== null) {
+        // fix title not auto focus in modal
+        titleInputElement.focus();
       }
     },
   });
