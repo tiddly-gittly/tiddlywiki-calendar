@@ -1,5 +1,5 @@
 import type { Widget } from 'tiddlywiki';
-import { Calendar } from '@fullcalendar/core';
+import { Calendar, CalendarOptions } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import scrollGridPlugin from '@fullcalendar/scrollgrid';
@@ -40,22 +40,37 @@ export function initCalendar(containerElement: HTMLDivElement, context: IContext
     longPressDelay: 250,
     nowIndicator: true,
     scrollTimeReset: false,
-    headerToolbar: isSmallScreen
-      ? false
-      : {
-          left: 'prev,next today',
-          center: 'title',
-          right: 'dayGridMonth,timeGridWeek,timeGridThreeDay,timeGridDay,listWeek',
-        },
-    footerToolbar: isSmallScreen
-      ? {
-          right: 'today,prev,next',
-          left: 'timeGridThreeDay,timeGridDay,listWeek',
-        }
-      : false,
     schedulerLicenseKey: 'GPL-My-Project-Is-Open-Source',
+    ...getToolbarSettings(context),
     // event handlers
     ...getHandlers(context),
   });
   return calendar;
+}
+
+function getToolbarSettings(_context: IContext): CalendarOptions {
+  const inCalendarLayout = $tw.wiki.getTiddlerText('$:/layout') === '$:/plugins/linonetwo/tw-calendar/tiddlywiki-ui/PageLayout/CalendarLayout';
+  return {
+    customButtons: {
+      backToDefaultLayout: {
+        text: 'Home',
+        click: () => {
+          $tw.wiki.setText('$:/layout', 'text', '$:/core/ui/PageTemplate');
+        },
+      },
+    },
+    headerToolbar: isSmallScreen
+      ? false
+      : {
+          left: `prev,next today`,
+          center: 'title',
+          right: `${inCalendarLayout ? 'backToDefaultLayout ' : ''}dayGridMonth,timeGridWeek,timeGridThreeDay,timeGridDay,listWeek`,
+        },
+    footerToolbar: isSmallScreen
+      ? {
+          right: `today,prev,next`,
+          left: `timeGridThreeDay,timeGridDay,listWeek${inCalendarLayout ? ' backToDefaultLayout' : ''}`,
+        }
+      : false,
+  };
 }
