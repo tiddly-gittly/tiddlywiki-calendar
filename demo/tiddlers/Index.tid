@@ -8,3 +8,7 @@ type: text/vnd.tiddlywiki
 ```
 
 <$calendar height="400px" />
+
+Try drag on the agenda to create a new event tiddler.
+
+{{$:/plugins/linonetwo/tw-example-plugin/readme}}
