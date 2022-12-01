@@ -9,12 +9,23 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
-  width: 200px;
-}
-.tw-calendar-layout-create-new-tiddler-popup button {
+  align-items: flex-start;
   width: 100%;
 }
-.tw-calendar-layout-create-new-tiddler-popup textarea {
+.tw-calendar-layout-create-new-tiddler-popup .tw-calendar-title-input {
+  width: 100%;
+  height: 3em;
+}
+.tw-calendar-layout-create-new-tiddler-popup .tw-calendar-tag-picker-container {
+  margin: 10px 0;
+}
+.tw-calendar-layout-create-new-tiddler-popup .tw-calendar-tag-picker-container .tc-edit-tags {
+  padding-left: 0;
+  border: unset;
+}
+.tw-calendar-layout-create-new-tiddler-popup .tw-calendar-tag-picker-container .tc-edit-texteditor {
+  height: 3em;
+}
+.tw-calendar-layout-create-new-tiddler-popup .tw-calendar-ok-button {
   width: 100%;
 }
