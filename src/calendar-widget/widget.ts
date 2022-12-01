@@ -1,6 +1,7 @@
 import type { Calendar } from '@fullcalendar/core';
 import type { Widget as IWidget, IChangedTiddlers } from 'tiddlywiki';
-import { initCalendar } from './initCalendar';
+import { changedTiddlerInViewRange } from './changeDetector';
+import { initCalendar, tiddlerEventSourceID } from './initCalendar';
 import './widget.css';
 
 const Widget = (require('$:/core/modules/widgets/widget.js') as { widget: typeof IWidget }).widget;
@@ -13,7 +14,19 @@ class CalendarWidget extends Widget {
   #calendar?: Calendar;
   #containerElement?: HTMLDivElement;
 
-  refresh(_changedTiddlers: IChangedTiddlers): boolean {
+  refresh(changedTiddlers: IChangedTiddlers): boolean {
+    if (
+      Object.keys(changedTiddlers).some((changedTiddlerTitle) => {
+        if (changedTiddlers[changedTiddlerTitle].modified) {
+          return changedTiddlerInViewRange(changedTiddlerTitle, this.#calendar);
+        }
+        return false;
+      })
+    ) {
+      this.#calendar?.getEventSourceById(tiddlerEventSourceID)?.refetch();
+      // this won't cause this.render to be called...
+      return true;
+    }
     return false;
   }
 
