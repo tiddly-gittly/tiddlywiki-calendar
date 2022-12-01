@@ -1,25 +1,16 @@
-# Typescript plugin template for TiddlyWiki5
+# TiddlyWiki Calendar
 
-This template will help you automatically package zipped multiple-file plugin for nodejs wiki, and single file JSON plugin for HTML wiki.
+Widget and Page Layout displaying tiddlers on calendar and agenda, based on created, modified, startDate and endDate fields.
 
-You can also try [Modern.TiddlyDev](https://github.com/tiddly-gittly/Modern.TiddlyDev).
+## Document & Usage
 
-## What need to change after apply the template
+See website [https://tiddly-gittly.github.io/tiddlywiki-calendar](https://tiddly-gittly.github.io/tiddlywiki-calendar) for demo and usage
 
-### Basic
+## Credits
 
-1. update `title`, `author` and `description` in the [src/plugin.info](src/plugin.info), update `url` field in the [package.json](package.json).
-2. write your plugin code in the [src/](src/) directory, use `index.ts` as your ts code's entry point.
-3. you can use other file name or path, just update the "tsFiles" field in the package.json
-4. write `.js.meta` file aloneside with your ts file (that listed in the "tsFiles" field in the package.json), because when bundled as a plugin, all ts (in "tsFiles" field) will become js.
-5. other tid files just put in the src directory, they will be copy to the plugin automatically.
-   1. You can use folder to organize the files, like `src/filters/` to place the filter tiddlers, and that structure will be preserved in the nodejs multiple-file plugin
-   2. In the JSON plugin, the structure will strictly follow the tiddler title.
-   3. `ignoredExtensionsWhenBuildPlugin` field in package.json are file extensions that should not be copied to the dist. Normally they will be bundled by esbuild.
-6. update demo site tiddlers in the [demo/](demo/) directory.
-7. update this readme.md
+This project is based on [FullCalendar](https://github.com/fullcalendar/fullcalendar).
 
-## During development
+## Development
 
 There are some scripts you can run to boost your development.
 
@@ -34,25 +25,8 @@ You will need `--legacy-peer-deps` when `npm i` if you are using latest nodejs. 
 
 Add new file name (without `.ts`) to `package.json`'s `tsFiles` field. And build script will read it and compile files in it.
 
-## After the plugin is complete
+### After the plugin is complete
 
-### Publish
+#### Publish
 
 Enable github action in your repo (in your github repo - setting - action - general) if it is not allowed, and when you tagging a new version `vx.x.x` in a git commit and push, it will automatically publish to the github release.
-
-### Demo
-
-You will get a Github Pages demo site automatically after publish. If it is 404, you may need to manually enable Github Pages in your github repo:
-
-Settings - Pages (on left side) - Source - choose `gh-pages` branch
-
-## Examples
-
-- https://github.com/tiddly-gittly/tw-react
-- https://github.com/tiddly-gittly/slate-write
-
-## Trouble Shooting
-
-### ▲ [WARNING] Import "useFilter" will always be undefined because the file "node_modules/tw-react/dist/plugins/linonetwo/tw-react/index.js" has no exports
-
-See [tw-react](https://github.com/tiddly-gittly/tw-react/blob/eb858d33737bfa6cff35f58f27770321080980f6/esbuild.config.mjs#L35-L43)'s esbuild config, you will need to exclude the file from the modification here.

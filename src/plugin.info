@@ -1,7 +1,7 @@
 {
-  "title": "$:/plugins/linonetwo/tw-example-plugin",
+  "title": "$:/plugins/linonetwo/tw-calendar",
   "author": "LinOnetwo",
-  "description": "put your description here, and fill in the author and title above",
+  "description": "Widget and Page Layout displaying tiddlers on calendar and agenda, based on created, modified, startDate and endDate fields. ",
   "core-version": ">=5.1.22",
   "plugin-type": "plugin",
   "version": "0.0.1",

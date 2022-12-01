@@ -1,0 +1,11 @@
+title: $:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/CreateNewTiddlerPopup
+caption: Create Tiddler
+
+<div class="tw-calendar-layout-create-new-tiddler-popup">
+  <$edit-text focus="yes" tiddler="$:/state/Calendar/create-tiddler" default="" rows=1 />
+  <$button>
+    Create
+    <$action-createtiddler $basetitle={{$:/state/Calendar/PageLayout/create-tiddler}} type="application/tldr" />
+    <$action-setfield $tiddler="$:/state/Calendar/PageLayout/create-tiddler" text=""/>
+  </$button>
+</div>
