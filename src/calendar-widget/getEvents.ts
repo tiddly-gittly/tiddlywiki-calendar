@@ -12,6 +12,15 @@ export enum CalendarEventType {
 }
 const normalTiddlerEventLengthInHour = 1;
 
+export const getEventOnFullCalendarViewChange: EventSourceFunc = async (argument: EventSourceFuncArg) => {
+  const { start, end } = argument;
+  const [startTwString, endTwString] = [start, end].map((date) => toTWUTCString(date));
+  const getFilterOnField = (field: string) => `[all[tiddlers]]:filter[get[${field}]compare:date:gteq[${startTwString}]compare:date:lteq[${endTwString}]]`;
+  const titles = ['created', 'modified', 'startDate'].map(getFilterOnField).flatMap((filter) => $tw.wiki.filterTiddlers(filter));
+  const eventsOnPeriod = getEvents(`${titles.join(' ')}`);
+  return eventsOnPeriod;
+};
+
 export function getEvents(filter: string): EventInput[] {
   const tiddlerTitles = $tw.wiki.filterTiddlers(filter);
   const fullCalendarEvents = tiddlerTitles
@@ -77,12 +86,3 @@ function mapTiddlerFieldsToFullCalendarEventObject(fields: ITiddlerFields): Even
   }
   return fallbackResults;
 }
-
-export const getEventOnFullCalendarViewChange: EventSourceFunc = async (argument: EventSourceFuncArg) => {
-  const { start, end } = argument;
-  const [startTwString, endTwString] = [start, end].map((date) => toTWUTCString(date));
-  const getFilterOnField = (field: string) => `[all[tiddlers]]:filter[get[${field}]compare:date:gteq[${startTwString}]compare:date:lteq[${endTwString}]]`;
-  const titles = ['created', 'modified', 'startDate'].map(getFilterOnField).flatMap((filter) => $tw.wiki.filterTiddlers(filter));
-  const eventsOnPeriod = getEvents(`${titles.join(' ')}`);
-  return eventsOnPeriod;
-};
