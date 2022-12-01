@@ -13,6 +13,7 @@ class CalendarWidget extends Widget {
 
   #calendar?: Calendar;
   #containerElement?: HTMLDivElement;
+  #mountElement?: HTMLDivElement;
 
   refresh(changedTiddlers: IChangedTiddlers): boolean {
     if (
@@ -38,12 +39,17 @@ class CalendarWidget extends Widget {
     this.computeAttributes();
     this.execute();
 
-    if (this.#containerElement === undefined) {
+    if (this.#containerElement === undefined || this.#mountElement === undefined) {
       this.#containerElement = document.createElement('div');
-      this.#containerElement.classList.add('tiddlywiki-calendar-widget-container');
+      this.#mountElement = document.createElement('div');
+      this.#containerElement.appendChild(this.#mountElement);
+      this.#mountElement.classList.add('tiddlywiki-calendar-widget-container');
+      const [width, height] = [this.getAttribute('width'), this.getAttribute('height')];
+      this.#containerElement.style.width = width;
+      this.#containerElement.style.height = height;
     }
     if (this.#calendar === undefined) {
-      this.#calendar = initCalendar(this.#containerElement, { parentWidget: this.parentWidget });
+      this.#calendar = initCalendar(this.#mountElement, { parentWidget: this.parentWidget });
       // fix https://github.com/fullcalendar/fullcalendar/issues/4976
       setTimeout(() => {
         this.#calendar?.render();

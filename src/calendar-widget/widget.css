@@ -1,5 +1,6 @@
 .tiddlywiki-calendar-widget-container {
   min-height: 400px;
+  height: 100%;
 }
 .tiddlywiki-calendar-widget-container table {
   margin: unset;
@@ -17,7 +18,7 @@
 }
 .tw-calendar-layout-create-new-tiddler-popup .tw-calendar-time-range-preview {
   margin-top: 15px;
-  border-bottom: 1px solid #EEE;
+  border-bottom: 1px solid #eee;
 }
 .tw-calendar-layout-create-new-tiddler-popup {
   margin: 10px 0;

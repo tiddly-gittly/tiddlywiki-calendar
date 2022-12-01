@@ -3,4 +3,8 @@ type: text/vnd.tiddlywiki
 
 {{$:/snippets/minilanguageswitcher}}
 
-<$calendar />
+```
+<$calendar height="400px" />
+```
+
+<$calendar height="400px" />
