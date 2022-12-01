@@ -30,7 +30,7 @@ class CalendarWidget extends Widget {
       this.#containerElement.classList.add('tiddlywiki-calendar-widget-container');
     }
     if (this.#calendar === undefined) {
-      this.#calendar = initCalendar(this.#containerElement);
+      this.#calendar = initCalendar(this.#containerElement, { parentWidget: this.parentWidget });
       // fix https://github.com/fullcalendar/fullcalendar/issues/4976
       setTimeout(() => {
         this.#calendar?.render();

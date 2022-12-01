@@ -64,7 +64,8 @@ function mapTiddlerFieldsToFullCalendarEventObject(fields: ITiddlerFields): Even
   const fallbackResults = [];
   const tiddlerEvent = {
     ...options,
-    editable: false,
+    startEditable: false,
+    durationEditable: false,
     extendedProps: {
       type: CalendarEventType.NormalTiddler,
     },
