@@ -3,6 +3,7 @@
     "daygrid",
     "fullcalendar",
     "scrollgrid",
-    "timegrid"
+    "timegrid",
+    "TWUTC"
   ]
 }
