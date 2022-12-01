@@ -1,4 +1,4 @@
-import { Calendar, EventInput } from '@fullcalendar/core';
+import { Calendar } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import scrollGridPlugin from '@fullcalendar/scrollgrid';
@@ -6,12 +6,13 @@ import adaptivePlugin from '@fullcalendar/adaptive';
 import interactionPlugin from '@fullcalendar/interaction';
 import listPlugin from '@fullcalendar/list';
 import { getHandlers } from './handlers';
+import { getEventOnFullCalendarViewChange } from './getEvents';
 
 const isSmallScreen = window.innerWidth <= 600;
 
-export function initCalendar(containerElement: HTMLDivElement, events: EventInput[]) {
+export function initCalendar(containerElement: HTMLDivElement) {
   const calendar = new Calendar(containerElement, {
-    events,
+    events: getEventOnFullCalendarViewChange,
     plugins: [dayGridPlugin, timeGridPlugin, listPlugin, scrollGridPlugin, adaptivePlugin, interactionPlugin],
     views: {
       timeGridThreeDay: {

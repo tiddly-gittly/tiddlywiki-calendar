@@ -1,6 +1,5 @@
 import type { Calendar } from '@fullcalendar/core';
 import type { Widget as IWidget, IChangedTiddlers } from 'tiddlywiki';
-import { getEvents } from './getEvents';
 import { initCalendar } from './initCalendar';
 import './widget.css';
 
@@ -30,9 +29,8 @@ class CalendarWidget extends Widget {
       this.#containerElement = document.createElement('div');
       this.#containerElement.classList.add('tiddlywiki-calendar-widget-container');
     }
-    const events = getEvents('[all[tiddlers]]');
     if (this.#calendar === undefined) {
-      this.#calendar = initCalendar(this.#containerElement, events);
+      this.#calendar = initCalendar(this.#containerElement);
       // fix https://github.com/fullcalendar/fullcalendar/issues/4976
       setTimeout(() => {
         this.#calendar?.render();

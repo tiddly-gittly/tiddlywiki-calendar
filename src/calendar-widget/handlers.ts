@@ -6,6 +6,10 @@ const TWModal = (require('$:/core/modules/utils/dom/modal.js') as { Modal: Modal
 
 export function getHandlers(): CalendarOptions {
   const handlers: CalendarOptions = {
+    viewDidMount(mountArgument) {
+      // DEBUG: console
+      console.log(`mountArg`, mountArgument);
+    },
     eventClick: (info) => {
       if (info.jsEvent.getModifierState('Control') || info.jsEvent.getModifierState('Meta')) {
         // DEBUG: console

@@ -1,5 +1,7 @@
+/* eslint-disable @typescript-eslint/require-await */
 /* eslint-disable unicorn/no-array-callback-reference */
-import type { EventInput } from '@fullcalendar/core';
+import type { EventInput, EventSourceFunc, EventSourceFuncArg } from '@fullcalendar/core';
+import { toTWUTCString } from '../utils';
 import type { ITiddlerFields, Tiddler } from 'tiddlywiki';
 
 export enum CalendarEventType {
@@ -75,3 +77,12 @@ function mapTiddlerFieldsToFullCalendarEventObject(fields: ITiddlerFields): Even
   }
   return fallbackResults;
 }
+
+export const getEventOnFullCalendarViewChange: EventSourceFunc = async (argument: EventSourceFuncArg) => {
+  const { start, end } = argument;
+  const [startTwString, endTwString] = [start, end].map((date) => toTWUTCString(date));
+  const getFilterOnField = (field: string) => `[all[tiddlers]]:filter[get[${field}]compare:date:gteq[${startTwString}]compare:date:lteq[${endTwString}]]`;
+  const titles = ['created', 'modified', 'startDate'].map(getFilterOnField).flatMap((filter) => $tw.wiki.filterTiddlers(filter));
+  const eventsOnPeriod = getEvents(`${titles.join(' ')}`);
+  return eventsOnPeriod;
+};
