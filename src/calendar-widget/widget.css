@@ -1,0 +1,20 @@
+.tiddlywiki-calendar-widget-container {
+  min-height: 400px;
+}
+.tiddlywiki-calendar-widget-container table {
+  margin: unset;
+}
+
+.tw-calendar-layout-create-new-tiddler-popup {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 200px;
+}
+.tw-calendar-layout-create-new-tiddler-popup button {
+  width: 100%;
+}
+.tw-calendar-layout-create-new-tiddler-popup textarea {
+  width: 100%;
+}

@@ -1,9 +1,16 @@
 {
-  "url": "https://github.com/tiddly-gittly/tw-example-plugin",
+  "url": "https://github.com/tiddly-gittly/tiddlywiki-calendar",
   "tsFiles": [
-    "index"
+    "src/calendar-widget/widget.ts"
   ],
-  "ignoredExtensionsWhenBuildPlugin": [".ts", ".tsx", ".snap", ".tldr", ".md", ".json"],
+  "ignoredExtensionsWhenBuildPlugin": [
+    ".ts",
+    ".tsx",
+    ".snap",
+    ".tldr",
+    ".md",
+    ".json"
+  ],
   "license": "MIT",
   "version": "0.0.1",
   "types": "",
@@ -19,6 +26,15 @@
     "prepublishOnly": "npm run make && tsc --emitDeclarationOnly",
     "build:types": "tsc --emitDeclarationOnly",
     "installType": "typesync"
+  },
+  "dependencies": {
+    "@fullcalendar/adaptive": "^6.0.0-beta.2",
+    "@fullcalendar/core": "^6.0.0-beta.2",
+    "@fullcalendar/daygrid": "^6.0.0-beta.2",
+    "@fullcalendar/interaction": "^6.0.0-beta.2",
+    "@fullcalendar/list": "^6.0.0-beta.2",
+    "@fullcalendar/scrollgrid": "^6.0.0-beta.2",
+    "@fullcalendar/timegrid": "^6.0.0-beta.2"
   },
   "devDependencies": {
     "@types/archiver": "5.3.1",
