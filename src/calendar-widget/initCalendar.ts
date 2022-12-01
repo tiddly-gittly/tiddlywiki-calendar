@@ -10,13 +10,14 @@ import { getHandlers } from './handlers';
 import { getEventOnFullCalendarViewChange } from './getEvents';
 
 const isSmallScreen = window.innerWidth <= 600;
+export const tiddlerEventSourceID = 'tiddlers';
 
 export interface IContext {
   parentWidget?: Widget | undefined;
 }
 export function initCalendar(containerElement: HTMLDivElement, context: IContext) {
   const calendar = new Calendar(containerElement, {
-    events: getEventOnFullCalendarViewChange,
+    eventSources: [{ events: getEventOnFullCalendarViewChange, id: tiddlerEventSourceID }],
     plugins: [dayGridPlugin, timeGridPlugin, listPlugin, scrollGridPlugin, adaptivePlugin, interactionPlugin],
     views: {
       timeGridThreeDay: {
