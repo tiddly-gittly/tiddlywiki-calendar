@@ -1,5 +1,5 @@
 import type { ModalWidget } from 'tiddlywiki';
-import { Calendar } from '@fullcalendar/core';
+import { Calendar, EventInput } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import scrollGridPlugin from '@fullcalendar/scrollgrid';
@@ -12,8 +12,9 @@ const TWModal = (require('$:/core/modules/utils/dom/modal.js') as { Modal: Modal
 
 const isSmallScreen = window.innerWidth <= 600;
 
-export function initCalendar(containerElement: HTMLDivElement) {
+export function initCalendar(containerElement: HTMLDivElement, events: EventInput[]) {
   const calendar = new Calendar(containerElement, {
+    events,
     plugins: [dayGridPlugin, timeGridPlugin, listPlugin, scrollGridPlugin, adaptivePlugin, interactionPlugin],
     views: {
       timeGridThreeDay: {
