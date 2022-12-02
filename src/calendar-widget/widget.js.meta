@@ -2,3 +2,4 @@ creator: LinOnetwo
 title: $:/plugins/linonetwo/tw-calendar/calendar-widget/widget.js
 type: application/javascript
 module-type: library
+hide-body: yes
