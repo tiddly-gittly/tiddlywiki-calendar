@@ -15,7 +15,7 @@ const normalTiddlerEventLengthInHour = 1;
 export const getEventOnFullCalendarViewChange: EventSourceFunc = async (argument: EventSourceFuncArg) => {
   const { start, end } = argument;
   const [startTwString, endTwString] = [start, end].map((date) => toTWUTCString(date));
-  const getFilterOnField = (field: string) => `[all[tiddlers]]:filter[get[${field}]compare:date:gteq[${startTwString}]compare:date:lteq[${endTwString}]]`;
+  const getFilterOnField = (field: string) => `[all[tiddlers]!is[system]]:filter[get[${field}]compare:date:gteq[${startTwString}]compare:date:lteq[${endTwString}]]`;
   const titles = ['created', 'modified', 'startDate'].map(getFilterOnField).flatMap((filter) => $tw.wiki.filterTiddlers(filter));
   const eventsOnPeriod = getEvents(`${titles.join(' ')}`);
   return eventsOnPeriod;
