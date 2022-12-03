@@ -1,12 +1,10 @@
-caption: {{||Excerpt}}
-created: 20220315045250572
-creator: LinOnetwo
-due: 20220316050103382
-interval: 1
-modified: 20220315050104862
-modifier: LinOnetwo
-tags: ?
 title: DueExample
 type: text/vnd.tiddlywiki
 
-With field due
+Also you can use your own filter of fields:
+
+```
+<$calendar filter="[all[]tag[?]]" startDateFields="due" initialDate="20220316050103382" />
+```
+
+<$calendar filter="[all[]tag[?]]" startDateFields="due" initialDate="20220316050103382" initialView="timeGridDay" />
