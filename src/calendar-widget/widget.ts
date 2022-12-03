@@ -54,6 +54,8 @@ class CalendarWidget extends Widget {
         filter: this.getAttribute('filter'),
         startDateFields: this.getAttribute('startDateFields')?.split(','),
         endDateFields: this.getAttribute('endDateFields')?.split(','),
+        initialDate: this.getAttribute('initialDate'),
+        initialView: this.getAttribute('initialView'),
       };
       this.#calendar = initCalendar(this.#mountElement, context);
       // fix https://github.com/fullcalendar/fullcalendar/issues/4976

@@ -17,13 +17,22 @@ export interface IContext {
    * Use empty string if some of start field don't have a corresponding end field
    */
   endDateFields?: string[];
-  /** a fine grained filter to replace the current `[all[tiddlers]!is[system]]` filter */
+  /** a custom filter to replace the default `[all[tiddlers]!is[system]]` filter */
   filter?: string;
+  /** when calendar open, the initial start date it shows */
+  initialDate?: string;
+  /** when calendar open, the initial view it uses */
+  initialView?: string;
   parentWidget?: Widget;
-  /** when calendar open, it will filter tiddlers with these fields, and one of these field is within the range of current calendar view */
+  /** when calendar open, it will filter tiddlers with these fields (add to the filter expression on the fly), and one of these field is within the range of current calendar view */
   startDateFields?: string[];
 }
 export function initCalendar(containerElement: HTMLDivElement, context: IContext) {
+  // DEBUG: console
+  console.log(`context`, context);
+  const now = context.initialDate === undefined ? Date.now() : $tw.utils.parseDate(context.initialDate);
+  // DEBUG: console
+  console.log(`now`, now);
   const calendar = new Calendar(containerElement, {
     eventSources: [{ events: getEventOnFullCalendarViewChange(context), id: tiddlerEventSourceID }],
     plugins: [dayGridPlugin, timeGridPlugin, listPlugin, adaptivePlugin, interactionPlugin],
@@ -39,8 +48,8 @@ export function initCalendar(containerElement: HTMLDivElement, context: IContext
         buttonText: isSmallScreen ? '1d' : 'day',
       },
     },
-    initialView: isSmallScreen ? 'timeGridThreeDay' : 'timeGridWeek',
-    now: Date.now(),
+    initialView: context.initialView ?? (isSmallScreen ? 'timeGridThreeDay' : 'timeGridWeek'),
+    now,
     editable: true,
     selectable: true,
     droppable: true,
