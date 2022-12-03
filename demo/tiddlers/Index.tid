@@ -12,3 +12,9 @@ type: text/vnd.tiddlywiki
 Try drag on the agenda to create a new event tiddler.
 
 {{$:/plugins/linonetwo/tw-example-plugin/readme}}
+
+Also you can use your own filter of fields:
+
+```
+<$calendar filter="[all[]tag[?]]" startDateFields="due" />
+```

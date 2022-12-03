@@ -1,7 +1,7 @@
 import type { Calendar } from '@fullcalendar/core';
 import type { Widget as IWidget, IChangedTiddlers } from 'tiddlywiki';
 import { changedTiddlerInViewRange } from './changeDetector';
-import { initCalendar, tiddlerEventSourceID } from './initCalendar';
+import { IContext, initCalendar, tiddlerEventSourceID } from './initCalendar';
 import './widget.css';
 
 const Widget = (require('$:/core/modules/widgets/widget.js') as { widget: typeof IWidget }).widget;
@@ -49,7 +49,13 @@ class CalendarWidget extends Widget {
       this.#containerElement.style.height = height;
     }
     if (this.#calendar === undefined) {
-      this.#calendar = initCalendar(this.#mountElement, { parentWidget: this.parentWidget });
+      const context: IContext = {
+        parentWidget: this.parentWidget,
+        filter: this.getAttribute('filter'),
+        startDateFields: this.getAttribute('startDateFields')?.split(','),
+        endDateFields: this.getAttribute('endDateFields')?.split(','),
+      };
+      this.#calendar = initCalendar(this.#mountElement, context);
       // fix https://github.com/fullcalendar/fullcalendar/issues/4976
       setTimeout(() => {
         this.#calendar?.render();

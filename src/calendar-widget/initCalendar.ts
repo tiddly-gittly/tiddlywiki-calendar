@@ -12,11 +12,20 @@ const isSmallScreen = window.innerWidth <= 600;
 export const tiddlerEventSourceID = 'tiddlers';
 
 export interface IContext {
-  parentWidget?: Widget | undefined;
+  /**
+   * corresponding end date field to startDateFields. When using multiple pairs of fields, their index in the array should be the same.
+   * Use empty string if some of start field don't have a corresponding end field
+   */
+  endDateFields?: string[];
+  /** a fine grained filter to replace the current `[all[tiddlers]!is[system]]` filter */
+  filter?: string;
+  parentWidget?: Widget;
+  /** when calendar open, it will filter tiddlers with these fields, and one of these field is within the range of current calendar view */
+  startDateFields?: string[];
 }
 export function initCalendar(containerElement: HTMLDivElement, context: IContext) {
   const calendar = new Calendar(containerElement, {
-    eventSources: [{ events: getEventOnFullCalendarViewChange, id: tiddlerEventSourceID }],
+    eventSources: [{ events: getEventOnFullCalendarViewChange(context), id: tiddlerEventSourceID }],
     plugins: [dayGridPlugin, timeGridPlugin, listPlugin, adaptivePlugin, interactionPlugin],
     views: {
       timeGridThreeDay: {
