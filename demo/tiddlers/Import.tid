@@ -1,0 +1,10 @@
+title: Import
+type: text/vnd.tiddlywiki
+
+Import data from other calendar Apps.
+
+<$list filter="[tag<currentTiddler>]">
+
+!!! <$link><<currentTiddler>></$link>
+
+</$list>
