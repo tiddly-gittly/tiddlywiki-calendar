@@ -2,6 +2,8 @@
 
 Widget and Page Layout displaying tiddlers on calendar and agenda, based on created, modified, startDate and endDate fields.
 
+![screenshot](screenshots/demosite.png)
+
 ## Document & Usage
 
 See website [https://tiddly-gittly.github.io/tiddlywiki-calendar](https://tiddly-gittly.github.io/tiddlywiki-calendar) for demo and usage
