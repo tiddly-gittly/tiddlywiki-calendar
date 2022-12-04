@@ -1,13 +1,13 @@
+div.tc-page-container.tw-calendar-layout-container {
+  margin-top: 0px;
+  height: 100vh;
+  width: 100%;
+}
 .tw-calendar-layout-main-area {
   height: 100%;
   width: 100%;
 }
 
-div.tw-calendar-layout-container {
-  margin-top: 0px;
-  height: 100vh;
-  width: 100%;
-}
 .tw-calendar-layout-container p {
   margin: 0;
   height: 100%;
