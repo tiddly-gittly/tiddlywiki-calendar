@@ -23,7 +23,11 @@ export const getEventOnFullCalendarViewChange =
     const sourceFilter = context?.filter ?? '[all[tiddlers]!is[system]]';
     const getFilterOnField = (field: string) => `${sourceFilter}:filter[get[${field}]compare:date:gteq[${startTwString}]compare:date:lteq[${endTwString}]]`;
     const fields = context.startDateFields ?? ['created', 'modified', 'startDate'];
-    const titles = fields.map(getFilterOnField).flatMap((filter) => $tw.wiki.filterTiddlers(filter));
+    const titles = fields
+      .map(getFilterOnField)
+      .flatMap((filter) => $tw.wiki.filterTiddlers(filter))
+      // in case there is a space in title
+      .map((title) => `[[${title}]]`);
     const eventsOnPeriod = getEvents(`${titles.join(' ')}`, context);
     return eventsOnPeriod;
   };
