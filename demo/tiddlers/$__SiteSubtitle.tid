@@ -1,4 +1,4 @@
 title: $:/SiteSubtitle
 type: text/vnd.tiddlywiki
 
-A Plugin Demo
+Tiddlywiki Calendar Widget and Page Layout displaying tiddlers on calendar and agenda, based on created, modified, startDate and endDate fields on tiddlers.
