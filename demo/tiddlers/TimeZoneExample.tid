@@ -1,0 +1,19 @@
+title: TimeZoneExample
+type: text/vnd.tiddlywiki
+tags: WidgetUsage
+
+In this example, `Asia/Shanghai` is +8 to the `UTC`:
+
+```
+<div style="display: flex; flex-direction: row;">
+  <$calendar timeZone="UTC" initialView="timeGridDay" hideToolbar="yes" width="40%" height="600px" />
+  <$calendar timeZone="Asia/Shanghai" initialView="timeGridDay" hideToolbar="yes" width="40%" height="600px" />
+  <$calendar initialView="timeGridDay" hideToolbar="yes" width="40%" height="600px" />
+</div>
+```
+
+<div style="display: flex; flex-direction: row;">
+  <$calendar timeZone="UTC" initialView="timeGridDay" hideToolbar="yes" width="33%" height="600px" />
+  <$calendar timeZone="Asia/Shanghai" initialView="timeGridDay" hideToolbar="yes" width="33%" height="600px" />
+  <$calendar initialView="timeGridDay" hideToolbar="yes" width="33%" height="600px" />
+</div>

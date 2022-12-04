@@ -61,6 +61,7 @@ class CalendarWidget extends Widget {
         initialView: this.getAttribute('initialView'),
         parentWidget: this.parentWidget,
         startDateFields: this.getAttribute('startDateFields')?.split(','),
+        timeZone: this.getAttribute('timeZone'),
       };
       this.#calendar = initCalendar(this.#mountElement, context);
       // fix https://github.com/fullcalendar/fullcalendar/issues/4976
