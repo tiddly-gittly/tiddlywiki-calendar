@@ -3,6 +3,8 @@ type: text/vnd.tiddlywiki
 
 {{$:/snippets/minilanguageswitcher}}
 
+! User manual
+
 {{$:/plugins/linonetwo/tw-example-plugin/readme}}
 
 [[CalendarUsage]]
@@ -16,5 +18,7 @@ type: text/vnd.tiddlywiki
 <$calendar height="400px" />
 
 Try drag on the agenda to create a new event tiddler.
+
+! Settings
 
 {{$:/plugins/linonetwo/tw-calendar/tiddlywiki-ui/ControlPanel/Settings}}
