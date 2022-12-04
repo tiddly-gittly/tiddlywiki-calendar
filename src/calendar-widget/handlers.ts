@@ -51,7 +51,7 @@ export function getHandlers(context: IContext): CalendarOptions {
         'draft.title': info.startStr,
         text,
       });
-      new TWModal($tw.wiki).display('$:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/CreateNewTiddlerPopup');
+      new TWModal($tw.wiki).display('$:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/popup/CreateNewTiddlerPopup');
       const titleInputElement = document.querySelector<HTMLInputElement>('.tw-calendar-layout-create-new-tiddler-popup > .tc-titlebar.tc-edit-texteditor');
       if (titleInputElement !== null) {
         // fix title not auto focus in modal

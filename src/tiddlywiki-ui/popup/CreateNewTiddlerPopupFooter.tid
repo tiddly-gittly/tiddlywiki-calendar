@@ -1,4 +1,4 @@
-title: $:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/CreateNewTiddlerPopupFooter
+title: $:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/popup/CreateNewTiddlerPopupFooter
 
 \define cleearAction()
 <$action-setfield
