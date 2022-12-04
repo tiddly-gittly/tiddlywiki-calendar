@@ -50,6 +50,7 @@ export function initCalendar(containerElement: HTMLDivElement, context: IContext
     },
     initialView: context.initialView ?? (isSmallScreen ? 'timeGridThreeDay' : 'timeGridWeek'),
     now,
+    navLinks: true,
     editable: true,
     selectable: true,
     droppable: true,
