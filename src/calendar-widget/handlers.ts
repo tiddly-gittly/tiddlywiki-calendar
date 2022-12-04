@@ -7,10 +7,6 @@ const TWModal = (require('$:/core/modules/utils/dom/modal.js') as { Modal: Modal
 
 export function getHandlers(context: IContext): CalendarOptions {
   const handlers: CalendarOptions = {
-    viewDidMount(mountArgument) {
-      // DEBUG: console
-      console.log(`mountArg`, mountArgument);
-    },
     eventClick: (info) => {
       // if (info.jsEvent.getModifierState('Control') || info.jsEvent.getModifierState('Meta')) {
       context?.parentWidget?.dispatchEvent({
@@ -22,19 +18,29 @@ export function getHandlers(context: IContext): CalendarOptions {
         shiftKey: info.jsEvent.getModifierState('Shift'),
       });
     },
-    dateClick(info) {
-      console.log('dateClick', info);
-    },
     /**
      * Trigger when user select by mouse or long-press and drag on the grid, no matter it is empty or has event
      * @url https://fullcalendar.io/docs/select-callback
      */
     select(info) {
+      let text = '';
+      // handle full-date event, make them tw standard journey
       // @ts-expect-error Property 'type' does not exist on type 'ViewApi'.ts(2339)
       if (info.view.type === 'dayGridMonth') {
         info.start = new Date(info.startStr);
         info.end = new Date(info.endStr);
-        // info.end.setDate(info.start.getDate() - 1);
+      }
+      // @ts-expect-error The right-hand side of an arithmetic operation must be of type 'any', 'number', 'bigint' or an enum type.ts(2363)
+      // if is full day event
+      if (info.end - info.start === 86_400_000) {
+        // use journey format
+        const journalTitleTemplate = $tw.wiki.getTiddlerText('$:/config/NewJournal/Title');
+        const journalText = $tw.wiki.getTiddlerText('$:/config/NewJournal/Text');
+        if (journalTitleTemplate !== undefined) {
+          const journeyTitle = $tw.utils.formatDateString(info.start, journalTitleTemplate);
+          info.startStr = journeyTitle;
+          text = journalText ?? text;
+        }
       }
       const startDate = toTWUTCString(info.start);
       const endDate = toTWUTCString(info.end);
@@ -43,6 +49,7 @@ export function getHandlers(context: IContext): CalendarOptions {
         startDate,
         endDate,
         'draft.title': info.startStr,
+        text,
       });
       new TWModal($tw.wiki).display('$:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/CreateNewTiddlerPopup');
       const titleInputElement = document.querySelector<HTMLInputElement>('.tw-calendar-layout-create-new-tiddler-popup > .tc-titlebar.tc-edit-texteditor');
