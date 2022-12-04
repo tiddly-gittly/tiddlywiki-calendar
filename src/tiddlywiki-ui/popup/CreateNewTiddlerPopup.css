@@ -1,0 +1,43 @@
+.tw-calendar-layout-create-new-tiddler-popup {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+}
+.tw-calendar-layout-create-new-tiddler-popup .tw-calendar-title-input {
+  width: 100%;
+}
+.tw-calendar-layout-create-new-tiddler-popup .tw-calendar-time-range-preview {
+  margin-top: 15px;
+  border-bottom: 1px solid #eee;
+}
+.tw-calendar-layout-create-new-tiddler-popup {
+  margin: 10px 0;
+}
+.tw-calendar-layout-create-new-tiddler-popup .tw-calendar-tags-input {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+}
+.tw-calendar-layout-create-new-tiddler-popup .tw-calendar-tags-input .tw-calendar-frequently-used-tags {
+  cursor: pointer;
+}
+.tw-calendar-layout-create-new-tiddler-popup .tw-calendar-tags-input .tc-edit-tags {
+  padding-left: 0;
+  border: unset;
+}
+.tw-calendar-layout-create-new-tiddler-popup .tc-edit-texteditor {
+  width: 100%;
+}
+
+.tw-calendar-footer-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+.tw-calendar-footer-button {
+  width: 50%;
+  height: 3em;
+  margin-top: 10px;
+}

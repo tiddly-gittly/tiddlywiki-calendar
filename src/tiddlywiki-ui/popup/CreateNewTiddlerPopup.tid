@@ -1,11 +1,13 @@
-title: $:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/CreateNewTiddlerPopup
+title: $:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/popup/CreateNewTiddlerPopup
 subtitle: Create Tiddler
-footer: {{$:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/CreateNewTiddlerPopupFooter}}
+footer: {{$:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/popup/CreateNewTiddlerPopupFooter}}
 
 <div class="tw-calendar-layout-create-new-tiddler-popup">
   {{$:/state/Calendar/PageLayout/create-tiddler||$:/core/ui/EditTemplate/title}}
-  {{$:/state/Calendar/PageLayout/create-tiddler||$:/core/ui/EditTemplate/tags}}
-
+  <div class="tw-calendar-tags-input">
+    {{$:/state/Calendar/PageLayout/create-tiddler||$:/core/ui/EditTemplate/tags}}
+    {{$:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/popup/FrequentlyUsedTagsList}}
+  </div>
   <$let currentTiddler="$:/state/Calendar/PageLayout/create-tiddler">
     <$edit-text
       field="text"
