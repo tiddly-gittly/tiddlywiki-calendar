@@ -11,6 +11,8 @@ type: text/vnd.tiddlywiki
 
 [[WidgetUsage]]
 
+[[Import]]
+
 ```
 <$calendar height="400px" />
 ```
