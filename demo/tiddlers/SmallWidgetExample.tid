@@ -1,0 +1,10 @@
+title: SmallWidgetExample
+type: text/vnd.tiddlywiki
+
+Create small calendar:
+
+```
+<$calendar initialView="dayGridMonth" hideToolbar="yes" width="300px" height="300px" />
+```
+
+<$calendar initialView="dayGridMonth" hideToolbar="yes" width="300px" height="300px" />
