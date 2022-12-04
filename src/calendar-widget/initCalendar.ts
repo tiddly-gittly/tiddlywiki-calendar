@@ -28,11 +28,7 @@ export interface IContext {
   startDateFields?: string[];
 }
 export function initCalendar(containerElement: HTMLDivElement, context: IContext) {
-  // DEBUG: console
-  console.log(`context`, context);
   const now = context.initialDate === undefined ? Date.now() : $tw.utils.parseDate(context.initialDate);
-  // DEBUG: console
-  console.log(`now`, now);
   const calendar = new Calendar(containerElement, {
     eventSources: [{ events: getEventOnFullCalendarViewChange(context), id: tiddlerEventSourceID }],
     plugins: [dayGridPlugin, timeGridPlugin, listPlugin, adaptivePlugin, interactionPlugin],
