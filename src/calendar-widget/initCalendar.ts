@@ -1,10 +1,12 @@
 import type { Widget } from 'tiddlywiki';
 import { Calendar, CalendarOptions } from '@fullcalendar/core';
+import momentTimezonePlugin from '@fullcalendar/moment-timezone';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import adaptivePlugin from '@fullcalendar/adaptive';
 import interactionPlugin from '@fullcalendar/interaction';
 import listPlugin from '@fullcalendar/list';
+import moment from 'moment-timezone';
 import { getHandlers } from './handlers';
 import { getEventOnFullCalendarViewChange } from './getEvents';
 
@@ -28,12 +30,13 @@ export interface IContext {
   parentWidget?: Widget;
   /** when calendar open, it will filter tiddlers with these fields (add to the filter expression on the fly), and one of these field is within the range of current calendar view */
   startDateFields?: string[];
+  timeZone?: string;
 }
 export function initCalendar(containerElement: HTMLDivElement, context: IContext) {
   const now = context.initialDate === undefined ? undefined : $tw.utils.parseDate(context.initialDate);
   const calendar = new Calendar(containerElement, {
     eventSources: [{ events: getEventOnFullCalendarViewChange(context), id: tiddlerEventSourceID }],
-    plugins: [dayGridPlugin, timeGridPlugin, listPlugin, adaptivePlugin, interactionPlugin],
+    plugins: [momentTimezonePlugin, dayGridPlugin, timeGridPlugin, listPlugin, adaptivePlugin, interactionPlugin],
     views: {
       timeGridThreeDay: {
         type: 'timeGrid',
@@ -48,6 +51,7 @@ export function initCalendar(containerElement: HTMLDivElement, context: IContext
     },
     initialView: context.initialView ?? (isSmallScreen ? 'timeGridThreeDay' : 'timeGridWeek'),
     now,
+    timeZone: context.timeZone ?? moment.tz.guess(),
     navLinks: true,
     editable: true,
     selectable: true,
