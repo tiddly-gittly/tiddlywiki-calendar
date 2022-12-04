@@ -47,15 +47,20 @@ class CalendarWidget extends Widget {
       const [width, height] = [this.getAttribute('width'), this.getAttribute('height')];
       this.#containerElement.style.width = width;
       this.#containerElement.style.height = height;
+      // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
+      if (height) {
+        this.#mountElement.style.minHeight = height;
+      }
     }
     if (this.#calendar === undefined) {
       const context: IContext = {
-        parentWidget: this.parentWidget,
-        filter: this.getAttribute('filter'),
-        startDateFields: this.getAttribute('startDateFields')?.split(','),
         endDateFields: this.getAttribute('endDateFields')?.split(','),
+        filter: this.getAttribute('filter'),
+        hideToolbar: this.getAttribute('hideToolbar') === 'yes' || this.getAttribute('hideToolbar') === 'true',
         initialDate: this.getAttribute('initialDate'),
         initialView: this.getAttribute('initialView'),
+        parentWidget: this.parentWidget,
+        startDateFields: this.getAttribute('startDateFields')?.split(','),
       };
       this.#calendar = initCalendar(this.#mountElement, context);
       // fix https://github.com/fullcalendar/fullcalendar/issues/4976

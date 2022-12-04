@@ -19,6 +19,8 @@ export interface IContext {
   endDateFields?: string[];
   /** a custom filter to replace the default `[all[tiddlers]!is[system]]` filter */
   filter?: string;
+  /** hide toolbar buttons and title, only show the pure calendar content. So it can be used as a small calendar widget, for example. */
+  hideToolbar?: boolean;
   /** when calendar open, the initial start date it shows */
   initialDate?: string;
   /** when calendar open, the initial view it uses */
@@ -62,7 +64,7 @@ export function initCalendar(containerElement: HTMLDivElement, context: IContext
   return calendar;
 }
 
-function getToolbarSettings(_context: IContext): CalendarOptions {
+function getToolbarSettings(context: IContext): CalendarOptions {
   const inCalendarLayout = $tw.wiki.getTiddlerText('$:/layout') === '$:/plugins/linonetwo/tw-calendar/tiddlywiki-ui/PageLayout/CalendarLayout';
   return {
     customButtons: {
@@ -73,18 +75,20 @@ function getToolbarSettings(_context: IContext): CalendarOptions {
         },
       },
     },
-    headerToolbar: isSmallScreen
-      ? false
-      : {
-          left: `prev,next today`,
-          center: 'title',
-          right: `${inCalendarLayout ? 'backToDefaultLayout ' : ''}dayGridMonth,timeGridWeek,timeGridThreeDay,timeGridDay,listWeek`,
-        },
-    footerToolbar: isSmallScreen
-      ? {
-          right: `today,prev,next`,
-          left: `timeGridThreeDay,timeGridDay,listWeek${inCalendarLayout ? ' backToDefaultLayout' : ''}`,
-        }
-      : false,
+    headerToolbar:
+      isSmallScreen || context.hideToolbar === true
+        ? false
+        : {
+            left: `prev,next today`,
+            center: 'title',
+            right: `${inCalendarLayout ? 'backToDefaultLayout ' : ''}dayGridMonth,timeGridWeek,timeGridThreeDay,timeGridDay,listWeek`,
+          },
+    footerToolbar:
+      isSmallScreen && context.hideToolbar !== true
+        ? {
+            right: `today,prev,next`,
+            left: `timeGridThreeDay,timeGridDay,listWeek${inCalendarLayout ? ' backToDefaultLayout' : ''}`,
+          }
+        : false,
   };
 }
