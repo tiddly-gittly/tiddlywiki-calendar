@@ -1,0 +1,7 @@
+title: AllDayEvent
+type: text/vnd.tiddlywiki
+tags: CalendarUsage
+
+When click on a day in DayGridMonth, or click on "all-day" row in the TimeGridWeek, you will add an AllDayEvent.
+
+The event is identical to a standard [[TiddlyWiki Journal|https://tiddlywiki.com/#Creating%20journal%20tiddlers]] by default, but you can change the title during creation, to create multiple all-day event.

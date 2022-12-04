@@ -24,7 +24,7 @@ export function getHandlers(context: IContext): CalendarOptions {
      */
     select(info) {
       let text = '';
-      // handle full-date event, make them tw standard journey
+      // handle full-date event, make them tw standard journal
       // @ts-expect-error Property 'type' does not exist on type 'ViewApi'.ts(2339)
       if (info.view.type === 'dayGridMonth') {
         info.start = new Date(info.startStr);
@@ -33,12 +33,12 @@ export function getHandlers(context: IContext): CalendarOptions {
       // @ts-expect-error The right-hand side of an arithmetic operation must be of type 'any', 'number', 'bigint' or an enum type.ts(2363)
       // if is full day event
       if (info.end - info.start === 86_400_000) {
-        // use journey format
+        // use journal format
         const journalTitleTemplate = $tw.wiki.getTiddlerText('$:/config/NewJournal/Title');
         const journalText = $tw.wiki.getTiddlerText('$:/config/NewJournal/Text');
         if (journalTitleTemplate !== undefined) {
-          const journeyTitle = $tw.utils.formatDateString(info.start, journalTitleTemplate);
-          info.startStr = journeyTitle;
+          const journalTitle = $tw.utils.formatDateString(info.start, journalTitleTemplate);
+          info.startStr = journalTitle;
           text = journalText ?? text;
         }
       }
