@@ -6,3 +6,5 @@ tags: import
 First, read [[Google's official export documentation|https://support.google.com/calendar/answer/37111]], according to what it said, you will be able to find "Import and Export" feature in GoogleCalendar website app's Setting page.
 
 There is an Export button, click it, and GoogleCalendar will export all your calendars' data as a zip file, unzip it, you will get each calendar as separate *.ics files.
+
+Finally, now you can import your calendar from exported *.ical file, using [[tiddly-gittly/ical-calendar-importer (Github)|https://github.com/tiddly-gittly/ical-calendar-importer]] plugin. Install it from [[the CPL|https://tw-cpl.netlify.app/]], search for "import calendar" to find this plugin. 
