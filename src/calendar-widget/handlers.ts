@@ -1,6 +1,5 @@
 import type { ModalWidget } from 'tiddlywiki';
 import type { CalendarOptions } from '@fullcalendar/core';
-import { toTWUTCString } from '../utils';
 import type { IContext } from './initCalendar';
 
 const TWModal = (require('$:/core/modules/utils/dom/modal.js') as { Modal: ModalWidget }).Modal;
@@ -42,8 +41,8 @@ export function getHandlers(context: IContext): CalendarOptions {
           text = journalText ?? text;
         }
       }
-      const startDate = toTWUTCString(info.start);
-      const endDate = toTWUTCString(info.end);
+      const startDate = $tw.utils.formatDateString(info.start, '[UTC]YYYY0MM0DD0hh0mm0ssXXX');
+      const endDate = $tw.utils.formatDateString(info.end, '[UTC]YYYY0MM0DD0hh0mm0ssXXX');
       $tw.wiki.addTiddler({
         title: '$:/state/Calendar/PageLayout/create-tiddler',
         startDate,
