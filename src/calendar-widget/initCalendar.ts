@@ -29,6 +29,8 @@ export interface IContext {
   /** when calendar open, the initial view it uses */
   initialView?: string;
   parentWidget?: Widget;
+  /** make widget content non-editable */
+  readonly?: boolean;
   /** when calendar open, it will filter tiddlers with these fields (add to the filter expression on the fly), and one of these field is within the range of current calendar view */
   startDateFields?: string[];
   /** specify the time shift used by calendar when showing data. This won't change how data is stored, data is always store in UTC timeZone, so even you travel, they remains the same. */
@@ -59,6 +61,7 @@ export function getSettings(context: IContext): CalendarOptions {
     },
     initialView: context.initialView ?? (isSmallScreen ? 'timeGridThreeDay' : 'timeGridWeek'),
     now,
+    editable: context.readonly !== true,
     eventContent(argument, createElement: typeof h) {
       const titleElement = createElement('div', {}, argument.event.title);
       const timeElement = createElement('div', {}, argument.timeText);
@@ -77,7 +80,6 @@ export function getSettings(context: IContext): CalendarOptions {
     },
     timeZone: context.timeZone ?? moment.tz.guess(),
     navLinks: true,
-    editable: true,
     selectable: true,
     droppable: true,
     rerenderDelay: 100,

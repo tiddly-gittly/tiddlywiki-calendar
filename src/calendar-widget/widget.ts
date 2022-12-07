@@ -95,6 +95,7 @@ class CalendarWidget extends Widget {
       initialDate: this.getAttribute('initialDate'),
       initialView: this.getAttribute('initialView'),
       parentWidget: this.parentWidget,
+      readonly: this.getAttribute('readonly') === 'yes' || this.getAttribute('readonly') === 'true',
       startDateFields: this.getAttribute('startDateFields')?.split(','),
       timeZone: this.getAttribute('timeZone'),
     };
