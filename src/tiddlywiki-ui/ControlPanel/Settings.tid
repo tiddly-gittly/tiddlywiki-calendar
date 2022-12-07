@@ -14,6 +14,8 @@ The modal dialog shown when you drag/click on calendar to create a new event.
 
 Add tags to be displayed on the create event tiddler popup, so you can click on them to add tag to new tiddler quickly.
 
+Tags can have `caption` field as displayed name. And if tags here form a tag tree, they will be displayed as a tree.
+
 <$vars currentTiddler="$:/plugins/linonetwo/tw-calendar/frequently-used-tags" tagField="text">
 	{{||$:/core/ui/EditTemplate/tags}}
 </$vars>
