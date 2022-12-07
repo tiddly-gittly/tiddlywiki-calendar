@@ -70,8 +70,23 @@ export function getSettings(context: IContext): CalendarOptions {
         return [titleElement, timeElement];
       }
       const tagsElement = createElement('div', { class: 'fc-event-main-tags' }, tiddler.fields.tags?.map((tag) => createElement('span', {}, tag)) ?? '');
+      let captionResult: string | undefined | null;
+      if (typeof tiddler.fields.caption === 'string' && context.parentWidget !== undefined) {
+        if (tiddler.fields.caption.includes('{{')) {
+          const childTree = $tw.wiki.parseText('text/vnd.tiddlywiki', tiddler.fields.caption).tree;
+          const astNode = { type: 'tiddler', children: childTree };
+          const newWidgetNode = context.parentWidget.makeChildWidget(astNode);
+          const temporaryEle = document.createElement('div');
+          // eslint-disable-next-line unicorn/no-null
+          newWidgetNode.render(temporaryEle, null);
+          captionResult = temporaryEle.textContent;
+        } else {
+          // if caption not including transclusion (or maybe other wikitext syntax?) skip the expensive rendering
+          captionResult = tiddler.fields.caption;
+        }
+      }
       // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
-      const captionElement = typeof tiddler.fields.caption === 'string' ? createElement('div', {}, tiddler.fields.caption) : undefined;
+      const captionElement = typeof captionResult === 'string' ? createElement('div', {}, captionResult) : undefined;
       return [captionElement, tagsElement, timeElement];
     },
     timeZone: context.timeZone ?? moment.tz.guess(),
