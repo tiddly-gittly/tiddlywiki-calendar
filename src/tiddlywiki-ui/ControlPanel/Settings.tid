@@ -14,6 +14,21 @@ These settings let you customise the behaviour of Calendar plugin.
 
 The modal dialog shown when you drag/click on calendar to create a new event.
 
+!!! Prefix
+
+Auto add prefix to all created event.
+
+<$edit-text
+	tiddler="$:/plugins/linonetwo/tw-calendar/settings/prefix"
+	field="text"
+	default=""
+	tabindex=-1
+	focus=false
+	cancelPopups="yes"
+	fileDrop=no
+	tag="input"
+/>
+
 !!! Frequently used tags
 
 Add tags to be displayed on the create event tiddler popup, so you can click on them to add tag to new tiddler quickly.

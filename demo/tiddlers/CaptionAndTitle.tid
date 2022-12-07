@@ -1,0 +1,7 @@
+title: CaptionAndTitle
+tags: EventDisplay
+type: text/vnd.tiddlywiki
+
+Events can automatically have a prefix when created, and will forced to have a date time suffix. So created tiddler will have a long title. So we only display tiddler's caption in the calendar. When caption is missing, we will omit the title part of the event.
+
+When creating event, the "title input" is actually for inputting the caption, and the real concatenated title will be shown below that input as a smaller text. 
