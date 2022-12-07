@@ -6,6 +6,8 @@ Also you can use your own filter of fields. Use `startDateFields` and `endDateFi
 
 Adding `startDateFields` and `endDateFields` will make created tiddler use them as key to store the `startDate` and `endDate`. When multiple fields are provided, only ""first"" of them will be used as key during creation.
 
+In the following example, drag will create tiddler with `due` and `dueEnd` field. Note that you have to add `?` in the tag to make your created tiddler show in the calendar, because of the `filter="[all[]tag[?]]"`.
+
 ```
 <$calendar filter="[all[]tag[?]]" startDateFields="due" endDateFields="dueEnd" initialDate="20220316050103382" />
 ```
