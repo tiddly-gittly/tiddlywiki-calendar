@@ -3,7 +3,8 @@ subtitle: Create Tiddler
 footer: {{$:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/popup/CreateNewTiddlerPopupFooter}}
 
 <div class="tw-calendar-layout-create-new-tiddler-popup">
-  {{$:/state/Calendar/PageLayout/create-tiddler||$:/core/ui/EditTemplate/title}}
+  Caption:{{$:/state/Calendar/PageLayout/create-tiddler-caption||$:/core/ui/EditTemplate/title}}
+  <small>Title:{{$:/state/Calendar/PageLayout/create-tiddler-caption!!draft.title}}{{$:/state/Calendar/PageLayout/create-tiddler!!draft.title}}</small>
   <div class="tw-calendar-tags-input">
     {{$:/state/Calendar/PageLayout/create-tiddler||$:/core/ui/EditTemplate/tags}}
     {{$:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/popup/FrequentlyUsedTagsList}}
