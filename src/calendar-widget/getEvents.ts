@@ -118,8 +118,6 @@ function mapTiddlerFieldsToFullCalendarEventObject(fields: ITiddlerFields, conte
   if (typeof startDate === 'string' && typeof endDate === 'string') {
     const start = f(startDate);
     const end = f(endDate);
-    // DEBUG: console
-    console.log(`end - start === allDayDateLength`, end - start, end - start === allDayDateLength);
     return [
       {
         ...options,
