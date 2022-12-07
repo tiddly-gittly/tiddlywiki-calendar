@@ -15,6 +15,7 @@ title: $:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/popup/Crea
 />
 \end
 
+<!-- learn this from twMat https://groups.google.com/g/tiddlywiki/c/XXbzgRmcXF0 -->
 <$wikify name="newtitle" text="{{$:/plugins/linonetwo/tw-calendar/settings/prefix}}{{$:/state/Calendar/PageLayout/create-tiddler-caption!!draft.title}}{{$:/state/Calendar/PageLayout/create-tiddler!!draft.title}}" >
 
 <div class="tw-calendar-footer-buttons">
