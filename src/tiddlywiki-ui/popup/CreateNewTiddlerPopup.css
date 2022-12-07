@@ -22,11 +22,15 @@
   justify-content: flex-start;
 }
 .tw-calendar-layout-create-new-tiddler-popup .tw-calendar-tags-input .tw-calendar-frequently-used-tags {
-  cursor: pointer;
+  max-width: 40%;
 }
 .tw-calendar-layout-create-new-tiddler-popup .tw-calendar-tags-input .tc-edit-tags {
   padding-left: 0;
   border: unset;
+  width: 60%;
+}
+.tw-calendar-empty-list-help-text {
+  margin: 0;
 }
 .tw-calendar-layout-create-new-tiddler-popup .tc-edit-texteditor {
   width: 100%;
