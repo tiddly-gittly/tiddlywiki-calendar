@@ -2,10 +2,14 @@ title: DueExample
 type: text/vnd.tiddlywiki
 tags: WidgetUsage
 
-Also you can use your own filter of fields:
+Also you can use your own filter of fields. Use `startDateFields` and `endDateFields` to only show tiddlers with these fields.
+
+Adding `startDateFields` and `endDateFields` will make created tiddler use them as key to store the `startDate` and `endDate`. When multiple fields are provided, only ""first"" of them will be used as key during creation.
 
 ```
-<$calendar filter="[all[]tag[?]]" startDateFields="due" initialDate="20220316050103382" />
+<$calendar filter="[all[]tag[?]]" startDateFields="due" endDateFields="dueEnd" initialDate="20220316050103382" />
 ```
 
-<$calendar filter="[all[]tag[?]]" startDateFields="due" initialDate="20220316050103382" initialView="timeGridDay" />
+<$calendar filter="[all[]tag[?]]" startDateFields="due" endDateFields="dueEnd" initialDate="20220316050103382" initialView="timeGridDay" />
+
+You should use standard TiddlerWiki time format in these fields.
