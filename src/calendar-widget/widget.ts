@@ -16,8 +16,10 @@ class CalendarWidget extends Widget {
   #mountElement?: HTMLDivElement;
 
   refresh(changedTiddlers: IChangedTiddlers): boolean {
+    let refreshed = false;
     if (
       Object.keys(changedTiddlers).some((changedTiddlerTitle) => {
+        // if modified date is within calendar view, refresh to show new event
         if (changedTiddlers[changedTiddlerTitle].modified) {
           return changedTiddlerInViewRange(changedTiddlerTitle, this.#calendar);
         }
@@ -26,9 +28,22 @@ class CalendarWidget extends Widget {
     ) {
       this.#calendar?.getEventSourceById(tiddlerEventSourceID)?.refetch();
       // this won't cause this.render to be called...
-      return true;
+      refreshed = true;
     }
-    return false;
+    if (
+      Object.keys(changedTiddlers).some((changedTiddlerTitle) => {
+        // if setting changed, refresh the whole calendar, to make options take effect
+        if (changedTiddlerTitle.startsWith('$:/plugins/linonetwo/tw-calendar/settings')) return true;
+        return false;
+      })
+    ) {
+      this.#calendar?.destroy();
+      this.#calendar = initCalendar(this.#mountElement!, this.getContext());
+      this.#calendar?.render();
+      // this won't cause this.render to be called...
+      refreshed = true;
+    }
+    return refreshed;
   }
 
   /**
@@ -53,17 +68,7 @@ class CalendarWidget extends Widget {
       }
     }
     if (this.#calendar === undefined) {
-      const context: IContext = {
-        endDateFields: this.getAttribute('endDateFields')?.split(','),
-        filter: this.getAttribute('filter'),
-        hideToolbar: this.getAttribute('hideToolbar') === 'yes' || this.getAttribute('hideToolbar') === 'true',
-        initialDate: this.getAttribute('initialDate'),
-        initialView: this.getAttribute('initialView'),
-        parentWidget: this.parentWidget,
-        startDateFields: this.getAttribute('startDateFields')?.split(','),
-        timeZone: this.getAttribute('timeZone'),
-      };
-      this.#calendar = initCalendar(this.#mountElement, context);
+      this.#calendar = initCalendar(this.#mountElement, this.getContext());
       // fix https://github.com/fullcalendar/fullcalendar/issues/4976
       setTimeout(() => {
         this.#calendar?.render();
@@ -80,6 +85,19 @@ class CalendarWidget extends Widget {
   removeChildDomNodes() {
     super.removeChildDomNodes();
     this.#calendar?.destroy();
+  }
+
+  getContext(): IContext {
+    return {
+      endDateFields: this.getAttribute('endDateFields')?.split(','),
+      filter: this.getAttribute('filter'),
+      hideToolbar: this.getAttribute('hideToolbar') === 'yes' || this.getAttribute('hideToolbar') === 'true',
+      initialDate: this.getAttribute('initialDate'),
+      initialView: this.getAttribute('initialView'),
+      parentWidget: this.parentWidget,
+      startDateFields: this.getAttribute('startDateFields')?.split(','),
+      timeZone: this.getAttribute('timeZone'),
+    };
   }
 }
 

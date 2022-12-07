@@ -34,7 +34,7 @@ color:$(foregroundColor)$;
 `;
 
 exports.run = function (tagsString = '') {
-  const tags = tagsString.split(' ');
+  const tags = tagsString.split(' ').filter((tag) => tag.length > 0);
   // remove all tags that has direct parent in the array, so we won't create duplicate trees
   const tagsWithoutDuplicate = tags.filter((tag) => {
     const tiddler = $tw.wiki.getTiddler(tag);

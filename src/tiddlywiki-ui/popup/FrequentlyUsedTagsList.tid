@@ -11,11 +11,11 @@ You can goto <a href="/#%24%3A%2Fplugins%2Flinonetwo%2Ftw-calendar%2Ftiddlywiki-
 \end
 
 <div class="tw-calendar-frequently-used-tags">
-  <$list filter="[list[$:/plugins/linonetwo/tw-calendar/frequently-used-tags!!text]first[]then[yes]]" storyview="pop" emptyMessage=<<empty-list-help-text>>>
+  <$list filter="[list[$:/plugins/linonetwo/tw-calendar/settings/frequently-used-tags!!text]first[]then[yes]]" storyview="pop" emptyMessage=<<empty-list-help-text>>>
     <div class="tc-edit-tags">
       <$macrocall
         $name="input-only-tag-tree"
-        tags={{$:/plugins/linonetwo/tw-calendar/frequently-used-tags}}
+        tags={{$:/plugins/linonetwo/tw-calendar/settings/frequently-used-tags}}
       />
     </div>
   </$list>

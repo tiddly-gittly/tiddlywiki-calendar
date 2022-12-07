@@ -34,8 +34,14 @@ export interface IContext {
   timeZone?: string;
 }
 export function initCalendar(containerElement: HTMLDivElement, context: IContext) {
+  const calendar = new Calendar(containerElement, getSettings(context));
+  return calendar;
+}
+
+export function getSettings(context: IContext): CalendarOptions {
   const now = context.initialDate === undefined ? undefined : $tw.utils.parseDate(context.initialDate);
-  const calendar = new Calendar(containerElement, {
+  const use24HourFormat = $tw.wiki.getTiddlerText('$:/plugins/linonetwo/tw-calendar/settings/24hour') === 'yes';
+  return {
     eventSources: [{ events: getEventOnFullCalendarViewChange(context), id: tiddlerEventSourceID }],
     plugins: [momentTimezonePlugin, dayGridPlugin, timeGridPlugin, listPlugin, adaptivePlugin, interactionPlugin],
     views: {
@@ -59,14 +65,27 @@ export function initCalendar(containerElement: HTMLDivElement, context: IContext
     droppable: true,
     rerenderDelay: 100,
     longPressDelay: 250,
+    eventTimeFormat: use24HourFormat
+      ? {
+          hour: '2-digit',
+          minute: '2-digit',
+          hour12: false,
+        }
+      : undefined,
+    slotLabelFormat: use24HourFormat
+      ? {
+          hour: '2-digit',
+          minute: '2-digit',
+          hour12: false,
+        }
+      : undefined,
     nowIndicator: true,
     scrollTimeReset: false,
     schedulerLicenseKey: 'GPL-My-Project-Is-Open-Source',
     ...getToolbarSettings(context),
     // event handlers
     ...getHandlers(context),
-  });
-  return calendar;
+  };
 }
 
 function getToolbarSettings(context: IContext): CalendarOptions {
