@@ -7,6 +7,7 @@ import adaptivePlugin from '@fullcalendar/adaptive';
 import interactionPlugin from '@fullcalendar/interaction';
 import listPlugin from '@fullcalendar/list';
 import moment from 'moment-timezone';
+import type { h } from 'preact';
 import { getHandlers } from './handlers';
 import { getEventOnFullCalendarViewChange } from './getEvents';
 
@@ -58,6 +59,22 @@ export function getSettings(context: IContext): CalendarOptions {
     },
     initialView: context.initialView ?? (isSmallScreen ? 'timeGridThreeDay' : 'timeGridWeek'),
     now,
+    eventContent(argument, createElement: typeof h) {
+      const titleElement = createElement('div', {}, argument.event.title);
+      const timeElement = createElement('div', {}, argument.timeText);
+      const tiddler = $tw.wiki.getTiddler(argument.event.title);
+      if (tiddler === undefined) {
+        return [titleElement, timeElement];
+      }
+      const tagsElement = createElement(
+        'div',
+        { class: 'fc-event-main-tags' },
+        tiddler.fields.tags.map((tag) => createElement('span', {}, tag)),
+      );
+      // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
+      const captionElement = typeof tiddler.fields.caption === 'string' ? createElement('div', {}, tiddler.fields.caption) : undefined;
+      return [captionElement, tagsElement, timeElement];
+    },
     timeZone: context.timeZone ?? moment.tz.guess(),
     navLinks: true,
     editable: true,
