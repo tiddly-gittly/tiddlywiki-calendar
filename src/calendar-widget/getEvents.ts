@@ -13,6 +13,7 @@ export enum CalendarEventType {
   CustomField,
 }
 const normalTiddlerEventLengthInHour = 1;
+const allDayDateLength = 60 * 60 * 24 * 1000;
 
 export const getEventOnFullCalendarViewChange =
   (context: IContext): EventSourceFunc =>
@@ -100,6 +101,8 @@ function mapTiddlerFieldsToFullCalendarEventObject(fields: ITiddlerFields, conte
           durationEditable: false,
           start: startDateFromField,
           end: endDateFromField,
+          // @ts-expect-error The left-hand side of an arithmetic operation must be of type 'any', 'number', 'bigint' or an enum type.ts(2362)
+          allDay: endDateFromField - startDateFromField === allDayDateLength,
           extendedProps: {
             type: CalendarEventType.CustomField,
           },
@@ -113,11 +116,17 @@ function mapTiddlerFieldsToFullCalendarEventObject(fields: ITiddlerFields, conte
    * If it has startDate and endDate, means this is an event created by the calendar
    */
   if (typeof startDate === 'string' && typeof endDate === 'string') {
+    const start = f(startDate);
+    const end = f(endDate);
+    // DEBUG: console
+    console.log(`end - start === allDayDateLength`, end - start, end - start === allDayDateLength);
     return [
       {
         ...options,
-        start: f(startDate),
-        end: f(endDate),
+        start,
+        end,
+        // @ts-expect-error The left-hand side of an arithmetic operation must be of type 'any', 'number', 'bigint' or an enum type.ts(2362)
+        allDay: end - start === allDayDateLength,
         extendedProps: {
           type: CalendarEventType.Event,
         },
