@@ -23,6 +23,8 @@ color:$(foregroundColor)$;
 \\whitespace trim
 <$vars foregroundColor=<<contrastcolour target:"""$colour$""" fallbackTarget:"""$fallbackTarget$""" colourA:"""$colourA$""" colourB:"""$colourB$""">> backgroundColor="""$colour$""">
 <$button class="tc-tag-label" style=<<tag-styles>>>
+<$log />
+<$macrocall $name="tag-tree-button-action" tiddlerName=<<currentTiddler>>/>
 <$transclude tiddler="""$icon$"""/><$transclude field="caption"><$view field="title"/></$transclude>
 </$button>
 </$vars>
