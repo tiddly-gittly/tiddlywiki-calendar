@@ -22,11 +22,13 @@ color:$(foregroundColor)$;
 \\define tag-body-inner(colour,fallbackTarget,colourA,colourB,icon)
 \\whitespace trim
 <$vars foregroundColor=<<contrastcolour target:"""$colour$""" fallbackTarget:"""$fallbackTarget$""" colourA:"""$colourA$""" colourB:"""$colourB$""">> backgroundColor="""$colour$""">
-<$button class="tc-tag-label" style=<<tag-styles>>>
-<$log />
-<$macrocall $name="tag-tree-button-action" tiddlerName=<<currentTiddler>>/>
-<$transclude tiddler="""$icon$"""/><$transclude field="caption"><$view field="title"/></$transclude>
-</$button>
+  <$button class="tc-tag-label" style=<<tag-styles>>>
+    <$macrocall $name="tag-tree-button-action" tiddlerName=<<currentTiddler>>/>
+    <$transclude tiddler="""$icon$"""/>
+    <$transclude field="caption">
+      <$view field="title"/>
+    </$transclude>
+  </$button>
 </$vars>
 \\end
 `;
