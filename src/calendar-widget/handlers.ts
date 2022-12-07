@@ -22,6 +22,7 @@ export function getHandlers(context: IContext): CalendarOptions {
      * @url https://fullcalendar.io/docs/select-callback
      */
     select(info) {
+      if (context.readonly === true) return;
       let text = '';
       // handle full-date event, make them tw standard journal
       // @ts-expect-error Property 'type' does not exist on type 'ViewApi'.ts(2339)

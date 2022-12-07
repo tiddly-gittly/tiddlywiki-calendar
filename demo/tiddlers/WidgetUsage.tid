@@ -10,7 +10,8 @@ There are some attributes to control the state and data source of the widget.
 |startDateFields|when calendar open, it will filter tiddlers with these fields (add to the filter expression on the fly), and one of these field is within the range of current calendar view|(any field name whose value is date format), separated by comma `,`|`created,modified,startDate`|`startDateFields="due,due2"` `startDateFields="due"`|
 |endDateFields|corresponding end date field to startDateFields. When using multiple pairs of fields, their index in the array should be the same.|(any field name whose value is date format), separated by comma `,`|`,,endDate`|`endDateFields="dueEnd,dueEnd2"` `endDateFields=",dueEnd2"`|
 |hideToolbar|hide toolbar buttons and title, only show the pure calendar content. So it can be used as a small calendar widget, for example.|"yes" or "true"|`no`|`hideToolbar="yes"`|
-|timeZone|specify the time shift used by calendar when showing data. This won't change how data is stored, data is always store in UTC timeZone, so even you travel, they remains the same.|[[tz database time zones|https://www.wikiwand.com/en/List_of_tz_database_time_zones]]|(auto detect from browser)|`timeZone="Asia/Shanghai"`|
+|readonly|make widget content non-editable (disable all tiddler-creating-popups), so you can use it in public-facing wikis.|"yes" or "true"|`no`|`readonly="yes"`|
+|[timeZone]|specify the time shift used by calendar when showing data ([[TimeZoneExample]]). This won't change how data is stored, data is always store in UTC timeZone, so even you travel, they remains the same.|[[tz database time zones|https://www.wikiwand.com/en/List_of_tz_database_time_zones]]|(auto detect from browser)|`timeZone="Asia/Shanghai"`|
 
 <$list filter="[tag<currentTiddler>]">
 
