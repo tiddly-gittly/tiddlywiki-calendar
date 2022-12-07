@@ -1,7 +1,8 @@
 {
   "url": "https://github.com/tiddly-gittly/tiddlywiki-calendar",
   "tsFiles": [
-    "src/calendar-widget/widget.ts"
+    "src/calendar-widget/widget.ts",
+    "src/tiddlywiki-ui/tagTreeMacro.ts"
   ],
   "ignoredExtensionsWhenBuildPlugin": [
     ".ts",

@@ -17,3 +17,8 @@ Add tags to be displayed on the create event tiddler popup, so you can click on 
 <$vars currentTiddler="$:/plugins/linonetwo/tw-calendar/frequently-used-tags" tagField="text">
 	{{||$:/core/ui/EditTemplate/tags}}
 </$vars>
+
+<$macrocall
+	$name="input-only-tag-tree"
+	tags={{$:/plugins/linonetwo/tw-calendar/frequently-used-tags}}
+/>

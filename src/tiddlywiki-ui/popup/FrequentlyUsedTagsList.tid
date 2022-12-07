@@ -22,13 +22,21 @@ color:$(foregroundColor)$;
 <$macrocall $name="tag-body-inner" colour="""$colour$""" fallbackTarget={{$palette$##tag-background}} colourA={{$palette$##foreground}} colourB={{$palette$##background}} icon="""$icon$"""/>
 \end
 
-<div class="tc-edit-tags tw-calendar-frequently-used-tags">
-  <$list filter="[list[$:/plugins/linonetwo/tw-calendar/frequently-used-tags!!text]]" storyview="pop">
-    <$macrocall
-      $name="tag-body"
-      colour={{{ [<currentTiddler>] :cascade[all[shadows+tiddlers]tag[$:/tags/TiddlerColourFilter]!is[draft]get[text]] }}}
-      palette={{$:/palette}}
-      icon={{{ [<currentTiddler>] :cascade[all[shadows+tiddlers]tag[$:/tags/TiddlerIconFilter]!is[draft]get[text]] }}}
-    />
+\define empty-list-help-text()
+<p class="tw-calendar-empty-list-help-text">
+You can goto <a href="/#%24%3A%2Fplugins%2Flinonetwo%2Ftw-calendar%2Ftiddlywiki-ui%2FControlPanel%2FSettings">Plugin Setting</a> in control panel or plugin page, add frequently used tags here.
+</p>
+\end
+
+<div class="tw-calendar-frequently-used-tags">
+  <$list filter="[list[$:/plugins/linonetwo/tw-calendar/frequently-used-tags!!text]]" storyview="pop" emptyMessage=<<empty-list-help-text>>>
+    <div class="tc-edit-tags">
+      <$macrocall
+        $name="tag-body"
+        colour={{{ [<currentTiddler>] :cascade[all[shadows+tiddlers]tag[$:/tags/TiddlerColourFilter]!is[draft]get[text]] }}}
+        palette={{$:/palette}}
+        icon={{{ [<currentTiddler>] :cascade[all[shadows+tiddlers]tag[$:/tags/TiddlerIconFilter]!is[draft]get[text]] }}}
+      />
+    </div>
   </$list>
 </div>
