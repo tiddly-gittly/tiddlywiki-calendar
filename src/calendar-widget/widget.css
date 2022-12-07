@@ -5,3 +5,8 @@
 .tiddlywiki-calendar-widget-container table {
   margin: unset;
 }
+
+.fc-event-main-tags > span {
+  padding-right: 5px;
+  word-break: break-all;
+}
