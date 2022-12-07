@@ -23,7 +23,7 @@ color:$(foregroundColor)$;
 \\whitespace trim
 <$vars foregroundColor=<<contrastcolour target:"""$colour$""" fallbackTarget:"""$fallbackTarget$""" colourA:"""$colourA$""" colourB:"""$colourB$""">> backgroundColor="""$colour$""">
 <$button class="tc-tag-label" style=<<tag-styles>>>
-<$transclude tiddler="""$icon$"""/><$view field="title" format="text" />
+<$transclude tiddler="""$icon$"""/><$transclude field="caption"><$view field="title"/></$transclude>
 </$button>
 </$vars>
 \\end
@@ -34,7 +34,7 @@ exports.run = function (tagsString = '') {
   // remove all tags that has direct parent in the array, so we won't create duplicate trees
   const tagsWithoutDuplicate = tags.filter((tag) => {
     const tiddler = $tw.wiki.getTiddler(tag);
-    if (tiddler === undefined) return false;
+    if (tiddler === undefined) return true;
     if ((tiddler.fields.tags ?? []).some((tagOfTag) => tags.includes(tagOfTag))) return false;
     return true;
   });
@@ -64,6 +64,9 @@ function buildTocWithOfferedTiddlers(rootTiddler: string, offeredTiddlers: strin
   if (tiddlersTaggingTheRoot.length === 0) return rootButton;
   return `${rootButton}
   <ul>
-	${tiddlersTaggingTheRoot.map((tag) => `<li>${buildTocWithOfferedTiddlers(tag, offeredTiddlers)}</li>`).join('')}
+	${tiddlersTaggingTheRoot
+    .filter((tag) => offeredTiddlers.includes(tag))
+    .map((tag) => `<li>${buildTocWithOfferedTiddlers(tag, offeredTiddlers)}</li>`)
+    .join('')}
 	</ul>`;
 }
