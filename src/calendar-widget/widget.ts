@@ -17,11 +17,13 @@ class CalendarWidget extends Widget {
 
   refresh(changedTiddlers: IChangedTiddlers): boolean {
     let refreshed = false;
+    const context = this.getContext()
     if (
       Object.keys(changedTiddlers).some((changedTiddlerTitle) => {
         // if modified date is within calendar view, refresh to show new event
+        const endDateKey = context.endDateFields?.[0] ?? 'endDate';
         if (changedTiddlers[changedTiddlerTitle].modified) {
-          return changedTiddlerInViewRange(changedTiddlerTitle, this.#calendar);
+          return changedTiddlerInViewRange(changedTiddlerTitle, this.#calendar, endDateKey);
         }
         return false;
       })
@@ -38,7 +40,7 @@ class CalendarWidget extends Widget {
       })
     ) {
       this.#calendar?.destroy();
-      this.#calendar = initCalendar(this.#mountElement!, this.getContext());
+      this.#calendar = initCalendar(this.#mountElement!, context);
       this.#calendar?.render();
       // this won't cause this.render to be called...
       refreshed = true;

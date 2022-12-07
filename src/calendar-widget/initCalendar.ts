@@ -69,11 +69,7 @@ export function getSettings(context: IContext): CalendarOptions {
       if (tiddler === undefined) {
         return [titleElement, timeElement];
       }
-      const tagsElement = createElement(
-        'div',
-        { class: 'fc-event-main-tags' },
-        tiddler.fields.tags.map((tag) => createElement('span', {}, tag)),
-      );
+      const tagsElement = createElement('div', { class: 'fc-event-main-tags' }, tiddler.fields.tags?.map((tag) => createElement('span', {}, tag)) ?? '');
       // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
       const captionElement = typeof tiddler.fields.caption === 'string' ? createElement('div', {}, tiddler.fields.caption) : undefined;
       return [captionElement, tagsElement, timeElement];

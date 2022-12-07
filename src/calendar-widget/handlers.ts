@@ -44,10 +44,12 @@ export function getHandlers(context: IContext): CalendarOptions {
       }
       const startDate = $tw.utils.formatDateString(info.start, '[UTC]YYYY0MM0DD0hh0mm0ssXXX');
       const endDate = $tw.utils.formatDateString(info.end, '[UTC]YYYY0MM0DD0hh0mm0ssXXX');
+      const startDateKey = context.startDateFields?.[0] ?? 'startDate';
+      const endDateKey = context.endDateFields?.[0] ?? 'endDate';
       $tw.wiki.addTiddler({
         title: '$:/state/Calendar/PageLayout/create-tiddler',
-        startDate,
-        endDate,
+        [startDateKey]: startDate,
+        [endDateKey]: endDate,
         'draft.title': info.startStr,
         text,
       });
