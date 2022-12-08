@@ -19,7 +19,7 @@ export const getEventOnFullCalendarViewChange =
   (context: IContext): EventSourceFunc =>
   async (argument: EventSourceFuncArg) => {
     const { start, end } = argument;
-    const [startTwString, endTwString] = [start, end].map((date) => $tw.utils.formatDateString(date, '[UTC]YYYY0MM0DD0hh0mm0ssXXX'));
+    const [startTwString, endTwString] = [start, end].map((date) => $tw.utils.stringifyDate(date));
     const sourceFilter = context?.filter ?? '[all[tiddlers]!is[system]]';
     const getFilterOnField = (field: string) => `${sourceFilter}:filter[get[${field}]compare:date:gteq[${startTwString}]compare:date:lteq[${endTwString}]]`;
     const fields = context.startDateFields ?? ['created', 'modified', 'startDate'];

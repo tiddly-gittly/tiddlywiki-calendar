@@ -42,8 +42,8 @@ export function getHandlers(context: IContext): CalendarOptions {
           text = journalText ?? text;
         }
       }
-      const startDate = $tw.utils.formatDateString(info.start, '[UTC]YYYY0MM0DD0hh0mm0ssXXX');
-      const endDate = $tw.utils.formatDateString(info.end, '[UTC]YYYY0MM0DD0hh0mm0ssXXX');
+      const startDate = $tw.utils.stringifyDate(info.start);
+      const endDate = $tw.utils.stringifyDate(info.end);
       const startDateKey = context.startDateFields?.[0] ?? 'startDate';
       const endDateKey = context.endDateFields?.[0] ?? 'endDate';
       $tw.wiki.addTiddler({
