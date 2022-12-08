@@ -1,0 +1,7 @@
+title: CalendarPageLayout
+type: text/vnd.tiddlywiki
+tags: CalendarUsage
+
+You can use <kbd><<displayshortcuts ((layout-switcher))>></kbd> to trigger the page layout switch dialog. See [[official documentation about page layout|https://tiddlywiki.com/#Alternative%20page%20layouts]] for details.
+
+Choose "Calendar" layout will bring you to a full page calendar.

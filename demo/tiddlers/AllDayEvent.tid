@@ -2,6 +2,12 @@ title: AllDayEvent
 type: text/vnd.tiddlywiki
 tags: CalendarUsage
 
+!! Creating
+
 When click on a day in DayGridMonth, or click on "all-day" row in the TimeGridWeek, you will add an AllDayEvent.
 
 The event is identical to a standard [[TiddlyWiki Journal|https://tiddlywiki.com/#Creating%20journal%20tiddlers]] by default, but you can change the title during creation, to create multiple all-day event.
+
+!! Displaying
+
+If you have created an event with a length of 24 hours, no matter it is created by method mentioned above, or by other plugins, it will be recognized as an all day event automatically, even its start and end time is not exactly 00:00.
