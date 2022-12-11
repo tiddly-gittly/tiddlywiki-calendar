@@ -4,11 +4,8 @@ footer: {{$:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/popup/C
 
 <div class="tw-calendar-layout-create-new-tiddler-popup">
   Caption:{{$:/state/Calendar/PageLayout/create-tiddler-caption||$:/core/ui/EditTemplate/title}}
-  <small>Title:{{$:/plugins/linonetwo/tw-calendar/settings/prefix}}{{$:/state/Calendar/PageLayout/create-tiddler-caption!!draft.title}}{{$:/state/Calendar/PageLayout/create-tiddler!!draft.title}}</small>
-  <div class="tw-calendar-tags-input">
-    {{$:/state/Calendar/PageLayout/create-tiddler||$:/core/ui/EditTemplate/tags}}
-    {{$:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/popup/FrequentlyUsedTagsList}}
-  </div>
+  <small>Title:{{$:/plugins/linonetwo/tw-calendar/settings/prefix}}{{$:/state/Calendar/PageLayout/create-tiddler-caption!!draft.title}}</small>
+
   <$let currentTiddler="$:/state/Calendar/PageLayout/create-tiddler">
     <$edit-text
       field="text"
@@ -21,9 +18,14 @@ footer: {{$:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/popup/C
       fileDrop=no
       minHeight="30px"
     />
-
     <div class="tw-calendar-time-range-preview">
       <$view field="startDate" format="date" template={{$:/language/Tiddler/DateFormat}}/> → <$view field="endDate" format="date" template={{$:/language/Tiddler/DateFormat}}/>
     </div>
   </$let>
+  <div class="tw-calendar-tags-input">
+    {{$:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/popup/FrequentlyUsedTagsList}}
+    <div class="tw-calendar-tags-input">
+    {{$:/state/Calendar/PageLayout/create-tiddler||$:/core/ui/EditTemplate/tags}}
+    </div>
+  </div>
 </div>
