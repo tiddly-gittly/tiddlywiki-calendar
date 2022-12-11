@@ -19,7 +19,8 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  
+  max-width: 100%;
+  overflow-x: auto;
 }
 .tw-calendar-layout-create-new-tiddler-popup .tw-calendar-tags-input .tw-calendar-frequently-used-tags {
   max-width: 180%;
