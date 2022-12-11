@@ -6,7 +6,21 @@
   margin: unset;
 }
 
+.fc-event-main-tags {
+  overflow: hidden;
+}
 .fc-event-main-tags > span {
-  padding-right: 5px;
   word-break: break-all;
+  border: 1px solid;
+  padding: 1px;
+  margin: 1px;
+  margin-right: 2px;
+  margin-bottom: 0px;
+  line-height: 2em;
+}
+
+.fc-event-title-with-text {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 15%;
 }
