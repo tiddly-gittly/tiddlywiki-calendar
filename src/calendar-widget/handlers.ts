@@ -51,6 +51,11 @@ export function getHandlers(context: IContext): CalendarOptions {
         [startDateKey]: startDate,
         [endDateKey]: endDate,
         'draft.title': info.startStr,
+        /**
+         * this `calendarEntry` is used for cascade that ask tiddler only show caption
+         * See $:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/ViewTemplate/captionCascade
+         */
+        calendarEntry: 'yes',
         text,
       });
       new TWModal($tw.wiki).display('$:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/popup/CreateNewTiddlerPopup');
