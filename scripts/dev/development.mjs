@@ -71,7 +71,7 @@ const refresh = async () => {
   }
   if (twServer) twServer.close();
   $tw2 = tw.TiddlyWiki();
-  $tw2.boot.argv = ['dist', '--listen', 'host=0.0.0.0'];
+  $tw2.boot.argv = ['dist', '--listen'];
   $tw2.preloadTiddler({ title: '$:/Modern.TiddlyDev/devWebsocket/port', text: `${wssPort}` });
   $tw2.preloadTiddler({
     title: '$:/Modern.TiddlyDev/devWebsocket/listener',

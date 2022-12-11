@@ -29,7 +29,7 @@ export const config = {
   treeShaking: true,
   external: ['$:/*', 'react', 'react-dom'],
   plugins: [
-    esbuildPluginBrowserslist(browserslist('last 2 versions'), {
+    esbuildPluginBrowserslist(browserslist('defaults'), {
       printUnknownTargets: false,
     }),
   ],
