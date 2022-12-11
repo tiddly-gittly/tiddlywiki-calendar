@@ -4,7 +4,7 @@ footer: {{$:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/popup/C
 
 <div class="tw-calendar-layout-create-new-tiddler-popup">
   Caption:{{$:/state/Calendar/PageLayout/create-tiddler-caption||$:/core/ui/EditTemplate/title}}
-  <small>Title:{{$:/plugins/linonetwo/tw-calendar/settings/prefix}}{{$:/state/Calendar/PageLayout/create-tiddler-caption!!draft.title}}{{$:/state/Calendar/PageLayout/create-tiddler!!draft.title}}</small>
+  <small>Title:{{$:/plugins/linonetwo/tw-calendar/settings/prefix}}{{$:/state/Calendar/PageLayout/create-tiddler-caption!!draft.title}}</small>
 
   <$let currentTiddler="$:/state/Calendar/PageLayout/create-tiddler">
     <$edit-text
