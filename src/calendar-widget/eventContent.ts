@@ -16,7 +16,6 @@ export function getEventContent(context: IContext): CustomContentGenerator<Event
       return [titleElement, timeElement];
     }
 
-    const tagsElement = createElement('div', { class: 'fc-event-main-tags' }, tiddler.fields.tags?.map((tag) => createElement('span', {}, tag)) ?? '');
     let captionResult: string | undefined | null;
     if (typeof tiddler.fields.caption === 'string' && context.parentWidget !== undefined) {
       if (tiddler.fields.caption.includes('{{')) {
@@ -39,7 +38,14 @@ export function getEventContent(context: IContext): CustomContentGenerator<Event
         ? // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
           createElement('div', { class: tiddler?.fields?.text ? 'fc-event-title-with-text' : undefined }, captionResult)
         : undefined;
+    // on small view that can only display an element
+    // @ts-expect-error Property 'type' does not exist on type 'ViewApi'.ts(2339)
+    if (['dayGridMonth'].includes(argument.view.type as string)) {
+      return [captionElement];
+    }
+    // on large view
     const textElement = createElement('div', {}, tiddler.fields.text);
+    const tagsElement = createElement('div', { class: 'fc-event-main-tags' }, tiddler.fields.tags?.map((tag) => createElement('span', {}, tag)) ?? '');
     return [captionElement, tagsElement, timeElement, textElement];
   };
 }
