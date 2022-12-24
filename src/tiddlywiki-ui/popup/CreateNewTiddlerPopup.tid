@@ -24,7 +24,7 @@ footer: {{$:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/popup/C
   </$let>
   <div class="tw-calendar-tags-input">
     {{$:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/popup/FrequentlyUsedTagsList}}
-    <div class="tw-calendar-tags-input">
+    <div class="tw-calendar-tags-input-new-tag">
     {{$:/state/Calendar/PageLayout/create-tiddler||$:/core/ui/EditTemplate/tags}}
     </div>
   </div>
