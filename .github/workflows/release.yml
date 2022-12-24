@@ -44,6 +44,9 @@ jobs:
           # here we replace "title": "$:/plugins/linonetwo/tw-example-plugin", to "title": "linonetwo/tw-example-plugin",
           # so it can be used in tiddly-gittly/tw5-plugin-packer to find output path
           content="${content//$\:\/plugins\//}"
+          content="${content//$\:\/themes\//}"
+          # replace plugin-type with pluginType
+          content="${content//$'plugin-type'/'pluginType'}"
           # end of optional handling for multi line json
           echo "::set-output name=pluginInfoJSON::$content"
 
@@ -57,7 +60,7 @@ jobs:
             ${{ runner.os }}-node-
 
       - name: Install dependencies
-        run: npm i
+        run: pnpm i
 
       - name: Make Plugins
         run: npm run make
@@ -67,11 +70,11 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       # this should be the same as `scripts/run-action.mjs`
-      - uses: tiddly-gittly/tw5-plugin-packer@v0.0.10
+      - uses: tiddly-gittly/tw5-plugin-packer@v0.0.13
         with:
           minify: 'true'
           # here we read plugin author and name from pluginInfoJSON, and pluginInfoJSON is read in the step above with id `setPluginInfoJSON`
-          source: 'dist/plugins/${{fromJson(steps.setPluginInfoJSON.outputs.pluginInfoJSON).title}}'
+          source: 'dist/${{fromJson(steps.setPluginInfoJSON.outputs.pluginInfoJSON).pluginType}}s/${{fromJson(steps.setPluginInfoJSON.outputs.pluginInfoJSON).title}}'
           output: 'dist/out'
           uglifyjs-options: '{ "warnings": false, "ie8": false, "safari10": false }'
           cleancss-options: '{ "compatibility": "*", "level": 2 }'
