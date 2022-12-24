@@ -6,6 +6,9 @@
   margin: unset;
 }
 
+.fc-timegrid-event-harness {
+  overflow: hidden;
+}
 .fc-event-main-tags {
   overflow: hidden;
 }
