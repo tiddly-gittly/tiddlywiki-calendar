@@ -8,10 +8,6 @@ exports.name = 'input-only-tag-tree';
 
 exports.params = [{ name: 'tags' }];
 
-// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-const contrastcolour: (colour: string, fallbackTarget: string, colourA: string, colourB: string) => string =
-  require('$:/core/modules/macros/contrastcolour.js').run;
-
 const textMacros = `
 \\define tag-styles()
 background-color:$(backgroundColor)$;

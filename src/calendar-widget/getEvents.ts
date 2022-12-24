@@ -34,23 +34,39 @@ export const getEventOnFullCalendarViewChange =
 
 export function getEvents(filter: string, context: IContext): EventInput[] {
   const tiddlerTitles = $tw.wiki.filterTiddlers(filter);
+  const currentPalette: Record<string, string> = $tw.wiki.getTiddlerData($tw.wiki.getTiddlerText('$:/palette') ?? '$:/palettes/Vanilla');
   const fullCalendarEvents = tiddlerTitles
     .map((title) => $tw.wiki.getTiddler(title))
     .filter((tiddler): tiddler is Tiddler => tiddler !== undefined)
     .map((tiddler) => tiddler.fields)
-    .flatMap((tiddlerField) => mapTiddlerFieldsToFullCalendarEventObject(tiddlerField, context));
+    .flatMap((tiddlerField) => mapTiddlerFieldsToFullCalendarEventObject(tiddlerField, context, currentPalette));
   return fullCalendarEvents;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+const contrastColour: (colour: string, fallbackTarget: string, colourFore: string, colourBack: string) => number[] | string =
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+  require('$:/core/modules/macros/contrastcolour.js').run;
 const f = (twDate: string) => $tw.utils.parseDate(twDate);
-function mapTiddlerFieldsToFullCalendarEventObject(fields: ITiddlerFields, context: IContext): EventInput[] {
+
+function mapTiddlerFieldsToFullCalendarEventObject(fields: ITiddlerFields, context: IContext, palette: Record<string, string>): EventInput[] {
   const { title, startDate, endDate, created, modified, color, tags } = fields;
   const backgroundColor = color ?? tags?.map((tagName) => $tw.wiki.getTiddler(tagName)?.fields?.color).find(Boolean);
+  let textColor: string | undefined;
+  if (backgroundColor !== undefined) {
+    const contractColorResult = contrastColour(backgroundColor, palette['tag-background'], palette.foreground, palette.background);
+    if (Array.isArray(contractColorResult)) {
+      textColor = `rgba(${contractColorResult.join(',')})`;
+    } else {
+      textColor = contractColorResult;
+    }
+  }
   const options: Partial<EventInput> = {
     title,
     id: title,
     interactive: true,
     backgroundColor,
+    textColor,
   };
   /**
    * Use user defined fields for top priority, and hide all other type of events, so only events that user want to see will show. User can add default fields if they want to see the full result.
