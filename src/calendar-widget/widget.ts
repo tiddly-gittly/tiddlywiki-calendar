@@ -17,7 +17,7 @@ class CalendarWidget extends Widget {
 
   refresh(changedTiddlers: IChangedTiddlers): boolean {
     let refreshed = false;
-    const context = this.getContext()
+    const context = this.getContext();
     if (
       Object.keys(changedTiddlers).some((changedTiddlerTitle) => {
         // if modified date is within calendar view, refresh to show new event
@@ -90,6 +90,7 @@ class CalendarWidget extends Widget {
   }
 
   getContext(): IContext {
+    /* eslint-disable @typescript-eslint/strict-boolean-expressions */
     return {
       endDateFields: this.getAttribute('endDateFields')?.split(','),
       filter: this.getAttribute('filter'),
@@ -98,6 +99,7 @@ class CalendarWidget extends Widget {
       initialView: this.getAttribute('initialView'),
       parentWidget: this.parentWidget,
       readonly: this.getAttribute('readonly') === 'yes' || this.getAttribute('readonly') === 'true',
+      slotDuration: this.getAttribute('slotDuration') || $tw.wiki.getTiddlerText('$:/plugins/linonetwo/tw-calendar/settings/slotDuration'),
       startDateFields: this.getAttribute('startDateFields')?.split(','),
       timeZone: this.getAttribute('timeZone'),
     };

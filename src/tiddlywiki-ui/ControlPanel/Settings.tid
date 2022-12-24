@@ -14,21 +14,6 @@ These settings let you customise the behaviour of Calendar plugin.
 
 The modal dialog shown when you drag/click on calendar to create a new event.
 
-!!! Prefix
-
-Auto add prefix to all created event.
-
-<$edit-text
-	tiddler="$:/plugins/linonetwo/tw-calendar/settings/prefix"
-	field="text"
-	default=""
-	tabindex=-1
-	focus=false
-	cancelPopups="yes"
-	fileDrop=no
-	tag="input"
-/>
-
 !!! Frequently used tags
 
 Add tags to be displayed on the create event tiddler popup, so you can click on them to add tag to new tiddler quickly.
@@ -44,7 +29,24 @@ Tags can have `caption` field as displayed name. And if tags here form a tag tre
 	tags={{$:/plugins/linonetwo/tw-calendar/settings/frequently-used-tags}}
 />
 
+!!! Prefix
+
+Auto add prefix to all created event.
+
+<$edit-text
+	tiddler="$:/plugins/linonetwo/tw-calendar/settings/prefix"
+	field="text"
+	default=""
+	tabindex=-1
+	focus=false
+	cancelPopups="yes"
+	fileDrop=no
+	tag="input"
+/>
+
 !! Appearance
 
-;24 Hour Format
+;24 Hour Format:
 :<$checkbox tiddler="$:/plugins/linonetwo/tw-calendar/settings/24hour" field="text" checked="yes" unchecked=""> Show 24 hour format in calendar left slot label and events</$checkbox>
+;SlotDuration: The frequency for displaying time slots.
+:<$edit-text tiddler="$:/plugins/linonetwo/tw-calendar/settings/slotDuration" tabindex=-1 focus=false cancelPopups="yes" fileDrop=no tag="input" />

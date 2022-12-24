@@ -31,6 +31,11 @@ export interface IContext {
   parentWidget?: Widget;
   /** make widget content non-editable */
   readonly?: boolean;
+  /**
+   * The frequency for displaying time slots.
+   * @url https://fullcalendar.io/docs/slotDuration
+   */
+  slotDuration?: string;
   /** when calendar open, it will filter tiddlers with these fields (add to the filter expression on the fly), and one of these field is within the range of current calendar view */
   startDateFields?: string[];
   /** specify the time shift used by calendar when showing data. This won't change how data is stored, data is always store in UTC timeZone, so even you travel, they remains the same. */
@@ -67,6 +72,7 @@ export function getSettings(context: IContext): CalendarOptions {
     navLinks: true,
     selectable: true,
     droppable: true,
+    slotDuration: context.slotDuration,
     rerenderDelay: 100,
     longPressDelay: 250,
     eventTimeFormat: use24HourFormat
