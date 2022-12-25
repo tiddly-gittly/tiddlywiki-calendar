@@ -1,0 +1,5 @@
+title: $:/language/Buttons/
+
+GoToCalendarLayoutButton/Caption: Calendar
+GoToCalendarLayoutButton/Hint: Go to Calendar Layout
+GoToCalendarLayoutButton/Description: Click on this button will go to Calendar Layout

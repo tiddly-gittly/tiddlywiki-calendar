@@ -13,3 +13,7 @@ div.tc-page-container.tw-calendar-layout-container {
   height: 100%;
   width: 100%;
 }
+
+.tc-page-controls svg.tc-image-tmd-calendar-cursor {
+  fill: <<colour toolbar-options-button>>;
+}
