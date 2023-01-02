@@ -20,6 +20,7 @@ export function getHandlers(context: IContext): CalendarOptions {
       ...originalEventTiddler.fields,
       [startDateKey]: startDate,
       [endDateKey]: endDate,
+      modified: new Date(),
     });
   }
   const handlers: CalendarOptions = {
