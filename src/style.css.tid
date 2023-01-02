@@ -1,0 +1,11 @@
+creator: LinOnetwo
+tags: $:/tags/Stylesheet
+title: $:/plugins/linonetwo/tw-calendar/style.css
+type: text/vnd.tiddlywiki
+
+/** make it possible to drag the app using this bar in TidGi, when titleBar is closed */
+<$reveal type="match" state="$:/state/titleBarOpened" text="no">
+div.opened-tiddlers-bar-drag-area {
+  -webkit-app-region: drag;
+}
+</$reveal>
