@@ -22,7 +22,7 @@ class CalendarWidget extends Widget {
       Object.keys(changedTiddlers).some((changedTiddlerTitle) => {
         // if modified date is within calendar view, refresh to show new event
         const endDateKey = context.endDateFields?.[0] ?? 'endDate';
-        if (changedTiddlers[changedTiddlerTitle].modified) {
+        if (changedTiddlers[changedTiddlerTitle].modified === true) {
           return changedTiddlerInViewRange(changedTiddlerTitle, this.#calendar, endDateKey);
         }
         return false;

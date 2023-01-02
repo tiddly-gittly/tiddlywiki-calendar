@@ -10,6 +10,7 @@ import moment from 'moment-timezone';
 import { getHandlers } from './handlers';
 import { getEventOnFullCalendarViewChange } from './getEvents';
 import { getEventContent } from './eventContent';
+import { getInCalendarLayout } from './constants';
 
 const isSmallScreen = window.innerWidth <= 600;
 export const tiddlerEventSourceID = 'tiddlers';
@@ -99,13 +100,12 @@ export function getSettings(context: IContext): CalendarOptions {
 }
 
 function getToolbarSettings(context: IContext): CalendarOptions {
-  const inCalendarLayout = $tw.wiki.getTiddlerText('$:/layout') === '$:/plugins/linonetwo/tw-calendar/tiddlywiki-ui/PageLayout/CalendarLayout';
   return {
     customButtons: {
       backToDefaultLayout: {
         text: 'Home',
         click: () => {
-          $tw.wiki.setText('$:/layout', 'text', '$:/core/ui/PageTemplate');
+          $tw.wiki.setText('$:/layout', 'text', '');
         },
       },
     },
@@ -115,13 +115,13 @@ function getToolbarSettings(context: IContext): CalendarOptions {
         : {
             left: `prev,next today`,
             center: 'title',
-            right: `${inCalendarLayout ? 'backToDefaultLayout ' : ''}dayGridMonth,timeGridWeek,timeGridThreeDay,timeGridDay,listWeek`,
+            right: `${getInCalendarLayout() ? 'backToDefaultLayout ' : ''}dayGridMonth,timeGridWeek,timeGridThreeDay,timeGridDay,listWeek`,
           },
     footerToolbar:
       isSmallScreen && context.hideToolbar !== true
         ? {
             right: `today,prev,next`,
-            left: `timeGridThreeDay,timeGridDay,listWeek${inCalendarLayout ? ' backToDefaultLayout' : ''}`,
+            left: `timeGridThreeDay,timeGridDay,listWeek${getInCalendarLayout() ? ' backToDefaultLayout' : ''}`,
           }
         : false,
   };

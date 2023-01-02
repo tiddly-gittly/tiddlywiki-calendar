@@ -39,8 +39,7 @@ export function getEventContent(context: IContext): CustomContentGenerator<Event
           createElement('div', { class: tiddler?.fields?.text ? 'fc-event-title-with-text' : undefined }, captionResult)
         : undefined;
     // on small view that can only display an element
-    // @ts-expect-error Property 'type' does not exist on type 'ViewApi'.ts(2339)
-    if (['dayGridMonth'].includes(argument.view.type as string)) {
+    if (['dayGridMonth'].includes(argument.view.type)) {
       return [captionElement];
     }
     // on large view

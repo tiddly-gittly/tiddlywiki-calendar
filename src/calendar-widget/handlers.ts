@@ -1,6 +1,7 @@
 import type { ModalWidget } from 'tiddlywiki';
 import type { CalendarOptions } from '@fullcalendar/core';
 import type { IContext } from './initCalendar';
+import { getInCalendarLayout } from './constants';
 
 const TWModal = (require('$:/core/modules/utils/dom/modal.js') as { Modal: ModalWidget }).Modal;
 
@@ -8,6 +9,7 @@ export function getHandlers(context: IContext): CalendarOptions {
   const handlers: CalendarOptions = {
     eventClick: (info) => {
       // if (info.jsEvent.getModifierState('Control') || info.jsEvent.getModifierState('Meta')) {
+      getInCalendarLayout() && $tw.wiki.setText('$:/layout', 'text', '');
       context?.parentWidget?.dispatchEvent({
         type: 'tm-navigate',
         navigateTo: info.event.title,
@@ -25,7 +27,6 @@ export function getHandlers(context: IContext): CalendarOptions {
       if (context.readonly === true) return;
       let text = '';
       // handle full-date event, make them tw standard journal
-      // @ts-expect-error Property 'type' does not exist on type 'ViewApi'.ts(2339)
       if (info.view.type === 'dayGridMonth') {
         info.start = new Date(info.startStr);
         info.end = new Date(info.endStr);
