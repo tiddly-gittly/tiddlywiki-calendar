@@ -2,10 +2,26 @@ import type { ModalWidget } from 'tiddlywiki';
 import type { CalendarOptions } from '@fullcalendar/core';
 import type { IContext } from './initCalendar';
 import { getInCalendarLayout } from './constants';
+import type { EventImpl } from '@fullcalendar/core/internal';
 
 const TWModal = (require('$:/core/modules/utils/dom/modal.js') as { Modal: ModalWidget }).Modal;
 
 export function getHandlers(context: IContext): CalendarOptions {
+  function putEvent(event: EventImpl) {
+    // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
+    if (event.start === null || event.end === null || !event.title) return;
+    const originalEventTiddler = $tw.wiki.getTiddler(event.title);
+    if (originalEventTiddler === undefined) return;
+    const startDate = $tw.utils.stringifyDate(event.start);
+    const endDate = $tw.utils.stringifyDate(event.end);
+    const startDateKey = context.startDateFields?.[0] ?? 'startDate';
+    const endDateKey = context.endDateFields?.[0] ?? 'endDate';
+    $tw.wiki.addTiddler({
+      ...originalEventTiddler.fields,
+      [startDateKey]: startDate,
+      [endDateKey]: endDate,
+    });
+  }
   const handlers: CalendarOptions = {
     eventClick: (info) => {
       // if (info.jsEvent.getModifierState('Control') || info.jsEvent.getModifierState('Meta')) {
@@ -65,6 +81,14 @@ export function getHandlers(context: IContext): CalendarOptions {
         // fix title not auto focus in modal
         titleInputElement.focus();
       }
+    },
+    eventResize(info) {
+      putEvent(info.event);
+      info.relatedEvents.forEach((event) => putEvent(event));
+    },
+    eventDrop(info) {
+      putEvent(info.event);
+      info.relatedEvents.forEach((event) => putEvent(event));
     },
   };
   return handlers;
