@@ -27,3 +27,7 @@
   text-decoration-thickness: 2px;
   text-underline-offset: 15%;
 }
+
+.fc-event {
+  cursor: pointer;
+}
