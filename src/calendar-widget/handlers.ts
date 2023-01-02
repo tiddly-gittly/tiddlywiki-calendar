@@ -37,7 +37,8 @@ export function getHandlers(context: IContext): CalendarOptions {
       });
     },
     /**
-     * Trigger when user select by mouse or long-press and drag on the grid, no matter it is empty or has event
+     * Triggered when a date/time selection is made.
+     * Trigger when user select by mouse or long-press and drag on the grid, no matter it is empty or has event. If already has event, a new event with same title will be created, then tiddlywiki will handle the deduplicate of title (by adding a " 1" as suffix).
      * @url https://fullcalendar.io/docs/select-callback
      */
     select(info) {
@@ -64,6 +65,10 @@ export function getHandlers(context: IContext): CalendarOptions {
       const endDate = $tw.utils.stringifyDate(info.end);
       const startDateKey = context.startDateFields?.[0] ?? 'startDate';
       const endDateKey = context.endDateFields?.[0] ?? 'endDate';
+      $tw.wiki.addTiddler({
+        title: '$:/state/Calendar/PageLayout/create-tiddler-caption',
+        text: '',
+      });
       $tw.wiki.addTiddler({
         title: '$:/state/Calendar/PageLayout/create-tiddler',
         [startDateKey]: startDate,
