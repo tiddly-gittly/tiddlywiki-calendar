@@ -2,6 +2,4 @@ title: $:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/ViewTempla
 tags: $:/tags/ViewTemplateTitleFilter
 list-before: $:/config/ViewTemplateTitleFilters/system
 
-[<currentTiddler>]
-:cascade[all[shadows+tiddlers]field:calendarEntry[yes]!is[draft]]
-+[limit[1]then[$:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/ViewTemplate/caption]]
+[field:calendarEntry[yes]then[$:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/ViewTemplate/caption]]
