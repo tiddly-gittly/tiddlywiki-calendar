@@ -48,3 +48,7 @@
   height: 3em;
   margin-top: 10px;
 }
+
+span.tc-add-tag-name input {
+  min-width: 5em;
+}
