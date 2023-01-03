@@ -5,7 +5,8 @@ type: text/vnd.tiddlywiki
 
 /** make it possible to drag the app using this bar in TidGi, when titleBar is closed */
 <$reveal type="match" state="$:/state/titleBarOpened" text="no">
-div.opened-tiddlers-bar-drag-area {
+.fc-header-toolbar {
+  cursor: grab;
   -webkit-app-region: drag;
 }
 </$reveal>
