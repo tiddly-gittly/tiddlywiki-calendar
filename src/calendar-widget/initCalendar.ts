@@ -72,6 +72,7 @@ export function getSettings(context: IContext): CalendarOptions {
     timeZone: context.timeZone ?? moment.tz.guess(),
     navLinks: true,
     selectable: true,
+    selectMirror: true,
     droppable: true,
     slotDuration: context.slotDuration,
     rerenderDelay: 100,
