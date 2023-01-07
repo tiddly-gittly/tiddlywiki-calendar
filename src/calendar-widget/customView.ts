@@ -16,7 +16,6 @@ function threeDayWith1Previous1NextVisibleRange(currentDate: Date) {
     .add(moment.duration({ day: 2 }))
     .add(timeZoneOffset)
     .format('YYYY-MM-DD'); // One day into the future
-
   return { start: startDate, end: endDate };
 }
 
@@ -25,6 +24,7 @@ export function getCustomViews(): CalendarOptions['views'] {
     timeGridThreeDay: {
       type: 'timeGrid',
       buttonText: isSmallScreen ? '3d' : '3 day',
+      duration: { days: 3 }, // comment out this after https://github.com/fullcalendar/fullcalendar/issues/7129 solved. the duration option will override the visibleRange option
       visibleRange: threeDayWith1Previous1NextVisibleRange,
     },
     timeGridDay: {
