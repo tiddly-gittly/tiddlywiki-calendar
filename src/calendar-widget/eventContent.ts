@@ -2,6 +2,9 @@ import type { CustomContentGenerator, EventContentArg } from '@fullcalendar/core
 import type { h } from 'preact';
 import type { IContext } from './initCalendar';
 
+const dateDurationMacro = require('$:/plugins/linonetwo/tw-calendar/date-duration-macro');
+const getDateDuration = dateDurationMacro.run as (startDateString: string, endDateString: string) => string;
+
 /**
  * Get content of event in 'timeGridThreeDay' and 'timeGridWeek'
  * See `$:/plugins/linonetwo/tw-calendar/calendar-widget/widget.css` for style about container (.fc-event-main-tags).
@@ -32,6 +35,14 @@ export function getEventContent(context: IContext): CustomContentGenerator<Event
         captionResult = tiddler.fields.caption;
       }
     }
+
+    const startDate = tiddler.fields[context.startDateFields?.[0] ?? 'startDate']
+    const endDate = tiddler.fields[context.endDateFields?.[0] ?? 'endDate']
+    const durationElement = createElement(
+      'div',
+      {},
+      getDateDuration(startDate, endDate),
+    );
     // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
     const captionElement =
       typeof captionResult === 'string'
@@ -45,6 +56,6 @@ export function getEventContent(context: IContext): CustomContentGenerator<Event
     // on large view
     const textElement = createElement('div', {}, tiddler.fields.text);
     const tagsElement = createElement('div', { class: 'fc-event-main-tags' }, tiddler.fields.tags?.map((tag) => createElement('span', {}, tag)) ?? '');
-    return [captionElement, tagsElement, timeElement, textElement];
+    return [captionElement, tagsElement, timeElement, durationElement, textElement];
   };
 }
