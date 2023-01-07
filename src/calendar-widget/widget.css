@@ -31,3 +31,8 @@
 .fc-event {
   cursor: pointer;
 }
+
+.fc-daygrid-event > div {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
