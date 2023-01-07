@@ -76,7 +76,7 @@ export function getSettings(context: IContext): CalendarOptions {
     droppable: true,
     slotDuration: context.slotDuration,
     rerenderDelay: 100,
-    longPressDelay: 250,
+    longPressDelay: 350,
     eventTimeFormat: use24HourFormat
       ? {
           hour: '2-digit',
