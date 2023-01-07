@@ -1,0 +1,36 @@
+import type { CalendarOptions } from '@fullcalendar/core';
+import moment from 'moment-timezone';
+import { isSmallScreen, timeZoneOffset } from './constants';
+
+function threeDayWith1Previous1NextVisibleRange(currentDate: Date) {
+  // Generate a new date for manipulating in the next step
+  let startDate: moment.Moment | Date | string = moment(currentDate);
+  let endDate: moment.Moment | Date | string = moment(currentDate);
+
+  // Adjust the start & end dates, respectively
+  startDate = startDate
+    .subtract(moment.duration({ day: 1 }))
+    .add(timeZoneOffset)
+    .format('YYYY-MM-DD'); // One day in the past
+  endDate = endDate
+    .add(moment.duration({ day: 2 }))
+    .add(timeZoneOffset)
+    .format('YYYY-MM-DD'); // One day into the future
+
+  return { start: startDate, end: endDate };
+}
+
+export function getCustomViews(): CalendarOptions['views'] {
+  return {
+    timeGridThreeDay: {
+      type: 'timeGrid',
+      buttonText: isSmallScreen ? '3d' : '3 day',
+      visibleRange: threeDayWith1Previous1NextVisibleRange,
+    },
+    timeGridDay: {
+      type: 'timeGrid',
+      duration: { days: 1 },
+      buttonText: isSmallScreen ? '1d' : 'day',
+    },
+  };
+}

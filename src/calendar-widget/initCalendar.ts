@@ -10,10 +10,8 @@ import moment from 'moment-timezone';
 import { getHandlers } from './handlers';
 import { getEventOnFullCalendarViewChange } from './getEvents';
 import { getEventContent } from './eventContent';
-import { getInCalendarLayout } from './constants';
-
-const isSmallScreen = window.innerWidth <= 600;
-export const tiddlerEventSourceID = 'tiddlers';
+import { getInCalendarLayout, isSmallScreen, tiddlerEventSourceID } from './constants';
+import { getCustomViews } from './customView';
 
 export interface IContext {
   /**
@@ -53,18 +51,7 @@ export function getSettings(context: IContext): CalendarOptions {
   return {
     eventSources: [{ events: getEventOnFullCalendarViewChange(context), id: tiddlerEventSourceID }],
     plugins: [momentTimezonePlugin, dayGridPlugin, timeGridPlugin, listPlugin, adaptivePlugin, interactionPlugin],
-    views: {
-      timeGridThreeDay: {
-        type: 'timeGrid',
-        duration: { days: 3 },
-        buttonText: isSmallScreen ? '3d' : '3 day',
-      },
-      timeGridDay: {
-        type: 'timeGrid',
-        duration: { days: 1 },
-        buttonText: isSmallScreen ? '1d' : 'day',
-      },
-    },
+    views: getCustomViews(),
     initialView: context.initialView ?? (isSmallScreen ? 'timeGridThreeDay' : 'timeGridWeek'),
     now,
     editable: context.readonly !== true,

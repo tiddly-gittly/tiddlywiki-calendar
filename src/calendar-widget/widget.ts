@@ -1,16 +1,13 @@
 import type { Calendar } from '@fullcalendar/core';
 import type { Widget as IWidget, IChangedTiddlers } from 'tiddlywiki';
 import { changedTiddlerInViewRange } from './changeDetector';
-import { IContext, initCalendar, tiddlerEventSourceID } from './initCalendar';
+import { IContext, initCalendar } from './initCalendar';
 import './widget.css';
+import { tiddlerEventSourceID } from './constants';
 
 const Widget = (require('$:/core/modules/widgets/widget.js') as { widget: typeof IWidget }).widget;
 
 class CalendarWidget extends Widget {
-  // constructor(parseTreeNode: IParseTreeNode, options?: unknown) {
-  //   super(parseTreeNode, options);
-  // }
-
   #calendar?: Calendar;
   #containerElement?: HTMLDivElement;
   #mountElement?: HTMLDivElement;
