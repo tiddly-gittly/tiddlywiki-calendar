@@ -6,8 +6,19 @@ import type { EventImpl } from '@fullcalendar/core/internal';
 
 const TWModal = (require('$:/core/modules/utils/dom/modal.js') as { Modal: ModalWidget }).Modal;
 
+function notifyNavigatorSaveTiddler(parameters: { event: MouseEvent; title: string }, context: IContext) {
+  context.parentWidget?.dispatchEvent({
+    type: 'tm-save-tiddler',
+    // param: param,
+    paramObject: { suppressNavigation: 'yes' },
+    event: parameters.event,
+    tiddlerTitle: parameters.title,
+  });
+  context.parentWidget?.dispatchEvent({ type: 'tm-auto-save-wiki' });
+}
+
 export function getHandlers(context: IContext): CalendarOptions {
-  function putEvent(event: EventImpl) {
+  function putEvent(event: EventImpl, jsEvent: MouseEvent) {
     // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
     if (event.start === null || event.end === null || !event.title) return;
     const originalEventTiddler = $tw.wiki.getTiddler(event.title);
@@ -22,6 +33,7 @@ export function getHandlers(context: IContext): CalendarOptions {
       [endDateKey]: endDate,
       modified: new Date(),
     });
+    notifyNavigatorSaveTiddler({ title: event.title, event: jsEvent }, context);
   }
   const handlers: CalendarOptions = {
     eventClick: (info) => {
@@ -89,12 +101,12 @@ export function getHandlers(context: IContext): CalendarOptions {
       }
     },
     eventResize(info) {
-      putEvent(info.event);
-      info.relatedEvents.forEach((event) => putEvent(event));
+      putEvent(info.event, info.jsEvent);
+      info.relatedEvents.forEach((event) => putEvent(event, info.jsEvent));
     },
     eventDrop(info) {
-      putEvent(info.event);
-      info.relatedEvents.forEach((event) => putEvent(event));
+      putEvent(info.event, info.jsEvent);
+      info.relatedEvents.forEach((event) => putEvent(event, info.jsEvent));
     },
   };
   return handlers;

@@ -34,6 +34,10 @@ title: $:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/popup/Crea
       caption={{$:/state/Calendar/PageLayout/create-tiddler-caption!!draft.title}}
       type="text/vnd.tiddlywiki"
     />
+    <$let currentTiddler=<<createTiddler-title>> >
+      <$action-sendmessage $message="tm-save-tiddler" $param=<<currentTiddler>> />
+      <$action-sendmessage $message="tm-auto-save-wiki" />
+    </$let>
     <<cleearAction>>
   </$button>
 </div>
