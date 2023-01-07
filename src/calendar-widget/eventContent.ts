@@ -1,8 +1,11 @@
 import type { CustomContentGenerator, EventContentArg } from '@fullcalendar/core';
 import type { h } from 'preact';
+import compact from 'lodash/compact';
 import type { IContext } from './initCalendar';
 
+// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 const dateDurationMacro = require('$:/plugins/linonetwo/tw-calendar/date-duration-macro');
+// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
 const getDateDuration = dateDurationMacro.run as (startDateString: string, endDateString: string) => string;
 
 /**
@@ -36,13 +39,10 @@ export function getEventContent(context: IContext): CustomContentGenerator<Event
       }
     }
 
-    const startDate = tiddler.fields[context.startDateFields?.[0] ?? 'startDate']
-    const endDate = tiddler.fields[context.endDateFields?.[0] ?? 'endDate']
-    const durationElement = createElement(
-      'div',
-      {},
-      getDateDuration(startDate, endDate),
-    );
+    const startDate = tiddler.fields[context.startDateFields?.[0] ?? 'startDate'] as string | undefined;
+    const endDate = tiddler.fields[context.endDateFields?.[0] ?? 'endDate'] as string | undefined;
+    const durationText = startDate !== undefined && endDate !== undefined ? getDateDuration(startDate, endDate) : undefined;
+    const durationElement = durationText !== undefined && createElement('div', {}, durationText);
     // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
     const captionElement =
       typeof captionResult === 'string'
@@ -56,6 +56,6 @@ export function getEventContent(context: IContext): CustomContentGenerator<Event
     // on large view
     const textElement = createElement('div', {}, tiddler.fields.text);
     const tagsElement = createElement('div', { class: 'fc-event-main-tags' }, tiddler.fields.tags?.map((tag) => createElement('span', {}, tag)) ?? '');
-    return [captionElement, tagsElement, timeElement, durationElement, textElement];
+    return compact([captionElement, tagsElement, timeElement, durationElement, textElement]);
   };
 }
