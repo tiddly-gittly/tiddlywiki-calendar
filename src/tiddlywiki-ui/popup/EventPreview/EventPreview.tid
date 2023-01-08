@@ -1,0 +1,36 @@
+title: $:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/popup/EventPreview
+
+<div class="tw-calendar-layout-event-preview-container">
+  <$button to=<<currentTiddler>> style="width: 100%; height: 40px;" >Open</$button>
+  <$edit-text
+    field="caption"
+    class="tc-titlebar
+    tc-edit-texteditor"
+    tabindex=1
+    focus={{{ [{$:/config/AutoFocus}match[title]then[true]] ~[[false]] }}}
+    tabindex={{$:/config/EditTabIndex}}
+    cancelPopups="yes"
+    fileDrop=no
+  />
+  Text:
+  <$edit-text
+    field="text"
+    class="tc-edit-texteditor tc-edit-texteditor-body"
+    default=""
+    placeholder={{$:/language/EditTemplate/Body/Placeholder}}
+    tabindex=-1
+    focus=false
+    cancelPopups="yes"
+    fileDrop=no
+    minHeight="30px"
+  />
+  <div class="tw-calendar-time-range-preview">
+    <$view field="startDate" format="date" template={{$:/language/Tiddler/DateFormat}}/> -| <$macrocall $name="date-duration-macro" startDate={{!!startDate}} endDate={{!!endDate}} /><$text text=" |-> " /><$view field="endDate" format="date" template={{$:/language/Tiddler/DateFormat}}/>
+  </div>
+  <div class="tw-calendar-tags-input">
+    {{||$:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/popup/FrequentlyUsedTagsList}}
+    <div class="tw-calendar-tags-input-new-tag">
+    {{||$:/core/ui/EditTemplate/tags}}
+    </div>
+  </div>
+</div>

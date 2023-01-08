@@ -1,0 +1,9 @@
+title: $:/plugins/linonetwo/tw-calendar/calendar-widget/widgetDynamicCss.css
+tags: $:/tags/Stylesheet
+type: text/vnd.tiddlywiki
+
+<$importvariables filter="[[$:/themes/tiddlywiki/vanilla/base]]">
+.tiddlywiki-calendar-widget-event-preview {
+  background-color: <<colour modal-background>>;
+}
+</$importvariables>

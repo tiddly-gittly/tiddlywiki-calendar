@@ -15,6 +15,7 @@ import { getInCalendarLayout, isSmallScreen, tiddlerEventSourceID } from './cons
 import { getCustomViews } from './customView';
 
 export interface IContext {
+  containerElement?: HTMLDivElement | undefined;
   /**
    * corresponding end date field to startDateFields. When using multiple pairs of fields, their index in the array should be the same.
    * Use empty string if some of start field don't have a corresponding end field

@@ -29,6 +29,7 @@
     "installType": "typesync"
   },
   "dependencies": {
+    "@floating-ui/dom": "^1.1.0",
     "@fullcalendar/adaptive": "^6.0.2",
     "@fullcalendar/core": "^6.0.2",
     "@fullcalendar/daygrid": "^6.0.2",

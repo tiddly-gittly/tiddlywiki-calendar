@@ -1,5 +1,8 @@
+/* eslint-disable @typescript-eslint/strict-boolean-expressions */
+/* eslint-disable unicorn/no-null */
 import type { ModalWidget } from 'tiddlywiki';
-import type { CalendarOptions } from '@fullcalendar/core';
+import type { CalendarOptions, EventClickArg } from '@fullcalendar/core';
+import { computePosition, autoPlacement, shift } from '@floating-ui/dom';
 import type { IContext } from './initCalendar';
 import { getInCalendarLayout } from './constants';
 import type { EventImpl } from '@fullcalendar/core/internal';
@@ -22,6 +25,19 @@ function notifyNavigatorSaveTiddler(parameters: { event: MouseEvent; title: stri
   );
 }
 
+function navigateToTiddlerInDefaultLayout(info: EventClickArg, context: IContext) {
+  // if (info.jsEvent.getModifierState('Control') || info.jsEvent.getModifierState('Meta')) {
+  getInCalendarLayout() && $tw.wiki.setText('$:/layout', 'text', '');
+  context?.parentWidget?.dispatchEvent({
+    type: 'tm-navigate',
+    navigateTo: info.event.title,
+    metaKey: info.jsEvent.getModifierState('Meta'),
+    ctrlKey: info.jsEvent.getModifierState('Control'),
+    altKey: info.jsEvent.getModifierState('Alt'),
+    shiftKey: info.jsEvent.getModifierState('Shift'),
+  });
+}
+
 export function getHandlers(context: IContext): CalendarOptions {
   function putEvent(event: EventImpl, jsEvent: MouseEvent) {
     // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
@@ -41,16 +57,44 @@ export function getHandlers(context: IContext): CalendarOptions {
     notifyNavigatorSaveTiddler({ title: event.title, event: jsEvent }, context);
   }
   const handlers: CalendarOptions = {
-    eventClick: (info) => {
-      // if (info.jsEvent.getModifierState('Control') || info.jsEvent.getModifierState('Meta')) {
-      getInCalendarLayout() && $tw.wiki.setText('$:/layout', 'text', '');
-      context?.parentWidget?.dispatchEvent({
-        type: 'tm-navigate',
-        navigateTo: info.event.title,
-        metaKey: info.jsEvent.getModifierState('Meta'),
-        ctrlKey: info.jsEvent.getModifierState('Control'),
-        altKey: info.jsEvent.getModifierState('Alt'),
-        shiftKey: info.jsEvent.getModifierState('Shift'),
+    // eslint-disable-next-line @typescript-eslint/no-misused-promises
+    eventClick: async (info) => {
+      if (!context.parentWidget) return;
+      const previewWidgetDataName = 'tiddlywiki-calendar-widget-event-preview';
+      // delete previous element if exist
+      const previousEventPreviewElement = context.containerElement?.querySelector<HTMLDivElement>('.tiddlywiki-calendar-widget-event-preview');
+      if (previousEventPreviewElement) {
+        const previousTitle = previousEventPreviewElement.dataset.tiddler;
+        context.parentWidget.children = context.parentWidget.children.filter(
+          (child) => !('data-name' in child && (child['data-name'] as string | undefined) === previewWidgetDataName),
+        );
+        context.containerElement?.removeChild(previousEventPreviewElement);
+        // if click same event twice, means close.
+        if (previousTitle === info.event.title) return;
+      }
+      // add new element
+      const eventPreviewElement = document.createElement('div');
+      context.containerElement?.appendChild(eventPreviewElement);
+      eventPreviewElement.classList.add('tiddlywiki-calendar-widget-event-preview');
+      eventPreviewElement.dataset.tiddler = info.event.title;
+
+      if (!eventPreviewElement) return;
+      const newWidgetNode = context.parentWidget.makeChildWidget({
+        type: 'tiddler',
+        children: $tw.wiki.parseText(
+          'text/vnd.tiddlywiki',
+          `{{${info.event.title}||$:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/popup/EventPreview}}`,
+        ).tree,
+      });
+      // @ts-expect-error Property 'data-name' does not exist on type 'Widget'.ts(7053)
+      newWidgetNode['data-name'] = previewWidgetDataName;
+      newWidgetNode.render(eventPreviewElement, null);
+      context.parentWidget.children.push(newWidgetNode);
+      const eventElement = info.el;
+      const { x, y } = await computePosition(eventElement, eventPreviewElement, { middleware: [autoPlacement(), shift()] });
+      Object.assign(eventPreviewElement.style, {
+        left: `${x}px`,
+        top: `${y}px`,
       });
     },
     /**
@@ -107,10 +151,12 @@ export function getHandlers(context: IContext): CalendarOptions {
     },
     eventResize(info) {
       putEvent(info.event, info.jsEvent);
+      // eslint-disable-next-line @typescript-eslint/no-confusing-void-expression
       info.relatedEvents.forEach((event) => putEvent(event, info.jsEvent));
     },
     eventDrop(info) {
       putEvent(info.event, info.jsEvent);
+      // eslint-disable-next-line @typescript-eslint/no-confusing-void-expression
       info.relatedEvents.forEach((event) => putEvent(event, info.jsEvent));
     },
   };

@@ -11,6 +11,7 @@ class CalendarWidget extends Widget {
   #calendar?: Calendar;
   #containerElement?: HTMLDivElement;
   #mountElement?: HTMLDivElement;
+  #popPreviewElement?: HTMLDivElement;
 
   refresh(changedTiddlers: IChangedTiddlers): boolean {
     let refreshed = false;
@@ -95,6 +96,7 @@ class CalendarWidget extends Widget {
       initialDate: this.getAttribute('initialDate'),
       initialView: this.getAttribute('initialView'),
       parentWidget: this.parentWidget,
+      containerElement: this.#containerElement,
       readonly: this.getAttribute('readonly') === 'yes' || this.getAttribute('readonly') === 'true',
       slotDuration: this.getAttribute('slotDuration') || $tw.wiki.getTiddlerText('$:/plugins/linonetwo/tw-calendar/settings/slotDuration'),
       startDateFields: this.getAttribute('startDateFields')?.split(','),

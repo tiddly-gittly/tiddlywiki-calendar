@@ -1,6 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@floating-ui/dom': ^1.1.0
   '@fullcalendar/adaptive': ^6.0.2
   '@fullcalendar/core': ^6.0.2
   '@fullcalendar/daygrid': ^6.0.2
@@ -66,6 +67,7 @@ specifiers:
   zx: 7.1.1
 
 dependencies:
+  '@floating-ui/dom': 1.1.0
   '@fullcalendar/adaptive': 6.0.2_@fullcalendar+core@6.0.2
   '@fullcalendar/core': 6.0.2
   '@fullcalendar/daygrid': 6.0.2_@fullcalendar+core@6.0.2
@@ -721,6 +723,16 @@ packages:
     transitivePeerDependencies:
       - supports-color
     dev: true
+
+  /@floating-ui/core/1.1.0:
+    resolution: {integrity: sha512-zbsLwtnHo84w1Kc8rScAo5GMk1GdecSlrflIbfnEBJwvTSj1SL6kkOYV+nHraMCPEy+RNZZUaZyL8JosDGCtGQ==}
+    dev: false
+
+  /@floating-ui/dom/1.1.0:
+    resolution: {integrity: sha512-TSogMPVxbRe77QCj1dt8NmRiJasPvuc+eT5jnJ6YpLqgOD2zXc5UA3S1qwybN+GVCDNdKfpKy1oj8RpzLJvh6A==}
+    dependencies:
+      '@floating-ui/core': 1.1.0
+    dev: false
 
   /@fullcalendar/adaptive/6.0.2_@fullcalendar+core@6.0.2:
     resolution: {integrity: sha512-PFwMnIlLw8sCaVTM2sdmPYs0nzulJ1Sa/GfsokWhGf2mg70oGT+qxOoFvqIHBavAYKT/m72sB4jqppAWqhwwMg==}
