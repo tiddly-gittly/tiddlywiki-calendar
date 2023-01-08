@@ -7,14 +7,19 @@ import type { EventImpl } from '@fullcalendar/core/internal';
 const TWModal = (require('$:/core/modules/utils/dom/modal.js') as { Modal: ModalWidget }).Modal;
 
 function notifyNavigatorSaveTiddler(parameters: { event: MouseEvent; title: string }, context: IContext) {
-  context.parentWidget?.dispatchEvent({
-    type: 'tm-save-tiddler',
-    // param: param,
-    paramObject: { suppressNavigation: 'yes' },
-    event: parameters.event,
-    tiddlerTitle: parameters.title,
-  });
-  context.parentWidget?.dispatchEvent({ type: 'tm-auto-save-wiki' });
+  window.requestIdleCallback(
+    () => {
+      context.parentWidget?.dispatchEvent({
+        type: 'tm-save-tiddler',
+        // param: param,
+        paramObject: { suppressNavigation: 'yes' },
+        event: parameters.event,
+        tiddlerTitle: parameters.title,
+      });
+      context.parentWidget?.dispatchEvent({ type: 'tm-auto-save-wiki' });
+    },
+    { timeout: 2000 },
+  );
 }
 
 export function getHandlers(context: IContext): CalendarOptions {

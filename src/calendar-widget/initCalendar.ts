@@ -1,3 +1,4 @@
+import 'requestidlecallback-polyfill';
 import type { Widget } from 'tiddlywiki';
 import { Calendar, CalendarOptions } from '@fullcalendar/core';
 import momentTimezonePlugin from '@fullcalendar/moment-timezone';

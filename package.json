@@ -37,7 +37,8 @@
     "@fullcalendar/moment-timezone": "^6.0.2",
     "@fullcalendar/timegrid": "^6.0.2",
     "lodash": "^4.17.21",
-    "moment-timezone": "^0.5.40"
+    "moment-timezone": "^0.5.40",
+    "requestidlecallback-polyfill": "^1.0.2"
   },
   "devDependencies": {
     "@types/archiver": "5.3.1",
