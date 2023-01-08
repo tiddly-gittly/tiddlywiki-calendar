@@ -1,7 +1,7 @@
 title: $:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/popup/FrequentlyUsedTagsList
 
-\define tag-tree-button-action(tiddlerName)
-<$action-listops $tags="[[$tiddlerName$]]" $tiddler="$:/state/Calendar/PageLayout/create-tiddler" />
+\define tag-tree-button-action(tagName)
+<$action-listops $tags="[[$tagName$]]" $tiddler="""$(targetTiddler)$""" />
 \end
 
 \define empty-list-help-text()
@@ -11,12 +11,14 @@ You can goto <a href="/#%24%3A%2Fplugins%2Flinonetwo%2Ftw-calendar%2Ftiddlywiki-
 \end
 
 <div class="tw-calendar-frequently-used-tags">
-  <$list filter="[list[$:/plugins/linonetwo/tw-calendar/settings/frequently-used-tags!!text]first[]then[yes]]" storyview="pop" emptyMessage=<<empty-list-help-text>>>
-    <div class="tc-edit-tags">
-      <$macrocall
-        $name="input-only-tag-tree"
-        tags={{$:/plugins/linonetwo/tw-calendar/settings/frequently-used-tags}}
-      />
-    </div>
-  </$list>
+  <$let targetTiddler=<<currentTiddler>> >
+    <$list filter="[list[$:/plugins/linonetwo/tw-calendar/settings/frequently-used-tags!!text]first[]then[yes]]" storyview="pop" emptyMessage=<<empty-list-help-text>>>
+      <div class="tc-edit-tags">
+        <$macrocall
+          $name="input-only-tag-tree"
+          tags={{$:/plugins/linonetwo/tw-calendar/settings/frequently-used-tags}}
+        />
+      </div>
+    </$list>
+  </$let>
 </div>
