@@ -1,6 +1,6 @@
 title: $:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/popup/CreateNewTiddlerPopupFooter
 
-\define cleearAction()
+\define cleanUpAction()
 <$action-setfield
   $tiddler="$:/state/Calendar/PageLayout/create-tiddler"
   text=""
@@ -21,7 +21,7 @@ title: $:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/popup/Crea
 <div class="tw-calendar-footer-buttons">
   <$button class="tw-calendar-footer-button" message="tm-close-tiddler">
     Close
-    <<cleearAction>>
+    <<cleanUpAction>>
   </$button>
   
 
@@ -38,6 +38,6 @@ title: $:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/popup/Crea
       <$action-sendmessage $message="tm-save-tiddler" $param=<<currentTiddler>> />
       <$action-sendmessage $message="tm-auto-save-wiki" />
     </$let>
-    <<cleearAction>>
+    <<cleanUpAction>>
   </$button>
 </div>
