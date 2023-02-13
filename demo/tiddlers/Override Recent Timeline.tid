@@ -1,0 +1,4 @@
+tags: $:/tags/Macro
+title: Override Recent Timeline
+
+Override widget call in $:/core/ui/SideBar/Recent to allow "Recent" tab to not show calendar entry.
