@@ -1,0 +1,6 @@
+tags: $:/tags/Macro
+title: Override Timeline
+
+Override two macros in $:/core/macros/timeline to allow "Recent" tab to not show calendar entry.
+
+[[Override Timeline Macro]]
