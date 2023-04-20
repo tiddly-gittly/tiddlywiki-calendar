@@ -4,6 +4,8 @@ Widget and Page Layout displaying tiddlers on calendar and agenda, based on crea
 
 ![screenshot](screenshots/demosite.png)
 
+See also [More layouts in Tiddlywiki (ZH-cn)](https://zhuanlan.zhihu.com/p/601040724)
+
 ## Document & Usage
 
 See website [https://tiddly-gittly.github.io/tiddlywiki-calendar](https://tiddly-gittly.github.io/tiddlywiki-calendar) for demo and usage
