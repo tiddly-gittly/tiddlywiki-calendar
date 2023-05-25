@@ -71,7 +71,6 @@ export const buildEntries = async (entries, metaMap) => {
   const buildResult = await esbuild.build({
     ...config,
     entryPoints: entries,
-    incremental: true,
   });
   buildResult.outputFiles.forEach((out) => {
     const outKey = out.path.replace(path.resolve(DISTNATION_DIRECTORY), SOURCE_DIRECTORY).replace(`/plugins/${pluginTitle}`, '');
