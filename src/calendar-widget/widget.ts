@@ -18,6 +18,7 @@ class CalendarWidget extends Widget {
     const context = this.getContext();
     if (
       Object.keys(changedTiddlers).some((changedTiddlerTitle) => {
+        if (changedTiddlerTitle.startsWith('$:/state/')) return false;
         // if modified date is within calendar view, refresh to show new event
         const endDateKey = context.endDateFields?.[0] ?? 'endDate';
         if (changedTiddlers[changedTiddlerTitle].modified === true) {
