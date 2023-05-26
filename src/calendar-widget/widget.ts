@@ -1,7 +1,7 @@
 import type { Calendar } from '@fullcalendar/core';
-import type { Widget as IWidget, IChangedTiddlers } from 'tiddlywiki';
+import type { IChangedTiddlers, Widget as IWidget } from 'tiddlywiki';
 import { changedTiddlerInViewRange } from './changeDetector';
-import { IContext, initCalendar } from './initCalendar';
+import { type IContext, initCalendar } from './initCalendar';
 import './widget.css';
 import { tiddlerEventSourceID } from './constants';
 
@@ -49,7 +49,7 @@ class CalendarWidget extends Widget {
   /**
    * Lifecycle method: Render this widget into the DOM
    */
-  render(parent: Node, _nextSibling: Node): void {
+  render(parent: Element, _nextSibling: Element | null): void {
     this.parentDomNode = parent;
     this.computeAttributes();
     this.execute();
@@ -60,8 +60,12 @@ class CalendarWidget extends Widget {
       this.#containerElement.appendChild(this.#mountElement);
       this.#mountElement.classList.add('tiddlywiki-calendar-widget-container');
       const [width, height] = [this.getAttribute('width'), this.getAttribute('height')];
-      this.#containerElement.style.width = width;
-      this.#containerElement.style.height = height;
+      if (width !== undefined) {
+        this.#containerElement.style.width = width;
+      }
+      if (height !== undefined) {
+        this.#containerElement.style.height = height;
+      }
       // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
       if (height) {
         this.#mountElement.style.minHeight = height;
@@ -92,12 +96,13 @@ class CalendarWidget extends Widget {
     return {
       endDateFields: this.getAttribute('endDateFields')?.split(','),
       filter: this.getAttribute('filter'),
-      hideToolbar: this.getAttribute('hideToolbar') === 'yes' || this.getAttribute('hideToolbar') === 'true',
+      hideToolbar: (this.getAttribute('hideToolbar') === 'yes') || (this.getAttribute('hideToolbar') === 'true'),
       initialDate: this.getAttribute('initialDate'),
       initialView: this.getAttribute('initialView'),
       parentWidget: this.parentWidget,
       containerElement: this.#containerElement,
-      readonly: this.getAttribute('readonly') === 'yes' || this.getAttribute('readonly') === 'true',
+      readonly: (this.getAttribute('readonly') === 'yes') || (this.getAttribute('readonly') === 'true'),
+      // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
       slotDuration: this.getAttribute('slotDuration') || $tw.wiki.getTiddlerText('$:/plugins/linonetwo/tw-calendar/settings/slotDuration'),
       startDateFields: this.getAttribute('startDateFields')?.split(','),
       timeZone: this.getAttribute('timeZone'),

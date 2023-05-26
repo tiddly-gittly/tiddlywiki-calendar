@@ -29,7 +29,7 @@ color:$(foregroundColor)$;
 \\end
 `;
 
-exports.run = function (tagsString = '') {
+exports.run = function(tagsString = '') {
   const tags = tagsString.split(' ').filter((tag) => tag.length > 0);
   // remove all tags that has direct parent in the array, so we won't create duplicate trees
   const tagsWithoutDuplicate = tags.filter((tag) => {
@@ -40,10 +40,12 @@ exports.run = function (tagsString = '') {
   });
   if (tagsWithoutDuplicate.length === 0) return '';
   return `${textMacros}<ul>
-    ${tagsWithoutDuplicate
+    ${
+    tagsWithoutDuplicate
       .map((tag) => buildTocWithOfferedTiddlers(tag, tags))
       .map((item) => `<li>${item}</li>`)
-      .join('')}
+      .join('')
+  }
     </ul>`;
 };
 
@@ -64,9 +66,11 @@ function buildTocWithOfferedTiddlers(rootTiddler: string, offeredTiddlers: strin
   if (tiddlersTaggingTheRoot.length === 0) return rootButton;
   return `${rootButton}
   <ul>
-	${tiddlersTaggingTheRoot
-    .filter((tag) => offeredTiddlers.includes(tag))
-    .map((tag) => `<li>${buildTocWithOfferedTiddlers(tag, offeredTiddlers)}</li>`)
-    .join('')}
+	${
+    tiddlersTaggingTheRoot
+      .filter((tag) => offeredTiddlers.includes(tag))
+      .map((tag) => `<li>${buildTocWithOfferedTiddlers(tag, offeredTiddlers)}</li>`)
+      .join('')
+  }
 	</ul>`;
 }

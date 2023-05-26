@@ -1,6 +1,6 @@
 import type { CustomContentGenerator, EventContentArg } from '@fullcalendar/core';
-import type { h } from 'preact';
 import compact from 'lodash/compact';
+import type { h } from 'preact';
 import type { IContext } from './initCalendar';
 
 // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
@@ -44,11 +44,10 @@ export function getEventContent(context: IContext): CustomContentGenerator<Event
     const durationText = startDate !== undefined && endDate !== undefined ? getDateDuration(startDate, endDate) : undefined;
     const durationElement = durationText !== undefined && createElement('div', {}, durationText);
     // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
-    const captionElement =
-      typeof captionResult === 'string'
-        ? // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
-          createElement('div', { class: tiddler?.fields?.text ? 'fc-event-title-with-text' : undefined }, captionResult)
-        : titleElement;
+    const captionElement = typeof captionResult === 'string'
+      // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
+      ? createElement('div', { class: tiddler?.fields?.text ? 'fc-event-title-with-text' : undefined }, captionResult)
+      : titleElement;
     // on small view that can only display an element
     if (['dayGridMonth'].includes(argument.view.type)) {
       return [captionElement];

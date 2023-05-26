@@ -9,3 +9,5 @@ localization/
 build-resources/
 .vscode/
 .github/
+dist/
+scripts/

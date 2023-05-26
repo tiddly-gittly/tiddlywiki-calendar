@@ -15,22 +15,20 @@ export enum CalendarEventType {
 const normalTiddlerEventLengthInHour = 1;
 const allDayDateLength = 60 * 60 * 24 * 1000;
 
-export const getEventOnFullCalendarViewChange =
-  (context: IContext): EventSourceFunc =>
-  async (argument: EventSourceFuncArg) => {
-    const { start, end } = argument;
-    const [startTwString, endTwString] = [start, end].map((date) => $tw.utils.stringifyDate(date));
-    const sourceFilter = context?.filter ?? '[all[tiddlers]!is[system]]';
-    const getFilterOnField = (field: string) => `${sourceFilter}:filter[get[${field}]compare:date:gteq[${startTwString}]compare:date:lteq[${endTwString}]]`;
-    const fields = context.startDateFields ?? ['created', 'modified', 'startDate'];
-    const titles = fields
-      .map(getFilterOnField)
-      .flatMap((filter) => $tw.wiki.filterTiddlers(filter))
-      // in case there is a space in title
-      .map((title) => `[[${title}]]`);
-    const eventsOnPeriod = getEvents(`${titles.join(' ')}`, context);
-    return eventsOnPeriod;
-  };
+export const getEventOnFullCalendarViewChange = (context: IContext): EventSourceFunc => async (argument: EventSourceFuncArg) => {
+  const { start, end } = argument;
+  const [startTwString, endTwString] = [start, end].map((date) => $tw.utils.stringifyDate(date));
+  const sourceFilter = context?.filter ?? '[all[tiddlers]!is[system]]';
+  const getFilterOnField = (field: string) => `${sourceFilter}:filter[get[${field}]compare:date:gteq[${startTwString}]compare:date:lteq[${endTwString}]]`;
+  const fields = context.startDateFields ?? ['created', 'modified', 'startDate'];
+  const titles = fields
+    .map(getFilterOnField)
+    .flatMap((filter) => $tw.wiki.filterTiddlers(filter))
+    // in case there is a space in title
+    .map((title) => `[[${title}]]`);
+  const eventsOnPeriod = getEvents(`${titles.join(' ')}`, context);
+  return eventsOnPeriod;
+};
 
 export function getEvents(filter: string, context: IContext): EventInput[] {
   const tiddlerTitles = $tw.wiki.filterTiddlers(filter);
@@ -47,7 +45,11 @@ export function getEvents(filter: string, context: IContext): EventInput[] {
 const contrastColour: (colour: string, fallbackTarget: string, colourFore: string, colourBack: string) => number[] | string =
   // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
   require('$:/core/modules/macros/contrastcolour.js').run;
-const f = (twDate: string) => $tw.utils.parseDate(twDate);
+const parseDate = (twDate: string) => {
+  const result = $tw.utils.parseDate(twDate);
+  if (result === null) throw new Error('null result from parseDate');
+  return result;
+};
 
 function mapTiddlerFieldsToFullCalendarEventObject(fields: ITiddlerFields, context: IContext, palette: Record<string, string>): EventInput[] {
   const { title, startDate, endDate, created, modified, color, tags } = fields;
@@ -79,7 +81,7 @@ function mapTiddlerFieldsToFullCalendarEventObject(fields: ITiddlerFields, conte
         // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions, array-callback-return
         if (!startDateFieldValue) return;
         try {
-          startDateFromField = f(startDateFieldValue);
+          startDateFromField = parseDate(startDateFieldValue);
         } catch (error) {
           throw new Error(
             `field ${fieldName} in tiddler ${title} is not a valid date format: ${startDateFieldValue} , causing ${(error as Error).message} ${
@@ -95,7 +97,7 @@ function mapTiddlerFieldsToFullCalendarEventObject(fields: ITiddlerFields, conte
           endDateFromFieldValue = fields[correspondingEndFieldName] as string | undefined;
           if (endDateFromFieldValue !== undefined) {
             try {
-              endDateFromField = f(endDateFromFieldValue);
+              endDateFromField = parseDate(endDateFromFieldValue);
             } catch (error) {
               throw new Error(
                 `field ${correspondingEndFieldName} in tiddler ${title} is not a valid date format: ${endDateFromFieldValue} , causing ${
@@ -132,8 +134,8 @@ function mapTiddlerFieldsToFullCalendarEventObject(fields: ITiddlerFields, conte
    * If it has startDate and endDate, means this is an event created by the calendar
    */
   if (typeof startDate === 'string' && typeof endDate === 'string') {
-    const start = f(startDate);
-    const end = f(endDate);
+    const start = parseDate(startDate);
+    const end = parseDate(endDate);
     return [
       {
         ...options,

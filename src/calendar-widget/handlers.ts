@@ -1,11 +1,10 @@
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 /* eslint-disable unicorn/no-null */
-import type { ModalWidget } from 'tiddlywiki';
-import type { CalendarOptions, EventClickArg } from '@fullcalendar/core';
-import { computePosition, autoPlacement, shift } from '@floating-ui/dom';
-import type { IContext } from './initCalendar';
-import { getInCalendarLayout } from './constants';
+import { autoPlacement, computePosition, shift } from '@floating-ui/dom';
+import type { CalendarOptions } from '@fullcalendar/core';
 import type { EventImpl } from '@fullcalendar/core/internal';
+import type { ModalWidget } from 'tiddlywiki';
+import type { IContext } from './initCalendar';
 
 const TWModal = (require('$:/core/modules/utils/dom/modal.js') as { Modal: ModalWidget }).Modal;
 
@@ -23,19 +22,6 @@ function notifyNavigatorSaveTiddler(parameters: { event: MouseEvent; title: stri
     },
     { timeout: 2000 },
   );
-}
-
-function navigateToTiddlerInDefaultLayout(info: EventClickArg, context: IContext) {
-  // if (info.jsEvent.getModifierState('Control') || info.jsEvent.getModifierState('Meta')) {
-  getInCalendarLayout() && $tw.wiki.setText('$:/layout', 'text', '');
-  context?.parentWidget?.dispatchEvent({
-    type: 'tm-navigate',
-    navigateTo: info.event.title,
-    metaKey: info.jsEvent.getModifierState('Meta'),
-    ctrlKey: info.jsEvent.getModifierState('Control'),
-    altKey: info.jsEvent.getModifierState('Alt'),
-    shiftKey: info.jsEvent.getModifierState('Shift'),
-  });
 }
 
 export function getHandlers(context: IContext): CalendarOptions {
@@ -68,7 +54,7 @@ export function getHandlers(context: IContext): CalendarOptions {
         context.parentWidget.children = context.parentWidget.children.filter(
           (child) => !('data-name' in child && (child['data-name'] as string | undefined) === previewWidgetDataName),
         );
-        context.containerElement?.removeChild(previousEventPreviewElement);
+        previousEventPreviewElement.remove();
         // if click same event twice, means close.
         if (previousTitle === info.event.title) return;
       }

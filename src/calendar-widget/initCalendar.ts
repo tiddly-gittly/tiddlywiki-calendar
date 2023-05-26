@@ -1,18 +1,18 @@
 import 'requestidlecallback-polyfill';
-import type { Widget } from 'tiddlywiki';
-import { Calendar, CalendarOptions } from '@fullcalendar/core';
-import momentTimezonePlugin from '@fullcalendar/moment-timezone';
-import dayGridPlugin from '@fullcalendar/daygrid';
-import timeGridPlugin from '@fullcalendar/timegrid';
 import adaptivePlugin from '@fullcalendar/adaptive';
+import { Calendar, type CalendarOptions } from '@fullcalendar/core';
+import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import listPlugin from '@fullcalendar/list';
+import momentTimezonePlugin from '@fullcalendar/moment-timezone';
+import timeGridPlugin from '@fullcalendar/timegrid';
 import moment from 'moment-timezone';
-import { getHandlers } from './handlers';
-import { getEventOnFullCalendarViewChange } from './getEvents';
-import { getEventContent } from './eventContent';
+import type { Widget } from 'tiddlywiki';
 import { getInCalendarLayout, isSmallScreen, tiddlerEventSourceID } from './constants';
 import { getCustomViews } from './customView';
+import { getEventContent } from './eventContent';
+import { getEventOnFullCalendarViewChange } from './getEvents';
+import { getHandlers } from './handlers';
 
 export interface IContext {
   containerElement?: HTMLDivElement | undefined;
@@ -48,7 +48,7 @@ export function initCalendar(containerElement: HTMLDivElement, context: IContext
 }
 
 export function getSettings(context: IContext): CalendarOptions {
-  const now = context.initialDate === undefined ? undefined : $tw.utils.parseDate(context.initialDate);
+  const now = context.initialDate === undefined ? undefined : $tw.utils.parseDate(context.initialDate) ?? undefined;
   const use24HourFormat = $tw.wiki.getTiddlerText('$:/plugins/linonetwo/tw-calendar/settings/24hour') === 'yes';
   return {
     eventSources: [{ events: getEventOnFullCalendarViewChange(context), id: tiddlerEventSourceID }],
@@ -68,17 +68,17 @@ export function getSettings(context: IContext): CalendarOptions {
     longPressDelay: 350,
     eventTimeFormat: use24HourFormat
       ? {
-          hour: '2-digit',
-          minute: '2-digit',
-          hour12: false,
-        }
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: false,
+      }
       : undefined,
     slotLabelFormat: use24HourFormat
       ? {
-          hour: '2-digit',
-          minute: '2-digit',
-          hour12: false,
-        }
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: false,
+      }
       : undefined,
     nowIndicator: true,
     scrollTimeReset: false,
@@ -99,20 +99,18 @@ function getToolbarSettings(context: IContext): CalendarOptions {
         },
       },
     },
-    headerToolbar:
-      isSmallScreen || context.hideToolbar === true
-        ? false
-        : {
-            left: `prev,next today`,
-            center: 'title',
-            right: `${getInCalendarLayout() ? 'backToDefaultLayout ' : ''}dayGridMonth,timeGridWeek,timeGridThreeDay,timeGridDay,listWeek`,
-          },
-    footerToolbar:
-      isSmallScreen && context.hideToolbar !== true
-        ? {
-            right: `today,prev,next`,
-            left: `timeGridThreeDay,timeGridDay,listWeek${getInCalendarLayout() ? ' backToDefaultLayout' : ''}`,
-          }
-        : false,
+    headerToolbar: isSmallScreen || context.hideToolbar === true
+      ? false
+      : {
+        left: `prev,next today`,
+        center: 'title',
+        right: `${getInCalendarLayout() ? 'backToDefaultLayout ' : ''}dayGridMonth,timeGridWeek,timeGridThreeDay,timeGridDay,listWeek`,
+      },
+    footerToolbar: isSmallScreen && context.hideToolbar !== true
+      ? {
+        right: `today,prev,next`,
+        left: `timeGridThreeDay,timeGridDay,listWeek${getInCalendarLayout() ? ' backToDefaultLayout' : ''}`,
+      }
+      : false,
   };
 }
