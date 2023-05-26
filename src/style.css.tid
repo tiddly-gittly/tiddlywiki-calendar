@@ -9,4 +9,10 @@ type: text/vnd.tiddlywiki
   cursor: grab;
   -webkit-app-region: drag;
 }
+.fc-header-toolbar .fc-toolbar-chunk {
+  -webkit-app-region: no-drag;
+}
+.fc-scrollgrid-section-header a {
+  -webkit-app-region: no-drag;
+}
 </$reveal>
