@@ -1,6 +1,7 @@
 import type { CustomContentGenerator, EventContentArg } from '@fullcalendar/core';
 import compact from 'lodash/compact';
 import type { h } from 'preact';
+import { allowedTiddlerTypeToPreview } from './constants';
 import type { IContext } from './initCalendar';
 
 // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
@@ -53,7 +54,9 @@ export function getEventContent(context: IContext): CustomContentGenerator<Event
       return { html: [captionElement] };
     }
     // on large view
-    const textElement = `<div>${tiddler.fields.text ?? ''}</div>`;
+    const textElement = allowedTiddlerTypeToPreview.includes(tiddler.fields.type ?? '')
+      ? `<div>${tiddler.fields.text ?? ''}</div>`
+      : `<div>${tiddler.fields.type} too large</div>`;
     const tagsElement = `<div class="fc-event-main-tags">${tiddler.fields.tags?.map((tag) => `<span>${tag}</span>`)?.join('') ?? ''}</div>`;
     return { html: compact([captionElement, tagsElement, timeElement, durationElement, textElement]).join('') };
   };
