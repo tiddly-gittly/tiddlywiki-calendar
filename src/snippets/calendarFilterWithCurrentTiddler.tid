@@ -1,0 +1,9 @@
+title: $:/plugins/linonetwo/tw-calendar/Snippets/calendarFilterWithCurrentTiddler
+tags: $:/tags/TextEditor/Snippet
+caption: Sometimes currentTiddler is "" empty string in filter, we can use macrocall to avoid this
+
+\define calendarWithCurrentTiddler(currentTag)
+<$calendar filter="[all[]tag[$currentTag$]field:calendarEntry[yes]]" readonly="yes" initialView="listWeek" hideToolbar="yes" />
+\end
+
+<$macrocall $name="calendarWithCurrentTiddler" currentTag=<<currentTiddler>>/>
