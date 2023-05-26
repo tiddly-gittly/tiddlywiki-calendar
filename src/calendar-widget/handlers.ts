@@ -49,12 +49,16 @@ export function getHandlers(context: IContext): CalendarOptions {
       const previewWidgetDataName = 'tiddlywiki-calendar-widget-event-preview';
       // delete previous element if exist
       const previousEventPreviewElement = context.containerElement?.querySelector<HTMLDivElement>('.tiddlywiki-calendar-widget-event-preview');
-      if (previousEventPreviewElement) {
-        const previousTitle = previousEventPreviewElement.dataset.tiddler;
+      const removePopup = (popupElementToRemove: HTMLDivElement | null | undefined) => {
+        if (!context.parentWidget || !popupElementToRemove) return;
         context.parentWidget.children = context.parentWidget.children.filter(
           (child) => !('data-name' in child && (child['data-name'] as string | undefined) === previewWidgetDataName),
         );
-        previousEventPreviewElement.remove();
+        popupElementToRemove.remove();
+      };
+      if (previousEventPreviewElement) {
+        removePopup(previousEventPreviewElement);
+        const previousTitle = previousEventPreviewElement.dataset.tiddler;
         // if click same event twice, means close.
         if (previousTitle === info.event.title) return;
       }
@@ -82,6 +86,13 @@ export function getHandlers(context: IContext): CalendarOptions {
         left: `${x}px`,
         top: `${y}px`,
       });
+      // add event listener to close button
+      const closeButton = eventPreviewElement.querySelector<HTMLButtonElement>('button.tw-calendar-layout-event-preview-close-button');
+      if (closeButton) {
+        closeButton.addEventListener('click', () => {
+          removePopup(eventPreviewElement);
+        });
+      }
     },
     /**
      * Triggered when a date/time selection is made.
