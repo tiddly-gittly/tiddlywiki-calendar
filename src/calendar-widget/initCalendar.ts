@@ -87,6 +87,7 @@ export function getSettings(context: IContext): CalendarOptions {
       : undefined,
     nowIndicator: true,
     scrollTimeReset: false,
+    dragScroll: false,
     schedulerLicenseKey: 'CC-Attribution-NonCommercial-NoDerivatives',
     ...getToolbarSettings(context),
     // event handlers
