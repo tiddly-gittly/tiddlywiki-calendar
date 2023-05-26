@@ -1,0 +1,22 @@
+title: $:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/popup/EventPreviewStyle.css
+creator: LinOnetwo
+tags: $:/tags/Stylesheet
+type: text/vnd.tiddlywiki
+
+.tw-calendar-layout-event-preview-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.tw-calendar-layout-event-preview-container .tw-calendar-layout-event-preview-top-buttons {
+  width: 100%;
+  height: 40px;
+  display: flex;
+  flex-direction: row;
+}
+.tw-calendar-layout-event-preview-container input, .tw-calendar-layout-event-preview-container textarea {
+  width: 100%;
+}
+.tw-calendar-layout-event-preview-container .tc-titlebar {
+  margin-top: 5px;
+}~
