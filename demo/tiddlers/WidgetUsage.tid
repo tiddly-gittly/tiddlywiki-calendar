@@ -5,7 +5,7 @@ There are some attributes to control the state and data source of the widget.
 
 | !Attribute | !Description | !Values | !DefaultValues | !Example |
 |filter|a custom filter to replace the default `[all[tiddlers]!is[system]]` filter|(TiddlyWiki standard filter expression)|`[all[tiddlers]!is[system]]`|`filter="[all[]tag[?]]"`|
-|initialView|when calendar open, the initial view it uses|`dayGridMonth,timeGridWeek,timeGridThreeDay,timeGridDay,listWeek`|`timeGridWeek`|`initialView="timeGridDay"`|
+|initialView|when calendar open, the initial view it uses|`dayGridMonth,timeGridWeek,timeGridThreeDay,timeGridDay,listYear,listMonth,listWeek,listDay`|`timeGridWeek`|`initialView="timeGridDay"`|
 |initialDate|when calendar open, the initial start date it shows|([[TiddlyWiki default date value format|https://tiddlywiki.com/#DateFormat]])|(Date.now in tw format)|`initialDate="20220316050103382"`|
 |startDateFields|when calendar open, it will filter tiddlers with these fields (add to the filter expression on the fly), and one of these field is within the range of current calendar view|(any field name whose value is date format), separated by comma `,`|`created,modified,startDate`|`startDateFields="due,due2"` `startDateFields="due"`|
 |endDateFields|corresponding end date field to startDateFields. When using multiple pairs of fields, their index in the array should be the same.|(any field name whose value is date format), separated by comma `,`|`,,endDate`|`endDateFields="dueEnd,dueEnd2"` `endDateFields=",dueEnd2"`|

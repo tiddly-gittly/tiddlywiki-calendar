@@ -1,0 +1,5 @@
+title: $:/plugins/linonetwo/tw-calendar/Snippets/listWeekCalendar
+tags: $:/tags/TextEditor/Snippet
+caption: List all events this week in a compact view. listYear or listMonth can also be used.
+
+<$calendar filter="[all[]tag[Todo]]" readonly="yes" initialView="listWeek" />

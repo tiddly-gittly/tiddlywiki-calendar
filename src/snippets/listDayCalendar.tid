@@ -1,0 +1,5 @@
+title: $:/plugins/linonetwo/tw-calendar/Snippets/listDayCalendar
+tags: $:/tags/TextEditor/Snippet
+caption: List all events today in a compact view. listYear or listMonth can also be used.
+
+<$calendar filter="[all[]tag[Todo]]" readonly="yes" initialView="listDay" />
