@@ -1,0 +1,14 @@
+title: $:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/popup/EventPreview/TopButtons
+tags: $:/tw-calendar/EventPreviewMiniViewTemplate
+
+<div class="tw-calendar-layout-event-preview-top-buttons">
+  <$button to=<<currentTiddler>> style="flex: 5;" >
+    Open
+    <$action-setfield $tiddler="$:/layout" text="">
+      <$action-navigate $to=<<currentTiddler>> />
+    </$action-setfield>
+  </$button>
+  <$button style="flex: 1;" class="tw-calendar-layout-event-preview-close-button" >
+    X
+  </$button>
+</div>

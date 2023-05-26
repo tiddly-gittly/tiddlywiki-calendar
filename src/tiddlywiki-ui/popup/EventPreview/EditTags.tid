@@ -1,0 +1,9 @@
+title: $:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/popup/EventPreview/EditTags
+tags: $:/tw-calendar/EventPreviewMiniViewTemplate
+
+<div class="tw-calendar-tags-input">
+  <div class="tw-calendar-tags-input-new-tag">
+    {{||$:/core/ui/EditTemplate/tags}}
+  </div>
+  {{||$:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/popup/FrequentlyUsedTagsList}}
+</div>

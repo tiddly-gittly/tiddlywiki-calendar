@@ -1,0 +1,7 @@
+title: $:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/popup/EventPreview/PluginDefaultViewTemplate
+tags: $:/tw-calendar/EventPreviewMiniViewTemplate
+
+<!-- ignore system view templates (for example title and text, which already exist as input, so don't need them), only support UI added by other plugins (for example SuperTag) -->
+<$list filter="[all[shadows]tag[$:/tags/ViewTemplate]prefix[$:/plugins/]] [all[tiddlers]tag[$:/tags/ViewTemplate]!is[draft]]" variable="listItem">
+  <$transclude tiddler=<<listItem>>/>
+</$list>

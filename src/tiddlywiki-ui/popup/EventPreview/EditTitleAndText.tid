@@ -1,0 +1,24 @@
+title: $:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/popup/EventPreview/EditTitleAndText
+tags: $:/tw-calendar/EventPreviewMiniViewTemplate
+
+<$edit-text
+  field="caption"
+  class="tc-titlebar tc-edit-texteditor"
+  tabindex=1
+  focus={{{ [{$:/config/AutoFocus}match[title]then[true]] ~[[false]] }}}
+  tabindex={{$:/config/EditTabIndex}}
+  cancelPopups="yes"
+  fileDrop=no
+/>
+Text:
+<$edit-text
+  field="text"
+  class="tc-edit-texteditor tc-edit-texteditor-body"
+  default=""
+  placeholder={{$:/language/EditTemplate/Body/Placeholder}}
+  tabindex=-1
+  focus=false
+  cancelPopups="yes"
+  fileDrop=no
+  minHeight="30px"
+/>

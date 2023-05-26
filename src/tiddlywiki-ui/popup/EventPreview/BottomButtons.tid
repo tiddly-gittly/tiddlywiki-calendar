@@ -1,0 +1,11 @@
+title: $:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/popup/BottomButtons
+tags: $:/tw-calendar/EventPreviewMiniViewTemplate
+
+\import [[$:/core/ui/EditTemplate]]
+
+<div class="tw-calendar-layout-event-preview-bottom-buttons">
+  <$button tooltip={{$:/language/Buttons/Delete/Hint}} aria-label={{$:/language/Buttons/Delete/Caption}} class="tw-calendar-layout-event-preview-close-button">
+    <$text text={{$:/language/Buttons/Delete/Caption}}/> {{$:/core/images/delete-button}}
+    <$action-sendmessage $message="tm-delete-tiddler" param=<<currentTiddler>>/>
+  </$button>
+</div>

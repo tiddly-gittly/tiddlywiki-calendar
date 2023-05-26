@@ -1,59 +1,21 @@
 title: $:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/popup/EventPreview
 
-\import [[$:/core/ui/EditTemplate]]
+\whitespace trim
+\import [all[shadows+tiddlers]tag[$:/tags/Macro/View]!is[draft]] [all[shadows+tiddlers]tag[$:/tags/Global/View]!is[draft]]
 
 <div class="tw-calendar-layout-event-preview-container">
-  <div class="tw-calendar-layout-event-preview-top-buttons">
-    <$button to=<<currentTiddler>> style="flex: 5;" >
-      Open
-      <$action-setfield $tiddler="$:/layout" text="">
-        <$action-navigate $to=<<currentTiddler>> />
-      </$action-setfield>
-    </$button>
-    <$button style="flex: 1;" class="tw-calendar-layout-event-preview-close-button" >
-      X
-    </$button>
+<$vars storyTiddler=<<currentTiddler>> tiddlerInfoState=<<qualify "$:/state/popup/tiddler-info">>>
+  <div
+    data-tiddler-title=<<currentTiddler>>
+    data-tags={{!!tags}}
+    class={{{ tc-tiddler-exists tc-tiddler-frame tc-tiddler-view-frame [{!!class}] +[join[ ]] }}}
+    role="article"
+  >
+    <!-- ignore system view templates (for example title and text, which already exist as input, so don't need them), only support UI added by other plugins (for example SuperTag) -->
+    <$list filter="[all[shadows+tiddlers]tag[$:/tw-calendar/EventPreviewMiniViewTemplate]!is[draft]]" variable="listItem">
+      <$transclude tiddler=<<listItem>>/>
+    </$list>
   </div>
-  <$edit-text
-    field="caption"
-    class="tc-titlebar tc-edit-texteditor"
-    tabindex=1
-    focus={{{ [{$:/config/AutoFocus}match[title]then[true]] ~[[false]] }}}
-    tabindex={{$:/config/EditTabIndex}}
-    cancelPopups="yes"
-    fileDrop=no
-  />
-  Text:
-  <$edit-text
-    field="text"
-    class="tc-edit-texteditor tc-edit-texteditor-body"
-    default=""
-    placeholder={{$:/language/EditTemplate/Body/Placeholder}}
-    tabindex=-1
-    focus=false
-    cancelPopups="yes"
-    fileDrop=no
-    minHeight="30px"
-  />
-  <div class="tw-calendar-time-range-preview">
-    <$edit-date showTime showSeconds use24hour field="startDate"/>
-    <span>
-      <$text text=" -| " />
-      <$macrocall $name="date-duration-macro" startDate={{!!startDate}} endDate={{!!endDate}} />
-      <$text text=" |-> " />
-    </span>
-    <$edit-date showTime showSeconds use24hour field="endDate"/>
-  </div>
-  <div class="tw-calendar-tags-input">
-    <div class="tw-calendar-tags-input-new-tag">
-      {{||$:/core/ui/EditTemplate/tags}}
-    </div>
-    {{||$:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/popup/FrequentlyUsedTagsList}}
-  </div>
-  <div class="tw-calendar-layout-event-preview-bottom-buttons">
-    <$button tooltip={{$:/language/Buttons/Delete/Hint}} aria-label={{$:/language/Buttons/Delete/Caption}} class="tw-calendar-layout-event-preview-close-button">
-      <$text text={{$:/language/Buttons/Delete/Caption}}/> {{$:/core/images/delete-button}}
-      <$action-sendmessage $message="tm-delete-tiddler" param=<<currentTiddler>>/>
-    </$button>
-  </div>
+</$vars>
+
 </div>
