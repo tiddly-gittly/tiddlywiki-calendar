@@ -1,0 +1,5 @@
+title: $:/plugins/linonetwo/tw-calendar/Snippets/monthCalendar
+tags: $:/tags/TextEditor/Snippet
+caption: Monthly Calendar widget hideToolbar, set width and height
+
+<$calendar initialView="dayGridMonth" hideToolbar="yes" width="300px" height="300px" />

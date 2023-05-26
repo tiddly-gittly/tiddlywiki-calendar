@@ -1,0 +1,5 @@
+title: $:/plugins/linonetwo/tw-calendar/Snippets/dueDateFieldCalendarWithFishingFilter
+tags: $:/tags/TextEditor/Snippet
+caption: Calendar widget use `due` and `dueEnd` field to show event from oflg/fishing plugin
+
+<$calendar filter="[all[]tag[?]]" startDateFields="due" endDateFields="dueEnd" />

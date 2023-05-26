@@ -1,0 +1,5 @@
+title: $:/plugins/linonetwo/tw-calendar/Snippets/readonlyCalendarWithFilter
+tags: $:/tags/TextEditor/Snippet
+caption: Readonly Calendar widget
+
+<$calendar filter="[all[]tag[Todo]]" readonly="yes" />

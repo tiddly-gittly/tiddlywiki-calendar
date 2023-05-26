@@ -1,0 +1,11 @@
+title: $:/plugins/linonetwo/tw-calendar/Snippets/countTodayEventHours
+tags: $:/tags/TextEditor/Snippet
+caption: Filter to display the total hours of today's XXX events (define need to be moved to top of the tiddler)
+
+\define getTimeForEntry() [{!!startDate}format:date[TIMESTAMP]] :map[<..currentTiddler>get[endDate]format:date[TIMESTAMP]subtract<currentTiddler>]
+
+{{{ 
+  [all[]days:startDate[0]field:calendarEntry[yes]tag[XXX]]
+    :map[subfilter<getTimeForEntry>]
+    :and[sum[]divide[1000]divide[3600]]
+}}}

@@ -1,0 +1,5 @@
+title: $:/plugins/linonetwo/tw-calendar/Snippets/calendarWithTimeZone
+tags: $:/tags/TextEditor/Snippet
+caption: Calendar widget with time zone
+
+<$calendar timeZone="Asia/Shanghai" initialView="timeGridDay" hideToolbar="yes" width="40%" height="600px" readonly="yes" />

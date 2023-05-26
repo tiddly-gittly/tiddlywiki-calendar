@@ -1,0 +1,5 @@
+title: $:/plugins/linonetwo/tw-calendar/Snippets/baseCalendarWithFilter
+tags: $:/tags/TextEditor/Snippet
+caption: Calendar widget with filter
+
+<$calendar filter="[all[]tag[Todo]]" />
