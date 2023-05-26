@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/prefer-nullish-coalescing */
 import type { Calendar } from '@fullcalendar/core';
 import type { IChangedTiddlers, Widget as IWidget } from 'tiddlywiki';
 
@@ -105,6 +106,7 @@ class CalendarWidget extends Widget {
       hideToolbar: (this.getAttribute('hideToolbar') === 'yes') || (this.getAttribute('hideToolbar') === 'true'),
       initialDate: this.getAttribute('initialDate'),
       initialView: this.getAttribute('initialView'),
+      defaultTags: $tw.utils.parseStringArray(this.getAttribute('defaultTags') || '') ?? [],
       parentWidget: this.parentWidget,
       containerElement: this.#containerElement,
       readonly: (this.getAttribute('readonly') === 'yes') || (this.getAttribute('readonly') === 'true'),

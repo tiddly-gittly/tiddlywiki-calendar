@@ -17,6 +17,10 @@ import { getHandlers } from './handlers';
 export interface IContext {
   containerElement?: HTMLDivElement | undefined;
   /**
+   * When adding tiddler in the calender, add these tags by default.
+   */
+  defaultTags?: string[];
+  /**
    * corresponding end date field to startDateFields. When using multiple pairs of fields, their index in the array should be the same.
    * Use empty string if some of start field don't have a corresponding end field
    */

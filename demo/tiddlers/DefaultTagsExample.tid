@@ -1,0 +1,11 @@
+title: DefaultTagsExample
+type: text/vnd.tiddlywiki
+tags: WidgetUsage
+
+Create Todo by drag/click in the calendar:
+
+```
+<$calendar defaultTags="Todo" hideToolbar="yes" height="300px" />
+```
+
+<$calendar defaultTags="Todo" hideToolbar="yes" height="400px" />

@@ -125,6 +125,7 @@ export function getHandlers(context: IContext): CalendarOptions {
       const endDate = $tw.utils.stringifyDate(info.end);
       const startDateKey = context.startDateFields?.[0] ?? 'startDate';
       const endDateKey = context.endDateFields?.[0] ?? 'endDate';
+      const tags = context.defaultTags ?? [];
       $tw.wiki.addTiddler({
         title: '$:/state/Calendar/PageLayout/create-tiddler-caption',
         text: '',
@@ -140,6 +141,7 @@ export function getHandlers(context: IContext): CalendarOptions {
          */
         calendarEntry: 'yes',
         text,
+        tags,
       });
       new TWModal($tw.wiki).display('$:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/popup/CreateNewTiddlerPopup');
       const titleInputElement = document.querySelector<HTMLInputElement>('.tw-calendar-layout-create-new-tiddler-popup > .tc-titlebar.tc-edit-texteditor');
