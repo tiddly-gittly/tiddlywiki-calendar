@@ -110,7 +110,9 @@ function getToolbarSettings(context: IContext): CalendarOptions {
   return {
     customButtons: {
       backToDefaultLayout: {
-        text: `Exit`,
+        /** set by setToolbarIcons() above */
+        text: '',
+        hint: `Exit`,
         click: () => {
           $tw.wiki.setText('$:/layout', 'text', '');
         },
