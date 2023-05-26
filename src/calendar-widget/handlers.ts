@@ -87,10 +87,12 @@ export function getHandlers(context: IContext): CalendarOptions {
         top: `${y}px`,
       });
       // add event listener to close button
-      const closeButton = eventPreviewElement.querySelector<HTMLButtonElement>('button.tw-calendar-layout-event-preview-close-button');
-      if (closeButton) {
-        closeButton.addEventListener('click', () => {
-          removePopup(eventPreviewElement);
+      const closeButtons = eventPreviewElement.querySelectorAll<HTMLButtonElement>('button.tw-calendar-layout-event-preview-close-button');
+      if (closeButtons) {
+        closeButtons.forEach(closeButton => {
+          closeButton.addEventListener('click', () => {
+            removePopup(eventPreviewElement);
+          });
         });
       }
     },

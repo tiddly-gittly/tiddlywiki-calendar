@@ -24,6 +24,11 @@ class CalendarWidget extends Widget {
         if (changedTiddlers[changedTiddlerTitle].modified === true) {
           return changedTiddlerInViewRange(changedTiddlerTitle, this.#calendar, endDateKey);
         }
+        if (changedTiddlers[changedTiddlerTitle].deleted === true) {
+          // have to react to each deleted tiddler, because we can't get deleted tiddler fields, so can't check if it's a calendar entry
+          // maybe can set a state tiddler as flag, and only react to deletion when that flag exist, then delete that flag
+          return true;
+        }
         return false;
       })
     ) {

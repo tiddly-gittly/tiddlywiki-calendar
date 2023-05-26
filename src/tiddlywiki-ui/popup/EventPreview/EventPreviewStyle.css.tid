@@ -29,3 +29,9 @@ type: text/vnd.tiddlywiki
 .tw-calendar-layout-event-preview-container .tw-calendar-time-range-preview input {
   width: unset;
 }
+.tw-calendar-layout-event-preview-container .tw-calendar-layout-event-preview-bottom-buttons {
+  width: 100%;
+  height: 30px;
+  display: flex;
+  flex-direction: row;
+}

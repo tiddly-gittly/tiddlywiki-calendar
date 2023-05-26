@@ -1,5 +1,7 @@
 title: $:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/popup/EventPreview
 
+\import [[$:/core/ui/EditTemplate]]
+
 <div class="tw-calendar-layout-event-preview-container">
   <div class="tw-calendar-layout-event-preview-top-buttons">
     <$button to=<<currentTiddler>> style="flex: 5;" >
@@ -47,5 +49,11 @@ title: $:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/popup/Even
       {{||$:/core/ui/EditTemplate/tags}}
     </div>
     {{||$:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/popup/FrequentlyUsedTagsList}}
+  </div>
+  <div class="tw-calendar-layout-event-preview-bottom-buttons">
+    <$button tooltip={{$:/language/Buttons/Delete/Hint}} aria-label={{$:/language/Buttons/Delete/Caption}} class="tw-calendar-layout-event-preview-close-button">
+      <$text text={{$:/language/Buttons/Delete/Caption}}/> {{$:/core/images/delete-button}}
+      <$action-sendmessage $message="tm-delete-tiddler" param=<<currentTiddler>>/>
+    </$button>
   </div>
 </div>
