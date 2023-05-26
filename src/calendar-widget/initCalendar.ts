@@ -82,7 +82,7 @@ export function getSettings(context: IContext): CalendarOptions {
       : undefined,
     nowIndicator: true,
     scrollTimeReset: false,
-    schedulerLicenseKey: 'GPL-My-Project-Is-Open-Source',
+    schedulerLicenseKey: 'CC-Attribution-NonCommercial-NoDerivatives',
     ...getToolbarSettings(context),
     // event handlers
     ...getHandlers(context),
