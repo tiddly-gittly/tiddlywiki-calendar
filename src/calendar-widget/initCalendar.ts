@@ -8,7 +8,7 @@ import momentTimezonePlugin from '@fullcalendar/moment-timezone';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import moment from 'moment-timezone';
 import type { Widget } from 'tiddlywiki';
-import { getInCalendarLayout, isSmallScreen, tiddlerEventSourceID } from './constants';
+import { getInCalendarLayout, isMobile, isSmallScreen, tiddlerEventSourceID } from './constants';
 import { getCustomViews } from './customView';
 import { getEventContent } from './eventContent';
 import { getEventOnFullCalendarViewChange } from './getEvents';
@@ -87,7 +87,10 @@ export function getSettings(context: IContext): CalendarOptions {
       : undefined,
     nowIndicator: true,
     scrollTimeReset: false,
-    dragScroll: false,
+    /**
+     * This prevent mouse wheel, but is necessary on mobile
+     */
+    dragScroll: isMobile,
     schedulerLicenseKey: 'CC-Attribution-NonCommercial-NoDerivatives',
     ...getToolbarSettings(context),
     // event handlers
