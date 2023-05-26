@@ -49,13 +49,13 @@ export function getEventContent(context: IContext): CustomContentGenerator<Event
       // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
       ? `<div class="${tiddler?.fields?.text ? 'fc-event-title-with-text' : ''}">${captionResult}</div>`
       : titleElement;
-    // on small view that can only display an element
+    // on small view like dayGridMonth that can only display an element
     if (['dayGridMonth'].includes(argument.view.type)) {
       return { html: [captionElement].join('') };
     }
-    // on large view
+    // on timeGridDay view, show full text, but ignore too long text that causes lagging
     const textElement = allowedTiddlerTypeToPreview.includes(tiddler.fields.type ?? '')
-      ? `<div>${tiddler.fields.text ?? ''}</div>`
+      ? `<div>${(tiddler.fields.text ?? '').substring(0, 2000)}</div>`
       : `<div>${tiddler.fields.type} too large</div>`;
     const tagsElement = `<div class="fc-event-main-tags">${tiddler.fields.tags?.map((tag) => `<span>${tag}</span>`)?.join('') ?? ''}</div>`;
     return { html: compact([captionElement, tagsElement, timeElement, durationElement, textElement]).join('') };
