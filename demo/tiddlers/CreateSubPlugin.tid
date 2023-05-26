@@ -1,0 +1,14 @@
+title: CreateSubPlugin
+type: text/vnd.tiddlywiki
+
+You can create sub-plugin of tiddlywiki-calendar to enrich the display.
+
+!! Add more view template to the popup
+
+When you click on a event, there will be a popup.
+
+!!! `$:/tw-calendar/EventPreviewMiniViewTemplate` tag
+
+By default, the popup will display the event caption, the event text, tags, and the date. Which is controlled by `$:/tw-calendar/EventPreviewMiniViewTemplate` tag. If you add this tag to your tiddler, that tiddler will show in the popup too.
+
+Also it renders ViewTemplate from `$:/tags/ViewTemplate`, but exclude those from the `$:/core`, this means it ignores system view templates (for example title and text, which already exist as inputs described above, so don't need them), it only supports UI added by other plugins (for example SuperTag plugin).
