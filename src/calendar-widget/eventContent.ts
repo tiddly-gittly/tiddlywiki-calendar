@@ -47,7 +47,7 @@ export function getEventContent(context: IContext): CustomContentGenerator<Event
     // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
     const captionElement = typeof captionResult === 'string'
       // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
-      ? `<div class="${tiddler?.fields?.text ? 'fc-event-title-with-text' : ''}>${captionResult}</div>`
+      ? `<div class="${tiddler?.fields?.text ? 'fc-event-title-with-text' : ''}">${captionResult}</div>`
       : titleElement;
     // on small view that can only display an element
     if (['dayGridMonth'].includes(argument.view.type)) {
