@@ -20,7 +20,7 @@ export function getEventContent(context: IContext): CustomContentGenerator<Event
     const timeElement = `<div>${argument.timeText}</div>`;
     const tiddler = $tw.wiki.getTiddler(argument.event.title);
     if (tiddler === undefined) {
-      return { html: [titleElement, timeElement] };
+      return { html: [titleElement, timeElement].join('') };
     }
 
     let captionResult: string | undefined | null;
@@ -51,7 +51,7 @@ export function getEventContent(context: IContext): CustomContentGenerator<Event
       : titleElement;
     // on small view that can only display an element
     if (['dayGridMonth'].includes(argument.view.type)) {
-      return { html: [captionElement] };
+      return { html: [captionElement].join('') };
     }
     // on large view
     const textElement = allowedTiddlerTypeToPreview.includes(tiddler.fields.type ?? '')
