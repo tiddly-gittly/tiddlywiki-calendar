@@ -1,6 +1,6 @@
 import type { CalendarOptions } from '@fullcalendar/core';
 import moment from 'moment-timezone';
-import { isSmallScreen, timeZoneOffset } from './constants';
+import { getIsSmallScreen, timeZoneOffset } from './constants';
 
 function threeDayWith1Previous1NextVisibleRange(currentDate: Date) {
   // Generate a new date for manipulating in the next step
@@ -23,14 +23,14 @@ export function getCustomViews(): CalendarOptions['views'] {
   return {
     timeGridThreeDay: {
       type: 'timeGrid',
-      buttonText: isSmallScreen ? '3d' : '3 day',
+      buttonText: getIsSmallScreen() ? '3d' : '3 day',
       duration: { days: 3 }, // comment out this after https://github.com/fullcalendar/fullcalendar/issues/7129 solved. the duration option will override the visibleRange option
       visibleRange: threeDayWith1Previous1NextVisibleRange,
     },
     timeGridDay: {
       type: 'timeGrid',
       duration: { days: 1 },
-      buttonText: isSmallScreen ? '1d' : 'day',
+      buttonText: getIsSmallScreen() ? '1d' : 'day',
     },
   };
 }

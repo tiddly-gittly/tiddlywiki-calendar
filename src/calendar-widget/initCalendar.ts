@@ -8,7 +8,7 @@ import momentTimezonePlugin from '@fullcalendar/moment-timezone';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import moment from 'moment-timezone';
 import type { Widget } from 'tiddlywiki';
-import { getInCalendarLayout, isMobile, isSmallScreen, tiddlerEventSourceID } from './constants';
+import { getInCalendarLayout, getIsSmallScreen, isMobile, tiddlerEventSourceID } from './constants';
 import { getCustomViews } from './customView';
 import { getEventContent } from './eventContent';
 import { getEventOnFullCalendarViewChange } from './getEvents';
@@ -59,7 +59,7 @@ export function getSettings(context: IContext): CalendarOptions {
     eventSources: [{ events: getEventOnFullCalendarViewChange(context), id: tiddlerEventSourceID }],
     plugins: [momentTimezonePlugin, dayGridPlugin, timeGridPlugin, listPlugin, adaptivePlugin, interactionPlugin],
     views: getCustomViews(),
-    initialView: context.initialView ?? (isSmallScreen ? 'timeGridThreeDay' : 'timeGridWeek'),
+    initialView: context.initialView ?? (getIsSmallScreen() ? 'timeGridThreeDay' : 'timeGridWeek'),
     now,
     editable: context.readonly !== true,
     eventContent: getEventContent(context),
@@ -103,7 +103,7 @@ export function setToolbarIcons() {
   // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
   if (backToDefaultLayoutButton) {
     const svgIcon = $tw.wiki.getTiddlerText('$:/plugins/linonetwo/tw-calendar/Images/ExitLayout') ?? '';
-    backToDefaultLayoutButton.innerHTML = isSmallScreen ? svgIcon : `Exit ${svgIcon}`;
+    backToDefaultLayoutButton.innerHTML = getIsSmallScreen() ? svgIcon : `Exit ${svgIcon}`;
   }
 }
 function getToolbarSettings(context: IContext): CalendarOptions {
@@ -116,14 +116,14 @@ function getToolbarSettings(context: IContext): CalendarOptions {
         },
       },
     },
-    headerToolbar: isSmallScreen || context.hideToolbar === true
+    headerToolbar: getIsSmallScreen() || context.hideToolbar === true
       ? false
       : {
         left: `prev,next today`,
         center: 'title',
         right: `${getInCalendarLayout() ? 'backToDefaultLayout ' : ''}dayGridMonth,timeGridWeek,timeGridThreeDay,timeGridDay,listWeek`,
       },
-    footerToolbar: isSmallScreen && context.hideToolbar !== true
+    footerToolbar: getIsSmallScreen() && context.hideToolbar !== true
       ? {
         right: `today,prev,next`,
         left: `timeGridThreeDay,timeGridDay,listWeek${getInCalendarLayout() ? ' backToDefaultLayout' : ''}`,
