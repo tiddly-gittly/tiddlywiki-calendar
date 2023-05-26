@@ -12,7 +12,7 @@ See website [https://tiddly-gittly.github.io/tiddlywiki-calendar](https://tiddly
 
 ## Credits
 
-This project is based on [FullCalendar](https://github.com/fullcalendar/fullcalendar).
+This project is based on [FullCalendar](https://github.com/fullcalendar/fullcalendar), best open source calendar library available.
 
 ## Development
 
