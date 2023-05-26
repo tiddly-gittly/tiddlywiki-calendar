@@ -33,4 +33,12 @@ export const config = {
       printUnknownTargets: false,
     }),
   ],
+  loader: {
+    '.png': 'dataurl',
+    '.woff': 'dataurl',
+    '.woff2': 'dataurl',
+    '.eot': 'dataurl',
+    '.ttf': 'dataurl',
+    '.svg': 'dataurl',
+  },
 };
