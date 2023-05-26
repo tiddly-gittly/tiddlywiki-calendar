@@ -78,6 +78,9 @@ devDependencies:
   cross-env:
     specifier: ^7.0.3
     version: 7.0.3
+  dprint:
+    specifier: ^0.36.1
+    version: 0.36.1
   esbuild:
     specifier: 0.17.19
     version: 0.17.19
@@ -105,6 +108,9 @@ devDependencies:
   eslint-plugin-autofix:
     specifier: 1.1.0
     version: 1.1.0(eslint@8.41.0)
+  eslint-plugin-dprint-integration:
+    specifier: ^0.3.0
+    version: 0.3.0
   eslint-plugin-html:
     specifier: 7.1.0
     version: 7.1.0
@@ -559,6 +565,30 @@ packages:
 
   /@bcoe/v8-coverage@0.2.3:
     resolution: {integrity: sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==}
+    dev: true
+
+  /@dprint/dockerfile@0.3.0:
+    resolution: {integrity: sha512-u2XhDkS0LrhmBrJ6ecP0TZsFv5a4W688XnD3F11/i9H0r/4/6QHLk6B2aKZmjK3rHaO1ERBYRA6YtKGxwkn2xg==}
+    dev: true
+
+  /@dprint/formatter@0.2.0:
+    resolution: {integrity: sha512-E1q1JaOPeEUBhG//IUayqJQvNpqprZ0OCF8B/bIhUqSsMIp0Y74PgF8JPvDCrOdq43qiGUYAavVO8iCBHOoU/A==}
+    dev: true
+
+  /@dprint/json@0.17.2:
+    resolution: {integrity: sha512-V5T2HW3N10TrF4nAl+7bzeBebmrPimn8Xkliu/SucL6WUsqGtxY8sJLGa+8f7gE9dFRW+VTsfX9QWEXopfn+ww==}
+    dev: true
+
+  /@dprint/markdown@0.15.2:
+    resolution: {integrity: sha512-/9lq1JnszpRJKzy31PqJ4qdlj53dky3qjilG6bNGQdMnagTbK/CioYNAtLV8E2Dj9eFQxPh3u0WIY5aQf0PhKg==}
+    dev: true
+
+  /@dprint/toml@0.5.4:
+    resolution: {integrity: sha512-d+5GwwzztZD0QixmOBhaO6nWVLsAeYsJ1HJYNxDoDRbASFCpza9BBVshG5ctBRXCkkIHhD9BO1SnbOoRQltUQw==}
+    dev: true
+
+  /@dprint/typescript@0.84.4:
+    resolution: {integrity: sha512-QIdXKI+bbtV7l+k3eBsPtbWFD4ELwY+Hbd9uH2sIOK6ZNzBquTO/EJNX77Pr25kdaj39lPr2Do1YDZM4iQVqXg==}
     dev: true
 
   /@esbuild/android-arm64@0.17.19:
@@ -2544,6 +2574,10 @@ packages:
       object-keys: 1.1.1
     dev: true
 
+  /defu@6.1.2:
+    resolution: {integrity: sha512-+uO4+qr7msjNNWKYPHqN/3+Dx3NFkmIzayk2L1MyZQlvgZb/J1A0fo410dpKrN2SnqFjt8n4JL8fDJE0wIgjFQ==}
+    dev: true
+
   /depd@2.0.0:
     resolution: {integrity: sha512-g7nH6P6dyDioJogAAGprGpCtVImJhpPk/roCzdb3fIh61/s/nPsfR6onyMwkCAR/OlC3yBC0lESvUoQEAssIrw==}
     engines: {node: '>= 0.8'}
@@ -2625,6 +2659,17 @@ packages:
       dom-serializer: 2.0.0
       domelementtype: 2.3.0
       domhandler: 5.0.3
+    dev: true
+
+  /dprint@0.36.1:
+    resolution: {integrity: sha512-F8TaWlieYtJc4ktqr0tjNwg/HN4wNPTU6rTq29MdoIKXi9gQmh7Ibqr0oyW1hsLpqBuAXjjwEYIos9plYkwENQ==}
+    hasBin: true
+    requiresBuild: true
+    dependencies:
+      https-proxy-agent: 5.0.1
+      yauzl: 2.10.0
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /duplexer@0.1.2:
@@ -2930,6 +2975,20 @@ packages:
       esutils: 2.0.3
       lodash: 4.17.21
       string-similarity: 4.0.4
+    dev: true
+
+  /eslint-plugin-dprint-integration@0.3.0:
+    resolution: {integrity: sha512-w92Av81MjERgR4h/03APU1T/XYvgp+8UV1KIoRwSqsKrbAlkiY9+iUKVX2hjN/5Sh2NnLrBFIt+NTpO6DieikA==}
+    dependencies:
+      '@dprint/dockerfile': 0.3.0
+      '@dprint/formatter': 0.2.0
+      '@dprint/json': 0.17.2
+      '@dprint/markdown': 0.15.2
+      '@dprint/toml': 0.5.4
+      '@dprint/typescript': 0.84.4
+      defu: 6.1.2
+      find-up: 5.0.0
+      prettier-linter-helpers: 1.0.0
     dev: true
 
   /eslint-plugin-es-x@6.2.1(eslint@8.41.0):
@@ -3409,6 +3468,12 @@ packages:
     resolution: {integrity: sha512-p5161BqbuCaSnB8jIbzQHOlpgsPmK5rJVDfDKO91Axs5NC1uu3HRQm6wt9cd9/+GtQQIO53JdGXXoyDpTAsgYA==}
     dependencies:
       bser: 2.1.1
+    dev: true
+
+  /fd-slicer@1.1.0:
+    resolution: {integrity: sha512-cE1qsB/VwyQozZ+q1dGxR8LBYNZeofhEdUNGSMbQD3Gw2lAzX9Zb3uIU6Ebc/Fmyjo9AWWfnn0AUCHqtevs/8g==}
+    dependencies:
+      pend: 1.2.0
     dev: true
 
   /fetch-blob@3.2.0:
@@ -5394,6 +5459,10 @@ packages:
       through: 2.3.8
     dev: true
 
+  /pend@1.2.0:
+    resolution: {integrity: sha512-F3asv42UuXchdzt+xXqfW1OGlVBe+mxa2mqI0pg5yAHZPvFmY3Y6drSf/GQ1A86WgWEN9Kzh/WrgKa6iGcHXLg==}
+    dev: true
+
   /picocolors@1.0.0:
     resolution: {integrity: sha512-1fygroTLlHu66zi26VoTDv8yRgm0Fccecssto+MhsZ0D/DGW2sm8E8AjW7NU5VVTRt5GxbeZ5qBuJr+HyLYkjQ==}
     dev: true
@@ -6651,6 +6720,13 @@ packages:
       string-width: 4.2.3
       y18n: 5.0.8
       yargs-parser: 21.1.1
+    dev: true
+
+  /yauzl@2.10.0:
+    resolution: {integrity: sha512-p4a9I6X6nu6IhoGmBqAcbJy1mlC4j27vEPZX9F4L4/vZT3Lyq1VkFHw/V/PUcB9Buo+DG3iHkT0x3Qya58zc3g==}
+    dependencies:
+      buffer-crc32: 0.2.13
+      fd-slicer: 1.1.0
     dev: true
 
   /yocto-queue@0.1.0:

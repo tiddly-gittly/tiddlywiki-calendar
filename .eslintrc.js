@@ -99,6 +99,17 @@ module.exports = {
         caughtErrorsIgnorePattern: '^_',
       },
     ],
+    'dprint-integration/dprint': [
+      'warn',
+      // Global Config (will pass to the dprint formatter directly): Available at https://dprint.dev/config/
+      {
+        useDprintJson: true,
+      },
+      // Plugin Specific Config (will pass to the dprint plugins): Available at https://dprint.dev/plugins/
+      {
+        useDprintJson: true,
+      },
+    ],
   },
   extends: [
     'eslint:recommended',
@@ -116,13 +127,14 @@ module.exports = {
     'plugin:import/warnings',
     'plugin:import/typescript',
     'plugin:react-hooks/recommended',
-    'prettier',
+    'plugin:dprint-integration/recommended',
+    'plugin:dprint-integration/disable-conflict',
     'plugin:security-node/recommended',
     'plugin:typescript-sort-keys/recommended',
   ],
   plugins: [
     '@typescript-eslint/eslint-plugin',
-    'prettier',
+    'dprint-integration',
     'react',
     'html',
     'typescript-sort-keys',
