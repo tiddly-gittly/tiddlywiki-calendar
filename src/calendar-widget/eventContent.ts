@@ -13,13 +13,13 @@ const getDateDuration = dateDurationMacro.run as (startDateString: string, endDa
  * See `$:/plugins/linonetwo/tw-calendar/calendar-widget/widget.css` for style about container (.fc-event-main-tags).
  */
 export function getEventContent(context: IContext): CustomContentGenerator<EventContentArg> {
-  return (argument, createElement: typeof h) => {
+  return (argument) => {
     /** this is for empty tiddler, normally we will use captionElement below */
-    const titleElement = createElement('div', {}, argument.event.title);
-    const timeElement = createElement('div', {}, argument.timeText);
+    const titleElement = `<div>${argument.event.title}</div>`;
+    const timeElement = `<div>${argument.timeText}</div>`;
     const tiddler = $tw.wiki.getTiddler(argument.event.title);
     if (tiddler === undefined) {
-      return [titleElement, timeElement];
+      return { html: [titleElement, timeElement] };
     }
 
     let captionResult: string | undefined | null;
@@ -42,19 +42,19 @@ export function getEventContent(context: IContext): CustomContentGenerator<Event
     const startDate = tiddler.fields[context.startDateFields?.[0] ?? 'startDate'] as string | undefined;
     const endDate = tiddler.fields[context.endDateFields?.[0] ?? 'endDate'] as string | undefined;
     const durationText = startDate !== undefined && endDate !== undefined ? getDateDuration(startDate, endDate) : undefined;
-    const durationElement = durationText !== undefined && createElement('div', {}, durationText);
+    const durationElement = durationText !== undefined && `<div>${durationText}</div>`;
     // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
     const captionElement = typeof captionResult === 'string'
       // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
-      ? createElement('div', { class: tiddler?.fields?.text ? 'fc-event-title-with-text' : undefined }, captionResult)
+      ? `<div class="${tiddler?.fields?.text ? 'fc-event-title-with-text' : ''}>${captionResult}</div>`
       : titleElement;
     // on small view that can only display an element
     if (['dayGridMonth'].includes(argument.view.type)) {
-      return [captionElement];
+      return { html: [captionElement] };
     }
     // on large view
-    const textElement = createElement('div', {}, tiddler.fields.text);
-    const tagsElement = createElement('div', { class: 'fc-event-main-tags' }, tiddler.fields.tags?.map((tag) => createElement('span', {}, tag)) ?? '');
-    return compact([captionElement, tagsElement, timeElement, durationElement, textElement]);
+    const textElement = `<div>${tiddler.fields.text ?? ''}</div>`;
+    const tagsElement = `<div class="fc-event-main-tags">${tiddler.fields.tags?.map((tag) => `<span>${tag}</span>`)?.join('') ?? ''}</div>`;
+    return { html: compact([captionElement, tagsElement, timeElement, durationElement, textElement]).join('') };
   };
 }
