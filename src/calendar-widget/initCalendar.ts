@@ -44,6 +44,11 @@ export interface IContext {
 }
 export function initCalendar(containerElement: HTMLDivElement, context: IContext) {
   const calendar = new Calendar(containerElement, getSettings(context));
+  const originalRender = calendar.render.bind(calendar);
+  calendar.render = function render() {
+    originalRender();
+    setToolbarIcons();
+  };
   return calendar;
 }
 
@@ -89,11 +94,19 @@ export function getSettings(context: IContext): CalendarOptions {
   };
 }
 
+export function setToolbarIcons() {
+  const backToDefaultLayoutButton = document.querySelector('.fc-backToDefaultLayout-button');
+  // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
+  if (backToDefaultLayoutButton) {
+    const svgIcon = $tw.wiki.getTiddlerText('$:/plugins/linonetwo/tw-calendar/Images/ExitLayout') ?? '';
+    backToDefaultLayoutButton.innerHTML = isSmallScreen ? svgIcon : `Exit ${svgIcon}`;
+  }
+}
 function getToolbarSettings(context: IContext): CalendarOptions {
   return {
     customButtons: {
       backToDefaultLayout: {
-        text: 'Home',
+        text: `Exit`,
         click: () => {
           $tw.wiki.setText('$:/layout', 'text', '');
         },
