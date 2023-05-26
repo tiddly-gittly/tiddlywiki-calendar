@@ -16,3 +16,63 @@ type: text/vnd.tiddlywiki
   -webkit-app-region: no-drag;
 }
 </$reveal>
+
+.tiddlywiki-calendar-widget-container {
+  min-height: 400px;
+  height: 100%;
+}
+.tiddlywiki-calendar-widget-container table {
+  margin: unset;
+}
+
+.fc-timegrid-event-harness {
+  overflow: hidden;
+}
+.fc-event-main-tags {
+  overflow: hidden;
+}
+.fc-event-main-tags > span {
+  word-break: break-all;
+  border: 1px solid;
+  padding: 1px;
+  margin: 1px;
+  margin-right: 2px;
+  margin-bottom: 0px;
+  line-height: 2em;
+}
+
+.fc-event-title-with-text {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 15%;
+}
+
+.fc-event {
+  cursor: pointer;
+}
+
+.fc-daygrid-event > div {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tiddlywiki-calendar-widget-event-preview {
+  width: min-content;
+  min-width: 30vw;
+
+  max-height: 80vh;
+  overflow: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 5px;
+  border-radius: 4px;
+  z-index: 100;
+
+  opacity: 0.9;
+  backdrop-filter: blur(10px);
+}
+
+.fc button.fc-button-primary > svg.tc-image-button {
+  fill: #fff;
+}

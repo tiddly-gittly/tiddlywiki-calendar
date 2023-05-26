@@ -1,9 +1,9 @@
 import type { Calendar } from '@fullcalendar/core';
 import type { IChangedTiddlers, Widget as IWidget } from 'tiddlywiki';
+
 import { changedTiddlerInViewRange } from './changeDetector';
-import { type IContext, initCalendar } from './initCalendar';
-import './widget.css';
 import { tiddlerEventSourceID } from './constants';
+import { type IContext, initCalendar } from './initCalendar';
 
 const Widget = (require('$:/core/modules/widgets/widget.js') as { widget: typeof IWidget }).widget;
 
@@ -16,16 +16,12 @@ class CalendarWidget extends Widget {
   refresh(changedTiddlers: IChangedTiddlers): boolean {
     let refreshed = false;
     const context = this.getContext();
-    // DEBUG: console changedTiddlers
-    console.log(`changedTiddlers`, changedTiddlers);
     if (
       Object.keys(changedTiddlers).some((changedTiddlerTitle) => {
         if (changedTiddlerTitle.startsWith('$:/state/')) return false;
         // if modified date is within calendar view, refresh to show new event
         const endDateKey = context.endDateFields?.[0] ?? 'endDate';
         if (changedTiddlers[changedTiddlerTitle].modified === true) {
-          // DEBUG: console changedTiddlerInViewRange(changedTiddlerTitle, this.#calendar, endDateKey)
-          console.log(`changedTiddlerInViewRange(changedTiddlerTitle, this.#calendar, endDateKey)`, changedTiddlerInViewRange(changedTiddlerTitle, this.#calendar, endDateKey));
           return changedTiddlerInViewRange(changedTiddlerTitle, this.#calendar, endDateKey);
         }
         if (changedTiddlers[changedTiddlerTitle].deleted === true) {
