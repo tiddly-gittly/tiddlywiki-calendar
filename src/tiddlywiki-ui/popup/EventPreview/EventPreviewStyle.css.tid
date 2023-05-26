@@ -19,4 +19,13 @@ type: text/vnd.tiddlywiki
 }
 .tw-calendar-layout-event-preview-container .tc-titlebar {
   margin-top: 5px;
-}~
+}
+.tw-calendar-layout-event-preview-container .tw-calendar-time-range-preview {
+  margin-top: 15px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.tw-calendar-layout-event-preview-container .tw-calendar-time-range-preview input {
+  width: unset;
+}
