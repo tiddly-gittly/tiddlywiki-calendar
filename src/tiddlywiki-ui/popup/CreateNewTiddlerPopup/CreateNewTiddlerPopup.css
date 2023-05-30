@@ -51,3 +51,12 @@
 span.tc-add-tag-name input {
   min-width: 5em;
 }
+.tw-calendar-alarms {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.tw-calendar-alarms input.alarmMsg {
+  margin-top: 0.5em;
+  width: 100%;
+}

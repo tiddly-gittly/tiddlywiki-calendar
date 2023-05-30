@@ -1,0 +1,6 @@
+title: $:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/popup/EditAlarm
+tags: $:/tw-calendar/EventPreviewMiniViewTemplate
+
+<div class="tw-calendar-alarms">
+  {{||$:/plugins/linonetwo/tw-calendar/lib/TiddlyTools/Time/Alarms}}
+</div>

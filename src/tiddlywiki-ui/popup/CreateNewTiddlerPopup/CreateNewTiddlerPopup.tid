@@ -31,5 +31,8 @@ footer: {{$:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/popup/C
       {{||$:/core/ui/EditTemplate/tags}}
       </div>
     </div>
+    <div class="tw-calendar-alarms">
+      {{||$:/plugins/linonetwo/tw-calendar/lib/TiddlyTools/Time/Alarms}}
+    </div>
   </$let>
 </div>
