@@ -109,7 +109,7 @@ author: EricShulman
 
 \define alarms_add()
 <!-- DEFAULTS -->
-<$vars freq="once" year=<<now YYYY>> month=<<now 0MM>> day=<<now 0DD>> hour="--" min="--" sec="--">
+<$vars freq="once" year=<<now YYYY>> month=<<now 0MM>> day=<<now 0DD>> hour={{{[<currentTiddler>get[startDate]format:date[TIMESTAMP]subtract[900000]parsedate:number[0hh]]}}} min={{{[<currentTiddler>get[startDate]format:date[TIMESTAMP]subtract[900000]parsedate:number[0mm]]}}} sec="00">
 <!-- INPUTS -->
 <$vars  freq={{{ [<alarms_input>get[freq]]  ~[<freq>]  }}}>
 <$vars  year={{{ [<alarms_input>get[year]]  ~[<year>]  }}}>
