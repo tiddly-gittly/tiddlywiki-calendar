@@ -55,8 +55,18 @@ span.tc-add-tag-name input {
   display: flex;
   flex-direction: column;
   width: 100%;
+  margin-top: 2em;
 }
 .tw-calendar-alarms input.alarmMsg {
   margin-top: 0.5em;
   width: 100%;
+}
+.tw-calendar-alarms input.alarmEdit {
+  width: 2em;
+}
+.tw-calendar-alarms input.alarmEdit.alarmEditYear {
+  width: 4em;
+}
+.tw-calendar-alarms .alarmTable td {
+  vertical-align: middle;
 }

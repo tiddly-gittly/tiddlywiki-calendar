@@ -3,7 +3,7 @@ caption: Alarms
 created: 20200811043857487
 modified: 20220725122018915
 tags: 
-title: TiddlyTools/Time/Alarms
+title: $:/plugins/linonetwo/tw-calendar/lib/TiddlyTools/Time/Alarms
 type: text/vnd.tiddlywiki
 creator: Eric Shulman
 
@@ -13,13 +13,19 @@ creator: Eric Shulman
 
 \define alarms_form()
 <style> .alarmEdit { width:3em; text-align:center; } </style>
-<<alarms_form_freq>> at <<alarms_form_time>>
+<<alarms_form_freq>>
+ at 
+<<alarms_form_time>>
 <span style={{{ [<alarms_input>get[freq]match[monthly]then[position:absolute]else[display:none;]] }}}>
    on the <<alarms_form_day>> day of the month</span>
 <span style={{{ [<alarms_input>!has[freq]] [<alarms_input>get[freq]match[once]] +[limit[1]] +[else[visibility:hidden;]] }}}>
    on <<alarms_form_month>> <<alarms_form_day>> <<alarms_form_year>></span>
 <br>
-<<alarms_form_msg>> <<alarms_add>> <<alarms_reset>>
+<<alarms_form_msg>>
+<br>
+<div style="display:flex;flex-direction:row;align-items:center;justify-content:center; margin-top: 0.5em;">
+   <<alarms_add>> <<alarms_reset>>
+</div>
 \end
 
 \define alarms_form_freq()
@@ -36,7 +42,7 @@ creator: Eric Shulman
 \end
 
 \define alarms_form_year()
-<$edit-text tag="input" class="alarmEdit" tiddler=<<alarms_input>> field="year" default=<<now YYYY>> placeholder=<<now YYYY>> />
+<$edit-text tag="input" class="alarmEdit alarmEditYear" tiddler=<<alarms_input>> field="year" default=<<now YYYY>> placeholder=<<now YYYY>> />
 \end
 
 \define alarms_form_month()
@@ -71,7 +77,7 @@ creator: Eric Shulman
 \define alarms_form_time()
 <$edit-text tag="input" class="alarmEdit" tiddler=<<alarms_input>> field="hour" default="" placeholder="hh" />
 <$edit-text tag="input" class="alarmEdit" tiddler=<<alarms_input>> field="min"  default="" placeholder="mm" />
-<$edit-text tag="input" class="alarmEdit" tiddler=<<alarms_input>> field="sec"  default="" placeholder="ss" />
+<$edit-text tag="input" class="alarmEdit" tiddler=<<alarms_input>> field="sec"  default="00" placeholder="ss" />
 \end
 
 \define alarms_form_msg()
@@ -103,15 +109,15 @@ creator: Eric Shulman
 <$vars newalarm={{{ [<freq>addsuffix[;]addsuffix<date>addsuffix[;]addsuffix<time>addsuffix[;]addsuffix<msg>] }}}>
 <!-- ADD/UPDATE ALARMS -->
 <$vars old_alarm={{{ [<alarms_input>get[old_alarm]] }}}>
-<$reveal default=<<old_alarm>> type="match" text="">
-   <$button class="tc-button tt-button" style="padding:1px 0.5em !important;width:2em;" tooltip="add alarm">
+<$reveal default=<<old_alarm>> type="match" text="" style="flex:1;margin-right:1em;">
+   <$button class="tc-button tt-button" style="width:100%" tooltip="add alarm">
       {{$:/core/images/new-button}}
       <$action-listops $tiddler=<<currentTiddler>> $field="alarms" $subfilter="[<newalarm>]" />
       <$action-deletetiddler $tiddler=<<alarms_input>> />
    </$button>
 </$reveal>
-<$reveal default=<<old_alarm>> type="nomatch" text="">
-   <$button class="tc-button tt-button" style="padding:1px 0.5em !important;width:2em;" tooltip="update alarm">
+<$reveal default=<<old_alarm>> type="nomatch" text="" style="flex:1;margin-right:1em;">
+   <$button class="tc-button tt-button" tooltip="update alarm" style="width:100%">
       {{$:/core/images/done-button}}
       <$action-listops $tiddler=<<currentTiddler>> $field="alarms" $subfilter="[<newalarm>] +[replace<old_alarm>]" />
       <$action-deletetiddler $tiddler=<<alarms_input>> />
@@ -121,7 +127,7 @@ creator: Eric Shulman
 \end
 
 \define alarms_reset()
-<$button class="tc-button tt-button" style="padding:1px 0.5em !important;width:2em;" tooltip="reset input">
+<$button class="tc-button tt-button" style="flex:1;margin-left:1em" tooltip="reset input">
    {{$:/core/images/close-button}}
    <$action-deletetiddler $tiddler=<<alarms_input>> />
 </$button>
