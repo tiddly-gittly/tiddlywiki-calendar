@@ -6,3 +6,7 @@ export const tiddlerEventSourceID = 'tiddlers';
 export const timeZoneOffset = moment.duration({ minutes: new Date().getTimezoneOffset() });
 export const allowedTiddlerTypeToPreview = ['', 'text/vnd.tiddlywiki', 'text/plain', 'text/x-markdown', 'text/markdown', 'text/x-tiddlywiki'];
 export const isMobile = $tw.wiki.getTiddlerText('$:/info/browser/is/mobile') === 'yes';
+/**
+ * If time span longer or equal to this, show time at bottom too, so easier to see
+ */
+export const DURATION_THRESHOLD_FOR_SHOWING_TIME_AT_BOTTOM = 60 * 60 * 3 * 1000;

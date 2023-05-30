@@ -1,7 +1,8 @@
+/* eslint-disable @typescript-eslint/strict-boolean-expressions */
 import type { CustomContentGenerator, EventContentArg } from '@fullcalendar/core';
 import compact from 'lodash/compact';
 import type { h } from 'preact';
-import { allowedTiddlerTypeToPreview } from './constants';
+import { allowedTiddlerTypeToPreview, DURATION_THRESHOLD_FOR_SHOWING_TIME_AT_BOTTOM } from './constants';
 import type { IContext } from './initCalendar';
 
 // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
@@ -15,12 +16,32 @@ const getDateDuration = dateDurationMacro.run as (startDateString: string, endDa
  */
 export function getEventContent(context: IContext): CustomContentGenerator<EventContentArg> {
   return (argument) => {
-    /** this is for empty tiddler, normally we will use captionElement below */
     const titleElement = `<div>${argument.event.title}</div>`;
     const timeElement = `<div>${argument.timeText}</div>`;
     const tiddler = $tw.wiki.getTiddler(argument.event.title);
+    let duration = 0;
+    /** this is for empty tiddler or tiddler not created (when user select range of time to create one), normally we will use captionElement below */
     if (tiddler === undefined) {
-      return { html: [titleElement, timeElement].join('') };
+      let durationElement = '<div></div>';
+      if (argument.event._instance !== undefined && argument.event.end instanceof Date && argument.event.start instanceof Date) {
+        const startDate = $tw.utils.formatDateString(argument.event.start, '[UTC]YYYY0MM0DD0hh0mm0ss0XXX');
+        const endDate = $tw.utils.formatDateString(argument.event.end, '[UTC]YYYY0MM0DD0hh0mm0ss0XXX');
+        const durationText = getDateDuration(startDate, endDate);
+        durationElement = `<div>${durationText}</div>`;
+        // @ts-expect-error The left-hand side of an arithmetic operation must be of type 'any', 'number', 'bigint' or an enum type.ts(2362)
+        duration = argument.event.end - argument.event.start;
+        if (duration >= DURATION_THRESHOLD_FOR_SHOWING_TIME_AT_BOTTOM) {
+          return {
+            html: `<div style="height: 100%; display: flex; flex-direction: column; justify-content: space-between;">
+              <div>${[titleElement, timeElement, durationElement].join('')}</div>
+              <div>${[timeElement, durationElement].join('')}</div>
+            </div>`,
+          };
+        }
+      }
+      return {
+        html: `<div>${[titleElement, timeElement, durationElement].join('')}</div>`,
+      };
     }
 
     let captionResult: string | undefined | null;
@@ -40,9 +61,14 @@ export function getEventContent(context: IContext): CustomContentGenerator<Event
       }
     }
 
-    const startDate = tiddler.fields[context.startDateFields?.[0] ?? 'startDate'] as string | undefined;
-    const endDate = tiddler.fields[context.endDateFields?.[0] ?? 'endDate'] as string | undefined;
-    const durationText = startDate !== undefined && endDate !== undefined ? getDateDuration(startDate, endDate) : undefined;
+    const startDateString = tiddler.fields[context.startDateFields?.[0] ?? 'startDate'] as string | undefined;
+    const endDateString = tiddler.fields[context.endDateFields?.[0] ?? 'endDate'] as string | undefined;
+    let durationText = '';
+    if (startDateString !== undefined && endDateString !== undefined) {
+      durationText = getDateDuration(startDateString, endDateString);
+      // @ts-expect-error The left-hand side of an arithmetic operation must be of type 'any', 'number', 'bigint' or an enum type.ts(2362)
+      duration = $tw.utils.parseDate(endDateString) - $tw.utils.parseDate(startDateString);
+    }
     const durationElement = durationText !== undefined && `<div>${durationText}</div>`;
     // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
     const captionElement = typeof captionResult === 'string'
@@ -58,6 +84,15 @@ export function getEventContent(context: IContext): CustomContentGenerator<Event
       ? `<div>${(tiddler.fields.text ?? '').substring(0, 2000)}</div>`
       : `<div>${tiddler.fields.type} too large</div>`;
     const tagsElement = `<div class="fc-event-main-tags">${tiddler.fields.tags?.map((tag) => `<span>${tag}</span>`)?.join('') ?? ''}</div>`;
-    return { html: compact([captionElement, tagsElement, timeElement, durationElement, textElement]).join('') };
+    const topHTMLString = compact([captionElement, tagsElement, timeElement, durationElement, textElement]).join('');
+    if (duration >= DURATION_THRESHOLD_FOR_SHOWING_TIME_AT_BOTTOM) {
+      return {
+        html: `<div style="height: 100%; display: flex; flex-direction: column; justify-content: space-between;">
+          <div>${topHTMLString}</div>
+          <div>${[timeElement, durationElement].join('')}</div>
+        </div>`,
+      };
+    }
+    return { html: topHTMLString };
   };
 }
