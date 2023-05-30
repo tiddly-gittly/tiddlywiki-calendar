@@ -74,7 +74,7 @@ export const buildEntries = async (entries, metaMap) => {
   });
   buildResult.outputFiles.forEach((out) => {
     const outKey = out.path.replace(path.resolve(DISTNATION_DIRECTORY), SOURCE_DIRECTORY).replace(`/plugins/${pluginTitle}`, '');
-    const outName = outKey.replace(SRC_PLUGIN_DIRECTORY, '').replaceAll('/', '-');
+    const outName = outKey.replace(SRC_PLUGIN_DIRECTORY, '').replaceAll('/', '-').replaceAll('\\', '-');
     fs.writeFileSync(
       path.join(DISTNATION_DIRECTORY, 'tiddlers', `${outName}.dist.tid`),
       `${metaMap[outKey]}\n\n${out.text
