@@ -397,6 +397,7 @@ author: EricShulman
            </$button>
         """ />
    <$action-sendmessage $message="tm-modal" $param=<<alarms_msg>> />
+   <$action-sendmessage $message="tm-notify" $param=<<alarms_msg>> />
 </$reveal>
 \end
 
