@@ -2,19 +2,22 @@ created: 20200814085053745
 modified: 20220124105540968
 tags: $:/tags/StartupAction/Browser
 title: $:/plugins/linonetwo/tw-calendar/lib/TiddlyTools/Time/Ticker
-type: text/plain
 original-source: http://TiddlyTools.com
 author: EricShulman
 
+<!-- don't forget to change title here to prefix with `$:/plugins/linonetwo/tw-calendar/lib/TiddlyTools/` -->
+
 \define startup_actions()
-<$importvariables filter="TiddlyTools/Time/Alarms"> <<alarms_startup>> </$importvariables>
+<$importvariables filter="$:/plugins/linonetwo/tw-calendar/lib/TiddlyTools/Time/Alarms">
+  <<alarms_startup>>
+</$importvariables>
 \end
 
 \define ticker_actions()
 <$action-setfield $tiddler="$:/temp/time/ticker" text=<<now [UTC]YYYY0MM0DD0hh0mm0ss0XXX>> />
-<$importvariables filter="TiddlyTools/Time/Alarms">    <<alarms_tick>>    </$importvariables>
-<$importvariables filter="TiddlyTools/Time/AutoSaver"> <<autosaver_tick>> </$importvariables>
-<$importvariables filter="TiddlyTools/Time/CountDown"> <<countdown_tick>> </$importvariables>
+<$importvariables filter="$:/plugins/linonetwo/tw-calendar/lib/TiddlyTools/Time/Alarms">
+  <<alarms_tick>>
+</$importvariables>
 \end
 
 <$action-timeout    delay="1000" actions=<<startup_actions>>/>
