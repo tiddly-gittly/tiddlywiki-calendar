@@ -1,5 +1,8 @@
 title: $:/language/Buttons/
 
-GoToCalendarLayoutButton/Caption: Calendar
-GoToCalendarLayoutButton/Hint: Go to Calendar Layout
-GoToCalendarLayoutButton/Description: Click on this button will go to Calendar Layout
+GoToEventsCalendarLayoutButton/Caption: Events Calendar
+GoToEventsCalendarLayoutButton/Hint: Go to Events Calendar Layout
+GoToEventsCalendarLayoutButton/Description: Click on this button will go to Events Calendar Layout (without normal tiddlers)
+GoToTiddlersCalendarLayoutButton/Caption: Tiddlers Calendar
+GoToTiddlersCalendarLayoutButton/Hint: Go to Tiddlers Calendar Layout
+GoToTiddlersCalendarLayoutButton/Description: Click on this button will go to Tiddlers Calendar Layout, view all tiddlers in agenda or calendar by their date related fields

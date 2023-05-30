@@ -1,6 +1,10 @@
 import moment from 'moment-timezone';
 
-export const getInCalendarLayout = () => $tw.wiki.getTiddlerText('$:/layout') === '$:/plugins/linonetwo/tw-calendar/tiddlywiki-ui/PageLayout/CalendarLayout';
+export const officialCalendarLayouts = [
+  '$:/plugins/linonetwo/tw-calendar/tiddlywiki-ui/PageLayout/EventsCalendarLayout',
+  '$:/plugins/linonetwo/tw-calendar/tiddlywiki-ui/PageLayout/TiddlersCalendarLayout',
+];
+export const getInCalendarLayout = () => officialCalendarLayouts.includes($tw.wiki.getTiddlerText('$:/layout') ?? '');
 export const getIsSmallScreen = () => window.innerWidth <= 600;
 export const tiddlerEventSourceID = 'tiddlers';
 export const timeZoneOffset = moment.duration({ minutes: new Date().getTimezoneOffset() });

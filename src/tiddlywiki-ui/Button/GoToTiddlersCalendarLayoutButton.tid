@@ -1,0 +1,15 @@
+title: $:/plugins/linonetwo/tw-calendar/tiddlywiki-ui/GoToTiddlersCalendarLayoutButton
+tags: $:/tags/PageControls
+caption: {{$:/plugins/linonetwo/tw-calendar/tiddlywiki-ui/Images/GoToCalendarImage}} {{$:/language/Buttons/GoToTiddlersCalendarLayoutButton/Caption}}
+description: {{$:/language/Buttons/GoToTiddlersCalendarLayoutButton/Description}}
+
+\whitespace trim
+<$button tooltip={{$:/language/Buttons/GoToTiddlersCalendarLayoutButton/Hint}} aria-label={{$:/language/Buttons/GoToTiddlersCalendarLayoutButton/Caption}} class=<<tv-config-toolbar-class>>>
+  <$action-setfield $tiddler="$:/layout" text="$:/plugins/linonetwo/tw-calendar/tiddlywiki-ui/PageLayout/TiddlersCalendarLayout"/>
+  <$list filter="[<tv-config-toolbar-icons>match[yes]]">
+    {{$:/plugins/linonetwo/tw-calendar/tiddlywiki-ui/Images/GoToCalendarImage}}
+  </$list>
+  <$list filter="[<tv-config-toolbar-text>match[yes]]">
+    <span class="tc-btn-text"><$text text={{$:/language/Buttons/GoToTiddlersCalendarLayoutButton/Caption}}/></span>
+  </$list>
+</$button>
