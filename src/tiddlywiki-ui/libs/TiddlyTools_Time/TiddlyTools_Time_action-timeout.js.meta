@@ -4,4 +4,5 @@ module-type: widget
 tags: 
 title: $:/plugins/linonetwo/tw-calendar/lib/TiddlyTools/Time/action-timeout.js
 type: application/javascript
-creator: Eric Shulman
+original-source: http://TiddlyTools.com
+author: EricShulman

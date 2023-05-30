@@ -3,7 +3,8 @@ modified: 20220124105540968
 tags: $:/tags/StartupAction/Browser
 title: $:/plugins/linonetwo/tw-calendar/lib/TiddlyTools/Time/Ticker
 type: text/plain
-creator: Eric Shulman
+original-source: http://TiddlyTools.com
+author: EricShulman
 
 \define startup_actions()
 <$importvariables filter="TiddlyTools/Time/Alarms"> <<alarms_startup>> </$importvariables>

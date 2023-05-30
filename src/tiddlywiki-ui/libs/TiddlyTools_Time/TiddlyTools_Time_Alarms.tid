@@ -5,7 +5,8 @@ modified: 20220725122018915
 tags: 
 title: $:/plugins/linonetwo/tw-calendar/lib/TiddlyTools/Time/Alarms
 type: text/vnd.tiddlywiki
-creator: Eric Shulman
+original-source: http://TiddlyTools.com
+author: EricShulman
 
 \define alarms_input()      $:/temp/time/alarms_input/$(currentTiddler)$
 \define alarms_msg()        $:/temp/time/alarms_msg/$(freq)$/$(this_time)$
@@ -19,7 +20,7 @@ creator: Eric Shulman
 <span style={{{ [<alarms_input>get[freq]match[monthly]then[position:absolute]else[display:none;]] }}}>
    on the <<alarms_form_day>> day of the month</span>
 <span style={{{ [<alarms_input>!has[freq]] [<alarms_input>get[freq]match[once]] +[limit[1]] +[else[visibility:hidden;]] }}}>
-   on <<alarms_form_month>> <<alarms_form_day>> <<alarms_form_year>></span>
+   on <<alarms_form_year>> <<alarms_form_month>> <<alarms_form_day>></span>
 <br>
 <<alarms_form_msg>>
 <br>
@@ -75,9 +76,30 @@ creator: Eric Shulman
 \end
 
 \define alarms_form_time()
-<$edit-text tag="input" class="alarmEdit" tiddler=<<alarms_input>> field="hour" default="" placeholder="hh" />
-<$edit-text tag="input" class="alarmEdit" tiddler=<<alarms_input>> field="min"  default="" placeholder="mm" />
-<$edit-text tag="input" class="alarmEdit" tiddler=<<alarms_input>> field="sec"  default="00" placeholder="ss" />
+<$edit-text
+  tag="input"
+  class="alarmEdit"
+  tiddler=<<alarms_input>>
+  field="hour"
+  default={{{[<currentTiddler>get[startDate]format:date[TIMESTAMP]subtract[900000]parsedate:number[0hh]]}}}
+  placeholder="hh"
+/>
+<$edit-text
+  tag="input"
+  class="alarmEdit"
+  tiddler=<<alarms_input>>
+  field="min"
+  default={{{[<currentTiddler>get[startDate]format:date[TIMESTAMP]subtract[900000]parsedate:number[0mm]]}}}
+  placeholder="mm"
+/>
+<$edit-text
+  tag="input"
+  class="alarmEdit"
+  tiddler=<<alarms_input>>
+  field="sec"
+  default="00"
+  placeholder="ss"
+/>
 \end
 
 \define alarms_form_msg()

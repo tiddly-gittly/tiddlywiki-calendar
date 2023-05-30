@@ -1,7 +1,4 @@
 /*\
-title: action-timeout.js
-type: application/javascript
-module-type: widget
 author: Eric Shulman elsdesign@gmail.com
 revision: 1.6
 
