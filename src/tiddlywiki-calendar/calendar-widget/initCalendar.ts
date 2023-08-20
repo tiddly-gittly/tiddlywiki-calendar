@@ -6,6 +6,7 @@ import interactionPlugin from '@fullcalendar/interaction';
 import listPlugin from '@fullcalendar/list';
 import momentTimezonePlugin from '@fullcalendar/moment-timezone';
 import timeGridPlugin from '@fullcalendar/timegrid';
+import zhLocale from '@fullcalendar/core/locales/zh-cn';
 import moment from 'moment-timezone';
 import type { Widget } from 'tiddlywiki';
 import { getInCalendarLayout, getIsSmallScreen, isMobile, tiddlerEventSourceID } from './constants';
@@ -60,6 +61,8 @@ export function getSettings(context: IContext): CalendarOptions {
   const now = context.initialDate === undefined ? undefined : $tw.utils.parseDate(context.initialDate) ?? undefined;
   const use24HourFormat = $tw.wiki.getTiddlerText('$:/plugins/linonetwo/tw-calendar/settings/24hour') === 'yes';
   return {
+    locale: $tw.wiki.getTiddlerText('$:/language') === '$:/languages/zh-Hans' ? 'zh' : 'en',
+    locales: [zhLocale],
     eventSources: [{ events: getEventOnFullCalendarViewChange(context), id: tiddlerEventSourceID }],
     plugins: [momentTimezonePlugin, dayGridPlugin, timeGridPlugin, listPlugin, adaptivePlugin, interactionPlugin],
     views: getCustomViews(),
