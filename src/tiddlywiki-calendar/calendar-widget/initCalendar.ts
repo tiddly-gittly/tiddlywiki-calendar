@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/strict-boolean-expressions */
 import 'requestidlecallback-polyfill';
 import adaptivePlugin from '@fullcalendar/adaptive';
 import { Calendar, type CalendarOptions } from '@fullcalendar/core';
@@ -63,6 +64,8 @@ export function getSettings(context: IContext): CalendarOptions {
   return {
     locale: $tw.wiki.getTiddlerText('$:/language') === '$:/languages/zh-Hans' ? 'zh' : 'en',
     locales: [zhLocale],
+    // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
+    firstDay: Number($tw.wiki.getTiddlerText('$:/plugins/linonetwo/tw-calendar/settings/firstDay') || '1') || 1,
     eventSources: [{ events: getEventOnFullCalendarViewChange(context), id: tiddlerEventSourceID }],
     plugins: [momentTimezonePlugin, dayGridPlugin, timeGridPlugin, listPlugin, adaptivePlugin, interactionPlugin],
     views: getCustomViews(),

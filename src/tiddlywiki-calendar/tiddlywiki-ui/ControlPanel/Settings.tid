@@ -48,5 +48,15 @@ Auto add prefix to all created event.
 
 ;24 Hour Format:
 :<$checkbox tiddler="$:/plugins/linonetwo/tw-calendar/settings/24hour" field="text" checked="yes" unchecked=""> Show 24 hour format in calendar left slot label and events</$checkbox>
+;First Day: The frequency for displaying time slots.
+:<$select tiddler='$:/plugins/linonetwo/tw-calendar/settings/firstDay'>
+	<option value='0'>Sunday</option>
+	<option value='1'>Monday</option>
+	<option value='2'>Tuesday</option>
+	<option value='3'>Wednesday</option>
+	<option value='4'>Thursday</option>
+	<option value='5'>Friday</option>
+	<option value='6'>Saturday</option>
+</$select>
 ;SlotDuration: The frequency for displaying time slots.
 :<$edit-text tiddler="$:/plugins/linonetwo/tw-calendar/settings/slotDuration" tabindex=-1 focus=false cancelPopups="yes" fileDrop=no tag="input" />
