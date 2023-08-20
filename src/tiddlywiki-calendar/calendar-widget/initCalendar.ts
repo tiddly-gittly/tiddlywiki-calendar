@@ -2,12 +2,12 @@
 import 'requestidlecallback-polyfill';
 import adaptivePlugin from '@fullcalendar/adaptive';
 import { Calendar, type CalendarOptions } from '@fullcalendar/core';
+import zhLocale from '@fullcalendar/core/locales/zh-cn';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import listPlugin from '@fullcalendar/list';
 import momentTimezonePlugin from '@fullcalendar/moment-timezone';
 import timeGridPlugin from '@fullcalendar/timegrid';
-import zhLocale from '@fullcalendar/core/locales/zh-cn';
 import moment from 'moment-timezone';
 import type { Widget } from 'tiddlywiki';
 import { getInCalendarLayout, getIsSmallScreen, isMobile, tiddlerEventSourceID } from './constants';

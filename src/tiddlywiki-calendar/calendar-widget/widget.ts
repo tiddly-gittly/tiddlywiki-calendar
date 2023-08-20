@@ -64,7 +64,7 @@ class CalendarWidget extends Widget {
     if (this.#containerElement === undefined || this.#mountElement === undefined) {
       this.#containerElement = document.createElement('div');
       this.#mountElement = document.createElement('div');
-      this.#containerElement.appendChild(this.#mountElement);
+      this.#containerElement.append(this.#mountElement);
       this.#mountElement.classList.add('tiddlywiki-calendar-widget-container');
       const [width, height] = [this.getAttribute('width'), this.getAttribute('height')];
       if (width !== undefined) {

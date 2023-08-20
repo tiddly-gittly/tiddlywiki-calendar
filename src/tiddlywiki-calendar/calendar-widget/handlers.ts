@@ -64,7 +64,7 @@ export function getHandlers(context: IContext): CalendarOptions {
       }
       // add new element
       const eventPreviewElement = document.createElement('div');
-      context.containerElement?.appendChild(eventPreviewElement);
+      context.containerElement?.append(eventPreviewElement);
       eventPreviewElement.classList.add('tiddlywiki-calendar-widget-event-preview');
       eventPreviewElement.dataset.tiddler = info.event.title;
 

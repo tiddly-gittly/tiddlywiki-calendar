@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 import type { CustomContentGenerator, EventContentArg } from '@fullcalendar/core';
 import compact from 'lodash/compact';
-import type { h } from 'preact';
 import { allowedTiddlerTypeToPreview, DURATION_THRESHOLD_FOR_SHOWING_TIME_AT_BOTTOM } from './constants';
 import type { IContext } from './initCalendar';
 
@@ -65,7 +64,6 @@ export function getEventContent(context: IContext): CustomContentGenerator<Event
     const endDateString = tiddler.fields[context.endDateFields?.[0] ?? 'endDate'] as string | undefined;
     let durationText = '';
     if (startDateString !== undefined && endDateString !== undefined) {
-      
       durationText = getDateDuration(startDateString, endDateString);
       // @ts-expect-error The left-hand side of an arithmetic operation must be of type 'any', 'number', 'bigint' or an enum type.ts(2362)
       duration = $tw.utils.parseDate(endDateString) - $tw.utils.parseDate(startDateString);

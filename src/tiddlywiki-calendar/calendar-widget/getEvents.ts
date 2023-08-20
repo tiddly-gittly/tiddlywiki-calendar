@@ -84,9 +84,7 @@ function mapTiddlerFieldsToFullCalendarEventObject(fields: ITiddlerFields, conte
           startDateFromField = parseDate(startDateFieldValue);
         } catch (error) {
           throw new Error(
-            `field ${fieldName} in tiddler ${title} is not a valid date format: ${startDateFieldValue} , causing ${(error as Error).message} ${
-              (error as Error).stack ?? ''
-            }`,
+            `field ${fieldName} in tiddler ${title} is not a valid date format: ${startDateFieldValue} , causing ${(error as Error).message} ${(error as Error).stack ?? ''}`,
           );
         }
         const correspondingEndFieldName = context.endDateFields?.[index];
@@ -100,9 +98,9 @@ function mapTiddlerFieldsToFullCalendarEventObject(fields: ITiddlerFields, conte
               endDateFromField = parseDate(endDateFromFieldValue);
             } catch (error) {
               throw new Error(
-                `field ${correspondingEndFieldName} in tiddler ${title} is not a valid date format: ${endDateFromFieldValue} , causing ${
-                  (error as Error).message
-                } ${(error as Error).stack ?? ''}`,
+                `field ${correspondingEndFieldName} in tiddler ${title} is not a valid date format: ${endDateFromFieldValue} , causing ${(error as Error).message} ${
+                  (error as Error).stack ?? ''
+                }`,
               );
             }
           }
