@@ -61,14 +61,15 @@ export function initCalendar(containerElement: HTMLDivElement, context: IContext
 export function getSettings(context: IContext): CalendarOptions {
   const now = context.initialDate === undefined ? undefined : $tw.utils.parseDate(context.initialDate) ?? undefined;
   const use24HourFormat = $tw.wiki.getTiddlerText('$:/plugins/linonetwo/tw-calendar/settings/24hour') === 'yes';
+  const locale = $tw.wiki.getTiddlerText('$:/language') === '$:/languages/zh-Hans' ? 'zh-cn' : 'en-gb';
   return {
-    locale: $tw.wiki.getTiddlerText('$:/language') === '$:/languages/zh-Hans' ? 'zh' : 'en',
+    locale,
     locales: [zhLocale],
     // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
     firstDay: Number($tw.wiki.getTiddlerText('$:/plugins/linonetwo/tw-calendar/settings/firstDay') || '1') || 1,
     eventSources: [{ events: getEventOnFullCalendarViewChange(context), id: tiddlerEventSourceID }],
     plugins: [momentTimezonePlugin, dayGridPlugin, timeGridPlugin, listPlugin, adaptivePlugin, interactionPlugin],
-    views: getCustomViews(),
+    views: getCustomViews(locale),
     initialView: context.initialView ?? (getIsSmallScreen() ? 'timeGridThreeDay' : 'timeGridWeek'),
     now,
     editable: context.readonly !== true,
@@ -110,10 +111,14 @@ export function getSettings(context: IContext): CalendarOptions {
 
 export function setToolbarIcons() {
   const backToDefaultLayoutButton = document.querySelector('.fc-backToDefaultLayout-button');
-  // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
   if (backToDefaultLayoutButton) {
-    const svgIcon = $tw.wiki.getTiddlerText('$:/plugins/linonetwo/tw-calendar/Images/ExitLayout') ?? '';
-    backToDefaultLayoutButton.innerHTML = getIsSmallScreen() ? svgIcon : `Exit ${svgIcon}`;
+    const svgIcon = $tw.wiki.renderTiddler('text/html', '$:/plugins/linonetwo/tw-calendar/Images/ExitLayout')?.replace('<p>', '')?.replace('</p>', '') ?? '';
+    backToDefaultLayoutButton.innerHTML = getIsSmallScreen() ? svgIcon : `${$tw.wiki.getTiddlerText('$:/language/Buttons/Close/Caption') ?? 'Close'} ${svgIcon}`;
+  }
+  const searchLayoutButton = document.querySelector('.fc-searchLayout-button');
+  if (searchLayoutButton) {
+    const svgIcon = $tw.wiki.renderTiddler('text/html', '$:/core/images/advanced-search-button')?.replace('<p>', '')?.replace('</p>', '') ?? '';
+    searchLayoutButton.innerHTML = getIsSmallScreen() ? svgIcon : `${$tw.wiki.getTiddlerText('$:/language/Search/Search') ?? 'Search'} ${svgIcon}`;
   }
 }
 function getToolbarSettings(context: IContext): CalendarOptions {
@@ -122,7 +127,15 @@ function getToolbarSettings(context: IContext): CalendarOptions {
       backToDefaultLayout: {
         /** set by setToolbarIcons() above */
         text: '',
-        hint: `Exit`,
+        hint: $tw.wiki.getTiddlerText('$:/language/Buttons/FullScreen/Hint') ?? 'Exit',
+        click: () => {
+          $tw.wiki.setText('$:/layout', 'text', '');
+        },
+      },
+      searchLayout: {
+        /** set by setToolbarIcons() above */
+        text: '',
+        hint: $tw.wiki.getTiddlerText('$:/language/Search/Standard/Hint') ?? 'Search',
         click: () => {
           $tw.wiki.setText('$:/layout', 'text', '');
         },
@@ -132,13 +145,13 @@ function getToolbarSettings(context: IContext): CalendarOptions {
       ? false
       : {
         // we can't add a date picker to title, so have to add prevYear,nextYear here to quick navigate between long time
-        left: `prev,next prevYear,nextYear today`,
+        left: `prev,next prevYear,nextYear today searchLayout`,
         center: 'title',
         right: `${getInCalendarLayout() ? 'backToDefaultLayout ' : ''}dayGridMonth,timeGridWeek,timeGridThreeDay,timeGridDay,listWeek`,
       },
     footerToolbar: getIsSmallScreen() && context.hideToolbar !== true
       ? {
-        right: `today,prev,next`,
+        right: `searchLayout today,prev,next`,
         left: `timeGridThreeDay,timeGridDay,listWeek${getInCalendarLayout() ? ' backToDefaultLayout' : ''}`,
       }
       : false,

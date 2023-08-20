@@ -1,4 +1,4 @@
-import type { CalendarOptions } from '@fullcalendar/core';
+import type { CalendarOptions, LocaleSingularArg } from '@fullcalendar/core';
 import moment from 'moment-timezone';
 import { getIsSmallScreen, timeZoneOffset } from './constants';
 
@@ -19,18 +19,18 @@ function threeDayWith1Previous1NextVisibleRange(currentDate: Date) {
   return { start: startDate, end: endDate };
 }
 
-export function getCustomViews(): CalendarOptions['views'] {
+export function getCustomViews(locale: LocaleSingularArg): CalendarOptions['views'] {
   return {
     timeGridThreeDay: {
       type: 'timeGrid',
-      buttonText: getIsSmallScreen() ? '3d' : '3 day',
+      buttonText: locale === 'zh-cn' ? '3日' : (getIsSmallScreen() ? '3d' : '3 day'),
       duration: { days: 3 }, // comment out this after https://github.com/fullcalendar/fullcalendar/issues/7129 solved. the duration option will override the visibleRange option
       visibleRange: threeDayWith1Previous1NextVisibleRange,
     },
     timeGridDay: {
       type: 'timeGrid',
       duration: { days: 1 },
-      buttonText: getIsSmallScreen() ? '1d' : 'day',
+      buttonText: locale === 'zh-cn' ? '1日' : (getIsSmallScreen() ? '1d' : 'day'),
     },
   };
 }
