@@ -24,8 +24,8 @@ Tags can have `caption` field as displayed name. And if tags here form a tag tre
 	{{||$:/core/ui/EditTemplate/tags}}
 </$vars>
 
-<$macrocall
-	$name="input-only-tag-tree"
+<$transclude
+	$variable="input-only-tag-tree"
 	tags={{$:/plugins/linonetwo/tw-calendar/settings/frequently-used-tags}}
 />
 
