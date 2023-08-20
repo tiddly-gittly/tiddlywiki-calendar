@@ -10,11 +10,13 @@ import momentTimezonePlugin from '@fullcalendar/moment-timezone';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import moment from 'moment-timezone';
 import type { Widget } from 'tiddlywiki';
-import { getInCalendarLayout, getIsSmallScreen, isMobile, tiddlerEventSourceID } from './constants';
+import { getInCalendarLayout, getIsSearchMode, getIsSmallScreen, isMobile, tiddlerEventSourceID } from './constants';
+import { getCustomButtons, setToolbarIcons } from './customButtons';
 import { getCustomViews } from './customView';
 import { getEventContent } from './eventContent';
-import { getEventOnFullCalendarViewChange } from './getEvents';
+import { getEventByFilter, getEventOnFullCalendarViewChange } from './getEvents';
 import { getHandlers } from './handlers';
+import { getSearchModeSettings } from './searchMode';
 
 export interface IContext {
   containerElement?: HTMLDivElement | undefined;
@@ -62,12 +64,13 @@ export function getSettings(context: IContext): CalendarOptions {
   const now = context.initialDate === undefined ? undefined : $tw.utils.parseDate(context.initialDate) ?? undefined;
   const use24HourFormat = $tw.wiki.getTiddlerText('$:/plugins/linonetwo/tw-calendar/settings/24hour') === 'yes';
   const locale = $tw.wiki.getTiddlerText('$:/language') === '$:/languages/zh-Hans' ? 'zh-cn' : 'en-gb';
+  const searchMode = getIsSearchMode();
   return {
     locale,
     locales: [zhLocale],
     // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
     firstDay: Number($tw.wiki.getTiddlerText('$:/plugins/linonetwo/tw-calendar/settings/firstDay') || '1') || 1,
-    eventSources: [{ events: getEventOnFullCalendarViewChange(context), id: tiddlerEventSourceID }],
+    eventSources: [{ events: searchMode ? getEventByFilter(context) : getEventOnFullCalendarViewChange(context), id: tiddlerEventSourceID }],
     plugins: [momentTimezonePlugin, dayGridPlugin, timeGridPlugin, listPlugin, adaptivePlugin, interactionPlugin],
     views: getCustomViews(locale),
     initialView: context.initialView ?? (getIsSmallScreen() ? 'timeGridThreeDay' : 'timeGridWeek'),
@@ -106,53 +109,34 @@ export function getSettings(context: IContext): CalendarOptions {
     ...getToolbarSettings(context),
     // event handlers
     ...getHandlers(context),
+    ...(searchMode ? getSearchModeSettings() : {}),
   };
 }
 
-export function setToolbarIcons() {
-  const backToDefaultLayoutButton = document.querySelector('.fc-backToDefaultLayout-button');
-  if (backToDefaultLayoutButton) {
-    const svgIcon = $tw.wiki.renderTiddler('text/html', '$:/plugins/linonetwo/tw-calendar/Images/ExitLayout')?.replace('<p>', '')?.replace('</p>', '') ?? '';
-    backToDefaultLayoutButton.innerHTML = getIsSmallScreen() ? svgIcon : `${$tw.wiki.getTiddlerText('$:/language/Buttons/Close/Caption') ?? 'Close'} ${svgIcon}`;
-  }
-  const searchLayoutButton = document.querySelector('.fc-searchLayout-button');
-  if (searchLayoutButton) {
-    const svgIcon = $tw.wiki.renderTiddler('text/html', '$:/core/images/advanced-search-button')?.replace('<p>', '')?.replace('</p>', '') ?? '';
-    searchLayoutButton.innerHTML = getIsSmallScreen() ? svgIcon : `${$tw.wiki.getTiddlerText('$:/language/Search/Search') ?? 'Search'} ${svgIcon}`;
-  }
-}
 function getToolbarSettings(context: IContext): CalendarOptions {
+  const searchMode = getIsSearchMode();
+  const calendarLayout = getInCalendarLayout();
+  // searchMode only show back button in $:/plugins/linonetwo/tw-calendar/tiddlywiki-ui/PageLayout/EventsCalendarSearchLayout, no day jump buttons
+  if (searchMode) {
+    return {
+      headerToolbar: false,
+      footerToolbar: false,
+    };
+  }
   return {
-    customButtons: {
-      backToDefaultLayout: {
-        /** set by setToolbarIcons() above */
-        text: '',
-        hint: $tw.wiki.getTiddlerText('$:/language/Buttons/FullScreen/Hint') ?? 'Exit',
-        click: () => {
-          $tw.wiki.setText('$:/layout', 'text', '');
-        },
-      },
-      searchLayout: {
-        /** set by setToolbarIcons() above */
-        text: '',
-        hint: $tw.wiki.getTiddlerText('$:/language/Search/Standard/Hint') ?? 'Search',
-        click: () => {
-          $tw.wiki.setText('$:/layout', 'text', '');
-        },
-      },
-    },
+    customButtons: getCustomButtons(),
     headerToolbar: getIsSmallScreen() || context.hideToolbar === true
       ? false
       : {
         // we can't add a date picker to title, so have to add prevYear,nextYear here to quick navigate between long time
         left: `prev,next prevYear,nextYear today searchLayout`,
         center: 'title',
-        right: `${getInCalendarLayout() ? 'backToDefaultLayout ' : ''}dayGridMonth,timeGridWeek,timeGridThreeDay,timeGridDay,listWeek`,
+        right: `${calendarLayout ? 'backToDefaultLayout ' : ''}dayGridMonth,timeGridWeek,timeGridThreeDay,timeGridDay,listWeek`,
       },
     footerToolbar: getIsSmallScreen() && context.hideToolbar !== true
       ? {
         right: `searchLayout today,prev,next`,
-        left: `timeGridThreeDay,timeGridDay,listWeek${getInCalendarLayout() ? ' backToDefaultLayout' : ''}`,
+        left: `timeGridThreeDay,timeGridDay,listWeek${calendarLayout ? ' backToDefaultLayout' : ''}`,
       }
       : false,
   };

@@ -8,6 +8,33 @@ div.tc-page-container.tw-calendar-layout-container {
   width: 100%;
 }
 
+.tw-calendar-search-layout-main-area {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.tw-calendar-search-layout-main-area .tw-calendar-search-bar {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+.tw-calendar-search-bar .tw-calendar-search-bar-icon {
+  height: 100%;
+  aspect-ratio: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.tw-calendar-search-bar .tw-calendar-search-bar-text-field {
+  width: 100%;
+  display: flex;
+  margin: 0.1em;
+  margin-left: 0;
+}
+
 .tw-calendar-layout-container p {
   margin: 0;
   height: 100%;

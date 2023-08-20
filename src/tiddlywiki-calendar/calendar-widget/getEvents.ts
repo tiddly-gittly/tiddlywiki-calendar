@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/strict-boolean-expressions */
 /* eslint-disable @typescript-eslint/require-await */
 /* eslint-disable unicorn/no-array-callback-reference */
 import type { EventInput, EventSourceFunc, EventSourceFuncArg } from '@fullcalendar/core';
@@ -15,6 +16,9 @@ export enum CalendarEventType {
 const normalTiddlerEventLengthInHour = 1;
 const allDayDateLength = 60 * 60 * 24 * 1000;
 
+/**
+ * Get event based on filter and date range of current calendar view.
+ */
 export const getEventOnFullCalendarViewChange = (context: IContext): EventSourceFunc => async (argument: EventSourceFuncArg) => {
   const { start, end } = argument;
   const [startTwString, endTwString] = [start, end].map((date) => $tw.utils.stringifyDate(date));
@@ -24,6 +28,21 @@ export const getEventOnFullCalendarViewChange = (context: IContext): EventSource
   const titles = fields
     .map(getFilterOnField)
     .flatMap((filter) => $tw.wiki.filterTiddlers(filter))
+    .filter(function onlyUnique(value, index, array) {
+      return array.indexOf(value) === index;
+    });
+  const eventsOnPeriod = getEvents(titles, context);
+  return eventsOnPeriod;
+};
+
+/**
+ * Get event only based on filter.
+ */
+export const getEventByFilter = (context: IContext): EventSourceFunc => async (_argument: EventSourceFuncArg) => {
+  const { filter } = context;
+  const searchKeywords = $tw.wiki.getTiddlerText('$:/state/linonetwo/tw-calendar/tiddlywiki-ui/PageLayout/EventsCalendarSearchLayout');
+  if (!searchKeywords || !filter) return [];
+  const titles = $tw.wiki.filterTiddlers(filter)
     .filter(function onlyUnique(value, index, array) {
       return array.indexOf(value) === index;
     });

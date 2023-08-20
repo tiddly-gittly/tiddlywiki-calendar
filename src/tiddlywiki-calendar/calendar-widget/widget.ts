@@ -3,7 +3,7 @@ import type { Calendar } from '@fullcalendar/core';
 import type { IChangedTiddlers, Widget as IWidget } from 'tiddlywiki';
 
 import { changedTiddlerInViewRange } from './changeDetector';
-import { tiddlerEventSourceID } from './constants';
+import { getIsSearchMode, tiddlerEventSourceID } from './constants';
 import { type IContext, initCalendar } from './initCalendar';
 
 const Widget = (require('$:/core/modules/widgets/widget.js') as { widget: typeof IWidget }).widget;
@@ -48,6 +48,10 @@ class CalendarWidget extends Widget {
       this.#calendar = initCalendar(this.#mountElement!, context);
       this.#calendar?.render();
       // this won't cause this.render to be called...
+      refreshed = true;
+    }
+    if (getIsSearchMode() && changedTiddlers['$:/state/linonetwo/tw-calendar/tiddlywiki-ui/PageLayout/EventsCalendarSearchLayout'].modified === true) {
+      this.#calendar?.getEventSourceById(tiddlerEventSourceID)?.refetch();
       refreshed = true;
     }
     return refreshed;

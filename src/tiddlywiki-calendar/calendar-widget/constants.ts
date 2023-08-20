@@ -3,6 +3,7 @@ import moment from 'moment-timezone';
 export const officialCalendarLayouts = [
   '$:/plugins/linonetwo/tw-calendar/tiddlywiki-ui/PageLayout/EventsCalendarLayout',
   '$:/plugins/linonetwo/tw-calendar/tiddlywiki-ui/PageLayout/TiddlersCalendarLayout',
+  '$:/plugins/linonetwo/tw-calendar/tiddlywiki-ui/PageLayout/EventsCalendarSearchLayout',
 ];
 export const getInCalendarLayout = () => officialCalendarLayouts.includes($tw.wiki.getTiddlerText('$:/layout') ?? '');
 export const getIsSmallScreen = () => window.innerWidth <= 600;
@@ -14,3 +15,4 @@ export const isMobile = $tw.wiki.getTiddlerText('$:/info/browser/is/mobile') ===
  * If time span longer or equal to this, show time at bottom too, so easier to see
  */
 export const DURATION_THRESHOLD_FOR_SHOWING_TIME_AT_BOTTOM = 60 * 60 * 3 * 1000;
+export const getIsSearchMode = () => $tw.wiki.getTiddlerText('$:/layout') === '$:/plugins/linonetwo/tw-calendar/tiddlywiki-ui/PageLayout/EventsCalendarSearchLayout';
