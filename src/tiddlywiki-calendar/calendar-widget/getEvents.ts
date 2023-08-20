@@ -24,14 +24,14 @@ export const getEventOnFullCalendarViewChange = (context: IContext): EventSource
   const titles = fields
     .map(getFilterOnField)
     .flatMap((filter) => $tw.wiki.filterTiddlers(filter))
-    // in case there is a space in title
-    .map((title) => `[[${title}]]`);
-  const eventsOnPeriod = getEvents(`${titles.join(' ')}`, context);
+    .filter(function onlyUnique(value, index, array) {
+      return array.indexOf(value) === index;
+    });
+  const eventsOnPeriod = getEvents(titles, context);
   return eventsOnPeriod;
 };
 
-export function getEvents(filter: string, context: IContext): EventInput[] {
-  const tiddlerTitles = $tw.wiki.filterTiddlers(filter);
+export function getEvents(tiddlerTitles: string[], context: IContext): EventInput[] {
   const currentPalette: Record<string, string> = $tw.wiki.getTiddlerData($tw.wiki.getTiddlerText('$:/palette') ?? '$:/palettes/Vanilla');
   const fullCalendarEvents = tiddlerTitles
     .map((title) => $tw.wiki.getTiddler(title))
