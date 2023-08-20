@@ -2,7 +2,7 @@ title: $:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/popup/Even
 tags: $:/tw-calendar/EventPreviewMiniViewTemplate
 
 <div class="tw-calendar-layout-event-preview-top-buttons">
-  <$button to=<<currentTiddler>> style="flex: 5;" >
+  <$button to=<<currentTiddler>> style="flex: 5;" class="tw-calendar-layout-event-preview-close-button">
     Open
     <$action-setfield $tiddler="$:/layout" text="">
       <$action-navigate $to=<<currentTiddler>> />
