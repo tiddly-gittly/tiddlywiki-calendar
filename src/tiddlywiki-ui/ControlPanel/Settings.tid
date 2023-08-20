@@ -2,8 +2,8 @@ title: $:/plugins/linonetwo/tw-calendar/tiddlywiki-ui/ControlPanel/Settings
 caption: Calendar
 tags: $:/tags/ControlPanel/SettingsTab
 
-\define tag-tree-button-action(tiddlerName)
-<$action-navigate $to=$tiddlerName$ />
+\define tag-tree-button-action(tagName)
+<$action-navigate $to="$tagName$" />
 \end
 
 These settings let you customise the behaviour of Calendar plugin.
