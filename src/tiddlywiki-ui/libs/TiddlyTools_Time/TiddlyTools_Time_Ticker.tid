@@ -21,4 +21,5 @@ author: EricShulman
 \end
 
 <$action-timeout    delay="1000" actions=<<startup_actions>>/>
+<!-- Here is modified to fix https://github.com/tiddly-gittly/tiddlywiki-calendar/issues/39 -->
 <$action-timeout interval="900000" actions=<<ticker_actions>> />
