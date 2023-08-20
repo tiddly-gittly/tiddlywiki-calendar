@@ -1,0 +1,10 @@
+title: $:/plugins/linonetwo/tw-calendar/tiddlywiki-ui/EditTemplate/caption
+tags: $:/tags/EditTemplate
+list-after: $:/core/ui/EditTemplate/title
+code-body: yes
+
+<$list filter="[all[current]field:calendarEntry[yes]]">
+
+<$edit-text tiddler=<<currentTiddler>> field="caption" focus="yes" class="tc-titlebar tc-edit-texteditor tiddlywiki-calendar-caption-edit"/>
+
+</$list>
