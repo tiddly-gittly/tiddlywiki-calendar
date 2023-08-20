@@ -67,6 +67,7 @@ function mapTiddlerFieldsToFullCalendarEventObject(fields: ITiddlerFields, conte
     title,
     id: title,
     interactive: true,
+    display: 'block',
     backgroundColor,
     textColor,
   };
