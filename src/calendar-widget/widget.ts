@@ -92,9 +92,8 @@ class CalendarWidget extends Widget {
     parent.appendChild(this.#containerElement);
   }
 
-  // TODO: do this in destroy()
-  removeChildDomNodes() {
-    super.removeChildDomNodes();
+  destroy() {
+    super.destroy();
     this.#calendar?.destroy();
   }
 

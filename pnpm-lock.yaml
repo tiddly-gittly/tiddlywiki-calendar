@@ -160,8 +160,8 @@ devDependencies:
     specifier: 14.2.0
     version: 14.2.0
   tiddlywiki:
-    specifier: 5.3.1
-    version: 5.3.1
+    specifier: 5.3.0
+    version: 5.3.0
   ts-jest:
     specifier: 29.1.0
     version: 29.1.0(@babel/core@7.20.5)(esbuild@0.17.19)(jest@29.5.0)(typescript@5.0.4)
@@ -172,8 +172,8 @@ devDependencies:
     specifier: 0.0.10
     version: 0.0.10
   tw5-typed:
-    specifier: 0.2.27
-    version: 0.2.27
+    specifier: 0.3.9
+    version: 0.3.9
   typescript:
     specifier: 5.0.4
     version: 5.0.4
@@ -1474,10 +1474,6 @@ packages:
 
   /@types/minimist@1.2.2:
     resolution: {integrity: sha512-jhuKLIRrhvCPLqwPcx6INqmKeiA5EWrsCOPhrlFSrbrmU4ZMPjj5Ul/oLCMDO98XRUIwVm78xICz4EPCektzeQ==}
-    dev: true
-
-  /@types/node@18.11.18:
-    resolution: {integrity: sha512-DHQpWGjyQKSHj3ebjFI/wRKcqQcdR+MoFBygntYOZytCqNfkd2ZC4ARDJ2DQqhjH5p85Nnd3jhUJIXrszFX/JA==}
     dev: true
 
   /@types/node@18.16.14:
@@ -6177,8 +6173,8 @@ packages:
     resolution: {integrity: sha1-DdTJ/6q8NXlgsbckEV1+Doai4fU=}
     dev: true
 
-  /tiddlywiki@5.3.1:
-    resolution: {integrity: sha512-17uoTt8w3wvqaF1fqulHeeR86984N0eC8fgd0Ql1LIKgrHRu1+M3fBW8V/ikofU2s74xr6S1efREHaA2zyhe1w==}
+  /tiddlywiki@5.3.0:
+    resolution: {integrity: sha512-q18h1fT3MhyBrMGhWP1tmFdyhPcUrC22Ue6OFDp9V8offtFw5pV1zZ7okSu1JHHMjl4R5/ivv3KlXO9qcdmJkQ==}
     engines: {node: '>=0.8.2'}
     hasBin: true
     dev: true
@@ -6300,18 +6296,18 @@ packages:
       '@actions/github': 5.1.1
       clean-css: 5.3.1
       minimist: 1.2.7
-      tiddlywiki: 5.3.1
+      tiddlywiki: 5.3.0
       uglify-es: 3.3.9
     transitivePeerDependencies:
       - encoding
     dev: true
 
-  /tw5-typed@0.2.27:
-    resolution: {integrity: sha512-ATJaMZh1udwzcgqNOoPTmH9nzI/yMo5TLgv5u3O8WKDIE8SzuDVteah0G4gSsx/ogDyHAdmn0Wu5m+2hQ2wc7A==}
+  /tw5-typed@0.3.9:
+    resolution: {integrity: sha512-FypE+YbEcpi+1vDg3EZP0jYyPYZLoH5HEDIwBvrWaLa7VhVNcMSZHCuIevZAyEAPnPT94g7gSWI08aVsWLxD7Q==}
     dependencies:
       '@types/codemirror': 5.60.7
       '@types/echarts': 4.9.17
-      '@types/node': 18.11.18
+      '@types/node': 18.16.14
     dev: true
 
   /type-check@0.4.0:
