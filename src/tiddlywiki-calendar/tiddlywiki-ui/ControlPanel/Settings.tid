@@ -60,3 +60,5 @@ Auto add prefix to all created event.
 </$select>
 ;SlotDuration: The frequency for displaying time slots.
 :<$edit-text tiddler="$:/plugins/linonetwo/tw-calendar/settings/slotDuration" tabindex=-1 focus=false cancelPopups="yes" fileDrop=no tag="input" />
+;Search Page Limit: In search layout, the maximum number of events to display in the list. (Too large will have performance impact).
+:<$edit-text tiddler="$:/plugins/linonetwo/tw-calendar/settings/searchPageLimit" type="number" min="0" step="1" tabindex=-1 focus=false cancelPopups="yes" fileDrop=no tag="input" />

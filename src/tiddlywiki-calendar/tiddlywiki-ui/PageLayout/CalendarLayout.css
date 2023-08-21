@@ -8,6 +8,11 @@ div.tc-page-container.tw-calendar-layout-container {
   width: 100%;
 }
 
+.tw-calendar-draggable-region {
+  cursor: grab;
+  -webkit-app-region: drag;
+}
+
 .tw-calendar-search-layout-main-area {
   height: 100%;
   width: 100%;
@@ -25,6 +30,14 @@ div.tc-page-container.tw-calendar-layout-container {
   aspect-ratio: 1;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.tw-calendar-search-bar .tw-calendar-search-bar-pagination {
+  height: 100%;
+  padding: 0 1em;
+  display: flex;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
 }

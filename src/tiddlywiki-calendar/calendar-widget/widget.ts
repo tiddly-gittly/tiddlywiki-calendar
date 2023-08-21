@@ -50,7 +50,11 @@ class CalendarWidget extends Widget {
       // this won't cause this.render to be called...
       refreshed = true;
     }
-    if (getIsSearchMode() && changedTiddlers['$:/state/linonetwo/tw-calendar/tiddlywiki-ui/PageLayout/EventsCalendarSearchLayout'].modified === true) {
+    if (
+      getIsSearchMode() &&
+      (changedTiddlers['$:/state/linonetwo/tw-calendar/tiddlywiki-ui/PageLayout/EventsCalendarSearchLayout/keywords'].modified === true ||
+        changedTiddlers['$:/state/linonetwo/tw-calendar/tiddlywiki-ui/PageLayout/EventsCalendarSearchLayout/pagination'].modified === true)
+    ) {
       this.#calendar?.getEventSourceById(tiddlerEventSourceID)?.refetch();
       refreshed = true;
     }

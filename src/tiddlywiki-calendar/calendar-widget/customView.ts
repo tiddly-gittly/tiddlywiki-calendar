@@ -33,7 +33,7 @@ export function getCustomViews(locale: LocaleSingularArg): CalendarOptions['view
       buttonText: locale === 'zh-cn' ? '1日' : (getIsSmallScreen() ? '1d' : 'day'),
     },
     filterList: {
-      type: 'list',
+      type: 'listYear',
       duration: { years: 1000 },
     },
   };

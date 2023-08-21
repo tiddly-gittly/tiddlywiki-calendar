@@ -39,13 +39,11 @@ export const getEventOnFullCalendarViewChange = (context: IContext): EventSource
  * Get event only based on filter.
  */
 export const getEventByFilter = (context: IContext): EventSourceFunc => async (_argument: EventSourceFuncArg) => {
-  const { filter } = context;
-  const searchKeywords = $tw.wiki.getTiddlerText('$:/state/linonetwo/tw-calendar/tiddlywiki-ui/PageLayout/EventsCalendarSearchLayout');
+  const { filter, parentWidget } = context;
+  const searchKeywords = $tw.wiki.getTiddlerText('$:/state/linonetwo/tw-calendar/tiddlywiki-ui/PageLayout/EventsCalendarSearchLayout/keywords');
   if (!searchKeywords || !filter) return [];
-  const titles = $tw.wiki.filterTiddlers(filter)
-    .filter(function onlyUnique(value, index, array) {
-      return array.indexOf(value) === index;
-    });
+  // no need to uniq here, let filter itself do the uniq.
+  const titles = $tw.wiki.filterTiddlers(filter, parentWidget);
   const eventsOnPeriod = getEvents(titles, context);
   return eventsOnPeriod;
 };
