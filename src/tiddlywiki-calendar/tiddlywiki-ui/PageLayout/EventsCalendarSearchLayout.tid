@@ -62,7 +62,7 @@ tc-page-container tc-page-view-$(storyviewTitle)$ tc-language-$(languageTitle)$ 
 	<$set name="pagination" value={{$:/state/linonetwo/tw-calendar/tiddlywiki-ui/PageLayout/EventsCalendarSearchLayout/pagination}} emptyValue="0">
 			<$let paginationTo={{{ [<pagination>add{$:/plugins/linonetwo/tw-calendar/settings/searchPageLimit}] }}} limit={{$:/plugins/linonetwo/tw-calendar/settings/searchPageLimit}} >
 				<div class="tw-calendar-search-calendar-container">
-					<$calendar height="100%" filter="[{$:/temp/volatile/linonetwo/tw-calendar/tiddlywiki-ui/PageLayout/EventsCalendarSearchLayout/keywords}length[]compare:number:gt[0]] :then[all[tiddlers]!is[system]field:calendarEntry[yes]search:caption,text,keywords:words{$:/temp/volatile/linonetwo/tw-calendar/tiddlywiki-ui/PageLayout/EventsCalendarSearchLayout/keywords}!sort[startDate]rest<pagination>first<limit>]" />
+					<$calendar height="100%" filter="[{$:/temp/volatile/linonetwo/tw-calendar/tiddlywiki-ui/PageLayout/EventsCalendarSearchLayout/keywords}length[]compare:number:gt[0]] :then[all[tiddlers]!is[system]field:calendarEntry[yes]search:caption,text,keywords,tags:words{$:/temp/volatile/linonetwo/tw-calendar/tiddlywiki-ui/PageLayout/EventsCalendarSearchLayout/keywords}!sort[startDate]rest<pagination>first<limit>]" />
 				</div>
 			</$let>
 	</$set>
