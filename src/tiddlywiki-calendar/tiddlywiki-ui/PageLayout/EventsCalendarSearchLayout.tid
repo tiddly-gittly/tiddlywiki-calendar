@@ -53,8 +53,9 @@ tc-page-container tc-page-view-$(storyviewTitle)$ tc-language-$(languageTitle)$ 
 					</div>
 				</div>
 
-				<$calendar height="calc(100vh - 2.35em - 2 * (2px + 0.1em))" filter="[all[tiddlers]!is[system]field:calendarEntry[yes]search:caption,text,keywords:words{$:/state/linonetwo/tw-calendar/tiddlywiki-ui/PageLayout/EventsCalendarSearchLayout/keywords}!sort[startDate]rest<pagination>first<limit>]" />
-
+				<div class="tw-calendar-search-calendar-container">
+					<$calendar height="100%" filter="[all[tiddlers]!is[system]field:calendarEntry[yes]search:caption,text,keywords:words{$:/state/linonetwo/tw-calendar/tiddlywiki-ui/PageLayout/EventsCalendarSearchLayout/keywords}!sort[startDate]rest<pagination>first<limit>]" />
+				</div>
 			</$let>
 		</$set>
 	</$set>

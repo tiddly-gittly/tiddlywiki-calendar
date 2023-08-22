@@ -20,10 +20,13 @@ div.tc-page-container.tw-calendar-layout-container {
   flex-direction: column;
 }
 .tw-calendar-search-layout-main-area .tw-calendar-search-bar {
-  height: 100%;
+  height: 4em;
   width: 100%;
   display: flex;
   flex-direction: row;
+}
+.tw-calendar-search-layout-main-area .tw-calendar-search-calendar-container {
+  height: calc(100vh - 4em);
 }
 .tw-calendar-search-bar .tw-calendar-search-bar-icon {
   height: 100%;
