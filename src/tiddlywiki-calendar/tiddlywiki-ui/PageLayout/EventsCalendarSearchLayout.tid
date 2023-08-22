@@ -25,7 +25,7 @@ tc-page-container tc-page-view-$(storyviewTitle)$ tc-language-$(languageTitle)$ 
 <main class="tw-calendar-search-layout-main-area">
 	<$set name="pagination" value={{$:/state/linonetwo/tw-calendar/tiddlywiki-ui/PageLayout/EventsCalendarSearchLayout/pagination}} emptyValue="0">
 		<$set name="count" value={{{ [{$:/state/linonetwo/tw-calendar/tiddlywiki-ui/PageLayout/EventsCalendarSearchLayout/keywords}length[]compare:number:gt[0]] :then[all[tiddlers]!is[system]field:calendarEntry[yes]search:caption,text,keywords:words{$:/state/linonetwo/tw-calendar/tiddlywiki-ui/PageLayout/EventsCalendarSearchLayout/keywords}count[]] }}} emptyValue="0">
-			<$let limit={{{ [<pagination>add{$:/plugins/linonetwo/tw-calendar/settings/searchPageLimit}] }}} >
+			<$let paginationTo={{{ [<pagination>add{$:/plugins/linonetwo/tw-calendar/settings/searchPageLimit}] }}} limit={{$:/plugins/linonetwo/tw-calendar/settings/searchPageLimit}} >
 
 				<div class="tw-calendar-search-bar">
 					<div class="tw-calendar-search-bar-icon">
@@ -45,7 +45,7 @@ tc-page-container tc-page-view-$(storyviewTitle)$ tc-language-$(languageTitle)$ 
 
 							<$button style="width: 85%;height: 85%;">
 								{{$:/core/images/chevron-right}}
-								<$action-setfield $tiddler="$:/state/linonetwo/tw-calendar/tiddlywiki-ui/PageLayout/EventsCalendarSearchLayout/pagination" text=<<limit>> />
+								<$action-setfield $tiddler="$:/state/linonetwo/tw-calendar/tiddlywiki-ui/PageLayout/EventsCalendarSearchLayout/pagination" text=<<paginationTo>> />
 							</$button>
 						</div>
 					<div class="tw-calendar-search-bar-icon tw-calendar-draggable-region">
@@ -53,7 +53,7 @@ tc-page-container tc-page-view-$(storyviewTitle)$ tc-language-$(languageTitle)$ 
 					</div>
 				</div>
 
-				<$calendar height="calc(100vh - 2.35em - 2 * (2px + 0.1em))" filter="[all[tiddlers]!is[system]field:calendarEntry[yes]search:caption,text,keywords:words{$:/state/linonetwo/tw-calendar/tiddlywiki-ui/PageLayout/EventsCalendarSearchLayout/keywords}rest<pagination>first<limit>]" />
+				<$calendar height="calc(100vh - 2.35em - 2 * (2px + 0.1em))" filter="[all[tiddlers]!is[system]field:calendarEntry[yes]search:caption,text,keywords:words{$:/state/linonetwo/tw-calendar/tiddlywiki-ui/PageLayout/EventsCalendarSearchLayout/keywords}!sort[startDate]rest<pagination>first<limit>]" />
 
 			</$let>
 		</$set>
