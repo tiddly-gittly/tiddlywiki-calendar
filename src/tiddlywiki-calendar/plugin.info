@@ -4,7 +4,7 @@
   "description": "Widget and Page Layout displaying tiddlers on calendar and agenda, based on created, modified, startDate and endDate fields. ",
   "core-version": ">=5.3.0",
   "plugin-type": "plugin",
-  "version": "0.9.1",
+  "version": "0.9.2",
   "dependents": ["$:/plugins/kixam/datepicker", "$:/plugins/tiddlywiki/browser-sniff", "$:/plugins/linonetwo/tag-tree-picker-macro"],
   "list": "readme tiddlywiki-ui/ControlPanel/Settings tree"
 }
