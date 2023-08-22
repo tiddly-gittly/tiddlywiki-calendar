@@ -32,6 +32,7 @@ tc-page-container tc-page-view-$(storyviewTitle)$ tc-language-$(languageTitle)$ 
 				<$action-setfield $tiddler="$:/layout" text="" />
 			</$button>
 		</div>
+		<!-- don't wrap edit-text widget with set or let, otherwise it will keeps refreshing and auto select all text, cause old chars get deleted. -->
 		<$edit-text tag="input" tiddler="$:/temp/volatile/linonetwo/tw-calendar/tiddlywiki-ui/PageLayout/EventsCalendarSearchLayout/keywords" field="text" focus="yes" class="tc-titlebar tc-edit-texteditor tw-calendar-search-bar-text-field"/>
 
 		<$set name="pagination" value={{$:/state/linonetwo/tw-calendar/tiddlywiki-ui/PageLayout/EventsCalendarSearchLayout/pagination}} emptyValue="0">
