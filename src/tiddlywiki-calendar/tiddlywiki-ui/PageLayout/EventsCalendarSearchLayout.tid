@@ -3,6 +3,7 @@ name: Search Events Calendar
 description: Search events in calendar (without normal tiddlers), show as list
 tags: $:/tags/Layout
 icon: $:/plugins/linonetwo/tw-calendar/tiddlywiki-ui/Images/CalendarSearchImage
+throttle.refresh: true
 
 \whitespace trim
 \define containerClasses()
@@ -23,41 +24,46 @@ tc-page-container tc-page-view-$(storyviewTitle)$ tc-language-$(languageTitle)$ 
 <$navigator story="$:/StoryList" history="$:/HistoryList" openLinkFromInsideRiver={{$:/config/Navigation/openLinkFromInsideRiver}} openLinkFromOutsideRiver={{$:/config/Navigation/openLinkFromOutsideRiver}} relinkOnRename={{$:/config/RelinkOnRename}}>
 
 <main class="tw-calendar-search-layout-main-area">
-	<$set name="pagination" value={{$:/state/linonetwo/tw-calendar/tiddlywiki-ui/PageLayout/EventsCalendarSearchLayout/pagination}} emptyValue="0">
-		<$set name="count" value={{{ [{$:/state/linonetwo/tw-calendar/tiddlywiki-ui/PageLayout/EventsCalendarSearchLayout/keywords}length[]compare:number:gt[0]] :then[all[tiddlers]!is[system]field:calendarEntry[yes]search:caption,text,keywords:words{$:/state/linonetwo/tw-calendar/tiddlywiki-ui/PageLayout/EventsCalendarSearchLayout/keywords}count[]] }}} emptyValue="0">
+
+	<div class="tw-calendar-search-bar">
+		<div class="tw-calendar-search-bar-icon">
+			<$button to=<<currentTiddler>> tooltip={{$:/language/Buttons/FullScreen/Hint}} style="width: 85%;height: 85%;">
+				{{$:/plugins/linonetwo/tw-calendar/Images/ExitLayout}}
+				<$action-setfield $tiddler="$:/layout" text="" />
+			</$button>
+		</div>
+		<$edit-text tag="input" tiddler="$:/temp/volatile/linonetwo/tw-calendar/tiddlywiki-ui/PageLayout/EventsCalendarSearchLayout/keywords" field="text" focus="yes" class="tc-titlebar tc-edit-texteditor tw-calendar-search-bar-text-field"/>
+
+		<$set name="pagination" value={{$:/state/linonetwo/tw-calendar/tiddlywiki-ui/PageLayout/EventsCalendarSearchLayout/pagination}} emptyValue="0">
 			<$let paginationTo={{{ [<pagination>add{$:/plugins/linonetwo/tw-calendar/settings/searchPageLimit}] }}} limit={{$:/plugins/linonetwo/tw-calendar/settings/searchPageLimit}} >
+				<div class="tw-calendar-search-bar-pagination tw-calendar-draggable-region">
+					<$button style="width: 85%;height: 85%;">
+						{{$:/core/images/chevron-left}}
+						<$action-setfield $tiddler="$:/state/linonetwo/tw-calendar/tiddlywiki-ui/PageLayout/EventsCalendarSearchLayout/pagination" text={{{ [<pagination>subtract{$:/plugins/linonetwo/tw-calendar/settings/searchPageLimit}] }}} />
+					</$button>
 
-				<div class="tw-calendar-search-bar">
-					<div class="tw-calendar-search-bar-icon">
-						<$button to=<<currentTiddler>> tooltip={{$:/language/Buttons/FullScreen/Hint}} style="width: 85%;height: 85%;">
-							{{$:/plugins/linonetwo/tw-calendar/Images/ExitLayout}}
-							<$action-setfield $tiddler="$:/layout" text="" />
-						</$button>
-					</div>
-					<$edit-text tag="input" tiddler="$:/state/linonetwo/tw-calendar/tiddlywiki-ui/PageLayout/EventsCalendarSearchLayout/keywords" field="text" focus="yes" class="tc-titlebar tc-edit-texteditor tw-calendar-search-bar-text-field"/>
-						<div class="tw-calendar-search-bar-pagination tw-calendar-draggable-region">
-							<$button style="width: 85%;height: 85%;">
-								{{$:/core/images/chevron-left}}
-								<$action-setfield $tiddler="$:/state/linonetwo/tw-calendar/tiddlywiki-ui/PageLayout/EventsCalendarSearchLayout/pagination" text={{{ [<pagination>subtract{$:/plugins/linonetwo/tw-calendar/settings/searchPageLimit}] }}} />
-							</$button>
+					<$set name="count" value={{{ [{$:/temp/volatile/linonetwo/tw-calendar/tiddlywiki-ui/PageLayout/EventsCalendarSearchLayout/keywords}length[]compare:number:gt[0]] :then[all[tiddlers]!is[system]field:calendarEntry[yes]search:caption,text,keywords:words{$:/temp/volatile/linonetwo/tw-calendar/tiddlywiki-ui/PageLayout/EventsCalendarSearchLayout/keywords}count[]] }}} emptyValue="0">
+						<<pagination>> ~ <$text text=<<paginationTo>> /> / <$text text=<<count>> />
+					</$set>
 
-							<<pagination>> ~ <$text text={{{ [<pagination>add{$:/plugins/linonetwo/tw-calendar/settings/searchPageLimit}] }}} /> / <$text text=<<count>> />
-
-							<$button style="width: 85%;height: 85%;">
-								{{$:/core/images/chevron-right}}
-								<$action-setfield $tiddler="$:/state/linonetwo/tw-calendar/tiddlywiki-ui/PageLayout/EventsCalendarSearchLayout/pagination" text=<<paginationTo>> />
-							</$button>
-						</div>
-					<div class="tw-calendar-search-bar-icon tw-calendar-draggable-region">
-						{{$:/plugins/linonetwo/tw-calendar/tiddlywiki-ui/Images/CalendarSearchImage}}
-					</div>
-				</div>
-
-				<div class="tw-calendar-search-calendar-container">
-					<$calendar height="100%" filter="[all[tiddlers]!is[system]field:calendarEntry[yes]search:caption,text,keywords:words{$:/state/linonetwo/tw-calendar/tiddlywiki-ui/PageLayout/EventsCalendarSearchLayout/keywords}!sort[startDate]rest<pagination>first<limit>]" />
+					<$button style="width: 85%;height: 85%;">
+						{{$:/core/images/chevron-right}}
+						<$action-setfield $tiddler="$:/state/linonetwo/tw-calendar/tiddlywiki-ui/PageLayout/EventsCalendarSearchLayout/pagination" text=<<paginationTo>> />
+					</$button>
 				</div>
 			</$let>
 		</$set>
+		<div class="tw-calendar-search-bar-icon tw-calendar-draggable-region">
+			{{$:/plugins/linonetwo/tw-calendar/tiddlywiki-ui/Images/CalendarSearchImage}}
+		</div>
+	</div>
+
+	<$set name="pagination" value={{$:/state/linonetwo/tw-calendar/tiddlywiki-ui/PageLayout/EventsCalendarSearchLayout/pagination}} emptyValue="0">
+			<$let paginationTo={{{ [<pagination>add{$:/plugins/linonetwo/tw-calendar/settings/searchPageLimit}] }}} limit={{$:/plugins/linonetwo/tw-calendar/settings/searchPageLimit}} >
+				<div class="tw-calendar-search-calendar-container">
+					<$calendar height="100%" filter="[{$:/temp/volatile/linonetwo/tw-calendar/tiddlywiki-ui/PageLayout/EventsCalendarSearchLayout/keywords}length[]compare:number:gt[0]] :then[all[tiddlers]!is[system]field:calendarEntry[yes]search:caption,text,keywords:words{$:/temp/volatile/linonetwo/tw-calendar/tiddlywiki-ui/PageLayout/EventsCalendarSearchLayout/keywords}!sort[startDate]rest<pagination>first<limit>]" />
+				</div>
+			</$let>
 	</$set>
 </main>
 

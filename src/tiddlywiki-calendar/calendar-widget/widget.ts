@@ -52,7 +52,7 @@ class CalendarWidget extends Widget {
     }
     if (
       getIsSearchMode() &&
-      (changedTiddlers['$:/state/linonetwo/tw-calendar/tiddlywiki-ui/PageLayout/EventsCalendarSearchLayout/keywords']?.modified === true ||
+      (changedTiddlers['$:/temp/volatile/linonetwo/tw-calendar/tiddlywiki-ui/PageLayout/EventsCalendarSearchLayout/keywords']?.modified === true ||
         changedTiddlers['$:/state/linonetwo/tw-calendar/tiddlywiki-ui/PageLayout/EventsCalendarSearchLayout/pagination']?.modified === true)
     ) {
       this.#calendar?.getEventSourceById(tiddlerEventSourceID)?.refetch();
