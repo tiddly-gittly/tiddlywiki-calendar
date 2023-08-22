@@ -4,7 +4,7 @@ import { IContext } from './initCalendar';
 
 export function getSearchModeSettings(): CalendarOptions {
   return {
-    initialView: 'filterList',
+    initialView: 'searchResultList',
     nowIndicator: false,
     scrollTimeReset: true,
     droppable: false,
@@ -14,6 +14,11 @@ export function getSearchModeSettings(): CalendarOptions {
     eventResizableFromStart: false,
     eventDurationEditable: false,
     eventStartEditable: false,
+    /**
+     * work with `duration: { years: 1000 }` of `searchResultList` in `src/tiddlywiki-calendar/calendar-widget/customView.ts` to show a unlimited list.
+     * @url https://github.com/fullcalendar/fullcalendar/issues/7432
+     */
+    initialDate: '1500-01-01',
   };
 }
 
