@@ -15,7 +15,7 @@ You can goto <a href="/#%24%3A%2Fplugins%2Flinonetwo%2Ftw-calendar%2Ftiddlywiki-
     <$list filter="[list[$:/plugins/linonetwo/tw-calendar/settings/frequently-used-tags!!text]first[]then[yes]]" storyview="pop" emptyMessage=<<empty-list-help-text>>>
       <div class="tc-edit-tags">
         <$transclude
-          $variable="input-only-tag-tree"
+          $variable="tag-tree-picker"
           tags={{$:/plugins/linonetwo/tw-calendar/settings/frequently-used-tags}}
         />
       </div>

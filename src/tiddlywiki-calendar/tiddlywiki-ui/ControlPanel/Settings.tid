@@ -25,7 +25,7 @@ Tags can have `caption` field as displayed name. And if tags here form a tag tre
 </$vars>
 
 <$transclude
-	$variable="input-only-tag-tree"
+	$variable="tag-tree-picker"
 	tags={{$:/plugins/linonetwo/tw-calendar/settings/frequently-used-tags}}
 />
 

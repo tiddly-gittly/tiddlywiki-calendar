@@ -5,6 +5,6 @@
   "core-version": ">=5.3.0",
   "plugin-type": "plugin",
   "version": "0.9.1",
-  "dependents": ["$:/plugins/kixam/datepicker", "$:/plugins/tiddlywiki/browser-sniff"],
+  "dependents": ["$:/plugins/kixam/datepicker", "$:/plugins/tiddlywiki/browser-sniff", "$:/plugins/linonetwo/tag-tree-picker-macro"],
   "list": "readme tiddlywiki-ui/ControlPanel/Settings tree"
 }
