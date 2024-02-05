@@ -3,6 +3,7 @@
 /* eslint-disable unicorn/no-array-callback-reference */
 import type { EventInput, EventSourceFunc, EventSourceFuncArg } from '@fullcalendar/core';
 import type { ITiddlerFields, Tiddler } from 'tiddlywiki';
+import { draftTiddlerTitle } from './constants';
 import type { IContext } from './initCalendar';
 
 export enum CalendarEventType {
@@ -22,7 +23,7 @@ const allDayDateLength = 60 * 60 * 24 * 1000;
 export const getEventOnFullCalendarViewChange = (context: IContext): EventSourceFunc => async (argument: EventSourceFuncArg) => {
   const { start, end } = argument;
   const [startTwString, endTwString] = [start, end].map((date) => $tw.utils.stringifyDate(date));
-  const sourceFilter = context?.filter ?? '[all[tiddlers]!is[system]]';
+  const sourceFilter = context?.filter ?? `[all[tiddlers]!is[system]] [[${draftTiddlerTitle}]]`;
   const getFilterOnField = (field: string) => `${sourceFilter}:filter[get[${field}]compare:date:gteq[${startTwString}]compare:date:lteq[${endTwString}]]`;
   const fields = context.startDateFields ?? ['created', 'modified', 'startDate'];
   const titles = fields

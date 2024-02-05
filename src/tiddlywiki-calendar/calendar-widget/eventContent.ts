@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 import type { CustomContentGenerator, EventContentArg } from '@fullcalendar/core';
 import type { h, VNode } from '@fullcalendar/core/preact';
-import { allowedTiddlerTypeToPreview, DURATION_THRESHOLD_FOR_SHOWING_TIME_AT_BOTTOM } from './constants';
+import { allowedTiddlerTypeToPreview, draftTiddlerCaptionTitle, draftTiddlerTitle, DURATION_THRESHOLD_FOR_SHOWING_TIME_AT_BOTTOM } from './constants';
 import type { IContext } from './initCalendar';
 
 // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
@@ -15,7 +15,9 @@ const getDateDuration = dateDurationMacro.run as (startDateString: string, endDa
  */
 export function getEventContent(context: IContext): CustomContentGenerator<EventContentArg> {
   return (argument, createElement: typeof h) => {
-    const titleElement = createElement('div', {}, argument.event.title);
+    // if this tiddler is calendar draft, use draft caption instead
+    const titleText = argument.event.title === draftTiddlerTitle ? ($tw.wiki.getTiddler(draftTiddlerCaptionTitle)?.fields?.['draft.title'] ?? '...') : argument.event.title;
+    const titleElement = createElement('div', {}, titleText);
     const timeElement = createElement('div', {}, argument.timeText);
     const tiddler = $tw.wiki.getTiddler(argument.event.title);
     let duration = 0;

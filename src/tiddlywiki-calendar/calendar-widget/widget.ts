@@ -5,7 +5,7 @@ import { ConnectionObserver } from '@wessberg/connection-observer';
 import type { IChangedTiddlers } from 'tiddlywiki';
 
 import { changedTiddlerInViewRange } from './changeDetector';
-import { getIsSearchMode, tiddlerEventSourceID } from './constants';
+import { draftTiddlerTitle, getIsSearchMode, tiddlerEventSourceID } from './constants';
 import { type IContext, initCalendar } from './initCalendar';
 
 class CalendarWidget extends Widget {
@@ -26,6 +26,7 @@ class CalendarWidget extends Widget {
     const context = this.getContext();
     if (
       Object.keys(changedTiddlers).some((changedTiddlerTitle) => {
+        if (changedTiddlerTitle.startsWith(draftTiddlerTitle)) return true;
         if (changedTiddlerTitle.startsWith('$:/state/')) return false;
         // if modified date is within calendar view, refresh to show new event
         const endDateKey = context.endDateFields?.[0] ?? 'endDate';
@@ -132,5 +133,7 @@ class CalendarWidget extends Widget {
   }
 }
 
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+declare let exports: {
+  widget: typeof CalendarWidget;
+};
 exports.widget = CalendarWidget;

@@ -4,6 +4,7 @@ import { Modal } from '$:/core/modules/utils/dom/modal.js';
 import { autoPlacement, computePosition, shift } from '@floating-ui/dom';
 import type { CalendarOptions } from '@fullcalendar/core';
 import type { EventImpl } from '@fullcalendar/core/internal';
+import { draftTiddlerCaptionTitle, draftTiddlerTitle } from './constants';
 import type { IContext } from './initCalendar';
 
 function notifyNavigatorSaveTiddler(parameters: { event: MouseEvent; title: string }, context: IContext) {
@@ -125,11 +126,11 @@ export function getHandlers(context: IContext): CalendarOptions {
       const endDateKey = context.endDateFields?.[0] ?? 'endDate';
       const tags = context.defaultTags ?? [];
       $tw.wiki.addTiddler({
-        title: '$:/state/Calendar/PageLayout/create-tiddler-caption',
+        title: draftTiddlerCaptionTitle,
         text: '',
       });
       $tw.wiki.addTiddler({
-        title: '$:/state/Calendar/PageLayout/create-tiddler',
+        title: draftTiddlerTitle,
         [startDateKey]: startDate,
         [endDateKey]: endDate,
         /**
@@ -143,10 +144,8 @@ export function getHandlers(context: IContext): CalendarOptions {
       });
       new Modal($tw.wiki).display('$:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/popup/CreateNewTiddlerPopup');
       const titleInputElement = document.querySelector<HTMLInputElement>('.tw-calendar-layout-create-new-tiddler-popup > .tc-titlebar.tc-edit-texteditor');
-      if (titleInputElement !== null) {
-        // fix title not auto focus in modal
-        titleInputElement.focus();
-      }
+      // fix title not auto focus in modal
+      titleInputElement?.focus?.();
     },
     eventResize(info) {
       putEvent(info.event, info.jsEvent);

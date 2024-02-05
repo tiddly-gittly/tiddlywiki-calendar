@@ -16,3 +16,5 @@ export const isMobile = $tw.wiki.getTiddlerText('$:/info/browser/is/mobile') ===
  */
 export const DURATION_THRESHOLD_FOR_SHOWING_TIME_AT_BOTTOM = 60 * 60 * 3 * 1000;
 export const getIsSearchMode = () => $tw.wiki.getTiddlerText('$:/layout') === '$:/plugins/linonetwo/tw-calendar/tiddlywiki-ui/PageLayout/EventsCalendarSearchLayout';
+export const draftTiddlerTitle = '$:/state/Calendar/PageLayout/create-tiddler';
+export const draftTiddlerCaptionTitle = `${draftTiddlerTitle}-caption`;
