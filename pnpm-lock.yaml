@@ -80,8 +80,8 @@ devDependencies:
     specifier: ^10.9.2
     version: 10.9.2(@types/node@20.11.16)(typescript@5.3.3)
   tw5-typed:
-    specifier: ^0.4.5
-    version: 0.4.5
+    specifier: ^0.4.6
+    version: 0.4.6
   typescript:
     specifier: ^5.3.3
     version: 5.3.3
@@ -5662,8 +5662,8 @@ packages:
       - supports-color
     dev: false
 
-  /tw5-typed@0.4.5:
-    resolution: {integrity: sha512-fdLzMQZKLSfGHA3v3t6nNtOkbZ+ieHFTLtDdM+cNSR3kZmoNOjhH51hWe1aVNINOqy/BT0SvrM7Cjw0aBi3nog==}
+  /tw5-typed@0.4.6:
+    resolution: {integrity: sha512-TveU+bE7B9Oe6XVxencc64lNgtkxYyMbuSlIswPU6r3Rb+6vNcH6GTVuclwiJujD+Ly1EkngNdSPYz004NrSqg==}
     dependencies:
       '@types/codemirror': 5.60.8
       '@types/echarts': 4.9.18

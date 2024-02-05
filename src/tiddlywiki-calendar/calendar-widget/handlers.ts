@@ -1,12 +1,10 @@
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 /* eslint-disable unicorn/no-null */
+import { Modal } from '$:/core/modules/utils/dom/modal.js';
 import { autoPlacement, computePosition, shift } from '@floating-ui/dom';
 import type { CalendarOptions } from '@fullcalendar/core';
 import type { EventImpl } from '@fullcalendar/core/internal';
-import type { ModalWidget } from 'tiddlywiki';
 import type { IContext } from './initCalendar';
-
-const TWModal = (require('$:/core/modules/utils/dom/modal.js') as { Modal: ModalWidget }).Modal;
 
 function notifyNavigatorSaveTiddler(parameters: { event: MouseEvent; title: string }, context: IContext) {
   window.requestIdleCallback(
@@ -134,7 +132,6 @@ export function getHandlers(context: IContext): CalendarOptions {
         title: '$:/state/Calendar/PageLayout/create-tiddler',
         [startDateKey]: startDate,
         [endDateKey]: endDate,
-        'draft.title': info.startStr,
         /**
          * this `calendarEntry` is used for cascade that ask tiddler only show caption
          * See $:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/ViewTemplate/captionCascade
@@ -143,7 +140,7 @@ export function getHandlers(context: IContext): CalendarOptions {
         text,
         tags,
       });
-      new TWModal($tw.wiki).display('$:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/popup/CreateNewTiddlerPopup');
+      new Modal($tw.wiki).display('$:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/popup/CreateNewTiddlerPopup');
       const titleInputElement = document.querySelector<HTMLInputElement>('.tw-calendar-layout-create-new-tiddler-popup > .tc-titlebar.tc-edit-texteditor');
       if (titleInputElement !== null) {
         // fix title not auto focus in modal

@@ -57,7 +57,7 @@
     "postcss": "^8.4.33",
     "rimraf": "^5.0.5",
     "ts-node": "^10.9.2",
-    "tw5-typed": "^0.4.5",
+    "tw5-typed": "^0.4.6",
     "typescript": "^5.3.3"
   }
 }
