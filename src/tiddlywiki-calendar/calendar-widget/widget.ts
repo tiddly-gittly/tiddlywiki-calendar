@@ -1,13 +1,12 @@
 /* eslint-disable @typescript-eslint/prefer-nullish-coalescing */
+import { widget as Widget } from '$:/core/modules/widgets/widget.js';
 import type { Calendar } from '@fullcalendar/core';
 import { ConnectionObserver } from '@wessberg/connection-observer';
-import type { IChangedTiddlers, Widget as IWidget } from 'tiddlywiki';
+import type { IChangedTiddlers } from 'tiddlywiki';
 
 import { changedTiddlerInViewRange } from './changeDetector';
 import { getIsSearchMode, tiddlerEventSourceID } from './constants';
 import { type IContext, initCalendar } from './initCalendar';
-
-const Widget = (require('$:/core/modules/widgets/widget.js') as { widget: typeof IWidget }).widget;
 
 class CalendarWidget extends Widget {
   #calendar?: Calendar;
