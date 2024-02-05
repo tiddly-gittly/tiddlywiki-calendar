@@ -10,7 +10,7 @@ export const getIsSmallScreen = () => window.innerWidth <= 600;
 export const tiddlerEventSourceID = 'tiddlers';
 export const timeZoneOffset = moment.duration({ minutes: new Date().getTimezoneOffset() });
 export const allowedTiddlerTypeToPreview = ['', 'text/vnd.tiddlywiki', 'text/plain', 'text/x-markdown', 'text/markdown', 'text/x-tiddlywiki'];
-export const isMobile = $tw.wiki.getTiddlerText('$:/info/browser/is/mobile') === 'yes';
+export const isMobile = $tw.wiki.getTiddlerText('$:/info/browser/is/mobile') === 'yes' || $tw.wiki.getTiddlerText('$:/info/tidgi-mobile') === 'yes';
 /**
  * If time span longer or equal to this, show time at bottom too, so easier to see
  */

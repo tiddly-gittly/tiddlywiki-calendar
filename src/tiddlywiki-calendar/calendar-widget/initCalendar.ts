@@ -103,6 +103,7 @@ export function getSettings(context: IContext): CalendarOptions {
     scrollTimeReset: false,
     /**
      * This prevent mouse wheel, but is necessary on mobile
+     * workaround for https://github.com/fullcalendar/fullcalendar/issues/7285
      */
     dragScroll: isMobile,
     schedulerLicenseKey: 'CC-Attribution-NonCommercial-NoDerivatives',
