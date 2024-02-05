@@ -41,14 +41,14 @@
     "@fullcalendar/timegrid": "^6.1.8",
     "lodash": "^4.17.21",
     "moment-timezone": "^0.5.43",
-    "requestidlecallback-polyfill": "^1.0.2",
-
     "npm-check-updates": "^16.12.2",
+    "requestidlecallback-polyfill": "^1.0.2",
     "tiddlywiki": "^5.3.1",
     "tiddlywiki-plugin-dev": "^0.0.39"
   },
   "devDependencies": {
     "@modern-js/tsconfig": "^2.31.2",
+    "@types/lodash": "^4.14.202",
     "@types/node": "^20.5.1",
     "dprint": "^0.40.2",
     "eslint-config-tidgi": "1.1.4",
