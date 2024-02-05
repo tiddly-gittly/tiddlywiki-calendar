@@ -43,6 +43,7 @@ export function getEventContent(context: IContext): CustomContentGenerator<Event
       };
     }
 
+    const tiddlerText = $tw.wiki.getTiddlerText(tiddler.fields.title);
     let captionResult: string | undefined | null;
     if (typeof tiddler.fields.caption === 'string' && context.parentWidget !== undefined) {
       if (tiddler.fields.caption.includes('{{')) {
@@ -72,7 +73,7 @@ export function getEventContent(context: IContext): CustomContentGenerator<Event
     // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
     const captionElement = typeof captionResult === 'string'
       // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
-      ? `<div class="${tiddler?.fields?.text ? 'fc-event-title-with-text' : ''}">${captionResult}</div>`
+      ? `<div class="${tiddlerText ? 'fc-event-title-with-text' : ''}">${captionResult}</div>`
       : titleElement;
     // on small view like dayGridMonth that can only display an element
     if (['dayGridMonth'].includes(argument.view.type)) {
@@ -80,7 +81,7 @@ export function getEventContent(context: IContext): CustomContentGenerator<Event
     }
     // on timeGridDay view, show full text, but ignore too long text that causes lagging
     const textElement = allowedTiddlerTypeToPreview.includes(tiddler.fields.type ?? '')
-      ? `<div>${(tiddler.fields.text ?? '').substring(0, 2000)}</div>`
+      ? `<div>${(tiddlerText ?? '').substring(0, 2000)}</div>`
       : `<div>${tiddler.fields.type} too large</div>`;
     const tagsElement = `<div class="fc-event-main-tags">${tiddler.fields.tags?.map((tag) => `<span>${tag}</span>`)?.join('') ?? ''}</div>`;
     const topHTMLString = compact([captionElement, tagsElement, timeElement, durationElement, textElement]).join('');
