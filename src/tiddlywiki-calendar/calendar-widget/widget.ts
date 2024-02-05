@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/prefer-nullish-coalescing */
 import type { Calendar } from '@fullcalendar/core';
+import { ConnectionObserver } from '@wessberg/connection-observer';
 import type { IChangedTiddlers, Widget as IWidget } from 'tiddlywiki';
 
 import { changedTiddlerInViewRange } from './changeDetector';
@@ -12,7 +13,14 @@ class CalendarWidget extends Widget {
   #calendar?: Calendar;
   #containerElement?: HTMLDivElement;
   #mountElement?: HTMLDivElement;
-  #popPreviewElement?: HTMLDivElement;
+  connectionObserver = new ConnectionObserver(entries => {
+    for (const { connected } of entries) {
+      if (!connected) {
+        this.destroy();
+        this.connectionObserver?.disconnect?.();
+      }
+    }
+  });
 
   refresh(changedTiddlers: IChangedTiddlers): boolean {
     let refreshed = false;
@@ -70,6 +78,7 @@ class CalendarWidget extends Widget {
     this.execute();
 
     if (this.#containerElement === undefined || this.#mountElement === undefined) {
+      this.connectionObserver.observe(this.parentDomNode);
       this.#containerElement = document.createElement('div');
       this.#mountElement = document.createElement('div');
       this.#containerElement.append(this.#mountElement);
@@ -101,7 +110,6 @@ class CalendarWidget extends Widget {
   }
 
   destroy() {
-    super.destroy();
     this.#calendar?.destroy();
   }
 

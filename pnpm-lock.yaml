@@ -29,6 +29,9 @@ dependencies:
   '@fullcalendar/timegrid':
     specifier: ^6.1.10
     version: 6.1.10(@fullcalendar/core@6.1.10)
+  '@wessberg/connection-observer':
+    specifier: ^1.0.5
+    version: 1.0.5
   lodash:
     specifier: ^4.17.21
     version: 4.17.21
@@ -903,6 +906,11 @@ packages:
       '@typescript-eslint/types': 5.62.0
       eslint-visitor-keys: 3.4.3
     dev: true
+
+  /@wessberg/connection-observer@1.0.5:
+    resolution: {integrity: sha512-QMo1PN81YCl7vNP4fUSF9CYIkQxBmqZW5SNeU3h5ZHtSRMSWVD14GWQqj6I5iWUPLDMTQyM71ElxKSGo8HTcNA==}
+    engines: {node: '>=4.0.0'}
+    dev: false
 
   /abbrev@1.1.1:
     resolution: {integrity: sha512-nne9/IiQ/hzIhY6pdDnbBtz7DjPTKrY00P/zvPSm5pOFkl6xuGrGnXn/VtTNNfNtAfZ9/1RtehkszU9qcTii0Q==}

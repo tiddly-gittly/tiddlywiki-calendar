@@ -39,6 +39,7 @@
     "@fullcalendar/list": "^6.1.10",
     "@fullcalendar/moment-timezone": "^6.1.10",
     "@fullcalendar/timegrid": "^6.1.10",
+    "@wessberg/connection-observer": "^1.0.5",
     "lodash": "^4.17.21",
     "moment-timezone": "^0.5.45",
     "npm-check-updates": "^16.14.14",
