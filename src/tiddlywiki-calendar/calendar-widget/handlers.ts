@@ -137,6 +137,7 @@ export function getHandlers(context: IContext): CalendarOptions {
          * See $:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/ViewTemplate/captionCascade
          */
         calendarEntry: 'yes',
+        'draft.title': info.startStr,
         text,
         tags,
       });

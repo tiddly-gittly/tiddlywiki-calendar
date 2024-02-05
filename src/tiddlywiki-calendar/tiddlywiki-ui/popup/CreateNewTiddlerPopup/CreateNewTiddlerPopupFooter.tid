@@ -31,10 +31,11 @@ title: $:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/popup/Crea
 
   <$button class="tw-calendar-footer-button" message="tm-close-tiddler">
     Create
+    <!-- Remove draft.title first -->
+    <$action-setfield $tiddler="$:/state/Calendar/PageLayout/create-tiddler" $field="draft.title" />
     <$action-createtiddler
       $basetitle=<<newtitle>>
       $template="$:/state/Calendar/PageLayout/create-tiddler"
-      draft.title=""
       caption={{$:/state/Calendar/PageLayout/create-tiddler-caption!!draft.title}}
       type="text/vnd.tiddlywiki"
     />
