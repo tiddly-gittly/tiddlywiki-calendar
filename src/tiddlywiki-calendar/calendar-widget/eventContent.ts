@@ -30,12 +30,10 @@ export function getEventContent(context: IContext): CustomContentGenerator<Event
         // @ts-expect-error The left-hand side of an arithmetic operation must be of type 'any', 'number', 'bigint' or an enum type.ts(2362)
         duration = argument.event.end - argument.event.start;
         if (duration >= DURATION_THRESHOLD_FOR_SHOWING_TIME_AT_BOTTOM) {
-          return {
-            html: createElement('div', { style: 'height: 100%; display: flex; flex-direction: column; justify-content: space-between;' }, [
-              createElement('div', {}, [titleElement, timeElement, durationElement]),
-              createElement('div', {}, [timeElement, durationElement]),
-            ]),
-          };
+          return createElement('div', { style: 'height: 100%; display: flex; flex-direction: column; justify-content: space-between;' }, [
+            createElement('div', {}, [titleElement, timeElement, durationElement]),
+            createElement('div', {}, [timeElement, durationElement]),
+          ]);
         }
       }
       return createElement('div', {}, [titleElement, timeElement, durationElement]);
