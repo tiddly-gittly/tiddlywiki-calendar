@@ -3,6 +3,31 @@ tags: $:/tags/Stylesheet
 title: $:/plugins/linonetwo/tw-calendar/style.css
 type: text/vnd.tiddlywiki
 
+\rules except horizrule dash
+\import [[$:/themes/tiddlywiki/vanilla/base]]
+
+.fc, .fc-view {
+  --fc-page-bg-color: <<colour page-background>>;
+  --fc-border-color: <<colour table-border>>;
+  --fc-button-text-color: <<colour button-foreground>>;
+  --fc-button-bg-color: <<colour button-background>>;
+  --fc-button-border-color: <<colour button-border>>;
+  --fc-button-hover-bg-color: <<colour button-background-hover>>;
+  --fc-button-hover-border-color: <<colour button-border>>;
+  --fc-button-active-bg-color: <<colour button-background-hover>>;
+  --fc-button-active-border-color: <<colour button-border>>;
+  --fc-event-bg-color: <<colour message-background>>;
+  --fc-event-border-color: <<colour message-border>>;
+  --fc-event-text-color: <<colour message-foreground>>;
+  --fc-event-selected-overlay-color: <<colour modal-backdrop>>;
+  --fc-more-link-bg-color: <<colour tiddler-link-background>>;
+  --fc-more-link-text-color: <<colour tiddler-link-foreground>>;
+  --fc-non-business-color: <<colour muted-foreground>>;
+  --fc-highlight-color: <<colour highlight-background>>;
+  --fc-today-bg-color: <<colour primary>>;
+  --fc-now-indicator-color: <<colour alert-highlight>>;
+}
+
 /** make it possible to drag the app using this bar in TidGi, when titleBar is closed */
 <$reveal type="match" state="$:/state/titleBarOpened" text="no">
 .fc-header-toolbar, .fc-scrollgrid-section-header {
@@ -56,6 +81,16 @@ type: text/vnd.tiddlywiki
   text-overflow: ellipsis;
 }
 
+.fc button.fc-button-primary {
+  border: <<colour button-border>>;
+}
+.fc button.fc-button-primary:hover {
+  border: <<colour button-border>>;
+}
 .fc button.fc-button-primary > svg.tc-image-button {
-  fill: #fff;
+  fill: <<colour button-foreground>>;
+}
+
+.fc-col-header-cell-cushion {
+  color: <<colour foreground>>;
 }
