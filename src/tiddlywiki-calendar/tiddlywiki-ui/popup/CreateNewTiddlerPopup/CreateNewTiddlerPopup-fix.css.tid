@@ -1,0 +1,13 @@
+creator: LinOnetwo
+tags: $:/tags/Stylesheet
+title: $:/plugins/linonetwo/tw-calendar/tiddlywiki-ui/PageLayout/CreateNewTiddlerPopup-fix.css
+list-after: $:/plugins/linonetwo/tw-calendar/tiddlywiki-ui/PageLayout/CreateNewTiddlerPopup.css
+type: text/vnd.tiddlywiki
+
+\import [[$:/themes/tiddlywiki/vanilla/base]]
+
+@media (max-width: <<sidebarbreakpoint>>) {
+  .tw-calendar-layout-create-new-tiddler-popup .tw-calendar-tags-input {
+    flex-direction: column-reverse;
+  }
+}

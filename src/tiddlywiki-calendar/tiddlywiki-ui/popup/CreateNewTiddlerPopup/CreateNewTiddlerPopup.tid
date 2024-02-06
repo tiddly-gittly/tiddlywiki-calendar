@@ -18,13 +18,6 @@ footer: {{$:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/popup/C
       fileDrop=no
       minHeight="30px"
     />
-    <div class="tw-calendar-time-range-preview">
-      <$edit-date showTime showSeconds use24hour field="startDate"/>
-      <$text text=" -| " />
-      <$macrocall $name="date-duration-macro" startDate={{!!startDate}} endDate={{!!endDate}} />
-      <$text text=" |-> " />
-      <$edit-date showTime showSeconds use24hour field="endDate"/>
-    </div>
     <div class="tw-calendar-tags-input">
       {{||$:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/popup/FrequentlyUsedTagsList}}
       <div class="tw-calendar-tags-input-new-tag">

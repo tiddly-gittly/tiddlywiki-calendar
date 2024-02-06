@@ -4,7 +4,7 @@ import { Modal } from '$:/core/modules/utils/dom/modal.js';
 import { autoPlacement, computePosition, shift } from '@floating-ui/dom';
 import type { CalendarOptions } from '@fullcalendar/core';
 import type { EventImpl } from '@fullcalendar/core/internal';
-import { draftTiddlerCaptionTitle, draftTiddlerTitle } from './constants';
+import { draftTiddlerCaptionTitle, draftTiddlerTitle, isMobile } from './constants';
 import type { IContext } from './initCalendar';
 
 function notifyNavigatorSaveTiddler(parameters: { event: MouseEvent; title: string }, context: IContext) {
@@ -73,6 +73,7 @@ export function getHandlers(context: IContext): CalendarOptions {
         children: $tw.wiki.parseText(
           'text/vnd.tiddlywiki',
           `{{${info.event.title}||$:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/popup/EventPreview}}`,
+          { parseAsInline: true },
         ).tree,
       });
       // @ts-expect-error Property 'data-name' does not exist on type 'Widget'.ts(7053)
@@ -80,7 +81,17 @@ export function getHandlers(context: IContext): CalendarOptions {
       newWidgetNode.render(eventPreviewElement, null);
       context.parentWidget.children.push(newWidgetNode);
       const eventElement = info.el;
-      const { x, y } = await computePosition(eventElement, eventPreviewElement, { middleware: [autoPlacement(), shift()] });
+      const { x, y } = await computePosition(eventElement, eventPreviewElement, {
+        middleware: [
+          isMobile
+            ? autoPlacement({
+              crossAxis: true,
+              allowedPlacements: ['top', 'bottom', 'right'],
+            })
+            : autoPlacement(),
+          shift(),
+        ],
+      });
       Object.assign(eventPreviewElement.style, {
         left: `${x}px`,
         top: `${y}px`,

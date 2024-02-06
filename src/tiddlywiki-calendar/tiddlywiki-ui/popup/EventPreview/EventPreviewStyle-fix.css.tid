@@ -1,0 +1,13 @@
+creator: LinOnetwo
+tags: $:/tags/Stylesheet
+title: $:/plugins/linonetwo/tw-calendar/tiddlywiki-ui/PageLayout/EventPreviewStyle-fix.css
+list-after: $:/plugins/linonetwo/tw-calendar/tiddlywiki-ui/PageLayout/EventPreviewStyle.css
+type: text/vnd.tiddlywiki
+
+\import [[$:/themes/tiddlywiki/vanilla/base]]
+
+@media (max-width: <<sidebarbreakpoint>>) {
+  .tw-calendar-layout-event-preview-container .tc-tiddler-frame {
+    padding: 0;
+  }
+}

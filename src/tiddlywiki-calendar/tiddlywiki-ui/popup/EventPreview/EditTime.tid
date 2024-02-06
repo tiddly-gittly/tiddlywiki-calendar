@@ -3,10 +3,10 @@ tags: $:/tw-calendar/EventPreviewMiniViewTemplate
 
 <div class="tw-calendar-time-range-preview">
   <$edit-date showTime showSeconds use24hour field="startDate"/>
-  <span>
+  <div class="tw-calendar-time-range-preview-range-text">
     <$text text=" -| " />
     <$macrocall $name="date-duration-macro" startDate={{!!startDate}} endDate={{!!endDate}} />
     <$text text=" |-> " />
-  </span>
+  </div>
   <$edit-date showTime showSeconds use24hour field="endDate"/>
 </div>
