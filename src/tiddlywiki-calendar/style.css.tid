@@ -24,7 +24,7 @@ type: text/vnd.tiddlywiki
   --fc-more-link-text-color: <<colour tiddler-link-foreground>>;
   --fc-non-business-color: <<colour muted-foreground>>;
   --fc-highlight-color: <<colour highlight-background>>;
-  --fc-today-bg-color: <<colour primary>>;
+  --fc-today-bg-color: <<colour notification-background>>;
   --fc-now-indicator-color: <<colour alert-highlight>>;
 }
 

@@ -5,5 +5,6 @@ type: text/vnd.tiddlywiki
 <$importvariables filter="[[$:/themes/tiddlywiki/vanilla/base]]">
 .tiddlywiki-calendar-widget-event-preview {
   background-color: <<colour modal-background>>;
+  border-color: <<colour modal-border>>;
 }
 </$importvariables>
