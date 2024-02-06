@@ -1,8 +1,12 @@
 title: $:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/ViewTemplate/EditTime
-tags: $:/tags/ViewTemplate
 
-<$list filter="[all[current]field:calendarEntry[yes]]">
-
-{{||$:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/popup/EditTime}}
-
-</$list>
+\whitespace trim
+<div class="tw-calendar-time-range-preview">
+  <$edit-date showTime showSeconds use24hour field="startDate"/>
+  <div class="tw-calendar-time-range-preview-range-text">
+    <$text text=" -| " />
+    <$macrocall $name="date-duration-macro" startDate={{!!startDate}} endDate={{!!endDate}} />
+    <$text text=" |-> " />
+  </div>
+  <$edit-date showTime showSeconds use24hour field="endDate"/>
+</div>

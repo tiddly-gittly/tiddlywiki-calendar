@@ -1,0 +1,6 @@
+title: $:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/ViewTemplate/EditTimeOnCalendarEntry
+tags: $:/tags/ViewTemplate
+
+<$list filter="[all[current]field:calendarEntry[yes]]">
+{{||$:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/ViewTemplate/EditTime}}
+</$list>

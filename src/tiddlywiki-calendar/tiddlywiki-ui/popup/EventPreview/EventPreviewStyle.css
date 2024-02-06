@@ -24,12 +24,6 @@
 }
 .tw-calendar-layout-event-preview-container .tw-calendar-time-range-preview {
   margin-top: 15px;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-}
-.tw-calendar-layout-event-preview-container .tw-calendar-time-range-preview input {
-  width: unset;
 }
 .tw-calendar-layout-event-preview-container .tw-calendar-layout-event-preview-bottom-buttons {
   width: 100%;
