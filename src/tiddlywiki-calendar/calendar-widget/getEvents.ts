@@ -23,7 +23,7 @@ const allDayDateLength = 60 * 60 * 24 * 1000;
 export const getEventOnFullCalendarViewChange = (context: IContext): EventSourceFunc => async (argument: EventSourceFuncArg) => {
   const { start, end } = argument;
   const [startTwString, endTwString] = [start, end].map((date) => $tw.utils.stringifyDate(date));
-  const sourceFilter = context?.filter ?? `[all[tiddlers]!is[system]] [[${draftTiddlerTitle}]]`;
+  const sourceFilter = context?.filter ? `${context.filter} [[${draftTiddlerTitle}]]` : `[all[tiddlers]!is[system]] [[${draftTiddlerTitle}]]`;
   const getFilterOnField = (field: string) => `${sourceFilter}:filter[get[${field}]compare:date:gteq[${startTwString}]compare:date:lteq[${endTwString}]]`;
   const fields = context.startDateFields ?? ['created', 'modified', 'startDate'];
   const titles = fields
