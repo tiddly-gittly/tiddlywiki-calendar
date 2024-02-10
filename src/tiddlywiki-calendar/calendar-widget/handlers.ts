@@ -61,6 +61,14 @@ export function getHandlers(context: IContext): CalendarOptions {
         // if click same event twice, means close.
         if (previousTitle === info.event.title) return;
       }
+      const tiddler = $tw.wiki.getTiddler(info.event.title);
+      if (tiddler?.hasField?.('_is_skinny')) {
+        // trigger lazyLoad after render, don't block UI rendering.
+        setTimeout(() => {
+          // Tell any listeners about the need to lazily load $tw.wiki tiddler
+          $tw.wiki.dispatchEvent('lazyLoad', tiddler.fields.title);
+        }, 0);
+      }
       // add new element
       const eventPreviewElement = document.createElement('div');
       context.containerElement?.append(eventPreviewElement);

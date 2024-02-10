@@ -2,7 +2,8 @@
 import { widget as Widget } from '$:/core/modules/widgets/widget.js';
 import type { Calendar } from '@fullcalendar/core';
 import { ConnectionObserver } from '@wessberg/connection-observer';
-import type { IChangedTiddlers } from 'tiddlywiki';
+import debounce from 'lodash/debounce';
+import type { IChangedTiddlers, IParseTreeNode, IWidgetInitialiseOptions } from 'tiddlywiki';
 
 import { changedTiddlerInViewRange } from './changeDetector';
 import { draftTiddlerTitle, getIsSearchMode, tiddlerEventSourceID } from './constants';
@@ -21,12 +22,42 @@ class CalendarWidget extends Widget {
     }
   });
 
+  constructor(parseTreeNode: IParseTreeNode, options?: IWidgetInitialiseOptions) {
+    super(parseTreeNode, options);
+    this.refreshTiddlerEventCalendar = debounce(this.refreshTiddlerEventCalendar.bind(this), 500);
+  }
+
+  /**
+   * When some tiddler changed, refresh the calendar to show the change. By rerun `calendar-widget/eventContent.ts` and `calendar-widget/getEvents.ts`
+   * This method is debounced, to prevent lazy-load a tiddler trigger refresh again and again, for every item in the view.
+   * @param force recreate the whole calendar, to make change to config take effect.
+   */
+  refreshTiddlerEventCalendar(force = false) {
+    if (force) {
+      this.#calendar?.destroy();
+      const context = this.getContext();
+      this.#calendar = initCalendar(this.#mountElement!, context);
+      this.#calendar?.render();
+    } else {
+      this.#triggerRefetch();
+    }
+  }
+
+  #triggerRefetch() {
+    this.#calendar?.getEventSourceById(tiddlerEventSourceID)?.refetch();
+  }
+
   refresh(changedTiddlers: IChangedTiddlers): boolean {
     let refreshed = false;
+    let refreshImmediately = false;
     const context = this.getContext();
     if (
       Object.keys(changedTiddlers).some((changedTiddlerTitle) => {
-        if (changedTiddlerTitle.startsWith(draftTiddlerTitle)) return true;
+        if (changedTiddlerTitle.startsWith(draftTiddlerTitle)) {
+          // when draft tiddler changed, refresh immediately, to show new event on typing or dragging
+          refreshImmediately = true;
+          return true;
+        }
         if (changedTiddlerTitle.startsWith('$:/state/')) return false;
         // if modified date is within calendar view, refresh to show new event
         const endDateKey = context.endDateFields?.[0] ?? 'endDate';
@@ -41,7 +72,11 @@ class CalendarWidget extends Widget {
         return false;
       })
     ) {
-      this.#calendar?.getEventSourceById(tiddlerEventSourceID)?.refetch();
+      if (refreshImmediately) {
+        this.#triggerRefetch();
+      } else {
+        this.refreshTiddlerEventCalendar();
+      }
       // this won't cause this.render to be called...
       refreshed = true;
     }
@@ -52,9 +87,7 @@ class CalendarWidget extends Widget {
         return false;
       })
     ) {
-      this.#calendar?.destroy();
-      this.#calendar = initCalendar(this.#mountElement!, context);
-      this.#calendar?.render();
+      this.refreshTiddlerEventCalendar(true);
       // this won't cause this.render to be called...
       refreshed = true;
     }
@@ -63,7 +96,7 @@ class CalendarWidget extends Widget {
       (changedTiddlers['$:/temp/volatile/linonetwo/tw-calendar/tiddlywiki-ui/PageLayout/EventsCalendarSearchLayout/keywords']?.modified === true ||
         changedTiddlers['$:/state/linonetwo/tw-calendar/tiddlywiki-ui/PageLayout/EventsCalendarSearchLayout/pagination']?.modified === true)
     ) {
-      this.#calendar?.getEventSourceById(tiddlerEventSourceID)?.refetch();
+      this.refreshTiddlerEventCalendar();
       refreshed = true;
     }
     return refreshed;
