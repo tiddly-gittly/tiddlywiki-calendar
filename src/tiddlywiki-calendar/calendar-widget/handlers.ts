@@ -176,6 +176,18 @@ export function getHandlers(context: IContext): CalendarOptions {
       // eslint-disable-next-line @typescript-eslint/no-confusing-void-expression
       info.relatedEvents.forEach((event) => putEvent(event, info.jsEvent));
     },
+    eventMouseEnter(info) {
+      // use this until https://github.com/Jermolene/TiddlyWiki5/discussions/7989 fixed
+      const tiddler = $tw.wiki.getTiddler(info.event.title);
+      if (tiddler?.hasField?.('_is_skinny')) {
+        // trigger lazyLoad after render, don't block UI rendering.
+        setTimeout(() => {
+          // Tell any listeners about the need to lazily load $tw.wiki tiddler
+          $tw.wiki.dispatchEvent('lazyLoad', tiddler.fields.title);
+          // lazy load later, not blocking user interaction to add new event
+        }, 1000);
+      }
+    },
   };
   return handlers;
 }

@@ -42,17 +42,10 @@ export function getEventContent(context: IContext): CustomContentGenerator<Event
     }
 
     /**
-     * This might be empty due to lazy load
+     * This might be empty due to lazy load.
+     * But Lazy loading is very slow, make drag-create lagging on first open, so disable it here. Search `lazyLoad` in this repo to find where we do it.
      */
     const tiddlerText = tiddler.fields.text;
-    if (tiddler.hasField('_is_skinny')) {
-      // trigger lazyLoad after render, don't block UI rendering.
-      setTimeout(() => {
-        // Tell any listeners about the need to lazily load $tw.wiki tiddler
-        $tw.wiki.dispatchEvent('lazyLoad', tiddler.fields.title);
-        // lazy load later, not blocking user interaction to add new event
-      }, 1000);
-    }
     let captionResult: string | undefined | null;
     if (typeof tiddler.fields.caption === 'string' && context.parentWidget !== undefined) {
       if (tiddler.fields.caption.includes('{{')) {
