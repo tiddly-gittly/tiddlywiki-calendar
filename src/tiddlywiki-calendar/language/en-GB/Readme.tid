@@ -1,0 +1,19 @@
+title: $:/plugins/linonetwo/tw-calendar/language/en-GB/Readme
+
+\define lingo-base() $:/plugins/linonetwo/tw-calendar/language/
+
+! <<lingo Name>>
+
+<<lingo Description>>
+
+!! Usage
+
+# Provides a calendar widget, use it like `<$calendar />`
+# Use the whole wiki as a data source, aggregate tiddler based on their `created` `modified` `startDate` and `endDate` field
+# Drag to create new event with `startDate` and `endDate` field
+# Provides a calendar view, use `ctrl+shift+L` to switch to this view, you can click `Home` button to go back
+# Add `color` field to change color. When `color` field missing, it will try get color from tags on it.
+
+!! Developing Sub-Plugin
+
+See [[Official wiki|https://tiddly-gittly.github.io/tiddlywiki-calendar/]].

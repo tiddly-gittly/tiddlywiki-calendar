@@ -1,0 +1,6 @@
+title: $:/plugins/linonetwo/tw-calendar/language/zh-Hans/
+
+Name: 日历
+Description: 提供日历日程微件和页面布局，根据 `created` `modified` `startDate` 和 `endDate` 字段在日历和日程上显示条目。
+PluginConfigs: 插件设置
+ConfigDescription: 通过这些设置，您可以自定义「日历」插件的行为。

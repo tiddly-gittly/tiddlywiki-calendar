@@ -1,0 +1,6 @@
+title: $:/plugins/linonetwo/tw-calendar/language/en-GB/
+
+Name: Calendar
+Description: Calendar Agenda widget and Page Layout displaying tiddlers on calendar and agenda, based on `created` `modified` `startDate` and `endDate` fields.
+PluginConfigs: Plugin Configs
+ConfigDescription: These settings let you customise the behaviour of Calendar plugin.

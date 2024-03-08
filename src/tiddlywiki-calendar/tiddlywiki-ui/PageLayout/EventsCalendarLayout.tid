@@ -2,7 +2,7 @@ title: $:/plugins/linonetwo/tw-calendar/tiddlywiki-ui/PageLayout/EventsCalendarL
 name: Events Calendar
 description: view events in agenda or calendar (without normal tiddlers)
 tags: $:/tags/Layout
-icon: $:/plugins/linonetwo/tw-calendar/tiddlywiki-ui/Images/GoToCalendarImage
+icon: $:/plugins/linonetwo/tw-calendar/tiddlywiki-ui/Images/EventCalendar
 
 \whitespace trim
 \define containerClasses()
