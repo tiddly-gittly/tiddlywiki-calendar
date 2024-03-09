@@ -2,6 +2,8 @@ title: $:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/popup/Crea
 subtitle: Create Tiddler
 footer: {{$:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/popup/CreateNewTiddlerPopupFooter}}
 
+\import [subfilter{$:/core/config/GlobalImportFilter}]
+
 <div class="tw-calendar-layout-create-new-tiddler-popup">
   <small>Title:{{$:/plugins/linonetwo/tw-calendar/settings/prefix}}{{$:/state/Calendar/PageLayout/create-tiddler!!draft.title}}</small>
   Caption:{{$:/state/Calendar/PageLayout/create-tiddler-caption||$:/core/ui/EditTemplate/title}}
