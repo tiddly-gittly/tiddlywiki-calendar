@@ -12,3 +12,9 @@ TiddlersCalendar/Caption: 条目时间轴
 TiddlersCalendar/Description: 按日期相关字段排列，以日程视图或日历视图查看所有条目
 Button/OpenInStory/Caption: 打开于故事河
 Button/OpenInDay/Caption: 打开于日视图
+Modal/CreateEvent/Caption: 创建事件
+Modal/CreateEvent/Label/Title: 条目名
+Modal/CreateEvent/Label/Caption: 标题
+Modal/CreateEvent/Label/Text: 内容
+Modal/CreateEvent/Label/Cancel: 取消
+Modal/CreateEvent/Label/Create: 创建

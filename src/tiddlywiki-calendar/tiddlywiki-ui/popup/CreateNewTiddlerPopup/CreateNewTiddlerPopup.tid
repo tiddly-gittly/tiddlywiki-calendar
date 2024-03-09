@@ -1,13 +1,14 @@
 title: $:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/popup/CreateNewTiddlerPopup
-subtitle: Create Tiddler
+subtitle: <<lingo Modal/CreateEvent/Caption $:/plugins/linonetwo/tw-calendar/language/>>
 footer: {{$:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/popup/CreateNewTiddlerPopupFooter}}
 
 \import [subfilter{$:/core/config/GlobalImportFilter}]
+\define lingo-base() $:/plugins/linonetwo/tw-calendar/language/
 
 <div class="tw-calendar-layout-create-new-tiddler-popup">
-  <small>Title:{{$:/plugins/linonetwo/tw-calendar/settings/prefix}}{{$:/state/Calendar/PageLayout/create-tiddler!!draft.title}}</small>
-  Caption:{{$:/state/Calendar/PageLayout/create-tiddler-caption||$:/core/ui/EditTemplate/title}}
-  Text:
+  <small><<lingo Modal/CreateEvent/Label/Title>> {{$:/plugins/linonetwo/tw-calendar/settings/prefix}}{{$:/state/Calendar/PageLayout/create-tiddler!!draft.title}}</small>
+  <<lingo Modal/CreateEvent/Label/Caption>> {{$:/state/Calendar/PageLayout/create-tiddler-caption||$:/core/ui/EditTemplate/title}}
+  <<lingo Modal/CreateEvent/Label/Text>> 
   <$let currentTiddler="$:/state/Calendar/PageLayout/create-tiddler">
     <$edit-text
       field="text"
