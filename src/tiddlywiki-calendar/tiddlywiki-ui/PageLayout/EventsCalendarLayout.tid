@@ -1,6 +1,6 @@
 title: $:/plugins/linonetwo/tw-calendar/tiddlywiki-ui/PageLayout/EventsCalendarLayout
-name: Events Calendar
-description: view events in agenda or calendar (without normal tiddlers)
+name: <<lingo EventsCalendar/Caption $:/plugins/linonetwo/tw-calendar/language/>>
+description: <<lingo EventsCalendar/Description $:/plugins/linonetwo/tw-calendar/language/>>
 tags: $:/tags/Layout
 icon: $:/plugins/linonetwo/tw-calendar/tiddlywiki-ui/Images/EventCalendar
 

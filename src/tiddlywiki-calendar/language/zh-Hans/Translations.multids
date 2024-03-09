@@ -4,3 +4,9 @@ Name: 日历
 Description: 提供日历日程微件和页面布局，根据 `created` `modified` `startDate` 和 `endDate` 字段在日历和日程上显示条目。
 PluginConfigs: 插件设置
 ConfigDescription: 通过这些设置，您可以自定义「日历」插件的行为。
+EventsCalendar/Caption: 事件日历
+EventsCalendar/Description: 在日历和日程里查看事件，只包含日记条目，不包含笔记条目。
+SearchCalendar/Caption: 搜索事件日历
+SearchCalendar/Description: 在日历中搜索事件，展示为列表，只搜日记条目，不包含笔记条目。
+TiddlersCalendar/Caption: 条目时间轴
+TiddlersCalendar/Description: 按日期相关字段排列，以日程视图或日历视图查看所有条目

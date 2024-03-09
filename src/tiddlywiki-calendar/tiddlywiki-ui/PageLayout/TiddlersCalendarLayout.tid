@@ -1,6 +1,6 @@
 title: $:/plugins/linonetwo/tw-calendar/tiddlywiki-ui/PageLayout/TiddlersCalendarLayout
-name: Tiddlers Calendar
-description: view all tiddlers in agenda or calendar by their date related fields
+name: <<lingo TiddlersCalendar/Caption $:/plugins/linonetwo/tw-calendar/language/>>
+description: <<lingo TiddlersCalendar/Description $:/plugins/linonetwo/tw-calendar/language/>>
 tags: $:/tags/Layout
 icon: $:/plugins/linonetwo/tw-calendar/tiddlywiki-ui/Images/TiddlersCalendar
 

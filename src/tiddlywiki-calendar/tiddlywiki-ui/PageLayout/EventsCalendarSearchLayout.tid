@@ -1,6 +1,6 @@
 title: $:/plugins/linonetwo/tw-calendar/tiddlywiki-ui/PageLayout/EventsCalendarSearchLayout
-name: Search Events Calendar
-description: Search events in calendar (without normal tiddlers), show as list
+name: <<lingo SearchCalendar/Caption $:/plugins/linonetwo/tw-calendar/language/>>
+description: <<lingo SearchCalendar/Description $:/plugins/linonetwo/tw-calendar/language/>>
 tags: $:/tags/Layout
 icon: $:/plugins/linonetwo/tw-calendar/tiddlywiki-ui/Images/CalendarSearchImage
 throttle.refresh: true
