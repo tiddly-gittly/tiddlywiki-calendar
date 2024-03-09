@@ -26,6 +26,8 @@ class CalendarWidget extends Widget {
   constructor(parseTreeNode: IParseTreeNode, options?: IWidgetInitialiseOptions) {
     super(parseTreeNode, options);
     this.refreshTiddlerEventCalendar = debounce(this.refreshTiddlerEventCalendar.bind(this), 500);
+    // allow focus an event on the calendar layout
+    this.addEventListener('tm-navigate', this.handleNavigateInCalendarEvent.bind(this));
   }
 
   /**
@@ -46,6 +48,24 @@ class CalendarWidget extends Widget {
 
   #triggerRefetch() {
     this.#calendar?.getEventSourceById(tiddlerEventSourceID)?.refetch();
+  }
+
+  handleNavigateInCalendarEvent(rawEvent: IWidgetEvent) {
+    const layout = $tw.wiki.getTiddlerText('$:/layout');
+    // only handle navigate when we are in event calendar layout
+    if (layout !== '$:/plugins/linonetwo/tw-calendar/tiddlywiki-ui/PageLayout/EventsCalendarLayout') return true;
+    const event = $tw.hooks.invokeHook('th-navigating', rawEvent);
+    if (!event?.navigateTo || typeof event.navigateTo !== 'string') return true;
+    const tiddler = $tw.wiki.getTiddler(event.navigateTo);
+    if (typeof tiddler?.fields?.startDate !== 'string' || !this.#calendar) {
+      return true;
+    }
+    const parsedStartDate = $tw.utils.parseDate(tiddler.fields.startDate);
+    if (parsedStartDate === null) return true;
+    const startDateString = $tw.utils.formatDateString(parsedStartDate, 'YYYY-MM-DD');
+    // focus event in day view
+    this.#calendar.changeView('timeGridDay', { start: startDateString, end: startDateString });
+    return false;
   }
 
   refresh(changedTiddlers: IChangedTiddlers): boolean {

@@ -10,6 +10,14 @@ tags: $:/tw-calendar/EventPreviewMiniViewTemplate
       <$action-navigate $to=<<currentTiddler>> />
     </$action-setfield>
   </$button>
+  <% if [{$:/layout}match[$:/plugins/linonetwo/tw-calendar/tiddlywiki-ui/PageLayout/EventsCalendarSearchLayout]] %>
+    <$button to=<<currentTiddler>> style="flex: 4;" class="tw-calendar-layout-event-preview-close-button">
+      <<lingo Button/OpenInDay/Caption>> {{$:/plugins/linonetwo/tw-calendar/tiddlywiki-ui/Images/EventCalendar}}
+      <$action-setfield $tiddler="$:/layout" text="$:/plugins/linonetwo/tw-calendar/tiddlywiki-ui/PageLayout/EventsCalendarLayout">
+      </$action-setfield>
+        <$action-navigate $to=<<currentTiddler>> />
+    </$button>
+  <% endif %>
   <$button style="flex: 1;" class="tw-calendar-layout-event-preview-close-button" >
     {{$:/core/images/close-button}}
   </$button>
