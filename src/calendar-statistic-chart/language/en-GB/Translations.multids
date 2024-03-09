@@ -7,4 +7,6 @@ ConfigDescription: These settings let you customise the behaviour of "Calendar S
 CalendarDashboardLayout/Caption: Calendar Dashboard
 CalendarDashboardLayout/Description: Big screen containing statistic charts for your calendar events.
 Modal/CreateGaugeModal/Button/Open/Caption: Create Gauge
+Modal/CreateGaugeModal/Button/Cancel/Caption: Cancel
+Modal/CreateGaugeModal/Button/Create/Caption: Create
 Modal/CreateGaugeModal/Caption: Quick create new gauge from templates

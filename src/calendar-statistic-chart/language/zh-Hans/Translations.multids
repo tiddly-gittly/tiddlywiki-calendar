@@ -7,4 +7,6 @@ ConfigDescription: 通过这些设置，您可以自定义「日历统计图表�
 CalendarDashboardLayout/Caption: 日历仪表盘
 CalendarDashboardLayout/Description: 可视化大屏集中展示统计日历事件的图表
 Modal/CreateGaugeModal/Button/Open/Caption: 创建仪表
+Modal/CreateGaugeModal/Button/Cancel/Caption: 取消
+Modal/CreateGaugeModal/Button/Create/Caption: 创建
 Modal/CreateGaugeModal/Caption: 从模板快速创建新仪表

@@ -6,16 +6,16 @@ div.tc-page-container.calendar-statistic-chart-layout-container {
 .calendar-statistic-chart-layout-main-area {
   height: 100%;
   width: 100%;
+  display: flex;
+  flex-direction: column;
 }
-
 .calendar-statistic-chart-draggable-region {
   cursor: grab;
   -webkit-app-region: drag;
 }
-
-.calendar-statistic-chart-search-layout-main-area {
-  height: 100%;
-  width: 100%;
+.calendar-statistic-chart-layout-gauge-list-container {
+  display: grid;
+}
+.calendar-statistic-chart-layout-gauge-item-container {
   display: flex;
-  flex-direction: column;
 }

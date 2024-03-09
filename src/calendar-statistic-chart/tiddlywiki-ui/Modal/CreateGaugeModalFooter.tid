@@ -1,5 +1,6 @@
 title: $:/plugins/linonetwo/calendar-statistic-chart/tiddlywiki-ui/Modal/CreateGaugeModalFooter
 
+\define lingo-base() $:/plugins/linonetwo/calendar-statistic-chart/language/
 \define cleanUpAction()
 <$action-setfield
   $tiddler="$:/state/CalendarStatisticChart/create-gauge-tiddler"
@@ -22,13 +23,13 @@ title: $:/plugins/linonetwo/calendar-statistic-chart/tiddlywiki-ui/Modal/CreateG
 
 <div class="tw-calendar-footer-buttons">
   <$button class="tw-calendar-footer-button" message="tm-close-tiddler">
-    Close
+    <<lingo Modal/CreateGaugeModal/Button/Cancel/Caption>>
     <<cleanUpAction>>
   </$button>
   
 
   <$button class="tw-calendar-footer-button" message="tm-close-tiddler">
-    Create
+    <<lingo Modal/CreateGaugeModal/Button/Create/Caption>>
     <!-- Remove draft.title first -->
     <$action-setfield $tiddler="$:/state/CalendarStatisticChart/create-gauge-tiddler" $field="draft.title" />
     <$action-createtiddler
