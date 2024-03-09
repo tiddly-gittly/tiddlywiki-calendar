@@ -10,3 +10,5 @@ SearchCalendar/Caption: 搜索事件日历
 SearchCalendar/Description: 在日历中搜索事件，展示为列表，只搜日记条目，不包含笔记条目。
 TiddlersCalendar/Caption: 条目时间轴
 TiddlersCalendar/Description: 按日期相关字段排列，以日程视图或日历视图查看所有条目
+Button/OpenInStory/Caption: 打开于故事河
+Button/OpenInDay/Caption: 打开于日视图

@@ -1,7 +1,7 @@
 title: $:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/popup/EventPreview
 
 \whitespace trim
-\import [all[shadows+tiddlers]tag[$:/tags/Macro/View]!is[draft]] [all[shadows+tiddlers]tag[$:/tags/Global/View]!is[draft]]
+\import [all[shadows+tiddlers]tag[$:/tags/Macro/View]!is[draft]] [all[shadows+tiddlers]tag[$:/tags/Global]!is[draft]]
 
 <div class="tw-calendar-layout-event-preview-container">
 <$vars storyTiddler=<<currentTiddler>> tiddlerInfoState=<<qualify "$:/state/popup/tiddler-info">>>
