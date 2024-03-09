@@ -3,6 +3,10 @@ type: text/vnd.tiddlywiki
 
 {{$:/snippets/minilanguageswitcher}}
 
+! Layouts
+
+<<simple-layout-launcher>>
+
 ! User manual
 
 {{$:/plugins/linonetwo/tw-example-plugin/readme}}
