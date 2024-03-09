@@ -31,6 +31,4 @@ Try drag on the agenda to create a new event tiddler.
 
 ! Settings
 
-You can find these settings in [[$:/plugins/linonetwo/tw-calendar/tiddlywiki-ui/ControlPanel/Settings]], You can find them from the ControlPanel -> Settings -> Calendar, or use advanced search to find this setting tiddler.
-
-{{$:/plugins/linonetwo/tw-calendar/tiddlywiki-ui/ControlPanel/Settings}}
+You can find these settings in [[$:/plugins/linonetwo/tw-calendar/config]], You can find them from the ControlPanel -> Settings -> Calendar, or use advanced search to find this setting tiddler.
