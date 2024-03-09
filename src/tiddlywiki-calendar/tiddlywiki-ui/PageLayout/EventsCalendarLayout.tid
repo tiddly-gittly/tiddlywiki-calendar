@@ -23,7 +23,12 @@ tc-page-container tc-page-view-$(storyviewTitle)$ tc-language-$(languageTitle)$ 
 <$navigator story="$:/StoryList" history="$:/HistoryList" openLinkFromInsideRiver={{$:/config/Navigation/openLinkFromInsideRiver}} openLinkFromOutsideRiver={{$:/config/Navigation/openLinkFromOutsideRiver}} relinkOnRename={{$:/config/RelinkOnRename}}>
 
 <main class="tw-calendar-layout-main-area">
-	<$calendar height="100vh" filter="[all[tiddlers]!is[system]field:calendarEntry[yes]]" />
+	<$calendar
+		height="100vh"
+		filter="[all[tiddlers]!is[system]field:calendarEntry[yes]]"
+		initialView={{$:/state/Calendar/PageLayout/EventCalendar/initialParams!!initialView}}
+		initialDate={{$:/state/Calendar/PageLayout/EventCalendar/initialParams!!initialDate}}
+	/>
 </main>
 
 </$navigator>

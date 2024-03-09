@@ -13,9 +13,16 @@ tags: $:/tw-calendar/EventPreviewMiniViewTemplate
   <% if [{$:/layout}match[$:/plugins/linonetwo/tw-calendar/tiddlywiki-ui/PageLayout/EventsCalendarSearchLayout]] %>
     <$button to=<<currentTiddler>> style="flex: 4;" class="tw-calendar-layout-event-preview-close-button">
       <<lingo Button/OpenInDay/Caption>> {{$:/plugins/linonetwo/tw-calendar/tiddlywiki-ui/Images/EventCalendar}}
-      <$action-setfield $tiddler="$:/layout" text="$:/plugins/linonetwo/tw-calendar/tiddlywiki-ui/PageLayout/EventsCalendarLayout">
-      </$action-setfield>
-        <$action-navigate $to=<<currentTiddler>> />
+      <!-- Use this to set initial value for calendar widget in the EventsCalendarLayout -->
+      <$action-createtiddler
+        $basetitle="$:/state/Calendar/PageLayout/EventCalendar/initialParams"
+        $overwrite="yes"
+        initialView="timeGridDay"
+        initialDate={{!!startDate}}
+      >
+      <!-- After initial value is set, switch to the layout and let it use initial values -->
+        <$action-setfield $tiddler="$:/layout" text="$:/plugins/linonetwo/tw-calendar/tiddlywiki-ui/PageLayout/EventsCalendarLayout" />
+      </$action-createtiddler>
     </$button>
   <% endif %>
   <$button style="flex: 1;" class="tw-calendar-layout-event-preview-close-button" >
