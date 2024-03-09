@@ -77,7 +77,7 @@ export function getEventContent(context: IContext): CustomContentGenerator<Event
       : titleElement;
     // on small view like dayGridMonth that can only display an element
     if (['dayGridMonth'].includes(argument.view.type)) {
-      return { html: [captionElement].join('') };
+      return captionElement;
     }
     // on timeGridDay view, show full text, but ignore too long text that causes lagging
     const textElement = allowedTiddlerTypeToPreview.includes(tiddler.fields.type ?? '')
