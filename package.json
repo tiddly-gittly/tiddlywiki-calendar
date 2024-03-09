@@ -31,34 +31,34 @@
     ]
   },
   "dependencies": {
-    "@floating-ui/dom": "^1.6.1",
-    "@fullcalendar/adaptive": "^6.1.10",
-    "@fullcalendar/core": "^6.1.10",
-    "@fullcalendar/daygrid": "^6.1.10",
-    "@fullcalendar/interaction": "^6.1.10",
-    "@fullcalendar/list": "^6.1.10",
-    "@fullcalendar/moment-timezone": "^6.1.10",
-    "@fullcalendar/timegrid": "^6.1.10",
+    "@floating-ui/dom": "^1.6.3",
+    "@fullcalendar/adaptive": "^6.1.11",
+    "@fullcalendar/core": "^6.1.11",
+    "@fullcalendar/daygrid": "^6.1.11",
+    "@fullcalendar/interaction": "^6.1.11",
+    "@fullcalendar/list": "^6.1.11",
+    "@fullcalendar/moment-timezone": "^6.1.11",
+    "@fullcalendar/timegrid": "^6.1.11",
     "@wessberg/connection-observer": "^1.0.5",
     "lodash": "^4.17.21",
     "moment-timezone": "^0.5.45",
-    "npm-check-updates": "^16.14.14",
+    "npm-check-updates": "^16.14.15",
     "requestidlecallback-polyfill": "^1.0.2",
     "tiddlywiki": "^5.3.3",
-    "tiddlywiki-plugin-dev": "^0.0.39"
+    "tiddlywiki-plugin-dev": "^0.0.41"
   },
   "devDependencies": {
-    "@modern-js/tsconfig": "^2.46.1",
+    "@modern-js/tsconfig": "^2.48.0",
     "@types/lodash": "^4.14.202",
-    "@types/node": "^20.11.16",
+    "@types/node": "^20.11.25",
     "dprint": "^0.45.0",
-    "eslint-config-tidgi": "1.1.5",
-    "husky": "^9.0.10",
-    "lint-staged": "^15.2.1",
-    "postcss": "^8.4.33",
+    "eslint-config-tidgi": "1.2.2",
+    "husky": "^9.0.11",
+    "lint-staged": "^15.2.2",
+    "postcss": "^8.4.35",
     "rimraf": "^5.0.5",
     "ts-node": "^10.9.2",
-    "tw5-typed": "^0.4.6",
-    "typescript": "^5.3.3"
+    "tw5-typed": "^0.5.2",
+    "typescript": "^5.4.2"
   }
 }
