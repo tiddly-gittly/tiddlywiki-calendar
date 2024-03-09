@@ -1,0 +1,11 @@
+{
+  "title": "$:/plugins/linonetwo/calendar-statistic-chart",
+  "name": "calendar-statistic-chart",
+  "author": "LinOnetwo",
+  "description": "Gauge diagram for events on calendar. Provides procedures and chart builder based on echarts, and a layout displaying the dashboard.",
+  "plugin-type": "plugin",
+  "parent-plugin": "$:/plugins/linonetwo/tw-calendar",
+  "dependents": "$:/plugins/Gk0Wk/echarts",
+  "version": "0.0.1",
+  "list": "readme config tree"
+}

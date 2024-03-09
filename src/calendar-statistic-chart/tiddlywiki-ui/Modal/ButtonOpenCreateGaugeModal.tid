@@ -1,0 +1,8 @@
+title: $:/plugins/linonetwo/calendar-statistic-chart/tiddlywiki-ui/Modal/ButtonOpenCreateGaugeModal
+
+\define lingo-base() $:/plugins/linonetwo/calendar-statistic-chart/language/
+
+<$button>
+  <$action-sendmessage $message="tm-modal" $param="$:/plugins/linonetwo/calendar-statistic-chart/tiddlywiki-ui/Modal/CreateGaugeModal"/>
+  <<lingo Modal/CreateGaugeModal/Button/Open/Caption>> {{$:/core/images/new-button}}
+</$button>

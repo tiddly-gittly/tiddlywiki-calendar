@@ -1,0 +1,19 @@
+title: $:/plugins/linonetwo/calendar-statistic-chart/tiddlywiki-ui/PageLayout/CalendarDashboardLayout
+name: <<lingo CalendarDashboardLayout/Caption $:/plugins/linonetwo/calendar-statistic-chart/language/>>
+description: <<lingo CalendarDashboardLayout/Description $:/plugins/linonetwo/calendar-statistic-chart/language/>>
+tags: $:/tags/Layout
+icon: $:/plugins/linonetwo/calendar-statistic-chart/tiddlywiki-ui/Icon/CalendarDashboard
+
+\whitespace trim
+\define containerClasses()
+tc-page-container tc-page-view-$(storyviewTitle)$ tc-language-$(languageTitle)$ calendar-statistic-chart-layout-container
+\end
+\import [subfilter{$:/core/config/GlobalImportFilter}]
+
+
+
+<div class=<<containerClasses>>>
+	<main class="calendar-statistic-chart-layout-main-area">
+		
+	</main>
+</div>

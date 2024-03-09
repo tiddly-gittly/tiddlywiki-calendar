@@ -1,0 +1,6 @@
+title: $:/plugins/linonetwo/calendar-statistic-chart/tiddlywiki-ui/Modal/CreateGaugeModal
+subtitle: <<lingo Modal/CreateGaugeModal/Caption $:/plugins/linonetwo/calendar-statistic-chart/language/>>
+footer: {{$:/plugins/linonetwo/calendar-statistic-chart/tiddlywiki-ui/Modal/CreateGaugeModalFooter}}
+
+\define lingo-base() $:/plugins/linonetwo/calendar-statistic-chart/language/
+

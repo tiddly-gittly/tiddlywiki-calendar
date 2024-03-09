@@ -1,0 +1,11 @@
+title: $:/plugins/linonetwo/calendar-statistic-chart/config
+tags: $:/tags/ControlPanel/SettingsTab
+caption: <<lingo "Name" "$:/plugins/linonetwo/calendar-statistic-chart/language/">>
+
+\define lingo-base() $:/plugins/linonetwo/calendar-statistic-chart/language/
+
+<<lingo ConfigDescription>>
+
+---
+
+! <<lingo PluginConfigs>>

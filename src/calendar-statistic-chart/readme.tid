@@ -1,0 +1,6 @@
+title: $:/plugins/linonetwo/calendar-statistic-chart/readme
+type: text/vnd.tiddlywiki
+
+\define lingo-base() $:/plugins/linonetwo/calendar-statistic-chart/language/
+
+<<lingo Readme>>

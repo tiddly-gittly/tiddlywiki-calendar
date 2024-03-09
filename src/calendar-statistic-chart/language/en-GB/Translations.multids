@@ -1,0 +1,10 @@
+title: $:/plugins/linonetwo/calendar-statistic-chart/language/en-GB/
+
+Name: Calendar Statistic Chart
+Description: Gauge diagram for events on calendar. Provides procedures and chart builder based on echarts, and a layout displaying the dashboard.
+PluginConfigs: Plugin Configs
+ConfigDescription: These settings let you customise the behaviour of "Calendar Statistic Chart" plugin.
+CalendarDashboardLayout/Caption: Calendar Dashboard
+CalendarDashboardLayout/Description: Big screen containing statistic charts for your calendar events.
+Modal/CreateGaugeModal/Button/Open/Caption: Create Gauge
+Modal/CreateGaugeModal/Caption: Quick create new gauge from templates

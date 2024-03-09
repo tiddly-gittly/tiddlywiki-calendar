@@ -1,0 +1,10 @@
+title: $:/plugins/linonetwo/calendar-statistic-chart/language/zh-Hans/
+
+Name: 日历统计图表
+Description: 提供日历日程微件和页面布局，根据 `created` `modified` `startDate` 和 `endDate` 字段在日历和日程上显示条目。
+PluginConfigs: 插件设置
+ConfigDescription: 通过这些设置，您可以自定义「日历统计图表」插件的行为。
+CalendarDashboardLayout/Caption: 日历仪表盘
+CalendarDashboardLayout/Description: 可视化大屏集中展示统计日历事件的图表
+Modal/CreateGaugeModal/Button/Open/Caption: 创建仪表
+Modal/CreateGaugeModal/Caption: 从模板快速创建新仪表

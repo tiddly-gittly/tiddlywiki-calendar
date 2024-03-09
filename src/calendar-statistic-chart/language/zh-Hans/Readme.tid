@@ -1,0 +1,21 @@
+title: $:/plugins/linonetwo/calendar-statistic-chart/language/zh-Hans/Readme
+
+\define lingo-base() $:/plugins/linonetwo/calendar-statistic-chart/language/
+
+! <<lingo Name>>
+
+<<lingo Description>>
+
+!! 用法
+
+# 带有 `$:/Tags/CalendarStatisticChart/Gauge` 标签的条目会被统计图表插件识别，放入仪表盘。
+## 本插件自带几个这样的条目，只需要在设置里填写要追踪的标签即可使用。如果忘了填写，它们也会在仪表盘里提醒你填写。
+## 你也可以在设置里禁用这些预置的条目。禁用即给条目带上 `disabled: yes` 字段，或点击条目下方的「禁用」按钮。
+# 点击「日历仪表盘」布局里的添加按钮（{{$:/plugins/linonetwo/calendar-statistic-chart/tiddlywiki-ui/Modal/ButtonOpenCreateGaugeModal}}），可以打开对话框，快速创建新的可视化仪表。
+## 对话框里可选的仪表来自本插件预置的模板，随着本插件更新会有更多仪表模板可选。
+## 通过对话框创建的每个仪表，都是你知识库里的一个笔记条目，你可以随后打开条目自由修改其内容。
+
+!! 开发新仪表
+
+# 参阅[[日历插件官方知识库|https://tiddly-gittly.github.io/tiddlywiki-calendar/]]，了解日历插件相关的字段。
+# 参阅[[ECharts 插件官方知识库|https://tiddly-gittly.github.io/tw-echarts/]]，了解 ECharts 可视化相关的微件。
