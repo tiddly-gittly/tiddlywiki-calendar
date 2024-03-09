@@ -47,13 +47,13 @@ export function getEventContent(context: IContext): CustomContentGenerator<Event
      */
     const tiddlerText = tiddler.fields.text;
     let captionResult: string | undefined | null;
-    if (typeof tiddler.fields.caption === 'string' && context.parentWidget !== undefined) {
+    if (typeof tiddler.fields.caption === 'string' && context.widget !== undefined) {
       if (tiddler.fields.caption.includes('{{')) {
         const childTree = $tw.wiki.parseText('text/vnd.tiddlywiki', tiddler.fields.caption).tree;
         const astNode = { type: 'tiddler', children: childTree };
-        const newWidgetNode = context.parentWidget.makeChildWidget(astNode);
+        const newWidgetNode = context.widget.makeChildWidget(astNode);
         // render tw content needs a temp real dom element, can't use vdom from `createElement`
-        const temporaryEle = context.parentWidget.document.createElement('div');
+        const temporaryEle = context.widget.document.createElement('div');
         // eslint-disable-next-line unicorn/no-null
         newWidgetNode.render(temporaryEle, null);
         captionResult = temporaryEle.textContent;

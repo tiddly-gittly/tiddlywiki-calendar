@@ -37,6 +37,7 @@ export interface IContext {
   initialDate?: string;
   /** when calendar open, the initial view it uses */
   initialView?: string;
+  /** Parent widget of the calendar widget */
   parentWidget?: Widget;
   /** make widget content non-editable */
   readonly?: boolean;
@@ -49,6 +50,8 @@ export interface IContext {
   startDateFields?: string[];
   /** specify the time shift used by calendar when showing data. This won't change how data is stored, data is always store in UTC timeZone, so even you travel, they remains the same. */
   timeZone?: string;
+  /** The calendar widget */
+  widget?: Widget;
 }
 export function initCalendar(containerElement: HTMLDivElement, context: IContext) {
   const calendar = new Calendar(containerElement, getSettings(context));

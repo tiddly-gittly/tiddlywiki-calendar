@@ -10,14 +10,14 @@ import type { IContext } from './initCalendar';
 function notifyNavigatorSaveTiddler(parameters: { event: MouseEvent; title: string }, context: IContext) {
   window.requestIdleCallback(
     () => {
-      context.parentWidget?.dispatchEvent({
+      context.widget?.dispatchEvent({
         type: 'tm-save-tiddler',
         // param: param,
         paramObject: { suppressNavigation: 'yes' },
         event: parameters.event,
         tiddlerTitle: parameters.title,
       });
-      context.parentWidget?.dispatchEvent({ type: 'tm-auto-save-wiki' });
+      context.widget?.dispatchEvent({ type: 'tm-auto-save-wiki' });
     },
     { timeout: 2000 },
   );
@@ -44,13 +44,13 @@ export function getHandlers(context: IContext): CalendarOptions {
   const handlers: CalendarOptions = {
     // eslint-disable-next-line @typescript-eslint/no-misused-promises
     eventClick: async (info) => {
-      if (!context.parentWidget) return;
+      if (!context.widget) return;
       const previewWidgetDataName = 'tiddlywiki-calendar-widget-event-preview';
       // delete previous element if exist
       const previousEventPreviewElement = context.containerElement?.querySelector<HTMLDivElement>('.tiddlywiki-calendar-widget-event-preview');
       const removePopup = (popupElementToRemove: HTMLDivElement | null | undefined) => {
-        if (!context.parentWidget || !popupElementToRemove) return;
-        context.parentWidget.children = context.parentWidget.children.filter(
+        if (!context.widget || !popupElementToRemove) return;
+        context.widget.children = context.widget.children.filter(
           (child) => !('data-name' in child && (child['data-name'] as string | undefined) === previewWidgetDataName),
         );
         popupElementToRemove.remove();
@@ -76,18 +76,18 @@ export function getHandlers(context: IContext): CalendarOptions {
       eventPreviewElement.dataset.tiddler = info.event.title;
 
       if (!eventPreviewElement) return;
-      const newWidgetNode = context.parentWidget.makeChildWidget({
+      const newWidgetNode = context.widget.makeChildWidget({
         type: 'tiddler',
         children: $tw.wiki.parseText(
           'text/vnd.tiddlywiki',
           `{{${info.event.title}||$:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/popup/EventPreview}}`,
           { parseAsInline: true },
         ).tree,
-      });
+      }, { variables: context.widget.variables });
       // @ts-expect-error Property 'data-name' does not exist on type 'Widget'.ts(7053)
       newWidgetNode['data-name'] = previewWidgetDataName;
+      context.widget.children.push(newWidgetNode);
       newWidgetNode.render(eventPreviewElement, null);
-      context.parentWidget.children.push(newWidgetNode);
       const eventElement = info.el;
       const { x, y } = await computePosition(eventElement, eventPreviewElement, {
         middleware: [

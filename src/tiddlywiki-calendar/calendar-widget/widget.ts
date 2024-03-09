@@ -1,9 +1,10 @@
+/* eslint-disable @typescript-eslint/strict-boolean-expressions */
 /* eslint-disable @typescript-eslint/prefer-nullish-coalescing */
 import { widget as Widget } from '$:/core/modules/widgets/widget.js';
 import type { Calendar } from '@fullcalendar/core';
 import { ConnectionObserver } from '@wessberg/connection-observer';
 import debounce from 'lodash/debounce';
-import type { IChangedTiddlers, IParseTreeNode, IWidgetInitialiseOptions } from 'tiddlywiki';
+import type { IChangedTiddlers, IParseTreeNode, IWidgetEvent, IWidgetInitialiseOptions } from 'tiddlywiki';
 
 import { changedTiddlerInViewRange } from './changeDetector';
 import { draftTiddlerTitle, getIsSearchMode, tiddlerEventSourceID } from './constants';
@@ -156,6 +157,7 @@ class CalendarWidget extends Widget {
       initialView: this.getAttribute('initialView'),
       defaultTags: $tw.utils.parseStringArray(this.getAttribute('defaultTags') || '') ?? [],
       parentWidget: this.parentWidget,
+      widget: this,
       containerElement: this.#containerElement,
       readonly: (this.getAttribute('readonly') === 'yes') || (this.getAttribute('readonly') === 'true'),
       // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing

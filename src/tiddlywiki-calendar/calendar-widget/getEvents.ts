@@ -40,10 +40,10 @@ export const getEventOnFullCalendarViewChange = (context: IContext): EventSource
  * Get event only based on filter.
  */
 export const getEventByFilter = (context: IContext): EventSourceFunc => async (_argument: EventSourceFuncArg) => {
-  const { filter, parentWidget } = context;
+  const { filter, widget } = context;
   if (!filter) return [];
   // no need to uniq here, let filter itself do the uniq.
-  const titles = $tw.wiki.filterTiddlers(filter, parentWidget);
+  const titles = $tw.wiki.filterTiddlers(filter, widget);
   const eventsOnPeriod = getEvents(titles, context);
   return eventsOnPeriod;
 };
