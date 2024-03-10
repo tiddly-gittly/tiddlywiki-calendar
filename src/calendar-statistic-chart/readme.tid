@@ -7,4 +7,4 @@ type: text/vnd.tiddlywiki
 
 !! <<lingo SystemTags>>
 
-{{$:/plugins/linonetwo/calendar-statistic-chart/SystemTags}}
+{{$:/plugins/linonetwo/calendar-statistic-chart/system-tags}}
