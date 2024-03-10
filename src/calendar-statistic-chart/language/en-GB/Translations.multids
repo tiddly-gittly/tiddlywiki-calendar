@@ -15,3 +15,5 @@ Tag/Gauge/Caption: Gauge tag
 Tag/Gauge/Description: Tiddlers with this tag will be recognized by this plugin and put into the dashboard.
 Tag/GaugeTemplate/Caption: Gauge template tag
 Tag/GaugeTemplate/Description: The tiddler will be listed in the list of templates in the "Quick create new gauge from templates" modal for the user to select and be used to copy into a new gauge.
+Tag/GaugeTemplateGroup/Caption: Gauge template group
+Tag/GaugeTemplateGroup/Description: Grouping in template list

@@ -1,5 +1,7 @@
 title: $:/plugins/linonetwo/calendar-statistic-chart/language/en-GB/
 
+GaugeTemplateGroup/Others/Caption: Others
+GaugeTemplateGroup/Number/Caption: Number
 GaugeTemplate/CountDownDays/Caption: Countdown days
 GaugeTemplate/CountDownDays/Description: Shows the number of days left until the start date (`startDate`) of a tiddler.
 GaugeTemplate/CountUpDays/Caption: Counts up days.
@@ -8,9 +10,10 @@ GaugeTemplate/CountDownHours/Caption: Tag countdown hours
 GaugeTemplate/CountDownHours/Description: Shows the number of hours left to the `startDate` of the nearest "tiddler with this tag" for a given tag. (e.g. how many hours left until the start of tonight's tiddler tagged "sleep")
 GaugeTemplate/CountTagHoursWeek/Caption: tag hours for the week
 GaugeTemplate/CountTagHoursWeek/Description: Counts the total duration (`endDate - startDate` end minus beginning) of this week's "tiddlers with this tag" for a particular tag. (e.g. how many hours did the tiddler tagged "sleep" sleep this week)
-GaugeTemplate/BarTagHoursWeek/Caption: Hours per day for this week's tags.
-GaugeTemplate/BarTagHoursWeek/Description: A bar chart showing the duration (`endDate - startDate` end minus beginning) of each day of the week for a tag. (e.g. how many hours a day did the tiddler tagged "sleep" sleep this week)
 GaugeTemplate/CountTagDaysWeek/Caption: tagged days of the week
 GaugeTemplate/CountTagDaysWeek/Description: Counts the number of days this week that a tag has "tiddlers with this tag". (e.g., how many days this week there were tiddlers tagged with "fitness"?)
+GaugeTemplateGroup/BarChart/Caption: Bar Chart
+GaugeTemplate/BarTagHoursWeek/Caption: Hours per day for this week's tags.
+GaugeTemplate/BarTagHoursWeek/Description: A bar chart showing the duration (`endDate - startDate` end minus beginning) of each day of the week for a tag. (e.g. how many hours a day did the tiddler tagged "sleep" sleep this week)
 GaugeTemplate/BarTagDaysWeek/Caption: number of tags per day this week.
 GaugeTemplate/BarTagDaysWeek/Description: A bar chart showing the number of days a tag has been tagged each day of the week. (e.g. how many times per day this week were the tiddlers tagged "watch short videos")

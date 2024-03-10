@@ -1,4 +1,4 @@
 title: $:/plugins/linonetwo/calendar-statistic-chart/tiddlywiki-ui/Template/CountDownHours
-tags: $:/Tags/CalendarStatisticChart/Gauge
+tags: $:/Tags/CalendarStatisticChart/GaugeTemplate $:/Tags/CalendarStatisticChart/Number
 caption: <<lingo GaugeTemplate/CountDownHours/Caption $:/plugins/linonetwo/calendar-statistic-chart/language/>>
 description: <<lingo GaugeTemplate/CountDownHours/Description $:/plugins/linonetwo/calendar-statistic-chart/language/>>

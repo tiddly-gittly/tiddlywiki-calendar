@@ -2,3 +2,14 @@ div.button-open-create-gauge-modal-container {
   display: flex;
   flex: 1;
 }
+
+.new-gauge-select-option {
+  display: flex;
+  flex-direction: column;
+}
+.new-gauge-select-option-caption {
+  margin-bottom: 5px;
+}
+.new-gauge-select-option-separator {
+  margin: 0 3px;
+}

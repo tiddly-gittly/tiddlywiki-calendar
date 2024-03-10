@@ -15,3 +15,5 @@ Tag/Gauge/Caption: 仪表标签
 Tag/Gauge/Description: 带有此标签的条目会被本插件识别，放入仪表盘。
 Tag/GaugeTemplate/Caption: 仪表模板标签
 Tag/GaugeTemplate/Description: 条目会列在「从模板快速创建新仪表」的模板列表中，供用户选择，用于复制成新仪表。
+Tag/GaugeTemplateGroup/Caption: 仪表模板组标签
+Tag/GaugeTemplateGroup/Description: 模板列表中的分组

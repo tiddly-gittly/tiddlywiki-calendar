@@ -1,5 +1,7 @@
 title: $:/plugins/linonetwo/calendar-statistic-chart/language/zh-Hans/
 
+GaugeTemplateGroup/Others/Caption: 其它
+GaugeTemplateGroup/Number/Caption: 数值
 GaugeTemplate/CountDownDays/Caption: 倒计日
 GaugeTemplate/CountDownDays/Description: 展示到某个条目的开始时间（`startDate`）的剩余天数。
 GaugeTemplate/CountUpDays/Caption: 正计日
@@ -8,9 +10,10 @@ GaugeTemplate/CountDownHours/Caption: 标签倒计时
 GaugeTemplate/CountDownHours/Description: 展示到某个标签最近的「带这个标签的条目」的开始时间（`startDate`）的剩余小时数。（例如到今晚打了「睡觉」标签的条目开始还有多久）
 GaugeTemplate/CountTagHoursWeek/Caption: 本周标签小时
 GaugeTemplate/CountTagHoursWeek/Description: 统计某个标签本周「带这个标签的条目」的总持续时间（`endDate - startDate` 末减初）的小时数。（例如本周打了「睡觉」标签的条目总共睡了几小时）
-GaugeTemplate/BarTagHoursWeek/Caption: 本周每日标签小时
-GaugeTemplate/BarTagHoursWeek/Description: 用柱状图展示某个标签本周每天「带这个标签的条目」的持续时间（`endDate - startDate` 末减初）的小时数。（例如本周打了「睡觉」标签的条目，每天睡了几小时）
 GaugeTemplate/CountTagDaysWeek/Caption: 本周标签天
 GaugeTemplate/CountTagDaysWeek/Description: 统计某个标签本周「带这个标签的条目」的出现天数。（例如本周总共有几天有打了「健身」标签的条目）
+GaugeTemplateGroup/BarChart/Caption: 柱状图
+GaugeTemplate/BarTagHoursWeek/Caption: 本周每日标签小时
+GaugeTemplate/BarTagHoursWeek/Description: 用柱状图展示某个标签本周每天「带这个标签的条目」的持续时间（`endDate - startDate` 末减初）的小时数。（例如本周打了「睡觉」标签的条目，每天睡了几小时）
 GaugeTemplate/BarTagDaysWeek/Caption: 本周每日标签数
 GaugeTemplate/BarTagDaysWeek/Description: 用柱状图展示某个标签本周每天「带这个标签的条目」的出现天数。（例如本周每天有几次打了「看短视频」标签的条目）

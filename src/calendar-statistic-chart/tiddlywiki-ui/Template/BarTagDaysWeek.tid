@@ -1,4 +1,4 @@
 title: $:/plugins/linonetwo/calendar-statistic-chart/tiddlywiki-ui/Template/BarTagDaysWeek
-tags: $:/Tags/CalendarStatisticChart/Gauge
+tags: $:/Tags/CalendarStatisticChart/GaugeTemplate $:/Tags/CalendarStatisticChart/BarChart
 caption: <<lingo GaugeTemplate/BarTagDaysWeek/Caption $:/plugins/linonetwo/calendar-statistic-chart/language/>>
 description: <<lingo GaugeTemplate/BarTagDaysWeek/Description $:/plugins/linonetwo/calendar-statistic-chart/language/>>

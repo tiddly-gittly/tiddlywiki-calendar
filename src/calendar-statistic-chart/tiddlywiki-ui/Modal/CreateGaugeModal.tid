@@ -3,9 +3,30 @@ subtitle: <<lingo Modal/CreateGaugeModal/Caption $:/plugins/linonetwo/calendar-s
 footer: {{$:/plugins/linonetwo/calendar-statistic-chart/tiddlywiki-ui/Modal/CreateGaugeModalFooter}}
 
 \define lingo-base() $:/plugins/linonetwo/calendar-statistic-chart/language/
+\define draft-tiddler() $:/temp/calendar-statistic-chart/new-gauge
+\define option-item()
+<option value={{!!title}} class='new-gauge-select-option'>
+  <span class='new-gauge-select-option-caption'>{{!!caption}}</span>
+  <span class='new-gauge-select-option-separator'>-</span>
+  <span class='new-gauge-select-option-description'>{{!!description}}</span>
+</option>
+\end option-item
 
-<$select tiddler=<<qualify 'select-demo'>> default='HelloThere'>
-<$list filter='[all[shadows+tiddlers]tags[]sort[title]]'>
-<option value=<<currentTiddler>>><$view field='title'/></option>
-</$list>
+<$select tiddler=<<draft-tiddler>> field='template' class='new-gauge-select'>
+  <$list filter='[all[shadows+tiddlers]tag[$:/Tags/CalendarStatisticChart/GaugeTemplateGroup]]' variable='groupName'>
+    <$wikify name='groupCaption' text={{{ [<groupName>get[caption]] }}}>
+    <optgroup label=<<groupCaption>>>
+      <$list filter='[all[shadows+tiddlers]tag[$:/Tags/CalendarStatisticChart/GaugeTemplate]tag<groupName>]'>
+        <<option-item>>
+      </$list>
+    </optgroup>
+    </$wikify>
+  </$list>
+  <$wikify name='groupCaption' text=<<lingo GaugeTemplateGroup/Others/Caption>>>
+    <optgroup label=<<groupCaption>>>
+      <$list filter='[all[shadows+tiddlers]tag[$:/Tags/CalendarStatisticChart/GaugeTemplate]notHaveGroupTag[]]'>
+        <<option-item>>
+      </$list>
+    </optgroup>
+  </$wikify>
 </$select>
