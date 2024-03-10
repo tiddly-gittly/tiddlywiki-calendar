@@ -22,7 +22,7 @@ footer: {{$:/plugins/linonetwo/calendar-statistic-chart/tiddlywiki-ui/Modal/Crea
     </optgroup>
     </$wikify>
   </$list>
-  <$wikify name='groupCaption' text=<<lingo GaugeTemplateGroup/Others/Caption>>>
+  <$wikify name='groupCaption' text='<<lingo GaugeTemplateGroup/Others/Caption>>'>
     <optgroup label=<<groupCaption>>>
       <$list filter='[all[shadows+tiddlers]tag[$:/Tags/CalendarStatisticChart/GaugeTemplate]notHaveGroupTag[]]'>
         <<option-item>>
