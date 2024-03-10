@@ -1,0 +1,13 @@
+title: $:/plugins/linonetwo/calendar-statistic-chart/SystemTags
+
+!!! <$macrocall $name="tag" tag="$:/Tags/CalendarStatisticChart/Tags" />
+
+<$list filter="[all[shadows+tiddlers]tag[$:/Tags/CalendarStatisticChart/Tags]]">
+
+!!!! <$macrocall $name="tag" tag={{!!title}} />
+
+{{!!caption}}
+
+{{!!description}}
+
+</$list>

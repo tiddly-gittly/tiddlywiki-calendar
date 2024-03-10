@@ -18,4 +18,14 @@ div.tc-page-container.calendar-statistic-chart-layout-container {
 }
 .calendar-statistic-chart-layout-gauge-item-container {
   display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+}
+.calendar-statistic-chart-layout-gauge-item-title {
+  margin-top: 0;
+}
+.calendar-statistic-chart-layout-gauge-item-body {
+  display: flex;
+  flex-direction: column;
 }

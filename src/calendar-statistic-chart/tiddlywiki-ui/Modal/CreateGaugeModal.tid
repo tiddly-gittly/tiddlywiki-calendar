@@ -4,3 +4,8 @@ footer: {{$:/plugins/linonetwo/calendar-statistic-chart/tiddlywiki-ui/Modal/Crea
 
 \define lingo-base() $:/plugins/linonetwo/calendar-statistic-chart/language/
 
+<$select tiddler=<<qualify 'select-demo'>> default='HelloThere'>
+<$list filter='[all[shadows+tiddlers]tags[]sort[title]]'>
+<option value=<<currentTiddler>>><$view field='title'/></option>
+</$list>
+</$select>

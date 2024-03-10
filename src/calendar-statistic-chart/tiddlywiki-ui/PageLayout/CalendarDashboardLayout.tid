@@ -10,15 +10,23 @@ tc-page-container tc-page-view-$(storyviewTitle)$ tc-language-$(languageTitle)$ 
 \end
 \import [subfilter{$:/core/config/GlobalImportFilter}]
 
+\procedure list-item()
+<div class="calendar-statistic-chart-layout-gauge-item-container">
+	<h3 class="calendar-statistic-chart-layout-gauge-item-title">
+		<$transclude field="caption"><$view field="title"/></$transclude>
+	</h3>
+	<div class="calendar-statistic-chart-layout-gauge-item-body">
+		<$transclude field="text" />
+	</div>
+</div>
+\end list-item
 
 
 <div class=<<containerClasses>>>
 	<main class="calendar-statistic-chart-layout-main-area">
 		<div class="calendar-statistic-chart-layout-gauge-list-container">
 			<$list filter="[tag[$:/Tags/CalendarStatisticChart/Gauge]]">
-				<div class="calendar-statistic-chart-layout-gauge-item-container">
-					<<currentTiddler>>
-				</div>
+				<<list-item>>
 			</$list>
 		</div>
 	</main>

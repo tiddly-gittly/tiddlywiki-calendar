@@ -10,3 +10,8 @@ Modal/CreateGaugeModal/Button/Open/Caption: Create Gauge
 Modal/CreateGaugeModal/Button/Cancel/Caption: Cancel
 Modal/CreateGaugeModal/Button/Create/Caption: Create
 Modal/CreateGaugeModal/Caption: Quick create new gauge from templates
+SystemTags: System Tags
+Tag/Gauge/Caption: Gauge tag
+Tag/Gauge/Description: Tiddlers with this tag will be recognized by this plugin and put into the dashboard.
+Tag/GaugeTemplate/Caption: Gauge template tag
+Tag/GaugeTemplate/Description: The tiddler will be listed in the list of templates in the "Quick create new gauge from templates" modal for the user to select and be used to copy into a new gauge.

@@ -4,3 +4,7 @@ type: text/vnd.tiddlywiki
 \define lingo-base() $:/plugins/linonetwo/calendar-statistic-chart/language/
 
 <<lingo Readme>>
+
+!! <<lingo SystemTags>>
+
+{{$:/plugins/linonetwo/calendar-statistic-chart/SystemTags}}
