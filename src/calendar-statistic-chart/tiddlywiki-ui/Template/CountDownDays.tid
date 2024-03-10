@@ -1,0 +1,4 @@
+title: $:/plugins/linonetwo/calendar-statistic-chart/tiddlywiki-ui/Template/CountDownDays
+tags: $:/Tags/CalendarStatisticChart/Gauge
+caption: <<lingo GaugeTemplate/CountDownDays/Caption $:/plugins/linonetwo/calendar-statistic-chart/language/>>
+description: <<lingo GaugeTemplate/CountDownDays/Description $:/plugins/linonetwo/calendar-statistic-chart/language/>>

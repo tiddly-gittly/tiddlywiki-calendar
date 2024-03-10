@@ -1,0 +1,4 @@
+title: $:/plugins/linonetwo/calendar-statistic-chart/tiddlywiki-ui/Template/CountTagDaysWeek
+tags: $:/Tags/CalendarStatisticChart/Gauge
+caption: <<lingo GaugeTemplate/CountTagDaysWeek/Caption $:/plugins/linonetwo/calendar-statistic-chart/language/>>
+description: <<lingo GaugeTemplate/CountTagDaysWeek/Description $:/plugins/linonetwo/calendar-statistic-chart/language/>>
