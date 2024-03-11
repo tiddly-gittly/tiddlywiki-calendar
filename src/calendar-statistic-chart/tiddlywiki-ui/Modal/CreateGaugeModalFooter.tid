@@ -17,7 +17,7 @@ title: $:/plugins/linonetwo/calendar-statistic-chart/tiddlywiki-ui/Modal/CreateG
 
   <$button
     message="tm-close-tiddler"
-    disabled={{{ [[$:/state/ego-store-lite/newAction]get[draft.title]else[yes]] }}}
+    disabled={{{ [<draft-tiddler>get[draft.title]else[yes]] }}}
   >
     <<lingo Modal/CreateGaugeModal/Button/Create/Caption>>
     <$action-createtiddler
