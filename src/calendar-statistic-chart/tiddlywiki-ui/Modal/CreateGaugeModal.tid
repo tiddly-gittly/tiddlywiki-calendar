@@ -11,22 +11,89 @@ footer: {{$:/plugins/linonetwo/calendar-statistic-chart/tiddlywiki-ui/Modal/Crea
   <span class='new-gauge-select-option-description'>{{!!description}}</span>
 </option>
 \end option-item
+\define conditional-field(fieldName)
+<% if [[<draft-tiddler>get[template]has[$fieldName$]] %>
+  <div class="calendar-statistic-chart-new-gauge-field">
+    <span class="calendar-statistic-chart-new-gauge-field-label"><<lingo Modal/CreateGaugeModal/$fieldName$/Caption>></span>
+    <$edit-text tag=input tiddler=<<draft-tiddler>> field="$fieldName$" class="calendar-statistic-chart-new-gauge-field-input"/>
+    <span class="calendar-statistic-chart-new-gauge-field-description"><<lingo Modal/CreateGaugeModal/$fieldName$/Description>></span>
+  </div>
+<% endif %>
+\end conditional-field
 
-<$select tiddler=<<draft-tiddler>> field='template' class='new-gauge-select'>
-  <$list filter='[all[shadows+tiddlers]tag[$:/Tags/CalendarStatisticChart/GaugeTemplateGroup]]' variable='groupName'>
-    <$wikify name='groupCaption' text={{{ [<groupName>get[caption]] }}}>
-    <optgroup label=<<groupCaption>>>
-      <$list filter='[all[shadows+tiddlers]tag[$:/Tags/CalendarStatisticChart/GaugeTemplate]tag<groupName>]'>
-        <<option-item>>
-      </$list>
-    </optgroup>
+<div class="calendar-statistic-chart-new-gauge-field">
+  <$select
+    tiddler=<<draft-tiddler>>
+    field='template'
+    class='new-gauge-select'
+    actions='<$action-setfield $tiddler=<<draft-tiddler>> $field="text" text={{{[<draft-tiddler>get[template]get[text]]}}}/>'
+  >
+    <$list filter='[all[shadows+tiddlers]tag[$:/Tags/CalendarStatisticChart/GaugeTemplateGroup]]' variable='groupName'>
+      <$wikify name='groupCaption' text={{{ [<groupName>get[caption]] }}}>
+      <optgroup label=<<groupCaption>>>
+        <$list filter='[all[shadows+tiddlers]tag[$:/Tags/CalendarStatisticChart/GaugeTemplate]tag<groupName>]'>
+          <<option-item>>
+        </$list>
+      </optgroup>
+      </$wikify>
+    </$list>
+    <$wikify name='groupCaption' text='<<lingo GaugeTemplateGroup/Others/Caption>>'>
+      <optgroup label=<<groupCaption>>>
+        <$list filter='[all[shadows+tiddlers]tag[$:/Tags/CalendarStatisticChart/GaugeTemplate]notHaveGroupTag[]]'>
+          <<option-item>>
+        </$list>
+      </optgroup>
     </$wikify>
-  </$list>
-  <$wikify name='groupCaption' text='<<lingo GaugeTemplateGroup/Others/Caption>>'>
-    <optgroup label=<<groupCaption>>>
-      <$list filter='[all[shadows+tiddlers]tag[$:/Tags/CalendarStatisticChart/GaugeTemplate]notHaveGroupTag[]]'>
-        <<option-item>>
-      </$list>
-    </optgroup>
-  </$wikify>
-</$select>
+  </$select>
+</div>
+
+<!-- Fields that possible required by some template -->
+<!-- // TODO: reflect to auto generate form use SuperTag? -->
+<<conditional-field targetTiddler>>
+
+<<conditional-field targetValue>>
+<!-- End Fields -->
+
+<div class="calendar-statistic-chart-new-gauge-field">
+  <span class="calendar-statistic-chart-new-gauge-field-label"><<lingo Modal/CreateGaugeModal/Title/Caption>></span>
+  <$edit-text tag=input tiddler=<<draft-tiddler>> field="draft.title" class="calendar-statistic-chart-new-gauge-field-input"/>
+  <span class="calendar-statistic-chart-new-gauge-field-description"><<lingo Modal/CreateGaugeModal/Title/Description>></span>
+</div>
+
+<div class="calendar-statistic-chart-new-gauge-field">
+  <span class="calendar-statistic-chart-new-gauge-field-label"><<lingo Modal/CreateGaugeModal/Caption/Caption>></span>
+  <$edit-text tag=input tiddler=<<draft-tiddler>> field="caption" class="calendar-statistic-chart-new-gauge-field-input" placeholder={{$:/state/calendar-statistic-chart/newAction!!draft.title}}/>
+  <span class="calendar-statistic-chart-new-gauge-field-description"><<lingo Modal/CreateGaugeModal/Caption/Description>></span>
+</div>
+
+<div class="calendar-statistic-chart-new-gauge-field">
+  <span class="calendar-statistic-chart-new-gauge-field-label"><<lingo Modal/CreateGaugeModal/Description/Caption>></span>
+  <$edit-text tag=input tiddler=<<draft-tiddler>> field="description" class="calendar-statistic-chart-new-gauge-field-input"/>
+  <span class="calendar-statistic-chart-new-gauge-field-description"><<lingo Modal/CreateGaugeModal/Description/Description>></span>
+</div>
+
+<div class="calendar-statistic-chart-new-gauge-field">
+  <span class="calendar-statistic-chart-new-gauge-field-label"><<lingo Modal/CreateGaugeModal/Icon/Caption>></span>
+  <$edit-text tag=input tiddler=<<draft-tiddler>> field="icon" class="calendar-statistic-chart-new-gauge-field-input"/>
+  <span class="calendar-statistic-chart-new-gauge-field-description"><<lingo Modal/CreateGaugeModal/Icon/Description>></span>
+</div>
+
+<div class="calendar-statistic-chart-new-gauge-field">
+  <span class="calendar-statistic-chart-new-gauge-field-label"><<lingo Modal/CreateGaugeModal/Tags/Caption>></span>
+  <$let savetiddler=<<draft-tiddler>> currenttiddler=<<draft-tiddler>>>
+    <$macrocall $name="edit-tags-template"/>
+  </$let>
+  <span class="calendar-statistic-chart-new-gauge-field-description"><<lingo Modal/CreateGaugeModal/Tags/Description>></span>
+</div>
+
+<div class="calendar-statistic-chart-new-gauge-field">
+  <span class="calendar-statistic-chart-new-gauge-field-label"><<lingo CreateAction/Enabled/Caption>></span>
+  <$checkbox
+    tiddler=<<draft-tiddler>>
+    field="enabled"
+    checked="yes"
+    unchecked="no"
+    class="calendar-statistic-chart-new-gauge-field-input"
+  />
+  <span class="calendar-statistic-chart-new-gauge-field-description"><<lingo CreateAction/Enabled/Description>></span>
+</div>

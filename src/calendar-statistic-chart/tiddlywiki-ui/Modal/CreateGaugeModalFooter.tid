@@ -1,46 +1,32 @@
 title: $:/plugins/linonetwo/calendar-statistic-chart/tiddlywiki-ui/Modal/CreateGaugeModalFooter
 
-\define lingo-base() $:/plugins/linonetwo/calendar-statistic-chart/language/
+\import [[$:/plugins/linonetwo/calendar-statistic-chart/tiddlywiki-ui/Modal/CreateGaugeModal]]
 \define cleanUpAction()
-<$action-setfield
-  $tiddler="$:/state/CalendarStatisticChart/create-gauge-tiddler"
-  text=""
-  tags=""
-  draft.title=""
-  startDate=""
-  endDate=""
-/>
-<$action-setfield
-  $tiddler="$:/state/CalendarStatisticChart/create-gauge-tiddler-caption"
-  draft.title=""
-/>
-<!-- alarm -->
-<$action-setfield      $tiddler="$:/state/CalendarStatisticChart/create-gauge-tiddler" alarms="" />
+<$action-deletetiddler $tiddler=<<draft-tiddler>> />
 \end
 
 <!-- learn this from twMat https://groups.google.com/g/tiddlywiki/c/XXbzgRmcXF0 -->
 <$wikify name="newtitle" text="{{$:/plugins/linonetwo/tw-calendar/settings/prefix}}{{$:/state/CalendarStatisticChart/create-gauge-tiddler!!draft.title}}" >
 
-<div class="tw-calendar-footer-buttons">
-  <$button class="tw-calendar-footer-button" message="tm-close-tiddler">
+<div class="calendar-statistic-chart-new-gauge-modal-buttons">
+  <$button message="tm-close-tiddler">
     <<lingo Modal/CreateGaugeModal/Button/Cancel/Caption>>
     <<cleanUpAction>>
   </$button>
   
 
-  <$button class="tw-calendar-footer-button" message="tm-close-tiddler">
+  <$button
+    message="tm-close-tiddler"
+    disabled={{{ [[$:/state/ego-store-lite/newAction]get[draft.title]else[yes]] }}}
+  >
     <<lingo Modal/CreateGaugeModal/Button/Create/Caption>>
-    <!-- Remove draft.title first -->
-    <$action-setfield $tiddler="$:/state/CalendarStatisticChart/create-gauge-tiddler" $field="draft.title" />
     <$action-createtiddler
-      $basetitle=<<newtitle>>
-      $template="$:/state/CalendarStatisticChart/create-gauge-tiddler"
-      caption={{$:/state/CalendarStatisticChart/create-gauge-tiddler-caption!!draft.title}}
-      type="text/vnd.tiddlywiki"
-    />
-    <$let currentTiddler=<<createTiddler-title>> >
-      <$action-sendmessage $message="tm-save-tiddler" $param=<<currentTiddler>> />
-    </$let>
+      $basetitle={{{ [<draft-tiddler>get[draft.title]] }}}
+      $template=<<draft-tiddler>>
+    >
+      <<cleanUpAction>>
+      <$action-deletefield $tiddler=<<createTiddler-title>> draft.title draft.of/>
+    </$action-createtiddler>
     <<cleanUpAction>>
   </$button>
 </div>

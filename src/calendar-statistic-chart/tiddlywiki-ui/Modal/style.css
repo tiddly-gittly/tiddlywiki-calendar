@@ -13,3 +13,25 @@ div.button-open-create-gauge-modal-container {
 .new-gauge-select-option-separator {
   margin: 0 3px;
 }
+.calendar-statistic-chart-new-gauge-container {
+  display: flex;
+  flex-direction: column;
+}
+.calendar-statistic-chart-new-gauge-field {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1em;
+}
+.calendar-statistic-chart-new-gauge-field-label {
+  font-size: 1.1em;
+}
+.calendar-statistic-chart-new-gauge-field-description {
+  font-size: 0.7em;
+}
+
+.calendar-statistic-chart-new-gauge-modal-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+}

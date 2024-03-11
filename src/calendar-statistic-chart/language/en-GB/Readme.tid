@@ -10,7 +10,7 @@ title: $:/plugins/linonetwo/calendar-statistic-chart/language/en-GB/Readme
 
 # Tiddlers with tags `$:/Tags/CalendarStatisticChart/Gauge` are recognized by the statistical chart plugin and put into the dashboard.
 ## This plugin comes with several such tiddlers, just fill in the tags to be tracked in the settings to use them. They will also remind you to fill them in the dashboard if you forget to do so.
-## You can also disable these preset tiddlers in the settings. To disable, either put the `disabled: yes` field on the tiddler, or click the `disable` button below the tiddler.
+## You can also disable these preset tiddlers in the settings. To disable, either put the `enabled: no` field on the tiddler, or click the `disable` button below the tiddler.
 # Clicking on the Add button ({{$:/plugins/linonetwo/calendar-statistic-chart/tiddlywiki-ui/Modal/ButtonOpenCreateGaugeModal}}) in the Calendar Dashboard layout opens a modal to quickly create a new visual dashboard.
 ## The gauges available in the modal are from the plugin's pre-built templates, and more gauge templates will be available as the plugin is updated.
 ## Each gauge created via the modal is a note tiddler in your wiki, and you can open the tiddler later to freely modify its content.

@@ -10,6 +10,22 @@ Modal/CreateGaugeModal/Button/Open/Caption: Create Gauge
 Modal/CreateGaugeModal/Button/Cancel/Caption: Cancel
 Modal/CreateGaugeModal/Button/Create/Caption: Create
 Modal/CreateGaugeModal/Caption: Quick create new gauge from templates
+Modal/CreateGaugeModal/Title/Caption: Title of the gauge
+Modal/CreateGaugeModal/Title/Description: Enter the title for the new gauge, each gauge is a note tiddler, thus need a unique title.
+Modal/CreateGaugeModal/Tags/Caption: Tags
+Modal/CreateGaugeModal/Tags/Description: Specify tags for the gauge tiddler, optional.
+Modal/CreateGaugeModal/Icon/Caption: Icon
+Modal/CreateGaugeModal/Icon/Description: Choose an icon for the gauge, optional, can be Emoji or SVG, or reference the SVG image tiddler using the transclude syntax.
+Modal/CreateGaugeModal/Caption/Caption: Caption
+Modal/CreateGaugeModal/Caption/Description: Provide a caption for the gauge, optional, fallback to title if not specified.
+Modal/CreateGaugeModal/Description/Caption: Description
+Modal/CreateGaugeModal/Description/Description: Describe the gauge in detail.
+Modal/CreateGaugeModal/Enabled/Caption: Enabled
+Modal/CreateGaugeModal/Enabled/Description: Toggle to enable or disable the gauge.
+Modal/CreateGaugeModal/targetTiddler/Caption: Target tiddler.
+Modal/CreateGaugeModal/targetTiddler/Description: Tiddler used by the visualization, can be a time reference point, or may be a tag name, depending on specific logic of vis template
+Modal/CreateGaugeModal/targetValue/Caption: Target value.
+Modal/CreateGaugeModal/targetValue/Description: value used by the visualization logic, typically as denominator of a percentage, e.g. total hours, subject to the specific logic of the vis template
 SystemTags: System Tags
 Tag/Gauge/Caption: Gauge tag
 Tag/Gauge/Description: Tiddlers with this tag will be recognized by this plugin and put into the dashboard.

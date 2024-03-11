@@ -10,6 +10,22 @@ Modal/CreateGaugeModal/Button/Open/Caption: 创建仪表
 Modal/CreateGaugeModal/Button/Cancel/Caption: 取消
 Modal/CreateGaugeModal/Button/Create/Caption: 创建
 Modal/CreateGaugeModal/Caption: 从模板快速创建新仪表
+Modal/CreateGaugeModal/Title/Caption: 仪表的条目名
+Modal/CreateGaugeModal/Title/Description: 仪表也是一个笔记条目，需要一个不重复的条目名。
+Modal/CreateGaugeModal/Tags/Caption: 标签
+Modal/CreateGaugeModal/Tags/Description: 为仪表条目添加标签，可选。
+Modal/CreateGaugeModal/Icon/Caption: 图标
+Modal/CreateGaugeModal/Icon/Description: 为仪表选择一个图标，可选，可以用 Emoji 或 SVG，也可以用嵌入语法引用 SVG 图片条目。
+Modal/CreateGaugeModal/Caption/Caption: 展示标题
+Modal/CreateGaugeModal/Caption/Description: 为仪表提供一个用于展示的标题，可选，如果不填则默认展示条目名。
+Modal/CreateGaugeModal/Description/Caption: 描述
+Modal/CreateGaugeModal/Description/Description: 详细描述仪表的用途和内容的文案，可选。
+Modal/CreateGaugeModal/Enabled/Caption: 启用
+Modal/CreateGaugeModal/Enabled/Description: 切换以启用或禁用仪表。
+Modal/CreateGaugeModal/targetTiddler/Caption: 目标条目
+Modal/CreateGaugeModal/targetTiddler/Description: 可视化逻辑所用的条目，一般作为时间点参照物使用，也可能是标签名，以可视化模板的具体逻辑为准
+Modal/CreateGaugeModal/targetValue/Caption: 目标值
+Modal/CreateGaugeModal/targetValue/Description: 可视化逻辑所用的值，一般作为百分比的分母，例如总时长，以可视化模板的具体逻辑为准
 SystemTags: 系统标签
 Tag/Gauge/Caption: 仪表标签
 Tag/Gauge/Description: 带有此标签的条目会被本插件识别，放入仪表盘。
