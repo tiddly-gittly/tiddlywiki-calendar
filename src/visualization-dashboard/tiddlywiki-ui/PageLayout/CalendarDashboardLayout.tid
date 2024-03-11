@@ -1,21 +1,21 @@
-title: $:/plugins/linonetwo/calendar-statistic-chart/tiddlywiki-ui/PageLayout/CalendarDashboardLayout
-name: <<lingo CalendarDashboardLayout/Caption $:/plugins/linonetwo/calendar-statistic-chart/language/>>
-description: <<lingo CalendarDashboardLayout/Description $:/plugins/linonetwo/calendar-statistic-chart/language/>>
+title: $:/plugins/linonetwo/visualization-dashboard/tiddlywiki-ui/PageLayout/CalendarDashboardLayout
+name: <<lingo CalendarDashboardLayout/Caption $:/plugins/linonetwo/visualization-dashboard/language/>>
+description: <<lingo CalendarDashboardLayout/Description $:/plugins/linonetwo/visualization-dashboard/language/>>
 tags: $:/tags/Layout
-icon: $:/plugins/linonetwo/calendar-statistic-chart/tiddlywiki-ui/Icon/CalendarDashboard
+icon: $:/plugins/linonetwo/visualization-dashboard/tiddlywiki-ui/Icon/CalendarDashboard
 
 \whitespace trim
 \define containerClasses()
-tc-page-container tc-page-view-$(storyviewTitle)$ tc-language-$(languageTitle)$ calendar-statistic-chart-layout-container
+tc-page-container tc-page-view-$(storyviewTitle)$ tc-language-$(languageTitle)$ visualization-dashboard-layout-container
 \end
 \import [subfilter{$:/core/config/GlobalImportFilter}]
 
 \procedure list-item()
-<div class="calendar-statistic-chart-layout-gauge-item-container">
-	<h3 class="calendar-statistic-chart-layout-gauge-item-title">
+<div class="visualization-dashboard-layout-gauge-item-container">
+	<h3 class="visualization-dashboard-layout-gauge-item-title">
 		<$transclude field="caption"><$view field="title"/></$transclude>
 	</h3>
-	<div class="calendar-statistic-chart-layout-gauge-item-body">
+	<div class="visualization-dashboard-layout-gauge-item-body">
 		<$transclude field="text" />
 	</div>
 </div>
@@ -23,8 +23,8 @@ tc-page-container tc-page-view-$(storyviewTitle)$ tc-language-$(languageTitle)$ 
 
 
 <div class=<<containerClasses>>>
-	<main class="calendar-statistic-chart-layout-main-area">
-		<div class="calendar-statistic-chart-layout-gauge-list-container">
+	<main class="visualization-dashboard-layout-main-area">
+		<div class="visualization-dashboard-layout-gauge-list-container">
 			<$list filter="[all[shadows+tiddlers]tag[$:/Tags/CalendarStatisticChart/Gauge]!is[draft]]">
 				<<list-item>>
 			</$list>

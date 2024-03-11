@@ -5,4 +5,4 @@ modifier: 林一二
 title: $:/DefaultTiddlers
 type: text/vnd.tiddlywiki
 
-Index $:/plugins/linonetwo/tw-calendar $:/plugins/linonetwo/calendar-statistic-chart
+Index $:/plugins/linonetwo/tw-calendar $:/plugins/linonetwo/visualization-dashboard

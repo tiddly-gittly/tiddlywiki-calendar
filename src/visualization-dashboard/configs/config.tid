@@ -1,8 +1,8 @@
-title: $:/plugins/linonetwo/calendar-statistic-chart/config
+title: $:/plugins/linonetwo/visualization-dashboard/config
 tags: $:/tags/ControlPanel/SettingsTab
-caption: <<lingo "Name" "$:/plugins/linonetwo/calendar-statistic-chart/language/">>
+caption: <<lingo "Name" "$:/plugins/linonetwo/visualization-dashboard/language/">>
 
-\define lingo-base() $:/plugins/linonetwo/calendar-statistic-chart/language/
+\define lingo-base() $:/plugins/linonetwo/visualization-dashboard/language/
 
 <<lingo ConfigDescription>>
 

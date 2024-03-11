@@ -3,8 +3,8 @@ import { IFilterOperator } from 'tiddlywiki';
 
 export const notHaveGroupTag = ((source, _operator): string[] => {
   const results: string[] = [];
-  const gaugeMetaTag = $tw.wiki.getTiddlerText('$:/plugins/linonetwo/calendar-statistic-chart/tags/gauge-meta-tag');
-  const gaugeTemplateGroupMetaTag = $tw.wiki.getTiddlerText('$:/plugins/linonetwo/calendar-statistic-chart/tags/gauge-template-group-meta-tag');
+  const gaugeMetaTag = $tw.wiki.getTiddlerText('$:/plugins/linonetwo/visualization-dashboard/tags/gauge-meta-tag');
+  const gaugeTemplateGroupMetaTag = $tw.wiki.getTiddlerText('$:/plugins/linonetwo/visualization-dashboard/tags/gauge-template-group-meta-tag');
   if (!gaugeMetaTag || !gaugeTemplateGroupMetaTag) return results;
   source(function(tiddler, title) {
     if (tiddler) {

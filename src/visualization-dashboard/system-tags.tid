@@ -1,4 +1,4 @@
-title: $:/plugins/linonetwo/calendar-statistic-chart/system-tags
+title: $:/plugins/linonetwo/visualization-dashboard/system-tags
 
 !!! <$macrocall $name="tag" tag="$:/Tags/CalendarStatisticChart/Tags" />
 

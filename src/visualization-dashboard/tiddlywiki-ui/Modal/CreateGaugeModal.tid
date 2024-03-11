@@ -1,9 +1,9 @@
-title: $:/plugins/linonetwo/calendar-statistic-chart/tiddlywiki-ui/Modal/CreateGaugeModal
-subtitle: <<lingo Modal/CreateGaugeModal/Caption $:/plugins/linonetwo/calendar-statistic-chart/language/>>
-footer: {{$:/plugins/linonetwo/calendar-statistic-chart/tiddlywiki-ui/Modal/CreateGaugeModalFooter}}
+title: $:/plugins/linonetwo/visualization-dashboard/tiddlywiki-ui/Modal/CreateGaugeModal
+subtitle: <<lingo Modal/CreateGaugeModal/Caption $:/plugins/linonetwo/visualization-dashboard/language/>>
+footer: {{$:/plugins/linonetwo/visualization-dashboard/tiddlywiki-ui/Modal/CreateGaugeModalFooter}}
 
-\define lingo-base() $:/plugins/linonetwo/calendar-statistic-chart/language/
-\define draft-tiddler() $:/temp/calendar-statistic-chart/new-gauge
+\define lingo-base() $:/plugins/linonetwo/visualization-dashboard/language/
+\define draft-tiddler() $:/temp/visualization-dashboard/new-gauge
 \define option-item()
 <option value={{!!title}} class='new-gauge-select-option'>
   <span class='new-gauge-select-option-caption'>{{!!caption}}</span>
@@ -13,15 +13,15 @@ footer: {{$:/plugins/linonetwo/calendar-statistic-chart/tiddlywiki-ui/Modal/Crea
 \end option-item
 \define conditional-field(fieldName)
 <% if [<draft-tiddler>get[template]has[$fieldName$]] %>
-  <div class="calendar-statistic-chart-new-gauge-field">
-    <span class="calendar-statistic-chart-new-gauge-field-label"><<lingo Modal/CreateGaugeModal/$fieldName$/Caption>></span>
-    <$edit-text tag=input tiddler=<<draft-tiddler>> field="$fieldName$" class="calendar-statistic-chart-new-gauge-field-input"/>
-    <span class="calendar-statistic-chart-new-gauge-field-description"><<lingo Modal/CreateGaugeModal/$fieldName$/Description>></span>
+  <div class="visualization-dashboard-new-gauge-field">
+    <span class="visualization-dashboard-new-gauge-field-label"><<lingo Modal/CreateGaugeModal/$fieldName$/Caption>></span>
+    <$edit-text tag=input tiddler=<<draft-tiddler>> field="$fieldName$" class="visualization-dashboard-new-gauge-field-input"/>
+    <span class="visualization-dashboard-new-gauge-field-description"><<lingo Modal/CreateGaugeModal/$fieldName$/Description>></span>
   </div>
 <% endif %>
 \end conditional-field
 
-<div class="calendar-statistic-chart-new-gauge-field">
+<div class="visualization-dashboard-new-gauge-field">
   <$select
     tiddler=<<draft-tiddler>>
     field='template'
@@ -54,46 +54,46 @@ footer: {{$:/plugins/linonetwo/calendar-statistic-chart/tiddlywiki-ui/Modal/Crea
 <<conditional-field targetValue>>
 <!-- End Fields -->
 
-<div class="calendar-statistic-chart-new-gauge-field">
-  <span class="calendar-statistic-chart-new-gauge-field-label"><<lingo Modal/CreateGaugeModal/Title/Caption>></span>
-  <$edit-text tag=input tiddler=<<draft-tiddler>> field="draft.title" class="calendar-statistic-chart-new-gauge-field-input"/>
-  <span class="calendar-statistic-chart-new-gauge-field-description"><<lingo Modal/CreateGaugeModal/Title/Description>></span>
+<div class="visualization-dashboard-new-gauge-field">
+  <span class="visualization-dashboard-new-gauge-field-label"><<lingo Modal/CreateGaugeModal/Title/Caption>></span>
+  <$edit-text tag=input tiddler=<<draft-tiddler>> field="draft.title" class="visualization-dashboard-new-gauge-field-input"/>
+  <span class="visualization-dashboard-new-gauge-field-description"><<lingo Modal/CreateGaugeModal/Title/Description>></span>
 </div>
 
-<div class="calendar-statistic-chart-new-gauge-field">
-  <span class="calendar-statistic-chart-new-gauge-field-label"><<lingo Modal/CreateGaugeModal/Caption/Caption>></span>
-  <$edit-text tag=input tiddler=<<draft-tiddler>> field="caption" class="calendar-statistic-chart-new-gauge-field-input" placeholder={{$:/state/calendar-statistic-chart/newAction!!draft.title}}/>
-  <span class="calendar-statistic-chart-new-gauge-field-description"><<lingo Modal/CreateGaugeModal/Caption/Description>></span>
+<div class="visualization-dashboard-new-gauge-field">
+  <span class="visualization-dashboard-new-gauge-field-label"><<lingo Modal/CreateGaugeModal/Caption/Caption>></span>
+  <$edit-text tag=input tiddler=<<draft-tiddler>> field="caption" class="visualization-dashboard-new-gauge-field-input" placeholder={{$:/state/visualization-dashboard/newAction!!draft.title}}/>
+  <span class="visualization-dashboard-new-gauge-field-description"><<lingo Modal/CreateGaugeModal/Caption/Description>></span>
 </div>
 
-<div class="calendar-statistic-chart-new-gauge-field">
-  <span class="calendar-statistic-chart-new-gauge-field-label"><<lingo Modal/CreateGaugeModal/Description/Caption>></span>
-  <$edit-text tag=input tiddler=<<draft-tiddler>> field="description" class="calendar-statistic-chart-new-gauge-field-input"/>
-  <span class="calendar-statistic-chart-new-gauge-field-description"><<lingo Modal/CreateGaugeModal/Description/Description>></span>
+<div class="visualization-dashboard-new-gauge-field">
+  <span class="visualization-dashboard-new-gauge-field-label"><<lingo Modal/CreateGaugeModal/Description/Caption>></span>
+  <$edit-text tag=input tiddler=<<draft-tiddler>> field="description" class="visualization-dashboard-new-gauge-field-input"/>
+  <span class="visualization-dashboard-new-gauge-field-description"><<lingo Modal/CreateGaugeModal/Description/Description>></span>
 </div>
 
-<div class="calendar-statistic-chart-new-gauge-field">
-  <span class="calendar-statistic-chart-new-gauge-field-label"><<lingo Modal/CreateGaugeModal/Icon/Caption>></span>
-  <$edit-text tag=input tiddler=<<draft-tiddler>> field="icon" class="calendar-statistic-chart-new-gauge-field-input"/>
-  <span class="calendar-statistic-chart-new-gauge-field-description"><<lingo Modal/CreateGaugeModal/Icon/Description>></span>
+<div class="visualization-dashboard-new-gauge-field">
+  <span class="visualization-dashboard-new-gauge-field-label"><<lingo Modal/CreateGaugeModal/Icon/Caption>></span>
+  <$edit-text tag=input tiddler=<<draft-tiddler>> field="icon" class="visualization-dashboard-new-gauge-field-input"/>
+  <span class="visualization-dashboard-new-gauge-field-description"><<lingo Modal/CreateGaugeModal/Icon/Description>></span>
 </div>
 
-<div class="calendar-statistic-chart-new-gauge-field">
-  <span class="calendar-statistic-chart-new-gauge-field-label"><<lingo Modal/CreateGaugeModal/Tags/Caption>></span>
+<div class="visualization-dashboard-new-gauge-field">
+  <span class="visualization-dashboard-new-gauge-field-label"><<lingo Modal/CreateGaugeModal/Tags/Caption>></span>
   <$let savetiddler=<<draft-tiddler>> currenttiddler=<<draft-tiddler>>>
     <$macrocall $name="edit-tags-template"/>
   </$let>
-  <span class="calendar-statistic-chart-new-gauge-field-description"><<lingo Modal/CreateGaugeModal/Tags/Description>></span>
+  <span class="visualization-dashboard-new-gauge-field-description"><<lingo Modal/CreateGaugeModal/Tags/Description>></span>
 </div>
 
-<div class="calendar-statistic-chart-new-gauge-field">
-  <span class="calendar-statistic-chart-new-gauge-field-label"><<lingo Modal/CreateGaugeModal/Enabled/Caption>></span>
+<div class="visualization-dashboard-new-gauge-field">
+  <span class="visualization-dashboard-new-gauge-field-label"><<lingo Modal/CreateGaugeModal/Enabled/Caption>></span>
   <$checkbox
     tiddler=<<draft-tiddler>>
     field="enabled"
     checked="yes"
     unchecked="no"
-    class="calendar-statistic-chart-new-gauge-field-input"
+    class="visualization-dashboard-new-gauge-field-input"
   />
-  <span class="calendar-statistic-chart-new-gauge-field-description"><<lingo Modal/CreateGaugeModal/Enabled/Description>></span>
+  <span class="visualization-dashboard-new-gauge-field-description"><<lingo Modal/CreateGaugeModal/Enabled/Description>></span>
 </div>

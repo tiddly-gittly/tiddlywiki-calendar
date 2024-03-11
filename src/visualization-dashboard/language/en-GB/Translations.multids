@@ -1,4 +1,4 @@
-title: $:/plugins/linonetwo/calendar-statistic-chart/language/en-GB/
+title: $:/plugins/linonetwo/visualization-dashboard/language/en-GB/
 
 Name: Calendar Statistic Chart
 Description: Gauge diagram for events on calendar. Provides procedures and chart builder based on echarts, and a layout displaying the dashboard.

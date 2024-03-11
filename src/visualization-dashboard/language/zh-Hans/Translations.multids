@@ -1,4 +1,4 @@
-title: $:/plugins/linonetwo/calendar-statistic-chart/language/zh-Hans/
+title: $:/plugins/linonetwo/visualization-dashboard/language/zh-Hans/
 
 Name: 日历统计图表
 Description: 提供日历日程微件和页面布局，根据 `created` `modified` `startDate` 和 `endDate` 字段在日历和日程上显示条目。

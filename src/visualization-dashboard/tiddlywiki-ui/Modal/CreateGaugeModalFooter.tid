@@ -1,6 +1,6 @@
-title: $:/plugins/linonetwo/calendar-statistic-chart/tiddlywiki-ui/Modal/CreateGaugeModalFooter
+title: $:/plugins/linonetwo/visualization-dashboard/tiddlywiki-ui/Modal/CreateGaugeModalFooter
 
-\import [[$:/plugins/linonetwo/calendar-statistic-chart/tiddlywiki-ui/Modal/CreateGaugeModal]]
+\import [[$:/plugins/linonetwo/visualization-dashboard/tiddlywiki-ui/Modal/CreateGaugeModal]]
 \define cleanUpAction()
 <$action-deletetiddler $tiddler=<<draft-tiddler>> />
 \end
@@ -8,7 +8,7 @@ title: $:/plugins/linonetwo/calendar-statistic-chart/tiddlywiki-ui/Modal/CreateG
 <!-- learn this from twMat https://groups.google.com/g/tiddlywiki/c/XXbzgRmcXF0 -->
 <$wikify name="newtitle" text="{{$:/plugins/linonetwo/tw-calendar/settings/prefix}}{{$:/state/CalendarStatisticChart/create-gauge-tiddler!!draft.title}}" >
 
-<div class="calendar-statistic-chart-new-gauge-modal-buttons">
+<div class="visualization-dashboard-new-gauge-modal-buttons">
   <$button message="tm-close-tiddler">
     <<lingo Modal/CreateGaugeModal/Button/Cancel/Caption>>
     <<cleanUpAction>>

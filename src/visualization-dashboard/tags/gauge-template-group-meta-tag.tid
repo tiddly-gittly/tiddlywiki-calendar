@@ -1,6 +1,6 @@
-title: $:/plugins/linonetwo/calendar-statistic-chart/tags/gauge-template-group-meta-tag
+title: $:/plugins/linonetwo/visualization-dashboard/tags/gauge-template-group-meta-tag
 tags: $:/Tags/CalendarStatisticChart/Tags
-description: <<lingo Tag/GaugeTemplateGroup/Description $:/plugins/linonetwo/calendar-statistic-chart/language/>>
-caption: <<lingo Tag/GaugeTemplateGroup/Caption $:/plugins/linonetwo/calendar-statistic-chart/language/>>
+description: <<lingo Tag/GaugeTemplateGroup/Description $:/plugins/linonetwo/visualization-dashboard/language/>>
+caption: <<lingo Tag/GaugeTemplateGroup/Caption $:/plugins/linonetwo/visualization-dashboard/language/>>
 
 $:/Tags/CalendarStatisticChart/GaugeTemplateGroup
