@@ -2,8 +2,8 @@ title: $:/plugins/linonetwo/calendar-statistic-chart/tiddlywiki-ui/Template/Coun
 tags: $:/Tags/CalendarStatisticChart/GaugeTemplate $:/Tags/CalendarStatisticChart/Number
 caption: <<lingo GaugeTemplate/CountUpDays/Caption $:/plugins/linonetwo/calendar-statistic-chart/language/>>
 description: <<lingo GaugeTemplate/CountUpDays/Description $:/plugins/linonetwo/calendar-statistic-chart/language/>>
-targetTiddler: 
-targetValue: 
+targetTiddler: -
+targetValue: 1
 
 \procedure targetTiddler() {{!!targetTiddler}}
 \procedure targetValue() {{!!targetValue}}

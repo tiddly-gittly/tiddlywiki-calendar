@@ -12,7 +12,7 @@ footer: {{$:/plugins/linonetwo/calendar-statistic-chart/tiddlywiki-ui/Modal/Crea
 </option>
 \end option-item
 \define conditional-field(fieldName)
-<% if [[<draft-tiddler>get[template]has[$fieldName$]] %>
+<% if [<draft-tiddler>get[template]has[$fieldName$]] %>
   <div class="calendar-statistic-chart-new-gauge-field">
     <span class="calendar-statistic-chart-new-gauge-field-label"><<lingo Modal/CreateGaugeModal/$fieldName$/Caption>></span>
     <$edit-text tag=input tiddler=<<draft-tiddler>> field="$fieldName$" class="calendar-statistic-chart-new-gauge-field-input"/>
@@ -87,7 +87,7 @@ footer: {{$:/plugins/linonetwo/calendar-statistic-chart/tiddlywiki-ui/Modal/Crea
 </div>
 
 <div class="calendar-statistic-chart-new-gauge-field">
-  <span class="calendar-statistic-chart-new-gauge-field-label"><<lingo CreateAction/Enabled/Caption>></span>
+  <span class="calendar-statistic-chart-new-gauge-field-label"><<lingo Modal/CreateGaugeModal/Enabled/Caption>></span>
   <$checkbox
     tiddler=<<draft-tiddler>>
     field="enabled"
@@ -95,5 +95,5 @@ footer: {{$:/plugins/linonetwo/calendar-statistic-chart/tiddlywiki-ui/Modal/Crea
     unchecked="no"
     class="calendar-statistic-chart-new-gauge-field-input"
   />
-  <span class="calendar-statistic-chart-new-gauge-field-description"><<lingo CreateAction/Enabled/Description>></span>
+  <span class="calendar-statistic-chart-new-gauge-field-description"><<lingo Modal/CreateGaugeModal/Enabled/Description>></span>
 </div>
