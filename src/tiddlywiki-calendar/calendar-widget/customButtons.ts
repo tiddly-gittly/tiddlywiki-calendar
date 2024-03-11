@@ -21,6 +21,8 @@ export function getCustomButtons() {
       text: '',
       hint: $tw.wiki.getTiddlerText('$:/language/Buttons/FullScreen/Hint') ?? 'Exit',
       click: () => {
+        // Remove initialParams so it won't affect next open
+        $tw.wiki.deleteTiddler('$:/state/Calendar/PageLayout/EventCalendar/initialParams')
         $tw.wiki.setText('$:/layout', 'text', undefined, '');
       },
     },
@@ -29,6 +31,8 @@ export function getCustomButtons() {
       text: '',
       hint: $tw.wiki.getTiddlerText('$:/language/Search/Standard/Hint') ?? 'Search',
       click: () => {
+        // Remove initialParams so it won't affect next open
+        $tw.wiki.deleteTiddler('$:/state/Calendar/PageLayout/EventCalendar/initialParams')
         $tw.wiki.setText('$:/layout', 'text', undefined, '$:/plugins/linonetwo/tw-calendar/tiddlywiki-ui/PageLayout/EventsCalendarSearchLayout');
       },
     },
