@@ -1,5 +1,5 @@
 title: $:/plugins/linonetwo/visualization-dashboard/tiddlywiki-ui/Modal/CreateGaugeModalGauge
-tags: $:/Tags/CalendarStatisticChart/Gauge
+tags: $:/Tags/VisualizationDashboard/Gauge
 caption: <<lingo Modal/CreateGaugeModal/Caption $:/plugins/linonetwo/visualization-dashboard/language/>>
 
 \define lingo-base() $:/plugins/linonetwo/visualization-dashboard/language/
@@ -7,5 +7,5 @@ caption: <<lingo Modal/CreateGaugeModal/Caption $:/plugins/linonetwo/visualizati
 <div class="button-open-create-gauge-modal-container">
   {{$:/plugins/linonetwo/visualization-dashboard/tiddlywiki-ui/Modal/ButtonOpenCreateGaugeModal}}
 
-  <p><<lingo VisualizationDashboardLayout/ExistingGaugesCount>>: <$text text={{{ [all[shadows+tiddlers]tag[$:/Tags/CalendarStatisticChart/Gauge]count[]] }}} /></p>
+  <p><<lingo VisualizationDashboardLayout/ExistingGaugesCount>>: <$text text={{{ [all[shadows+tiddlers]tag[$:/Tags/VisualizationDashboard/Gauge]count[]] }}} /></p>
 </div>

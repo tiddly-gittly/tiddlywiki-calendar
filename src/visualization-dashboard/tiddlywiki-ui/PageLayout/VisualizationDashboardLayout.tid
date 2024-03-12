@@ -14,7 +14,7 @@ tc-page-container tc-page-view-$(storyviewTitle)$ tc-language-$(languageTitle)$ 
 <div class=<<containerClasses>>>
 	<main class="visualization-dashboard-layout-main-area">
 		<div class="visualization-dashboard-layout-gauge-list-container">
-			<$list filter="[all[shadows+tiddlers]tag[$:/Tags/CalendarStatisticChart/Gauge]!is[draft]]">
+			<$list filter="[all[shadows+tiddlers]tag[$:/Tags/VisualizationDashboard/Gauge]!is[draft]]">
 				<<list-item>>
 			</$list>
 		</div>

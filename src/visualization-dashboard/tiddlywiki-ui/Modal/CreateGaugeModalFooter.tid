@@ -7,7 +7,7 @@ title: $:/plugins/linonetwo/visualization-dashboard/tiddlywiki-ui/Modal/CreateGa
 \end
 
 <!-- learn this from twMat https://groups.google.com/g/tiddlywiki/c/XXbzgRmcXF0 -->
-<$wikify name="newtitle" text="{{$:/plugins/linonetwo/tw-calendar/settings/prefix}}{{$:/state/CalendarStatisticChart/create-gauge-tiddler!!draft.title}}" >
+<$wikify name="newtitle" text="{{$:/plugins/linonetwo/tw-calendar/settings/prefix}}{{$:/state/VisualizationDashboard/create-gauge-tiddler!!draft.title}}" >
 
 <div class="visualization-dashboard-new-gauge-modal-buttons">
   <$button message="tm-close-tiddler">
@@ -23,7 +23,7 @@ title: $:/plugins/linonetwo/visualization-dashboard/tiddlywiki-ui/Modal/CreateGa
     <$action-createtiddler
       $basetitle={{{ [<draft-tiddler>get[draft.title]] }}}
       $template=<<draft-tiddler>>
-      tags={{{ [<draft-tiddler>get[tags]enlist-input[]] [[$:/Tags/CalendarStatisticChart/Gauge]] }}}
+      tags={{{ [<draft-tiddler>get[tags]enlist-input[]] [[$:/Tags/VisualizationDashboard/Gauge]] }}}
     >
       <<cleanUpAction>>
       <$action-deletefield $tiddler=<<createTiddler-title>> draft.title draft.of/>

@@ -1,8 +1,8 @@
 title: $:/plugins/linonetwo/visualization-dashboard/system-tags
 
-!!! <$macrocall $name="tag" tag="$:/Tags/CalendarStatisticChart/Tags" />
+!!! <$macrocall $name="tag" tag="$:/Tags/VisualizationDashboard/Tags" />
 
-<$list filter="[all[shadows+tiddlers]tag[$:/Tags/CalendarStatisticChart/Tags]]">
+<$list filter="[all[shadows+tiddlers]tag[$:/Tags/VisualizationDashboard/Tags]]">
 
 !!!! <$macrocall $name="tag" tag={{!!title}} />
 

@@ -1,4 +1,4 @@
 title: $:/plugins/linonetwo/visualization-dashboard/tiddlywiki-ui/Template/BarTagHoursWeek
-tags: $:/Tags/CalendarStatisticChart/GaugeTemplate $:/Tags/CalendarStatisticChart/BarChart
+tags: $:/Tags/VisualizationDashboard/GaugeTemplate $:/Tags/VisualizationDashboard/BarChart
 caption: <<lingo GaugeTemplate/BarTagHoursWeek/Caption $:/plugins/linonetwo/visualization-dashboard/language/>>
 description: <<lingo GaugeTemplate/BarTagHoursWeek/Description $:/plugins/linonetwo/visualization-dashboard/language/>>

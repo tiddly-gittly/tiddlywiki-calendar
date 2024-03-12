@@ -6,7 +6,7 @@ enabled: yes
 tags: GaugeExample
 icon: 🤠
 modified: 20240312095939657
-tags: $:/Tags/CalendarStatisticChart/Gauge
+tags: $:/Tags/VisualizationDashboard/Gauge
 targetTiddler: CountDownDayExampleTiddler
 targetValue: 40000
 title: CountDownDayExampleGauge

@@ -1,5 +1,5 @@
 title: $:/plugins/linonetwo/visualization-dashboard/tiddlywiki-ui/Template/CountDownDays
-tags: $:/Tags/CalendarStatisticChart/GaugeTemplate $:/Tags/CalendarStatisticChart/Number
+tags: $:/Tags/VisualizationDashboard/GaugeTemplate $:/Tags/VisualizationDashboard/Number
 caption: <<lingo GaugeTemplate/CountDownDays/Caption $:/plugins/linonetwo/visualization-dashboard/language/>>
 description: <<lingo GaugeTemplate/CountDownDays/Description $:/plugins/linonetwo/visualization-dashboard/language/>>
 targetTiddler: -

@@ -41,10 +41,10 @@ footer: {{$:/plugins/linonetwo/visualization-dashboard/tiddlywiki-ui/Modal/Creat
       </$action-createtiddler>
     '
   >
-    <$list filter='[all[shadows+tiddlers]tag[$:/Tags/CalendarStatisticChart/GaugeTemplateGroup]]' variable='groupName'>
+    <$list filter='[all[shadows+tiddlers]tag[$:/Tags/VisualizationDashboard/GaugeTemplateGroup]]' variable='groupName'>
       <$wikify name='groupCaption' text={{{ [<groupName>get[caption]] }}}>
       <optgroup label=<<groupCaption>>>
-        <$list filter='[all[shadows+tiddlers]tag[$:/Tags/CalendarStatisticChart/GaugeTemplate]tag<groupName>]'>
+        <$list filter='[all[shadows+tiddlers]tag[$:/Tags/VisualizationDashboard/GaugeTemplate]tag<groupName>]'>
           <<option-item>>
         </$list>
       </optgroup>
@@ -52,7 +52,7 @@ footer: {{$:/plugins/linonetwo/visualization-dashboard/tiddlywiki-ui/Modal/Creat
     </$list>
     <$wikify name='groupCaption' text='<<lingo GaugeTemplateGroup/Others/Caption>>'>
       <optgroup label=<<groupCaption>>>
-        <$list filter='[all[shadows+tiddlers]tag[$:/Tags/CalendarStatisticChart/GaugeTemplate]notHaveGroupTag[]]'>
+        <$list filter='[all[shadows+tiddlers]tag[$:/Tags/VisualizationDashboard/GaugeTemplate]notHaveGroupTag[]]'>
           <<option-item>>
         </$list>
       </optgroup>

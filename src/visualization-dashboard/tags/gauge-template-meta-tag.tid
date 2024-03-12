@@ -1,6 +1,6 @@
 title: $:/plugins/linonetwo/visualization-dashboard/tags/gauge-template-meta-tag
-tags: $:/Tags/CalendarStatisticChart/Tags
+tags: $:/Tags/VisualizationDashboard/Tags
 description: <<lingo Tag/GaugeTemplate/Description $:/plugins/linonetwo/visualization-dashboard/language/>>
 caption: <<lingo Tag/GaugeTemplate/Caption $:/plugins/linonetwo/visualization-dashboard/language/>>
 
-$:/Tags/CalendarStatisticChart/GaugeTemplate
+$:/Tags/VisualizationDashboard/GaugeTemplate
