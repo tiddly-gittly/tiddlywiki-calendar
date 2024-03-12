@@ -1,0 +1,89 @@
+caption: 
+color: #bda0fa
+created: 20240312095939655
+description: An example future day
+enabled: yes
+tags: GaugeExample
+icon: 🤠
+modified: 20240312095939657
+tags: $:/Tags/CalendarStatisticChart/Gauge
+targetTiddler: CountUpDayExampleTiddler
+targetValue: 40000
+title: CountUpDayExampleGauge
+type: text/vnd.tiddlywiki
+
+\function days() [{!!targetTiddler}!daysbetween[]]
+\function dayPercentage() [<days>divide{!!targetValue}multiply[100]floor[]]
+\function color() [{!!color}]
+
+<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;">
+
+  !! {{!!description}}
+
+  <$echarts $text=```
+  option = {
+    series: [
+      {
+        data: [{
+          value: $(dayPercentage)$,
+          name: '$(days)$',
+          title: {
+            offsetCenter: ['0%', '-30%']
+          },
+          detail: {
+            valueAnimation: true,
+            offsetCenter: ['0%', '0%']
+          }
+        }],
+        type: 'gauge',
+        startAngle: 90,
+        endAngle: -270,
+        pointer: {
+          show: false
+        },
+        progress: {
+          show: true,
+          overlap: false,
+          roundCap: true,
+          clip: false,
+          itemStyle: {
+            borderWidth: 1,
+            borderColor: '$(color)$'
+          }
+        },
+        axisLine: {
+          lineStyle: {
+            width: 40
+          }
+        },
+        splitLine: {
+          show: false,
+          distance: 0,
+          length: 10
+        },
+        axisTick: {
+          show: false
+        },
+        axisLabel: {
+          show: false,
+          distance: 50
+        },
+        title: {
+          fontSize: 14
+        },
+        detail: {
+          width: 50,
+          height: 14,
+          fontSize: 14,
+          color: 'inherit',
+          borderColor: 'inherit',
+          borderRadius: 20,
+          borderWidth: 1,
+          formatter: '{value}%'
+        }
+      }
+    ]
+  };
+  ```/>
+
+</div>
