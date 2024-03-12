@@ -1,11 +1,11 @@
 title: $:/plugins/linonetwo/visualization-dashboard/language/zh-Hans/
 
-Name: 日历统计图表
-Description: 提供日历日程微件和页面布局，根据 `created` `modified` `startDate` 和 `endDate` 字段在日历和日程上显示条目。
+Name: 可视化大屏
+Description: 在仪表盘上显示日历和知识库里事件的仪表和统计图表。提供基于 Echarts 的过程和图表生成器，以及显示统计图表仪表盘的布局。
 PluginConfigs: 插件设置
-ConfigDescription: 通过这些设置，您可以自定义「日历统计图表」插件的行为。
-CalendarDashboardLayout/Caption: 日历仪表盘
-CalendarDashboardLayout/Description: 可视化大屏集中展示统计日历事件的图表
+ConfigDescription: 通过这些设置，您可以自定义「可视化大屏」插件的行为。
+VisualizationDashboardLayout/Caption: 可视化大屏
+VisualizationDashboardLayout/Description: 可视化大屏集中展示统计日历事件和知识库活动的图表
 Modal/CreateGaugeModal/Button/Open/Caption: 创建仪表
 Modal/CreateGaugeModal/Button/Cancel/Caption: 取消
 Modal/CreateGaugeModal/Button/Create/Caption: 创建

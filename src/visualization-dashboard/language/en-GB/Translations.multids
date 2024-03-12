@@ -1,11 +1,11 @@
 title: $:/plugins/linonetwo/visualization-dashboard/language/en-GB/
 
-Name: Calendar Statistic Chart
-Description: Gauge diagram for events on calendar. Provides procedures and chart builder based on echarts, and a layout displaying the dashboard.
+Name: Visualization Dashboard
+Description: Dashboard showing gauge and diagram for events on calendar and wiki. Provides procedures and chart builder based on echarts, and a layout displaying the dashboard for statistic charts.
 PluginConfigs: Plugin Configs
-ConfigDescription: These settings let you customise the behaviour of "Calendar Statistic Chart" plugin.
-CalendarDashboardLayout/Caption: Calendar Dashboard
-CalendarDashboardLayout/Description: Big screen containing statistic charts for your calendar events.
+ConfigDescription: These settings let you customise the behaviour of "Visualization Dashboard" plugin.
+VisualizationDashboardLayout/Caption: Visualization Dashboard
+VisualizationDashboardLayout/Description: Dashboard containing statistic charts for your calendar events and wiki activity.
 Modal/CreateGaugeModal/Button/Open/Caption: Create Gauge
 Modal/CreateGaugeModal/Button/Cancel/Caption: Cancel
 Modal/CreateGaugeModal/Button/Create/Caption: Create

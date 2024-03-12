@@ -1,8 +1,8 @@
-title: $:/plugins/linonetwo/visualization-dashboard/tiddlywiki-ui/PageLayout/CalendarDashboardLayout
-name: <<lingo CalendarDashboardLayout/Caption $:/plugins/linonetwo/visualization-dashboard/language/>>
-description: <<lingo CalendarDashboardLayout/Description $:/plugins/linonetwo/visualization-dashboard/language/>>
+title: $:/plugins/linonetwo/visualization-dashboard/tiddlywiki-ui/PageLayout/VisualizationDashboardLayout
+name: <<lingo VisualizationDashboardLayout/Caption $:/plugins/linonetwo/visualization-dashboard/language/>>
+description: <<lingo VisualizationDashboardLayout/Description $:/plugins/linonetwo/visualization-dashboard/language/>>
 tags: $:/tags/Layout
-icon: $:/plugins/linonetwo/visualization-dashboard/tiddlywiki-ui/Icon/CalendarDashboard
+icon: $:/plugins/linonetwo/visualization-dashboard/tiddlywiki-ui/Icon/VisualizationDashboard
 
 \whitespace trim
 \define containerClasses()
