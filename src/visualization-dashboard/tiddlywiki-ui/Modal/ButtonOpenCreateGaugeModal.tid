@@ -3,7 +3,7 @@ title: $:/plugins/linonetwo/visualization-dashboard/tiddlywiki-ui/Modal/ButtonOp
 \define lingo-base() $:/plugins/linonetwo/visualization-dashboard/language/
 \define draft-tiddler() $:/temp/visualization-dashboard/new-gauge
 
-<$button>
+<$button style="padding: 1em;font-size: 2em;">
   <!-- Cleanup the draft state before open modal -->
   <$action-createtiddler $basetitle=<<draft-tiddler>> $overwrite="yes">
     <$action-sendmessage $message="tm-modal" $param="$:/plugins/linonetwo/visualization-dashboard/tiddlywiki-ui/Modal/CreateGaugeModal"/>

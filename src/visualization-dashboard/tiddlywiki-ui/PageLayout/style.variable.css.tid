@@ -1,2 +1,22 @@
 title: $:/plugins/linonetwo/visualization-dashboard/tiddlywiki-ui/PageLayout/style.variable.css
 tags: $:/tags/Stylesheet
+
+\import [[$:/themes/tiddlywiki/vanilla/base]]
+\rules except horizrule dash
+
+@media (min-width: <<sidebarbreakpoint>>) {
+  .visualization-dashboard-layout-gauge-list-container {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .visualization-dashboard-layout-gauge-item-container {
+    /* Desktop Default width-height that will be overwrite by field on tiddler */
+  }
+}
+@media (max-width: <<sidebarbreakpoint>>) {
+  .visualization-dashboard-layout-gauge-list-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .visualization-dashboard-layout-gauge-item-container {
+    /* Mobile Default width-height that will be overwrite by field on tiddler */
+  }
+}
