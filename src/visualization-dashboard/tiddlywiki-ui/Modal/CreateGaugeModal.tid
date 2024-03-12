@@ -2,31 +2,44 @@ title: $:/plugins/linonetwo/visualization-dashboard/tiddlywiki-ui/Modal/CreateGa
 subtitle: <<lingo Modal/CreateGaugeModal/Caption $:/plugins/linonetwo/visualization-dashboard/language/>>
 footer: {{$:/plugins/linonetwo/visualization-dashboard/tiddlywiki-ui/Modal/CreateGaugeModalFooter}}
 
+\import [[$:/core/ui/EditTemplate/tags]]
 \define lingo-base() $:/plugins/linonetwo/visualization-dashboard/language/
 \define draft-tiddler() $:/temp/visualization-dashboard/new-gauge
-\define option-item()
-<option value={{!!title}} class='new-gauge-select-option'>
-  <span class='new-gauge-select-option-caption'>{{!!caption}}</span>
-  <span class='new-gauge-select-option-separator'>-</span>
-  <span class='new-gauge-select-option-description'>{{!!description}}</span>
-</option>
-\end option-item
-\define conditional-field(fieldName)
-<% if [<draft-tiddler>get[template]has[$fieldName$]] %>
-  <div class="visualization-dashboard-new-gauge-field">
-    <span class="visualization-dashboard-new-gauge-field-label"><<lingo Modal/CreateGaugeModal/$fieldName$/Caption>></span>
-    <$edit-text tag=input tiddler=<<draft-tiddler>> field="$fieldName$" class="visualization-dashboard-new-gauge-field-input"/>
-    <span class="visualization-dashboard-new-gauge-field-description"><<lingo Modal/CreateGaugeModal/$fieldName$/Description>></span>
-  </div>
-<% endif %>
-\end conditional-field
+\procedure option-item()
+  <option value={{!!title}} class='new-gauge-select-option'>
+    <span class='new-gauge-select-option-caption'>{{!!caption}}</span>
+    <span class='new-gauge-select-option-separator'>-</span>
+    <span class='new-gauge-select-option-description'>{{!!description}}</span>
+  </option>
+\end
+
+\define conditional-field(fieldName, fieldType:"text")
+  <% if [<draft-tiddler>has[$fieldName$]] %>
+    <div class="visualization-dashboard-new-gauge-field">
+      <span class="visualization-dashboard-new-gauge-field-label"><<lingo Modal/CreateGaugeModal/$fieldName$/Caption>></span>
+      <$edit-text tag=input type="$fieldType$" tiddler=<<draft-tiddler>> field="$fieldName$" class="visualization-dashboard-new-gauge-field-input"/>
+      <span class="visualization-dashboard-new-gauge-field-description"><<lingo Modal/CreateGaugeModal/$fieldName$/Description>></span>
+    </div>
+  <% endif %>
+\end
 
 <div class="visualization-dashboard-new-gauge-field">
+  <!-- Apply the template to draft state, but remove the `tags`, and add `enabled` fields -->
   <$select
     tiddler=<<draft-tiddler>>
     field='template'
     class='new-gauge-select'
-    actions='<$action-setfield $tiddler=<<draft-tiddler>> $field="text" text={{{[<draft-tiddler>get[template]get[text]]}}}/>'
+    actions='
+      <$action-createtiddler $basetitle=<<draft-tiddler>> $overwrite="yes" $template={{{[<draft-tiddler>get[template]]}}}>
+        <$action-setfield
+          $tiddler=<<draft-tiddler>>
+          enabled="yes"
+          tags=""
+          caption=""
+          description=""
+        />
+      </$action-createtiddler>
+    '
   >
     <$list filter='[all[shadows+tiddlers]tag[$:/Tags/CalendarStatisticChart/GaugeTemplateGroup]]' variable='groupName'>
       <$wikify name='groupCaption' text={{{ [<groupName>get[caption]] }}}>
@@ -51,7 +64,9 @@ footer: {{$:/plugins/linonetwo/visualization-dashboard/tiddlywiki-ui/Modal/Creat
 <!-- // TODO: reflect to auto generate form use SuperTag? -->
 <<conditional-field targetTiddler>>
 
-<<conditional-field targetValue>>
+<<conditional-field targetValue fieldType:"number">>
+
+<<conditional-field color fieldType:"color">>
 <!-- End Fields -->
 
 <div class="visualization-dashboard-new-gauge-field">

@@ -1,9 +1,11 @@
 title: $:/plugins/linonetwo/visualization-dashboard/tiddlywiki-ui/Modal/ButtonOpenCreateGaugeModal
 
-\import [[$:/plugins/linonetwo/visualization-dashboard/tiddlywiki-ui/Modal/CreateGaugeModal]]
+\define lingo-base() $:/plugins/linonetwo/visualization-dashboard/language/
+\define draft-tiddler() $:/temp/visualization-dashboard/new-gauge
 
 <$button>
-  <$action-createtiddler $basetitle=<<draft-tiddler>> $overwrite="yes" enabled="yes">
+  <!-- Cleanup the draft state before open modal -->
+  <$action-createtiddler $basetitle=<<draft-tiddler>> $overwrite="yes">
     <$action-sendmessage $message="tm-modal" $param="$:/plugins/linonetwo/visualization-dashboard/tiddlywiki-ui/Modal/CreateGaugeModal"/>
   </$action-createtiddler>
   <<lingo Modal/CreateGaugeModal/Button/Open/Caption>> {{$:/core/images/new-button}}

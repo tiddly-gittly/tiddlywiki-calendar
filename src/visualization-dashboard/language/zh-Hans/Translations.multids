@@ -23,9 +23,11 @@ Modal/CreateGaugeModal/Description/Description: 详细描述仪表的用途和�
 Modal/CreateGaugeModal/Enabled/Caption: 启用
 Modal/CreateGaugeModal/Enabled/Description: 切换以启用或禁用仪表。
 Modal/CreateGaugeModal/targetTiddler/Caption: 目标条目
-Modal/CreateGaugeModal/targetTiddler/Description: 可视化逻辑所用的条目，一般作为时间点参照物使用，也可能是标签名，以可视化模板的具体逻辑为准
+Modal/CreateGaugeModal/targetTiddler/Description: 可视化逻辑所用的条目，一般作为时间点参照物使用，也可能是标签名，以模板的具体逻辑为准
 Modal/CreateGaugeModal/targetValue/Caption: 目标值
-Modal/CreateGaugeModal/targetValue/Description: 可视化逻辑所用的值，一般作为百分比的分母，例如总时长，以可视化模板的具体逻辑为准
+Modal/CreateGaugeModal/targetValue/Description: 可视化逻辑所用的值，一般作为百分比的分母，例如总时长，以具体逻辑为准
+Modal/CreateGaugeModal/color/Caption: 颜色
+Modal/CreateGaugeModal/color/Description: 可视化主题色，需要是一个颜色代码，你可以从调色板里选择，也可以直接输入颜色代码，例如 `#66ccff`
 SystemTags: 系统标签
 Tag/Gauge/Caption: 仪表标签
 Tag/Gauge/Description: 带有此标签的条目会被本插件识别，放入仪表盘。

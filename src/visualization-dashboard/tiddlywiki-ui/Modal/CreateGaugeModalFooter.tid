@@ -1,6 +1,7 @@
 title: $:/plugins/linonetwo/visualization-dashboard/tiddlywiki-ui/Modal/CreateGaugeModalFooter
 
-\import [[$:/plugins/linonetwo/visualization-dashboard/tiddlywiki-ui/Modal/CreateGaugeModal]]
+\define lingo-base() $:/plugins/linonetwo/visualization-dashboard/language/
+\define draft-tiddler() $:/temp/visualization-dashboard/new-gauge
 \define cleanUpAction()
 <$action-deletetiddler $tiddler=<<draft-tiddler>> />
 \end
@@ -14,7 +15,6 @@ title: $:/plugins/linonetwo/visualization-dashboard/tiddlywiki-ui/Modal/CreateGa
     <<cleanUpAction>>
   </$button>
   
-
   <$button
     message="tm-close-tiddler"
     disabled={{{ [<draft-tiddler>get[draft.title]else[yes]] }}}
@@ -23,6 +23,7 @@ title: $:/plugins/linonetwo/visualization-dashboard/tiddlywiki-ui/Modal/CreateGa
     <$action-createtiddler
       $basetitle={{{ [<draft-tiddler>get[draft.title]] }}}
       $template=<<draft-tiddler>>
+      tags={{{ [<draft-tiddler>get[tags]enlist-input[]] [[$:/Tags/CalendarStatisticChart/Gauge]] }}}
     >
       <<cleanUpAction>>
       <$action-deletefield $tiddler=<<createTiddler-title>> draft.title draft.of/>
