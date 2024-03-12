@@ -6,6 +6,10 @@ import { IFilterOperator } from 'tiddlywiki';
  * Count days between input and today.
  * If input is earlier than today (or the operand), you will get positive result.
  * If input is later than today (or the operand), to get positive result, use `!` prefix.
+ *
+ * ```
+ * [[CountUpDayExampleTiddler]!daysbetween[]]
+ * ```
  */
 export const daysbetween = ((source, operator): string[] => {
   // ! means `input - today`, which is reverse of traditional `end - start`

@@ -2,78 +2,80 @@ title: $:/plugins/linonetwo/visualization-dashboard/tiddlywiki-ui/Template/Count
 tags: $:/Tags/CalendarStatisticChart/GaugeTemplate $:/Tags/CalendarStatisticChart/Number
 caption: <<lingo GaugeTemplate/CountUpDays/Caption $:/plugins/linonetwo/visualization-dashboard/language/>>
 description: <<lingo GaugeTemplate/CountUpDays/Description $:/plugins/linonetwo/visualization-dashboard/language/>>
-targetTiddler: -
+targetTiddler: 
 targetValue: 1
 
-\procedure targetTiddler() {{!!targetTiddler}}
-\procedure targetValue() {{!!targetValue}}
-\function days() [<targetTiddler>daysbetween[]]
-\function dayPercentage() [<days>divide<targetValue>]
+\function days() [{!!targetTiddler}daysbetween[]]
+\function dayPercentage() [<days>divide{!!targetValue}multiply[100]floor[]]
 
-<$echarts $text=```
-option = {
-  series: [
-    {
-      data: [{
-        value: $(dayPercentage)$,
-        name: '$(days)$',
+<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;">
+
+  !! {{!!description}}
+
+  <$echarts $text=```
+  option = {
+    series: [
+      {
+        data: [{
+          value: $(dayPercentage)$,
+          name: '$(days)$',
+          title: {
+            offsetCenter: ['0%', '-30%']
+          },
+          detail: {
+            valueAnimation: true,
+            offsetCenter: ['0%', '0%']
+          }
+        }],
+        type: 'gauge',
+        startAngle: 90,
+        endAngle: -270,
+        pointer: {
+          show: false
+        },
+        progress: {
+          show: true,
+          overlap: false,
+          roundCap: true,
+          clip: false,
+          itemStyle: {
+            borderWidth: 1,
+            borderColor: '#464646'
+          }
+        },
+        axisLine: {
+          lineStyle: {
+            width: 40
+          }
+        },
+        splitLine: {
+          show: false,
+          distance: 0,
+          length: 10
+        },
+        axisTick: {
+          show: false
+        },
+        axisLabel: {
+          show: false,
+          distance: 50
+        },
         title: {
-          offsetCenter: ['0%', '-30%']
+          fontSize: 14
         },
         detail: {
-          valueAnimation: true,
-          offsetCenter: ['0%', '-20%']
-        }
-      }],
-      type: 'gauge',
-      startAngle: 90,
-      endAngle: -270,
-      pointer: {
-        show: false
-      },
-      progress: {
-        show: true,
-        overlap: false,
-        roundCap: true,
-        clip: false,
-        itemStyle: {
+          width: 50,
+          height: 14,
+          fontSize: 14,
+          color: 'inherit',
+          borderColor: 'inherit',
+          borderRadius: 20,
           borderWidth: 1,
-          borderColor: '#464646'
+          formatter: '{value}%'
         }
-      },
-      axisLine: {
-        lineStyle: {
-          width: 40
-        }
-      },
-      splitLine: {
-        show: false,
-        distance: 0,
-        length: 10
-      },
-      axisTick: {
-        show: false
-      },
-      axisLabel: {
-        show: false,
-        distance: 50
-      },
-      title: {
-        fontSize: 14
-      },
-      detail: {
-        width: 50,
-        height: 14,
-        fontSize: 14,
-        color: 'inherit',
-        borderColor: 'inherit',
-        borderRadius: 20,
-        borderWidth: 1,
-        formatter: '{value}%'
       }
-    }
-  ]
-};
-```/>
+    ]
+  };
+  ```/>
 
-{{!!description}}
+</div>
