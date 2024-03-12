@@ -21,13 +21,21 @@ div.tc-page-container.visualization-dashboard-layout-container {
 .visualization-dashboard-layout-gauge-item-container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
 }
 .visualization-dashboard-layout-gauge-item-title {
   margin-top: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 .visualization-dashboard-layout-gauge-item-body {
   display: flex;
   flex-direction: column;
+  flex: 5;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1em;
 }

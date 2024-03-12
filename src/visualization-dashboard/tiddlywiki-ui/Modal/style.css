@@ -1,8 +1,12 @@
 div.button-open-create-gauge-modal-container {
   display: flex;
+  flex-direction: column;
   flex: 1;
 }
-
+div.button-open-create-gauge-modal-container p {
+  font-size: 1.5em;
+  text-align: center;
+}
 .new-gauge-select-option {
   display: flex;
   flex-direction: column;

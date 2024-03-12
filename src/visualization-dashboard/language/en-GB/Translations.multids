@@ -6,6 +6,7 @@ PluginConfigs: Plugin Configs
 ConfigDescription: These settings let you customise the behaviour of "Visualization Dashboard" plugin.
 VisualizationDashboardLayout/Caption: Visualization Dashboard
 VisualizationDashboardLayout/Description: Dashboard containing statistic charts for your calendar events and wiki activity.
+VisualizationDashboardLayout/ExistingGaugesCount: Count of gauges
 Modal/CreateGaugeModal/Button/Open/Caption: Create Gauge
 Modal/CreateGaugeModal/Button/Cancel/Caption: Cancel
 Modal/CreateGaugeModal/Button/Create/Caption: Create

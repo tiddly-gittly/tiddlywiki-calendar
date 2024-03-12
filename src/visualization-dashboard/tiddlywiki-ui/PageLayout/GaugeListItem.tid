@@ -1,0 +1,16 @@
+title: $:/plugins/linonetwo/visualization-dashboard/tiddlywiki-ui/PageLayout/GaugeListItem
+
+\procedure list-item()
+<div class="visualization-dashboard-layout-gauge-item-container">
+	<h3 class="visualization-dashboard-layout-gauge-item-title">
+		<% if [all[current]has[caption]] %>
+			<$transclude field="caption"/>
+		<% else %>
+			<$view field="title"/>
+		<% endif %>
+	</h3>
+	<div class="visualization-dashboard-layout-gauge-item-body">
+		<$transclude field="text" mode="block"/>
+	</div>
+</div>
+\end list-item

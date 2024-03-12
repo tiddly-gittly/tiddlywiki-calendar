@@ -9,18 +9,7 @@ icon: $:/plugins/linonetwo/visualization-dashboard/tiddlywiki-ui/Icon/Visualizat
 tc-page-container tc-page-view-$(storyviewTitle)$ tc-language-$(languageTitle)$ visualization-dashboard-layout-container
 \end
 \import [subfilter{$:/core/config/GlobalImportFilter}]
-
-\procedure list-item()
-<div class="visualization-dashboard-layout-gauge-item-container">
-	<h3 class="visualization-dashboard-layout-gauge-item-title">
-		<$transclude field="caption"><$view field="title"/></$transclude>
-	</h3>
-	<div class="visualization-dashboard-layout-gauge-item-body">
-		<$transclude field="text" />
-	</div>
-</div>
-\end list-item
-
+\import [[$:/plugins/linonetwo/visualization-dashboard/tiddlywiki-ui/PageLayout/GaugeListItem]]
 
 <div class=<<containerClasses>>>
 	<main class="visualization-dashboard-layout-main-area">
