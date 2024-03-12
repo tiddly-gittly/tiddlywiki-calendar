@@ -95,7 +95,7 @@ footer: {{$:/plugins/linonetwo/visualization-dashboard/tiddlywiki-ui/Modal/Creat
 
 <div class="visualization-dashboard-new-gauge-field">
   <span class="visualization-dashboard-new-gauge-field-label"><<lingo Modal/CreateGaugeModal/Tags/Caption>></span>
-  <$let savetiddler=<<draft-tiddler>> currenttiddler=<<draft-tiddler>>>
+  <$let saveTiddler=<<draft-tiddler>> currentTiddler=<<draft-tiddler>>>
     <$macrocall $name="edit-tags-template"/>
   </$let>
   <span class="visualization-dashboard-new-gauge-field-description"><<lingo Modal/CreateGaugeModal/Tags/Description>></span>
