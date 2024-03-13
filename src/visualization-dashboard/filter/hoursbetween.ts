@@ -9,7 +9,7 @@ import { getDateToCompareFromTiddler, getDateToCompareOrTodayFromOperand, getDif
  * If input is later than today (or the operand), to get positive result, use `!` prefix.
  *
  * ```
- * [[CountUpDayExampleTiddler]!hoursbetween[]]
+ * [[CountUpDayExampleTiddler]hoursbetween[]]
  * ```
  */
 export const hoursbetween = ((source, operator): string[] => {

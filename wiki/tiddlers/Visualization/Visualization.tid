@@ -11,6 +11,8 @@ tags: Index
 
 <<.operator-example f1 "[[CountUpDayExampleTiddler]daysbetween[]]">>
 
+<<.operator-example f1.5 "[[CountUpDayExampleTiddler]hoursbetween[]]">>
+
 <<.operator-example f2 "[weekstart[]]">>
 
 <<.operator-example f2.5 "[<weekstart>]">>
