@@ -6,8 +6,8 @@ GaugeTemplate/CountDownDays/Caption: 倒计日
 GaugeTemplate/CountDownDays/Description: 展示到某个条目的开始时间（`startDate`）的剩余天数。
 GaugeTemplate/CountUpDays/Caption: 正计日
 GaugeTemplate/CountUpDays/Description: 展示从某个条目的结束时间（`endDate`）到今天的天数。
-GaugeTemplate/CountDownHours/Caption: 标签倒计时
-GaugeTemplate/CountDownHours/Description: 展示到某个标签最近的「带这个标签的条目」的开始时间（`startDate`）的剩余小时数。（例如到今晚打了「睡觉」标签的条目开始还有多久）
+GaugeTemplate/CountDownNearestTagHours/Caption: 最近标签倒计时
+GaugeTemplate/CountDownNearestTagHours/Description: 展示到某个标签最近的「带这个标签的条目」的开始时间（`startDate`）的剩余小时数。（例如到今晚打了「睡觉」标签的条目开始还有多久）
 GaugeTemplate/CountTagHoursWeek/Caption: 本周标签小时
 GaugeTemplate/CountTagHoursWeek/Description: 统计某个标签本周「带这个标签的条目」的总持续时间（`endDate - startDate` 末减初）的小时数。（例如本周打了「睡觉」标签的条目总共睡了几小时）
 GaugeTemplate/CountTagDaysWeek/Caption: 本周标签天

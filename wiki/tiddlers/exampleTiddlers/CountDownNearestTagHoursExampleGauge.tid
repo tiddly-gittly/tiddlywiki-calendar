@@ -1,14 +1,18 @@
-title: $:/plugins/linonetwo/visualization-dashboard/tiddlywiki-ui/Template/CountTagHoursWeek
-tags: $:/Tags/VisualizationDashboard/GaugeTemplate $:/Tags/VisualizationDashboard/Number
-caption: <<lingo GaugeTemplate/CountTagHoursWeek/Caption $:/plugins/linonetwo/visualization-dashboard/language/>>
-description: <<lingo GaugeTemplate/CountTagHoursWeek/Description $:/plugins/linonetwo/visualization-dashboard/language/>>
-targetTiddler: -
-targetValue: 1
-color: #464646
+caption: 
+color: blue
+created: 20240312095939655
+description: Hours to nearest "Sleeping" tag
+enabled: yes
+tags: GaugeExample
+icon: 🤠
+modified: 20240312095939657
+tags: $:/Tags/VisualizationDashboard/Gauge
+targetTiddler: Sleeping
+targetValue: 24
+title: CountDownNearestTagHoursExampleGauge
+type: text/vnd.tiddlywiki
 
-\function days() [{!!targetTiddler}hoursbetween[]]
-\function dayPercentage() [{!!targetValue}subtract<days>divide{!!targetValue}multiply[100]floor[]]
-\function color() [{!!color}]
+\import [[$:/plugins/linonetwo/visualization-dashboard/tiddlywiki-ui/Template/CountDownNearestTagHours]]
 
 <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;">
 
@@ -18,7 +22,7 @@ color: #464646
       {
         data: [{
           value: $(dayPercentage)$,
-          name: '$(days)$',
+          name: '$(hoursToNearestTag)$H',
           title: {
             offsetCenter: ['0%', '-10%'],
             fontSize: 30,

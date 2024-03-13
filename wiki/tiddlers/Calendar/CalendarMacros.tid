@@ -1,0 +1,11 @@
+title: CalendarMacros
+tags: Index
+type: text/vnd.tiddlywiki
+
+! Macros
+
+Get duration as 1D 2H 3M 4S
+
+`<<date-duration-macro startDate:"20230103223000000" endDate:"20230104033000000" >>`
+
+<<date-duration-macro startDate:"20230103223000000" endDate:"20230104033000000" >>

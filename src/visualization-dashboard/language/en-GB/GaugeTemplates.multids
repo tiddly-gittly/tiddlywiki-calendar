@@ -6,8 +6,8 @@ GaugeTemplate/CountDownDays/Caption: Countdown days
 GaugeTemplate/CountDownDays/Description: Shows the number of days left until the start date (`startDate`) of a tiddler.
 GaugeTemplate/CountUpDays/Caption: Counts up days.
 GaugeTemplate/CountUpDays/Description: Shows the number of days from the end of an tiddler (`endDate`) to today.
-GaugeTemplate/CountDownHours/Caption: Tag countdown hours
-GaugeTemplate/CountDownHours/Description: Shows the number of hours left to the `startDate` of the nearest "tiddler with this tag" for a given tag. (e.g. how many hours left until the start of tonight's tiddler tagged "sleep")
+GaugeTemplate/CountDownNearestTagHours/Caption: Nearest tag countdown hours
+GaugeTemplate/CountDownNearestTagHours/Description: Shows the number of hours left to the `startDate` of the nearest "tiddler with this tag" for a given tag. (e.g. how many hours left until the start of tonight's tiddler tagged "sleep")
 GaugeTemplate/CountTagHoursWeek/Caption: tag hours for the week
 GaugeTemplate/CountTagHoursWeek/Description: Counts the total duration (`endDate - startDate` end minus beginning) of this week's "tiddlers with this tag" for a particular tag. (e.g. how many hours did the tiddler tagged "sleep" sleep this week)
 GaugeTemplate/CountTagDaysWeek/Caption: tagged days of the week

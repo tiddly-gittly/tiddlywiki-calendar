@@ -1,18 +1,18 @@
 /* eslint-disable unicorn/no-null */
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 import { IFilterOperator } from 'tiddlywiki';
-import { getDateToCompare, getDiffInDays } from './dateUtils';
+import { getDateToCompare, getDiffInHours } from './dateUtils';
 
 /**
- * Count days between input and today.
+ * Count hours between input and today.
  * If input is earlier than today (or the operand), you will get positive result.
  * If input is later than today (or the operand), to get positive result, use `!` prefix.
  *
  * ```
- * [[CountUpDayExampleTiddler]!daysbetween[]]
+ * [[CountUpDayExampleTiddler]!hoursbetween[]]
  * ```
  */
-export const daysbetween = ((source, operator): string[] => {
+export const hoursbetween = ((source, operator): string[] => {
   // ! means `input - today`, which is reverse of traditional `end - start`
   const isTodayMinusInput = operator.prefix !== '!';
   let dayToTest: Date | null = null;
@@ -32,8 +32,8 @@ export const daysbetween = ((source, operator): string[] => {
         results.push('');
         return;
       }
-      const diffInDays = isTodayMinusInput ? getDiffInDays(dayToTest, dateToCompare) : getDiffInDays(dateToCompare, dayToTest);
-      results.push(String(diffInDays));
+      const diffInHours = isTodayMinusInput ? getDiffInHours(dayToTest, dateToCompare) : getDiffInHours(dateToCompare, dayToTest);
+      results.push(String(diffInHours));
     }
   });
   return results;
