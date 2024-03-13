@@ -1,6 +1,26 @@
 title: Visualization
 tags: Index
 
+! Macros
+
+<$macrocall $name=".example" n="m1" eg="""<<weekstart>>"""/>
+
+<$macrocall $name=".example" n="m2" eg="""<<weekend>>"""/>
+
 ! Filter Operators
 
-<<.operator-example 1 "[[CountUpDayExampleTiddler]!daysbetween[]]">>
+<<.operator-example f1 "[[CountUpDayExampleTiddler]daysbetween[]]">>
+
+<<.operator-example f2 "[weekstart[]]">>
+
+<<.operator-example f2.5 "[<weekstart>]">>
+
+<<.operator-example f3 "[weekend[]]">>
+
+<<.operator-example f3.5 "[<weekend>]">>
+
+<<.operator-example f4 "[all[tiddlers]!is[system]field:calendarEntry[yes]tag[Sleeping]]">>
+
+<<.operator-example f4.1 "[all[tiddlers]!is[system]field:calendarEntry[yes]tag[Sleeping]] :filter[get[startDate]compare:date:gteq<weekstart>compare:date:lteq<now [UTC]YYYY0MM0DD0hh0mm0ssXXX>]">>
+
+<<.operator-example f4.2 "[all[tiddlers]!is[system]field:calendarEntry[yes]tag[Sleeping]] :filter[get[startDate]compare:date:gteq<weekstart>compare:date:lteq<now [UTC]YYYY0MM0DD0hh0mm0ssXXX>] +[counthours[]]">>

@@ -1,7 +1,7 @@
 /* eslint-disable unicorn/no-null */
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 import { IFilterOperator } from 'tiddlywiki';
-import { getDateToCompare, getDiffInDays } from './dateUtils';
+import { getDateToCompareFromTiddler, getDateToCompareOrTodayFromOperand, getDiffInDays } from './dateUtils';
 
 /**
  * Count days between input and today.
@@ -9,24 +9,18 @@ import { getDateToCompare, getDiffInDays } from './dateUtils';
  * If input is later than today (or the operand), to get positive result, use `!` prefix.
  *
  * ```
- * [[CountUpDayExampleTiddler]!daysbetween[]]
+ * [[CountUpDayExampleTiddler]daysbetween[]]
  * ```
  */
 export const daysbetween = ((source, operator): string[] => {
   // ! means `input - today`, which is reverse of traditional `end - start`
   const isTodayMinusInput = operator.prefix !== '!';
-  let dayToTest: Date | null = null;
-  if (operator.operands[0]) {
-    dayToTest = $tw.utils.parseDate(operator.operands[0]);
-  }
-  if (dayToTest === null) {
-    dayToTest = new Date();
-  }
+  const dayToTest = getDateToCompareOrTodayFromOperand(operator.operands[0]);
   const results: string[] = [];
   source(function(tiddler, _title) {
     if (tiddler) {
       // ! means `input - today`, which is reverse of traditional `end - start`
-      const dateToCompare = getDateToCompare(tiddler, isTodayMinusInput);
+      const dateToCompare = getDateToCompareFromTiddler(tiddler, isTodayMinusInput);
       if (dateToCompare === undefined) {
         // if input tiddler don't have date fields, skip it by return empty string
         results.push('');

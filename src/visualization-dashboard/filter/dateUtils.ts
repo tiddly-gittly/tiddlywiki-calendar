@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 import type { Tiddler } from 'tiddlywiki';
 
-export function getDateToCompare(tiddler: Tiddler, isTodayMinusInput: boolean): Date | undefined {
+export function getDateToCompareFromTiddler(tiddler: Tiddler, isTodayMinusInput: boolean): Date | undefined {
   if (isTodayMinusInput) {
     // today is later than input, so minus input's endDate, which is near input (today)
     let dateEarlier: Date | null = null;
@@ -68,4 +68,54 @@ export function getDiffInHours(dateLater: Date, dateEarlier: Date): number {
   // two dates
   const differenceInDays = Math.round(differenceInTime / (1000 * 3600));
   return differenceInDays;
+}
+
+/**
+ * Get start date of this week, accept a param, if is 0 means get start of this week, if is 1 means get start of last week, if is 2 means get start of last last week. If is -1 means get start of next week (end of this week), and so on.
+ * @param offset how many weeks to last week, default is 0 means this week. 1 means last week.
+ * @returns
+ */
+export function getStartDateOfWeek(offset: number = 0): Date {
+  const now = new Date();
+  // Adjusting so that Monday is considered the first day of the week
+  const currentDay = now.getDay() || 7;
+  // If it's Monday, currentDay is 1, and we want to subtract 0 days.
+  // If it's Tuesday, currentDay is 2, and we want to subtract 1 day, etc.
+  const difference = currentDay - 1 + (offset * 7);
+  now.setDate(now.getDate() - difference);
+
+  // Resetting the hours, minutes, seconds, and milliseconds to get the start of the day
+  now.setHours(0, 0, 0, 0);
+
+  return now;
+}
+
+/**
+ * Get end date of this week, accept a param, if is 0 means get end of this week, if is 1 means get end of last week, if is 2 means get end of last last week. If is -1 means get end of next week (start of next next week), and so on.
+ * @param offset how many weeks to last week, default is 0 means this week. 1 means last week.
+ * @returns
+ */
+export function getEndDateOfWeek(offset: number = 0): Date {
+  // Get the start date of the week based on the offset
+  const startDate = getStartDateOfWeek(offset);
+
+  // Add 6 days to get the end date of the week (Sunday)
+  const endDate = new Date(startDate);
+  endDate.setDate(startDate.getDate() + 6);
+
+  // Resetting the hours, minutes, seconds, and milliseconds to get the end of the day
+  endDate.setHours(23, 59, 59, 999);
+
+  return endDate;
+}
+
+export function getDateToCompareOrTodayFromOperand(operand: string | undefined): Date {
+  let dayToCompare: Date | null = null;
+  if (operand) {
+    dayToCompare = $tw.utils.parseDate(operand);
+  }
+  if (dayToCompare === null) {
+    dayToCompare = new Date();
+  }
+  return dayToCompare;
 }
