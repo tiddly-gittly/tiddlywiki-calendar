@@ -20,11 +20,12 @@ color: #464646
           value: $(dayPercentage)$,
           name: '$(days)$',
           title: {
-            offsetCenter: ['0%', '-30%']
+            offsetCenter: ['0%', '-10%'],
+            fontSize: 30,
           },
           detail: {
             valueAnimation: true,
-            offsetCenter: ['0%', '0%']
+            offsetCenter: ['0%', '30%'],
           }
         }],
         type: 'gauge',
@@ -40,8 +41,9 @@ color: #464646
           clip: false,
           itemStyle: {
             borderWidth: 1,
-            borderColor: '$(color)$'
-          }
+            borderColor: '$(color)$',
+            color: '$(color)$',
+          },
         },
         axisLine: {
           lineStyle: {
