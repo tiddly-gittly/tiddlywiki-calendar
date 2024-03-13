@@ -64,10 +64,11 @@ export function getDiffInHours(dateLater: Date, dateEarlier: Date): number {
   // of two dates
   const differenceInTime = dateLater.getTime() - dateEarlier.getTime();
 
-  // Calculating the no. of days between
+  // Calculating the no. of hours between
   // two dates
-  const differenceInDays = Math.round(differenceInTime / (1000 * 3600));
-  return differenceInDays;
+  // to 3 precision
+  const differenceInHours = differenceInTime / (1000 * 3600);
+  return differenceInHours;
 }
 
 /**

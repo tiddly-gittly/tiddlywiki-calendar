@@ -17,7 +17,7 @@ tags: Index
 
 <<.operator-example f3 "[weekend[]]">>
 
-<<.operator-example f3.5 "[<weekend>]">>
+<<.operator-example f3.5 "[<weekend>] [<now [UTC]YYYY0MM0DD0hh0mm0ssXXX>]">>
 
 <<.operator-example f4 "[all[tiddlers]!is[system]field:calendarEntry[yes]tag[Sleeping]]">>
 

@@ -27,7 +27,7 @@ export const hoursbetween = ((source, operator): string[] => {
         return;
       }
       const diffInHours = isTodayMinusInput ? getDiffInHours(dayToTest, dateToCompare) : getDiffInHours(dateToCompare, dayToTest);
-      results.push(String(diffInHours));
+      results.push(diffInHours.toFixed(2));
     }
   });
   return results;

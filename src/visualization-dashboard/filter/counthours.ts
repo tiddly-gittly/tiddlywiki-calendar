@@ -24,5 +24,5 @@ export const counthours = ((source, operator): string[] => {
       result += hourDuration;
     }
   });
-  return [String(result)];
+  return [result.toFixed(2)];
 }) satisfies IFilterOperator;
