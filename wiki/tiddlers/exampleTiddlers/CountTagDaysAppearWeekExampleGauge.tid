@@ -1,15 +1,18 @@
-title: $:/plugins/linonetwo/visualization-dashboard/tiddlywiki-ui/Template/CountDownDays
-tags: $:/Tags/VisualizationDashboard/GaugeTemplate $:/Tags/VisualizationDashboard/Number
-caption: <<lingo GaugeTemplate/CountDownDays/Caption $:/plugins/linonetwo/visualization-dashboard/language/>>
-description: <<lingo GaugeTemplate/CountDownDays/Description $:/plugins/linonetwo/visualization-dashboard/language/>>
-targetTiddler: -
-targetValue: 30
-color: #66ccff
+caption: 
+color: #bda0fa
+created: 20240312095939655
+description: I sleep well for these days this week.
+enabled: yes
+tags: GaugeExample
+icon: 🤠
+modified: 20240312095939657
+tags: $:/Tags/VisualizationDashboard/Gauge
+targetTiddler: Sleeping
+targetValue: 7
+title: CountTagDaysAppearWeekExampleGauge
+type: text/vnd.tiddlywiki
 
-\function days() [{!!targetTiddler}!daysbetween[]]
-\function dayPercentage() [<days>divide{!!targetValue}multiply[100]floor[]]
-\function color() [{!!color}]
-\function dateString() [{!!targetTiddler}get[endDate]] :else[{!!targetTiddler}get[startDate]] +[format:date[YYYY MMM DD]]
+\import [[$:/plugins/linonetwo/visualization-dashboard/tiddlywiki-ui/Template/CountTagDaysAppearWeek]]
 
 <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;">
 
@@ -18,8 +21,8 @@ color: #66ccff
     series: [
       {
         data: [{
-          value: $(dayPercentage)$,
-          name: '$(days)$',
+          value: $(dayAppearPercentage)$,
+          name: '$(dayAppears)$',
           title: {
             offsetCenter: ['0%', '-10%'],
             fontSize: 30,
@@ -27,7 +30,7 @@ color: #66ccff
           detail: {
             valueAnimation: true,
             offsetCenter: ['0%', '30%'],
-          },
+          }
         }],
         type: 'gauge',
         startAngle: 90,
@@ -81,8 +84,6 @@ color: #66ccff
   };
   ```/>
 
-  !!! {{!!description}}
-
-  !! <<dateString>>
+  !! {{!!description}}
 
 </div>

@@ -120,3 +120,30 @@ export function getDateToCompareOrTodayFromOperand(operand: string | undefined):
   }
   return dayToCompare;
 }
+
+export function getMidpointDate(date1: Date | null, date2: Date | null): Date | null {
+  if (date1 === null || date2 === null) {
+    return null;
+  }
+  // Get the timestamps of the two dates
+  const timestamp1 = date1.getTime();
+  const timestamp2 = date2.getTime();
+
+  // Calculate the midpoint timestamp
+  const midpointTimestamp = (timestamp1 + timestamp2) / 2;
+
+  // Convert the midpoint timestamp back to a date and return it
+  return new Date(midpointTimestamp);
+}
+
+export function countUniqueDays(dates: Date[]): number {
+  const uniqueDays = new Set<string>();
+
+  dates.forEach(date => {
+    // Convert the date to a YYYY-MM-DD string
+    const dateString = date.toISOString().split('T')[0];
+    uniqueDays.add(dateString);
+  });
+
+  return uniqueDays.size;
+}

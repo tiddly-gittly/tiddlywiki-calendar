@@ -3,7 +3,7 @@ tags: $:/Tags/VisualizationDashboard/GaugeTemplate $:/Tags/VisualizationDashboar
 caption: <<lingo GaugeTemplate/CountTagHoursWeek/Caption $:/plugins/linonetwo/visualization-dashboard/language/>>
 description: <<lingo GaugeTemplate/CountTagHoursWeek/Description $:/plugins/linonetwo/visualization-dashboard/language/>>
 targetTiddler: -
-targetValue: 1
+targetValue: 7
 color: #464646
 
 \function hours() [{!!targetTiddler}tagging[]field:calendarEntry[yes]] :filter[get[startDate]compare:date:gteq<weekstart>compare:date:lteq<now [UTC]YYYY0MM0DD0hh0mm0ssXXX>] +[counthours[]]
