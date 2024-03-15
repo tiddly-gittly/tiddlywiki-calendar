@@ -7,6 +7,17 @@ div.button-open-create-gauge-modal-container p {
   font-size: 1.5em;
   text-align: center;
 }
+div.button-open-create-gauge-modal-container > button.button-open-create-gauge-modal-open-create-modal-button {
+  padding: 2em;
+  font-size: 2em;
+  margin: 15px;
+}
+div.button-open-create-gauge-modal-container > button.button-open-create-gauge-modal-back-to-default-layout {
+  padding: 1em;
+  font-size: 2em;
+  margin: 15px;
+}
+
 .new-gauge-select-option {
   display: flex;
   flex-direction: column;

@@ -3,8 +3,16 @@ tags: $:/Tags/VisualizationDashboard/Gauge
 caption: <<lingo Modal/CreateGaugeModal/Caption $:/plugins/linonetwo/visualization-dashboard/language/>>
 
 \define lingo-base() $:/plugins/linonetwo/visualization-dashboard/language/
+\procedure back-to-default-layout()
+<$button class="button-open-create-gauge-modal-back-to-default-layout">
+  <<lingo VisualizationDashboardLayout/Exit>> {{$:/plugins/linonetwo/tw-calendar/Images/ExitLayout}}
+  <$action-setfield $tiddler="$:/layout" text="" />
+</$button>
+\end
 
 <div class="button-open-create-gauge-modal-container">
+  <<back-to-default-layout>>
+
   {{$:/plugins/linonetwo/visualization-dashboard/tiddlywiki-ui/Modal/ButtonOpenCreateGaugeModal}}
 
   <p><<lingo VisualizationDashboardLayout/ExistingGaugesCount>>: <$text text={{{ [all[shadows+tiddlers]tag[$:/Tags/VisualizationDashboard/Gauge]count[]] }}} /></p>
