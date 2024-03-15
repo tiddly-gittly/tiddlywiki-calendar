@@ -26,3 +26,5 @@ tags: Index
 <<.operator-example f4.1 "[all[tiddlers]!is[system]field:calendarEntry[yes]tag[Sleeping]] :filter[get[startDate]compare:date:gteq<weekstart>compare:date:lteq<now [UTC]YYYY0MM0DD0hh0mm0ssXXX>]">>
 
 <<.operator-example f4.2 "[all[tiddlers]!is[system]field:calendarEntry[yes]tag[Sleeping]] :filter[get[startDate]compare:date:gteq<weekstart>compare:date:lteq<now [UTC]YYYY0MM0DD0hh0mm0ssXXX>] +[counthours[]]">>
+
+<<.operator-example f5 "[daystart[0],[7]] [dayend[0],[7]]">>

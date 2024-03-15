@@ -1,0 +1,70 @@
+caption: 
+color: #bda0fa
+created: 20240312095939655
+description: Sleeping statistic for the month
+enabled: yes
+tags: GaugeExample
+icon: 🤠
+modified: 20240312095939657
+tags: $:/Tags/VisualizationDashboard/Gauge
+title: LineTagHoursWeekExampleGauge
+type: text/vnd.tiddlywiki
+tags: $:/Tags/VisualizationDashboard/Gauge
+targetTiddler: Sleeping
+
+\import [[$:/plugins/linonetwo/visualization-dashboard/tiddlywiki-ui/Template/LineTagHoursWeek]]
+
+<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;">
+  <$wikify name="seriesText" text=<<series>>>
+    <$echarts $text=```
+      option = {
+        series: [
+          $(seriesText)$
+        ],
+        title: {
+          text: 'Stacked Area Chart'
+        },
+        tooltip: {
+          trigger: 'axis',
+          axisPointer: {
+            type: 'cross',
+            label: {
+              backgroundColor: '#6a7985'
+            }
+          }
+        },
+        legend: {
+          data: ['Email', 'Union Ads', 'Video Ads', 'Direct', 'Search Engine']
+        },
+        toolbox: {
+          feature: {
+            saveAsImage: {}
+          }
+        },
+        grid: {
+          left: '3%',
+          right: '4%',
+          bottom: '3%',
+          containLabel: true
+        },
+        xAxis: [
+          {
+            type: 'category',
+            boundaryGap: false,
+            data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+          }
+        ],
+        yAxis: [
+          {
+            type: 'value'
+          }
+        ],
+      };
+    ```/>
+  </$wikify>
+
+  !!! {{!!description}}
+
+  !! <<dateString>>
+
+</div>

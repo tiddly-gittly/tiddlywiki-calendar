@@ -13,7 +13,7 @@ GaugeTemplate/CountTagHoursWeek/Description: Counts the total duration (`endDate
 GaugeTemplate/CountTagDaysAppearWeek/Caption: tagged days of the week
 GaugeTemplate/CountTagDaysAppearWeek/Description: Counts the number of days this week that a tag has "tiddlers with this tag". (e.g., how many days this week there were tiddlers tagged with "fitness"?)
 GaugeTemplateGroup/BarChart/Caption: Bar Chart
-GaugeTemplate/BarTagHoursWeek/Caption: Hours per day for this week's tags.
-GaugeTemplate/BarTagHoursWeek/Description: A bar chart showing the duration (`endDate - startDate` end minus beginning) of each day of the week for a tag till now. (e.g. how many hours a day did the tiddler tagged "sleep" sleep this week)
+GaugeTemplate/LineTagHoursWeek/Caption: Hours per day for this week's tags.
+GaugeTemplate/LineTagHoursWeek/Description: A bar chart showing the duration (`endDate - startDate` end minus beginning) of each day of the week for a tag till now. (e.g. how many hours a day did the tiddler tagged "sleep" sleep this week)
 GaugeTemplate/BarTagDaysWeek/Caption: number of tags per day this week.
 GaugeTemplate/BarTagDaysWeek/Description: A bar chart showing the number of days a tag has been tagged each day of the week. (e.g. how many times per day this week were the tiddlers tagged "watch short videos")

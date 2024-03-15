@@ -12,8 +12,9 @@ GaugeTemplate/CountTagHoursWeek/Caption: 本周标签小时
 GaugeTemplate/CountTagHoursWeek/Description: 统计某个标签本周到现在「带这个标签的条目」的总持续时间（`endDate - startDate` 末减初）的小时数。（例如本周打了「睡觉」标签的条目总共睡了几小时）
 GaugeTemplate/CountTagDaysAppearWeek/Caption: 本周标签天
 GaugeTemplate/CountTagDaysAppearWeek/Description: 统计某个标签本周到现在「带这个标签的条目」的出现天数。（例如本周总共有几天有打了「健身」标签的条目）
+GaugeTemplateGroup/LineChart/Caption: 折线图
+GaugeTemplate/LineTagHoursWeek/Caption: 本周每日标签小时
+GaugeTemplate/LineTagHoursWeek/Description: 用折线图展示某个标签本周每天「带这个标签的条目」的持续时间（`endDate - startDate` 末减初）的小时数。（例如本周打了「睡觉」标签的条目，每天睡了几小时）
 GaugeTemplateGroup/BarChart/Caption: 柱状图
-GaugeTemplate/BarTagHoursWeek/Caption: 本周每日标签小时
-GaugeTemplate/BarTagHoursWeek/Description: 用柱状图展示某个标签本周每天「带这个标签的条目」的持续时间（`endDate - startDate` 末减初）的小时数。（例如本周打了「睡觉」标签的条目，每天睡了几小时）
 GaugeTemplate/BarTagDaysWeek/Caption: 本周每日标签数
 GaugeTemplate/BarTagDaysWeek/Description: 用柱状图展示某个标签本周每天「带这个标签的条目」的出现天数。（例如本周每天有几次打了「看短视频」标签的条目）
