@@ -22,7 +22,7 @@ targetTiddler: Sleeping
           $(seriesText)$
         ],
         title: {
-          text: 'Stacked Area Chart'
+          text: '${[{!!description}]}$'
         },
         tooltip: {
           trigger: 'axis',
@@ -62,9 +62,4 @@ targetTiddler: Sleeping
       };
     ```/>
   </$wikify>
-
-  !!! {{!!description}}
-
-  !! <<dateString>>
-
 </div>

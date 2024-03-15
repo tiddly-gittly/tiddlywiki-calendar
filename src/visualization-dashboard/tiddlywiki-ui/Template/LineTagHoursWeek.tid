@@ -6,6 +6,7 @@ targetTiddler: -
 color: #66ccff
 
 \function dayStartDate() [daystart<weekIndex>,<dayIndex>]
+\function dayEndDate() [dayend<weekIndex>,<dayIndex>]
 \function hoursToday()
   [{!!targetTiddler}tagging[]field:calendarEntry[yes]] :filter[get[startDate]compare:date:gteq<dayStartDate>compare:date:lteq<dayEndDate>] +[counthours[]]
 \end
@@ -15,7 +16,7 @@ color: #66ccff
 \procedure series()
 <$list filter="[range[0],[-3]]" variable="weekIndex">
 {
-  name: 'Email',
+  name: '{{!!targetTiddler}}',
   type: 'line',
   stack: 'Total',
   areaStyle: {},
@@ -39,7 +40,7 @@ color: #66ccff
           $(seriesText)$
         ],
         title: {
-          text: 'Stacked Area Chart'
+          text: '${[{!!description}]}$'
         },
         tooltip: {
           trigger: 'axis',
@@ -79,9 +80,4 @@ color: #66ccff
       };
     ```/>
   </$wikify>
-
-  !!! {{!!description}}
-
-  !! <<dateString>>
-
 </div>
