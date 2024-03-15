@@ -29,6 +29,10 @@ Modal/CreateGaugeModal/targetValue/Caption: Target value.
 Modal/CreateGaugeModal/targetValue/Description: value used by the visualization logic, typically as denominator of a percentage, e.g. total hours, subject to the specific logic of the vis template
 Modal/CreateGaugeModal/color/Caption: Color
 Modal/CreateGaugeModal/color/Description: theme color of visualization, need to be a color code, you can pick it from the palette or enter it manually, like `#66ccff`
+Modal/CreateGaugeModal/grid-column-span/Caption: Width
+Modal/CreateGaugeModal/grid-column-span/Description: How many columns of width are occupied on the dashboard
+Modal/CreateGaugeModal/grid-row-span/Caption: Height
+Modal/CreateGaugeModal/grid-row-span/Description: How many rows of height are occupied on the dashboard
 SystemTags: System Tags
 Tag/Gauge/Caption: Gauge tag
 Tag/Gauge/Description: Tiddlers with this tag will be recognized by this plugin and put into the dashboard.

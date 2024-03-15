@@ -23,6 +23,7 @@ div.button-open-create-gauge-modal-container p {
 }
 .visualization-dashboard-new-gauge-field {
   display: flex;
+  flex:1 ;
   flex-direction: column;
   margin-bottom: 1em;
 }
@@ -32,6 +33,22 @@ div.button-open-create-gauge-modal-container p {
 .visualization-dashboard-new-gauge-field-description {
   font-size: 0.7em;
 }
+.visualization-dashboard-new-gauge-field-two-column {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+.visualization-dashboard-new-gauge-field-two-column .visualization-dashboard-new-gauge-field {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.visualization-dashboard-new-gauge-field-two-column .visualization-dashboard-new-gauge-field:first-child {
+  padding-left: 0;
+}
+.visualization-dashboard-new-gauge-field-two-column .visualization-dashboard-new-gauge-field:last-child {
+  padding-right: 0;
+}
+
 
 .visualization-dashboard-new-gauge-modal-buttons {
   display: flex;

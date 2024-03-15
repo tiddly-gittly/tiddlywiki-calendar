@@ -16,7 +16,6 @@ div.tc-page-container.visualization-dashboard-layout-container {
 .visualization-dashboard-layout-gauge-list-container {
   display: grid;
   grid-column-gap: 10px;
-  grid-template-rows: masonry;
 }
 .visualization-dashboard-layout-gauge-item-container {
   display: flex;
@@ -38,4 +37,8 @@ div.tc-page-container.visualization-dashboard-layout-container {
   align-items: center;
   justify-content: center;
   margin-top: 1em;
+  width: 100%;
+}
+.visualization-dashboard-layout-gauge-item-body > p {
+  width: 100%;
 }

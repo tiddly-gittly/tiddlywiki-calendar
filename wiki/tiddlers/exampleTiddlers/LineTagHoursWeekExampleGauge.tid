@@ -11,6 +11,7 @@ title: LineTagHoursWeekExampleGauge
 type: text/vnd.tiddlywiki
 tags: $:/Tags/VisualizationDashboard/Gauge
 targetTiddler: Sleeping
+grid-column-span: 2
 
 \import [[$:/plugins/linonetwo/visualization-dashboard/tiddlywiki-ui/Template/LineTagHoursWeek]]
 

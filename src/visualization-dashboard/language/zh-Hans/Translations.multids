@@ -29,6 +29,10 @@ Modal/CreateGaugeModal/targetValue/Caption: 目标值
 Modal/CreateGaugeModal/targetValue/Description: 可视化逻辑所用的值，一般作为百分比的分母，例如总时长，以具体逻辑为准
 Modal/CreateGaugeModal/color/Caption: 颜色
 Modal/CreateGaugeModal/color/Description: 可视化主题色，需要是一个颜色代码，你可以从调色板里选择，也可以直接输入颜色代码，例如 `#66ccff`
+Modal/CreateGaugeModal/grid-column-span/Caption: 宽度
+Modal/CreateGaugeModal/grid-column-span/Description: 在仪表盘上占用的宽度有几列
+Modal/CreateGaugeModal/grid-row-span/Caption: 高度
+Modal/CreateGaugeModal/grid-row-span/Description: 在仪表盘上占用的高度有几行
 SystemTags: 系统标签
 Tag/Gauge/Caption: 仪表标签
 Tag/Gauge/Description: 带有此标签的条目会被本插件识别，放入仪表盘。

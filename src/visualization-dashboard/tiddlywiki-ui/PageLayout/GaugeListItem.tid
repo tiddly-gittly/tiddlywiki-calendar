@@ -1,7 +1,7 @@
 title: $:/plugins/linonetwo/visualization-dashboard/tiddlywiki-ui/PageLayout/GaugeListItem
 
 \procedure list-item()
-<div class="visualization-dashboard-layout-gauge-item-container">
+<div class="visualization-dashboard-layout-gauge-item-container" style=`grid-column: span ${[{!!grid-column-span}]}$;grid-row: span ${[{!!grid-row-span}]}$;`>
 	<h3 class="visualization-dashboard-layout-gauge-item-title">
 		<% if [all[current]has[caption]] %>
 			<$transclude field="caption"/>

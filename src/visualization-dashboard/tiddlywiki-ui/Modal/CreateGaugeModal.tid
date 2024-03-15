@@ -101,6 +101,19 @@ footer: {{$:/plugins/linonetwo/visualization-dashboard/tiddlywiki-ui/Modal/Creat
   <span class="visualization-dashboard-new-gauge-field-description"><<lingo Modal/CreateGaugeModal/Tags/Description>></span>
 </div>
 
+<div class="visualization-dashboard-new-gauge-field-two-column">
+  <div class="visualization-dashboard-new-gauge-field">
+    <span class="visualization-dashboard-new-gauge-field-label"><<lingo Modal/CreateGaugeModal/grid-column-span/Caption>></span>
+    <$edit-text tag=input type="number" default="1" tiddler=<<draft-tiddler>> field="grid-column-span" class="visualization-dashboard-new-gauge-field-input"/>
+    <span class="visualization-dashboard-new-gauge-field-description"><<lingo Modal/CreateGaugeModal/grid-column-span/Description>></span>
+  </div>
+  <div class="visualization-dashboard-new-gauge-field">
+    <span class="visualization-dashboard-new-gauge-field-label"><<lingo Modal/CreateGaugeModal/grid-row-span/Caption>></span>
+    <$edit-text tag=input type="number" default="1" tiddler=<<draft-tiddler>> field="grid-row-span" class="visualization-dashboard-new-gauge-field-input"/>
+    <span class="visualization-dashboard-new-gauge-field-description"><<lingo Modal/CreateGaugeModal/grid-row-span/Description>></span>
+  </div>
+</div>
+
 <div class="visualization-dashboard-new-gauge-field">
   <span class="visualization-dashboard-new-gauge-field-label"><<lingo Modal/CreateGaugeModal/Enabled/Caption>></span>
   <$checkbox
