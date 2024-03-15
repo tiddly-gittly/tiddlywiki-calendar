@@ -23,8 +23,8 @@ title: $:/plugins/linonetwo/visualization-dashboard/tiddlywiki-ui/Modal/CreateGa
     <$action-createtiddler
       $basetitle={{{ [<draft-tiddler>get[draft.title]] }}}
       $template=<<draft-tiddler>>
-      tags={{{ [<draft-tiddler>get[tags]enlist-input[]] [[$:/Tags/VisualizationDashboard/Gauge]] }}}
     >
+      <$action-listops $tiddler=<<createTiddler-title>>  $tags="$:/Tags/VisualizationDashboard/Gauge"/>
       <<cleanUpAction>>
       <$action-deletefield $tiddler=<<createTiddler-title>> draft.title draft.of/>
     </$action-createtiddler>
