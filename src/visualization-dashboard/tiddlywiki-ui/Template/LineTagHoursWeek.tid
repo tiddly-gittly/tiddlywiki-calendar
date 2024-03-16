@@ -10,7 +10,6 @@ color: #66ccff
 \function hoursToday()
   [{!!targetTiddler}tagging[]field:calendarEntry[yes]] :filter[get[startDate]compare:date:gteq<dayStartDate>compare:date:lteq<dayEndDate>] +[counthours[]]
 \end
-\function hoursEveryDayInWeek() []
 \function color() [{!!color}]
 
 \procedure series()
