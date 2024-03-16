@@ -1,16 +1,14 @@
 title: $:/plugins/linonetwo/visualization-dashboard/tiddlywiki-ui/PageLayout/GaugeListItem
 
 \procedure list-item()
-<div class="visualization-dashboard-layout-gauge-item-container" style=`grid-column: span ${[{!!grid-column-span}]}$;grid-row: span ${[{!!grid-row-span}]}$;`>
-	<h3 class="visualization-dashboard-layout-gauge-item-title">
-		<% if [all[current]has[caption]] %>
-			<$transclude field="caption"/>
-		<% else %>
-			<$view field="title"/>
-		<% endif %>
-	</h3>
-	<div class="visualization-dashboard-layout-gauge-item-body">
-		<$transclude field="text" mode="block"/>
-	</div>
+<$draggable tiddler=<<currentTiddler>> tag="h3" class="visualization-dashboard-layout-gauge-item-title" >
+	<% if [all[current]has[caption]] %>
+		<$transclude field="caption"/>
+	<% else %>
+		<$view field="title"/>
+	<% endif %>
+</$draggable>
+<div class="visualization-dashboard-layout-gauge-item-body">
+	<$transclude field="text" mode="block"/>
 </div>
 \end list-item

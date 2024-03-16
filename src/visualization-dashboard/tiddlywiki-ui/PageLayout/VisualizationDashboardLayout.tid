@@ -11,11 +11,24 @@ tc-page-container tc-page-view-$(storyviewTitle)$ tc-language-$(languageTitle)$ 
 \import [subfilter{$:/core/config/GlobalImportFilter}]
 \import [[$:/plugins/linonetwo/visualization-dashboard/tiddlywiki-ui/PageLayout/GaugeListItem]]
 
+\procedure list-grid-draggable-drop-actions()
+<$macrocall $name="list-tagged-draggable-drop-actions" tag="$:/Tags/VisualizationDashboard/Gauge"/>
+\end
+
 <div class=<<containerClasses>>>
 	<main class="visualization-dashboard-layout-main-area">
 		<div class="visualization-dashboard-layout-gauge-list-container">
 			<$list filter="[all[shadows+tiddlers]tag[$:/Tags/VisualizationDashboard/Gauge]!is[draft]]">
-				<<list-item>>
+				<$droppable
+					actions=<<list-grid-draggable-drop-actions>>
+					tag="div"
+					class="visualization-dashboard-layout-gauge-item-container"
+					style.grid-column=`span ${[{!!grid-column-span}]}$`
+					style.grid-row=`span ${[{!!grid-row-span}]}$`
+					enable=<<tv-enable-drag-and-drop>>
+				>
+					<<list-item>>
+				</$droppable>
 			</$list>
 		</div>
 	</main>
