@@ -17,6 +17,7 @@ color: #66ccff
   <$list filter="[{!!targetTiddler}enlist-input[]]" variable="currentTag">
     {
       value: <<hoursThisWeek>>,
+      name: '<<currentTag>>',
       itemStyle: {
         color: '{{{[<currentTag>get[color]else{!!color}]}}}'
       }
@@ -31,7 +32,7 @@ color: #66ccff
       option = {
         series: {
           type: 'bar',
-          data: $(seriesText)$,
+          data: $(seriesText)$.sort((a, b) => a.value - b.value),
           coordinateSystem: 'polar',
           label: {
             show: true,
@@ -39,20 +40,18 @@ color: #66ccff
             formatter: '{b}: {c}'
           }
         },
-
-        radiusAxis: {
-          type: 'category',
-          data: ['${[list[!!targetTiddler]join[',']]}$']
-        },
         title: {
           text: '${[{!!description}]}$'
         },
         polar: {
           radius: [30, '80%']
         },
+        radiusAxis: {
+          type: 'category',
+        },
         angleAxis: {
-          max: 4,
-          startAngle: 75
+          max: Math.max(...$(seriesText)$.map(item => item.value)) + 1,
+          startAngle: 75,
         },
         tooltip: {},
       };

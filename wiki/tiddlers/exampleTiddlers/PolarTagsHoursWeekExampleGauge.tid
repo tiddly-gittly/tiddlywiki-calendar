@@ -19,7 +19,7 @@ type: text/vnd.tiddlywiki
       option = {
         series: {
           type: 'bar',
-          data: $(seriesText)$,
+          data: $(seriesText)$.sort((a, b) => a.value - b.value),
           coordinateSystem: 'polar',
           label: {
             show: true,
@@ -27,19 +27,18 @@ type: text/vnd.tiddlywiki
             formatter: '{b}: {c}'
           }
         },
-        radiusAxis: {
-          type: 'category',
-          data: ['${[list[!!targetTiddler]join[',']]}$']
-        },
         title: {
           text: '${[{!!description}]}$'
         },
         polar: {
           radius: [30, '80%']
         },
+        radiusAxis: {
+          type: 'category',
+        },
         angleAxis: {
-          max: 4,
-          startAngle: 75
+          max: Math.max(...$(seriesText)$.map(item => item.value)) + 1,
+          startAngle: 75,
         },
         tooltip: {},
       };
