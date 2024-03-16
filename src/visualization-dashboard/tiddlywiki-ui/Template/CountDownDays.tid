@@ -2,7 +2,7 @@ title: $:/plugins/linonetwo/visualization-dashboard/tiddlywiki-ui/Template/Count
 tags: $:/Tags/VisualizationDashboard/GaugeTemplate $:/Tags/VisualizationDashboard/Number
 caption: <<lingo GaugeTemplate/CountDownDays/Caption $:/plugins/linonetwo/visualization-dashboard/language/>>
 description: <<lingo GaugeTemplate/CountDownDays/Description $:/plugins/linonetwo/visualization-dashboard/language/>>
-targetTiddler: -
+targetTiddler: 
 targetValue: 30
 color: #66ccff
 

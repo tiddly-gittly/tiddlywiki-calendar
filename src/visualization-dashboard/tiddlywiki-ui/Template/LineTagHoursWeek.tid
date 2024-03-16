@@ -2,7 +2,7 @@ title: $:/plugins/linonetwo/visualization-dashboard/tiddlywiki-ui/Template/LineT
 tags: $:/Tags/VisualizationDashboard/GaugeTemplate $:/Tags/VisualizationDashboard/LineChart
 caption: <<lingo GaugeTemplate/LineTagHoursWeek/Caption $:/plugins/linonetwo/visualization-dashboard/language/>>
 description: <<lingo GaugeTemplate/LineTagHoursWeek/Description $:/plugins/linonetwo/visualization-dashboard/language/>>
-targetTiddler: -
+targetTiddler: 
 color: #66ccff
 
 \function dayStartDate() [daystart<weekIndex>,<dayIndex>]

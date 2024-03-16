@@ -18,3 +18,5 @@ GaugeTemplate/LineTagHoursWeek/Description: 用折线图展示某个标签本周
 GaugeTemplateGroup/BarChart/Caption: 柱状图
 GaugeTemplate/BarTagDaysWeek/Caption: 本周每日标签数
 GaugeTemplate/BarTagDaysWeek/Description: 用柱状图展示某个标签本周每天「带这个标签的条目」的出现天数。（例如本周每天有几次打了「看短视频」标签的条目）
+GaugeTemplate/PolarTagsHoursWeek/Caption: 本周每日标签数
+GaugeTemplate/PolarTagsHoursWeek/Description: 用柱状图展示某个标签本周每天「带这个标签的条目」的出现天数。（例如本周每天有几次打了「看短视频」标签的条目）

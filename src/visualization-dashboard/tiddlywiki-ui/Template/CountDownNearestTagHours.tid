@@ -2,7 +2,7 @@ title: $:/plugins/linonetwo/visualization-dashboard/tiddlywiki-ui/Template/Count
 tags: $:/Tags/VisualizationDashboard/GaugeTemplate $:/Tags/VisualizationDashboard/Number
 caption: <<lingo GaugeTemplate/CountDownNearestTagHours/Caption $:/plugins/linonetwo/visualization-dashboard/language/>>
 description: <<lingo GaugeTemplate/CountDownNearestTagHours/Description $:/plugins/linonetwo/visualization-dashboard/language/>>
-targetTiddler: -
+targetTiddler: 
 targetValue: 24
 color: blue
 

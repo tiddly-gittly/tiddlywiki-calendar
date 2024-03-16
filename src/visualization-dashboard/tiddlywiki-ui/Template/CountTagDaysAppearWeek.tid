@@ -2,7 +2,7 @@ title: $:/plugins/linonetwo/visualization-dashboard/tiddlywiki-ui/Template/Count
 tags: $:/Tags/VisualizationDashboard/GaugeTemplate $:/Tags/VisualizationDashboard/Number
 caption: <<lingo GaugeTemplate/CountTagDaysAppearWeek/Caption $:/plugins/linonetwo/visualization-dashboard/language/>>
 description: <<lingo GaugeTemplate/CountTagDaysAppearWeek/Description $:/plugins/linonetwo/visualization-dashboard/language/>>
-targetTiddler: -
+targetTiddler: 
 targetValue: 7
 color: #464646
 

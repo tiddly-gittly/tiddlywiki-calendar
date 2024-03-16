@@ -22,6 +22,17 @@ footer: {{$:/plugins/linonetwo/visualization-dashboard/tiddlywiki-ui/Modal/Creat
     </div>
   <% endif %>
 \end
+\define conditional-field-tag-picker(fieldName)
+  <% if [<draft-tiddler>has:field[$fieldName$]] %>
+    <div class="visualization-dashboard-new-gauge-field">
+      <span class="visualization-dashboard-new-gauge-field-label"><<lingo Modal/CreateGaugeModal/$fieldName$/Caption>></span>
+      <$let saveTiddler=<<draft-tiddler>> currentTiddler=<<draft-tiddler>>>
+        <$macrocall $name="edit-tags-template" tagField="$fieldName$" />
+      </$let>
+      <span class="visualization-dashboard-new-gauge-field-description"><<lingo Modal/CreateGaugeModal/$fieldName$/Description>></span>
+    </div>
+  <% endif %>
+\end
 
 <div class="visualization-dashboard-new-gauge-field">
   <!-- Apply the template to draft state, but remove the `tags`, and add `enabled` fields -->
@@ -62,7 +73,7 @@ footer: {{$:/plugins/linonetwo/visualization-dashboard/tiddlywiki-ui/Modal/Creat
 
 <!-- Fields that possible required by some template -->
 <!-- // TODO: reflect to auto generate form use SuperTag? -->
-<<conditional-field targetTiddler>>
+<<conditional-field-tag-picker targetTiddler>>
 
 <<conditional-field targetValue fieldType:"number">>
 
