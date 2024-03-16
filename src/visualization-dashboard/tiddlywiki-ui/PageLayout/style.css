@@ -41,4 +41,5 @@ div.tc-page-container.visualization-dashboard-layout-container {
 }
 .visualization-dashboard-layout-gauge-item-body > p {
   width: 100%;
+  height: 100%;
 }
