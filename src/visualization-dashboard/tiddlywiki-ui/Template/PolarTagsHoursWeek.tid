@@ -1,0 +1,61 @@
+title: $:/plugins/linonetwo/visualization-dashboard/tiddlywiki-ui/Template/PolarTagsHoursWeek
+tags: $:/Tags/VisualizationDashboard/GaugeTemplate $:/Tags/VisualizationDashboard/BarChart
+caption: <<lingo GaugeTemplate/PolarTagsHoursWeek/Caption $:/plugins/linonetwo/visualization-dashboard/language/>>
+description: <<lingo GaugeTemplate/PolarTagsHoursWeek/Description $:/plugins/linonetwo/visualization-dashboard/language/>>
+targetTiddler: 
+color: #66ccff
+
+\function dayStartDate() [daystart[],<dayIndex>]
+\function dayEndDate() [dayend[],<dayIndex>]
+\function hoursThisWeek()
+  [<currentTag>tagging[]field:calendarEntry[yes]] :filter[get[startDate]compare:date:gteq<weekstart>compare:date:lteq<weekend>] +[counthours[]]
+\end
+\function color() [{!!color}]
+
+\procedure series()
+[
+  <$list filter="[{!!targetTiddler}enlist-input[]]" variable="currentTag">
+    {
+      value: <<hoursThisWeek>>,
+      itemStyle: {
+        color: '{{{[<currentTag>get[color]else{!!color}]}}}'
+      }
+    },
+  </$list>
+]
+\end
+
+<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;">
+  <$wikify name="seriesText" text=<<series>>>
+    <$echarts $text=```
+      option = {
+        series: {
+          type: 'bar',
+          data: $(seriesText)$,
+          coordinateSystem: 'polar',
+          label: {
+            show: true,
+            position: 'middle',
+            formatter: '{b}: {c}'
+          }
+        },
+
+        radiusAxis: {
+          type: 'category',
+          data: ['${[list[!!targetTiddler]join[',']]}$']
+        },
+        title: {
+          text: '${[{!!description}]}$'
+        },
+        polar: {
+          radius: [30, '80%']
+        },
+        angleAxis: {
+          max: 4,
+          startAngle: 75
+        },
+        tooltip: {},
+      };
+    ```/>
+  </$wikify>
+</div>

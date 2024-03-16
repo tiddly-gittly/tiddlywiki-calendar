@@ -1,5 +1,5 @@
 caption: 
-color: blue
+color: #66ccff
 created: 20240312095939655
 description: How many "Sleeping" everyday
 enabled: yes
@@ -17,6 +17,16 @@ type: text/vnd.tiddlywiki
   <$wikify name="seriesText" text=<<series>>>
     <$echarts $text=```
       option = {
+        series: [
+          {
+            data: $(seriesText)$,
+            type: 'bar'
+          }
+        ],
+        title: {
+          text: '${[{!!description}]}$'
+        },
+        color: '$(color)$',
         xAxis: {
           type: 'category',
           data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
@@ -31,12 +41,6 @@ type: text/vnd.tiddlywiki
             type: 'shadow'
           }
         },
-        series: [
-          {
-            data: $(seriesText)$,
-            type: 'bar'
-          }
-        ]
       };
     ```/>
   </$wikify>

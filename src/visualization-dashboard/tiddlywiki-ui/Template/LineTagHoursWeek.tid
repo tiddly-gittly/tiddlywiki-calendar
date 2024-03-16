@@ -45,7 +45,7 @@ color: #66ccff
           axisPointer: {
             type: 'cross',
             label: {
-              backgroundColor: '#6a7985'
+              backgroundColor: '$(color)$'
             }
           }
         },

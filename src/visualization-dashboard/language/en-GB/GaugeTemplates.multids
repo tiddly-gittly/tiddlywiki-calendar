@@ -17,3 +17,5 @@ GaugeTemplate/LineTagHoursWeek/Caption: Hours per day for this week's tags.
 GaugeTemplate/LineTagHoursWeek/Description: A bar chart showing the duration (`endDate - startDate` end minus beginning) of each day of the week for a tag till now. (e.g. how many hours a day did the tiddler tagged "sleep" sleep this week)
 GaugeTemplate/BarTagDaysWeek/Caption: number of tags per day this week.
 GaugeTemplate/BarTagDaysWeek/Description: A bar chart showing the number of days a tag has been tagged each day of the week. (e.g. how many times per day this week were the tiddlers tagged "watch short videos")
+GaugeTemplate/PolarTagsHoursWeek/Caption: Hours per day for each tag this week
+GaugeTemplate/PolarTagsHoursWeek/Description: A circular bar chart showing the duration of 'entries with this tag' for each day of the week for each of the selected tags, comparing the hours of each activity for the week on a polar coordinate system.
