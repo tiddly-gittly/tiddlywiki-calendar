@@ -2,7 +2,9 @@
 
 Widget and Page Layout displaying tiddlers on calendar and agenda, based on created, modified, startDate and endDate fields.
 
-![screenshot](screenshots/demosite.png)
+![screenshot](wiki/tiddlers/screenshots/demosite.png)
+
+![visualization-dashboard](wiki/tiddlers/screenshots/visualization-dashboard.png)
 
 See also [More layouts in Tiddlywiki (ZH-cn)](https://zhuanlan.zhihu.com/p/601040724)
 

@@ -1,0 +1,16 @@
+title: VisualizationDashboard
+tags: Index
+
+!! User Manual
+
+<<lingo Readme $:/plugins/linonetwo/visualization-dashboard/language/>>
+
+!! Tryout on demo site
+
+We already include some example gauges on the dashboard. You can try it by click “Visualization Dashboard” button on the [[simple layout launcher|$:/plugins/linonetwo/simple-layout-launcher]] on [[Index]].
+
+To give data to some gauge, you need to drag some `Sleeping` event (event added with Sleeping tag) on the calendar on [[CalendarUserManual]].
+
+!! Developer Manual
+
+[[VisualizationSDK]]

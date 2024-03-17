@@ -1,0 +1,29 @@
+title: CalendarUserManual
+tags: Index
+type: text/vnd.tiddlywiki
+
+!! User manual
+
+{{$:/plugins/linonetwo/tw-example-plugin/readme}}
+
+[[CalendarUsage]]
+
+[[WidgetUsage]]
+
+[[Import]]
+
+[[Override Recent Timeline]]
+
+[[CreateSubPlugin]]
+
+```
+<$calendar height="400px" />
+```
+
+<$calendar height="400px" />
+
+Try drag on the agenda to create a new event tiddler.
+
+!!! Calendar Settings
+
+You can find these settings in [[$:/plugins/linonetwo/tw-calendar/config]], You can find them from the ControlPanel -> Settings -> Calendar, or use advanced search to find this setting tiddler.
