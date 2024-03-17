@@ -30,7 +30,7 @@ color: #66ccff
 </$list>
 \end
 
-<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;">
+<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;">
   <$wikify name="seriesText" text=<<series>>>
     <$echarts $text=```
       option = {

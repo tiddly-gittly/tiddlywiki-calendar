@@ -14,7 +14,7 @@ type: text/vnd.tiddlywiki
 
 \import [[$:/plugins/linonetwo/visualization-dashboard/tiddlywiki-ui/Template/CountTagDaysAppearWeek]]
 
-<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;">
+<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;">
 
   <$echarts $text=```
   option = {

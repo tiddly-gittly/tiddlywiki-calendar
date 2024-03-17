@@ -15,7 +15,7 @@ grid-column-span: 2
 
 \import [[$:/plugins/linonetwo/visualization-dashboard/tiddlywiki-ui/Template/LineTagHoursWeek]]
 
-<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;">
+<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;">
   <$wikify name="seriesText" text=<<series>>>
     <$echarts $text=```
       option = {

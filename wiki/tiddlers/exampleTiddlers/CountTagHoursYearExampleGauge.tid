@@ -1,18 +1,17 @@
 caption: 
-color: pink
-created: 20240312095939655
-description: Already several days passed!
+color: #66ccff
+created: 20240317095032955
+description: For a year!
 enabled: yes
-tags: GaugeExample
-icon: 🤠
-modified: 20240312095939657
+modified: 20240317095032956
 tags: $:/Tags/VisualizationDashboard/Gauge
-targetTiddler: CountUpDayExampleTiddler
-targetValue: 900
-title: CountUpDayExampleGauge
+targetTiddler: Sleeping
+targetValue: 365
+template: $:/plugins/linonetwo/visualization-dashboard/tiddlywiki-ui/Template/CountTagHoursYear
+title: CountTagHoursYearExampleGauge
 type: text/vnd.tiddlywiki
 
-\import [[$:/plugins/linonetwo/visualization-dashboard/tiddlywiki-ui/Template/CountUpDays]]
+\import [[$:/plugins/linonetwo/visualization-dashboard/tiddlywiki-ui/Template/CountTagHoursYear]]
 
 <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;">
 
@@ -21,8 +20,8 @@ type: text/vnd.tiddlywiki
     series: [
       {
         data: [{
-          value: $(dayPercentage)$,
-          name: '$(days)$',
+          value: $(hourPercentage)$,
+          name: '$(hours)$',
           title: {
             offsetCenter: ['0%', '-10%'],
             fontSize: 30,
@@ -84,8 +83,6 @@ type: text/vnd.tiddlywiki
   };
   ```/>
 
-  !!! {{!!description}}
-
-  !! <<dateString>>
+  !! {{!!description}}
 
 </div>

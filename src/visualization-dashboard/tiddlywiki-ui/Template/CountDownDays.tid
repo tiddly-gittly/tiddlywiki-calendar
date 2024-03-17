@@ -11,7 +11,7 @@ color: #66ccff
 \function color() [{!!targetTiddler}get[color]else{!!color}]
 \function dateString() [{!!targetTiddler}get[endDate]] :else[{!!targetTiddler}get[startDate]] +[format:date[YYYY MMM DD]]
 
-<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;">
+<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;">
 
   <$echarts $text=```
   option = {
