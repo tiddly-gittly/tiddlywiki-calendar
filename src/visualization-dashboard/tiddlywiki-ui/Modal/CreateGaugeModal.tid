@@ -41,7 +41,12 @@ footer: {{$:/plugins/linonetwo/visualization-dashboard/tiddlywiki-ui/Modal/Creat
     field='template'
     class='new-gauge-select'
     actions='
-      <$action-createtiddler $basetitle=<<draft-tiddler>> $overwrite="yes" $template={{{[<draft-tiddler>get[template]]}}}>
+      <$action-createtiddler
+        $basetitle=<<draft-tiddler>>
+        $overwrite="yes"
+        $template={{{[<draft-tiddler>get[template]]}}}
+        template={{{[<draft-tiddler>get[template]]}}}
+      >
         <$action-setfield
           $tiddler=<<draft-tiddler>>
           enabled="yes"
