@@ -10,7 +10,7 @@ color: #66ccff
 \function hoursToday()
   [all[tiddlers]field:calendarEntry[yes]in-tagtree-of:inclusive{!!targetTiddler}] :filter[get[startDate]compare:date:gteq<dayStartDate>compare:date:lteq<dayEndDate>] +[counthours[]]
 \end
-\function color() [{!!color}]
+\function color() [{!!targetTiddler}get[color]else{!!color}]
 
 \procedure series()
 <$list filter="[range[0],[3]]" variable="weekIndex">
