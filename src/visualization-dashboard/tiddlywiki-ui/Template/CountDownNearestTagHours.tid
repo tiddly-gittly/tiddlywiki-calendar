@@ -7,7 +7,7 @@ targetValue: 24
 color: blue
 
 \define compare-dates() [get[startDate]else[19700101]]
-\function hoursToNearestTag() [{!!targetTiddler}tagging[]field:calendarEntry[yes]] :filter[get[startDate]compare:date:gteq<now [UTC]YYYY0MM0DD0hh0mm0ssXXX>]+[sortsub:date<compare-dates>first[]!hoursbetween[]]
+\function hoursToNearestTag() [all[tiddlers]field:calendarEntry[yes]in-tagtree-of:inclusive{!!targetTiddler}] :filter[get[startDate]compare:date:gteq<now [UTC]YYYY0MM0DD0hh0mm0ssXXX>] +[sortsub:date<compare-dates>first[]!hoursbetween[]]
 \function dayPercentage() [<hoursToNearestTag>divide{!!targetValue}multiply[100]floor[]]
 \function color() [{!!color}]
 

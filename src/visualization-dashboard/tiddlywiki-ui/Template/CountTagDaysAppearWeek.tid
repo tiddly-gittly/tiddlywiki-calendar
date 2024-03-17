@@ -6,7 +6,7 @@ targetTiddler:
 targetValue: 7
 color: #464646
 
-\function dayAppears() [{!!targetTiddler}tagging[]field:calendarEntry[yes]] :filter[get[startDate]compare:date:gteq<weekstart>compare:date:lteq<now [UTC]YYYY0MM0DD0hh0mm0ssXXX>] +[countdaysappear[]]
+\function dayAppears() [all[tiddlers]field:calendarEntry[yes]in-tagtree-of:inclusive{!!targetTiddler}] :filter[get[startDate]compare:date:gteq<weekstart>compare:date:lteq<now [UTC]YYYY0MM0DD0hh0mm0ssXXX>] +[countdaysappear[]]
 \function dayAppearPercentage() [<dayAppears>divide{!!targetValue}multiply[100]floor[]]
 \function color() [{!!color}]
 

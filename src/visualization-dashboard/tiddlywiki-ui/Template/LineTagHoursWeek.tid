@@ -8,14 +8,14 @@ color: #66ccff
 \function dayStartDate() [daystart<weekIndex>,<dayIndex>]
 \function dayEndDate() [dayend<weekIndex>,<dayIndex>]
 \function hoursToday()
-  [{!!targetTiddler}tagging[]field:calendarEntry[yes]] :filter[get[startDate]compare:date:gteq<dayStartDate>compare:date:lteq<dayEndDate>] +[counthours[]]
+  [all[tiddlers]field:calendarEntry[yes]in-tagtree-of:inclusive{!!targetTiddler}] :filter[get[startDate]compare:date:gteq<dayStartDate>compare:date:lteq<dayEndDate>] +[counthours[]]
 \end
 \function color() [{!!color}]
 
 \procedure series()
 <$list filter="[range[0],[3]]" variable="weekIndex">
 {
-  name: '{{!!targetTiddler}} {{{ [weekstart<weekIndex>format:date[YYYY MMM DD]] }}} - {{{ [weekend<weekIndex>format:date[YYYY MMM DD]] }}}',
+  name: '{{{ [weekstart<weekIndex>format:date[YYYY MMM DD]] }}} - {{{ [weekend<weekIndex>format:date[YYYY MMM DD]] }}}',
   type: 'line',
   areaStyle: {},
   emphasis: {

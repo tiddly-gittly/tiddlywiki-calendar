@@ -5,7 +5,7 @@
   "description": "Gauge diagram for events on calendar. Provides procedures and chart builder based on echarts, and a layout displaying the dashboard.",
   "plugin-type": "plugin",
   "parent-plugin": "$:/plugins/linonetwo/tw-calendar",
-  "dependents": "$:/plugins/Gk0Wk/echarts",
+  "dependents": "$:/plugins/Gk0Wk/echarts $:/plugins/linonetwo/in-tagtree-of",
   "version": "0.0.1",
   "list": "readme config tree"
 }

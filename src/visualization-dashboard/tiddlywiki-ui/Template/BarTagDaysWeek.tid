@@ -8,7 +8,7 @@ color: #66ccff
 \function dayStartDate() [daystart[],<dayIndex>]
 \function dayEndDate() [dayend[],<dayIndex>]
 \function hoursToday()
-  [{!!targetTiddler}tagging[]field:calendarEntry[yes]] :filter[get[startDate]compare:date:gteq<dayStartDate>compare:date:lteq<dayEndDate>] +[count[]]
+  [all[tiddlers]field:calendarEntry[yes]in-tagtree-of:inclusive{!!targetTiddler}] :filter[get[startDate]compare:date:gteq<dayStartDate>compare:date:lteq<dayEndDate>] +[count[]]
 \end
 \function color() [{!!color}]
 
