@@ -76,6 +76,12 @@ footer: {{$:/plugins/linonetwo/visualization-dashboard/tiddlywiki-ui/Modal/Creat
   </$select>
 </div>
 
+<div class="visualization-dashboard-new-gauge-description">
+  <$wikify name="description" text={{{[<draft-tiddler>get[template]get[description]]}}}>
+    <<description>>
+  </$wikify>
+</div>
+
 <!-- Fields that possible required by some template -->
 <!-- // TODO: reflect to auto generate form use SuperTag? -->
 <<conditional-field-tag-picker targetTiddler>>
