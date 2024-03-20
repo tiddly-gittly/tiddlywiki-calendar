@@ -7,7 +7,7 @@ color: #66ccff
 
 \function dayStartDate() [daystart[],<dayIndex>]
 \function dayEndDate() [dayend[],<dayIndex>]
-\function hoursToday()
+\function countsToday()
   [all[tiddlers]field:calendarEntry[yes]in-tagtree-of:inclusive{!!targetTiddler}] :filter[get[startDate]compare:date:gteq<dayStartDate>compare:date:lteq<dayEndDate>] +[count[]]
 \end
 \function color() [{!!targetTiddler}get[color]else{!!color}]
@@ -15,7 +15,7 @@ color: #66ccff
 \procedure series()
 [
   <$list filter="[range[7]]" variable="dayIndex">
-    <<hoursToday>>,
+    <<countsToday>>,
   </$list>
 ]
 \end
