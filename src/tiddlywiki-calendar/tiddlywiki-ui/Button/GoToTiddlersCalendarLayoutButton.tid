@@ -1,5 +1,4 @@
 title: $:/plugins/linonetwo/tw-calendar/tiddlywiki-ui/GoToTiddlersCalendarLayoutButton
-tags: $:/tags/PageControls
 caption: {{$:/plugins/linonetwo/tw-calendar/tiddlywiki-ui/Images/GoToCalendarImage}} {{$:/language/Buttons/GoToTiddlersCalendarLayoutButton/Caption}}
 description: {{$:/language/Buttons/GoToTiddlersCalendarLayoutButton/Description}}
 
