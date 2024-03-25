@@ -16,7 +16,9 @@ div.tc-page-container.visualization-dashboard-layout-container {
 .visualization-dashboard-layout-gauge-list-container {
   display: grid;
   grid-column-gap: 10px;
-  grid-auto-rows: 415px;
+  grid-auto-rows: 450px;
+  width: 100%;
+  overflow-x: hidden;
 }
 .visualization-dashboard-layout-gauge-item-container {
   display: flex;
