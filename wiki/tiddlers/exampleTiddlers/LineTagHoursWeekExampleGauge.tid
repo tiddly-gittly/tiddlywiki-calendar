@@ -52,7 +52,7 @@ grid-column-span: 2
           {
             type: 'category',
             boundaryGap: false,
-            data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+            data: $(montosun)$,
           }
         ],
         yAxis: [

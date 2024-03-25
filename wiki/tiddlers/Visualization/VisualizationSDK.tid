@@ -7,6 +7,8 @@ tags: VisualizationDashboard
 
 <$macrocall $name=".example" n="m2" eg="""<<weekend>>"""/>
 
+<$macrocall $name=".example" n="m3" eg="""<<montosun>>"""/>
+
 ! Filter Operators
 
 <<.operator-example f1 "[[CountUpDayExampleTiddler]daysbetween[]]">>
