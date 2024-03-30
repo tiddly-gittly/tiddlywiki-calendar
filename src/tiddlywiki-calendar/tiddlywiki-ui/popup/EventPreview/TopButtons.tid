@@ -6,12 +6,10 @@ tags: $:/tw-calendar/EventPreviewMiniViewTemplate
 <div class="tw-calendar-layout-event-preview-top-buttons">
   <$button to=<<currentTiddler>> style="flex: 4;" class="tw-calendar-layout-event-preview-close-button">
     <<lingo Button/OpenInStory/Caption>> {{$:/plugins/linonetwo/tw-calendar/Images/ExitLayout}}
-    <$action-setfield $tiddler="$:/layout" text="">
-      <$action-navigate $to=<<currentTiddler>> />
-    </$action-setfield>
+    <$action-setfield $tiddler="$:/layout" text="" />
   </$button>
   <% if [{$:/layout}match[$:/plugins/linonetwo/tw-calendar/tiddlywiki-ui/PageLayout/EventsCalendarSearchLayout]] %>
-    <$button to=<<currentTiddler>> style="flex: 4;" class="tw-calendar-layout-event-preview-close-button">
+    <$button style="flex: 4;" class="tw-calendar-layout-event-preview-close-button">
       <<lingo Button/OpenInDay/Caption>> {{$:/plugins/linonetwo/tw-calendar/tiddlywiki-ui/Images/EventCalendar}}
       <!-- Use this to set initial value for calendar widget in the EventsCalendarLayout -->
       <$action-createtiddler
