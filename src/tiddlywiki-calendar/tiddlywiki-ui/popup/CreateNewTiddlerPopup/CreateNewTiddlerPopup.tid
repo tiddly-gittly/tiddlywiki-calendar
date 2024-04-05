@@ -7,7 +7,17 @@ footer: {{$:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/popup/C
 
 <div class="tw-calendar-layout-create-new-tiddler-popup">
   <small><<lingo Modal/CreateEvent/Label/Title>> {{$:/plugins/linonetwo/tw-calendar/settings/prefix}}{{$:/state/Calendar/PageLayout/create-tiddler!!draft.title}}</small>
-  <<lingo Modal/CreateEvent/Label/Caption>> {{$:/state/Calendar/PageLayout/create-tiddler-caption||$:/core/ui/EditTemplate/title}}
+  <<lingo Modal/CreateEvent/Label/Caption>>
+  <$edit-text
+    tiddler="$:/state/Calendar/PageLayout/create-tiddler-caption"
+    field="draft.title"
+    class="tc-titlebar tc-edit-texteditor"
+    default=""
+    tabindex="1"
+    focus="true"
+    cancelPopups="yes"
+    fileDrop="no"
+  />
   <<lingo Modal/CreateEvent/Label/Text>> 
   <$let currentTiddler="$:/state/Calendar/PageLayout/create-tiddler">
     <$edit-text
@@ -18,7 +28,7 @@ footer: {{$:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/popup/C
       tabindex=-1
       focus=false
       cancelPopups="yes"
-      fileDrop=no
+      fileDrop="no"
       minHeight="30px"
     />
     <div class="tw-calendar-tags-input">
