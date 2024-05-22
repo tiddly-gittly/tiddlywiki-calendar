@@ -17,17 +17,12 @@ tc-page-container tc-page-view-$(storyviewTitle)$ tc-language-$(languageTitle)$ 
 	tv-show-missing-links={{$:/config/MissingLinks}}
 	storyviewTitle={{$:/view}}
 	languageTitle={{{ [{$:/language}get[name]] }}}>
-
-<div class=<<containerClasses>>>
-
-<$navigator story="$:/StoryList" history="$:/HistoryList" openLinkFromInsideRiver={{$:/config/Navigation/openLinkFromInsideRiver}} openLinkFromOutsideRiver={{$:/config/Navigation/openLinkFromOutsideRiver}} relinkOnRename={{$:/config/RelinkOnRename}}>
-
-<main class="tw-calendar-layout-main-area">
-	<$calendar height="100vh" />
-</main>
-
-</$navigator>
-
-</div>
-
+	<div class=<<containerClasses>>>
+		<$navigator story="$:/StoryList" history="$:/HistoryList" openLinkFromInsideRiver={{$:/config/Navigation/openLinkFromInsideRiver}} openLinkFromOutsideRiver={{$:/config/Navigation/openLinkFromOutsideRiver}} relinkOnRename={{$:/config/RelinkOnRename}}>
+			{{$:/core/ui/CommandPaletteTemplate}}
+			<main class="tw-calendar-layout-main-area">
+				<$calendar height="100vh" />
+			</main>
+		</$navigator>
+	</div>
 </$vars>
