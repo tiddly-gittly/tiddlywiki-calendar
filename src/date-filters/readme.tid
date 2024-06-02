@@ -1,7 +1,13 @@
-title: VisualizationSDK
-tags: VisualizationDashboard
+title: $:/plugins/linonetwo/date-filters/readme
+type: text/vnd.tiddlywiki
 
-! Macros
+! date-filters
+
+Filters for getting week range and preparing visualization data.
+
+// TODO: use https://talk.tiddlywiki.org/t/introducing-the-testcase-widget/9847/19 after 5.3.4 release
+
+!! Macros
 
 <$macrocall $name=".example" n="m1" eg="""<<weekstart>>"""/>
 
@@ -9,7 +15,7 @@ tags: VisualizationDashboard
 
 <$macrocall $name=".example" n="m3" eg="""<<montosun>>"""/>
 
-! Filter Operators
+!! Filter Operators
 
 <<.operator-example f1 "[[CountUpDayExampleTiddler]daysbetween[]]">>
 
