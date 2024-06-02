@@ -1,0 +1,16 @@
+title: $:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/ViewTemplate/EventCalendarSidebar
+
+\whitespace trim
+\define config-title()
+$:/config/SideBarSegments/Visibility/$(listItem)$
+\end
+
+<$scrollable fallthrough="no" class="tc-sidebar-scrollable event-calendar-sidebar">
+  <div class="tc-sidebar-header">
+    <$list filter="[all[shadows+tiddlers]tag[$:/tags/EventCalendarSideBarSegment]!has[draft.of]]" variable="listItem">
+      <$reveal type="nomatch" state=<<config-title>> text="hide"  tag="div">
+        <$transclude tiddler=<<listItem>> mode="block"/>
+      </$reveal>
+    </$list>
+  </div>
+</$scrollable>

@@ -12,6 +12,11 @@ export function setToolbarIcons() {
     const svgIcon = $tw.wiki.renderTiddler('text/html', '$:/plugins/linonetwo/tw-calendar/tiddlywiki-ui/Images/CalendarSearchImage')?.replace('<p>', '')?.replace('</p>', '') ?? '';
     searchLayoutButton.innerHTML = getIsSmallScreen() ? svgIcon : `${$tw.wiki.getTiddlerText('$:/language/Search/Search') ?? 'Search'} ${svgIcon}`;
   }
+  const toggleSidebarButton = document.querySelector('.fc-toggleSidebar-button');
+  if (toggleSidebarButton) {
+    const svgIcon = $tw.wiki.renderTiddler('text/html', '$:/core/images/chevron-left')?.replace('<p>', '')?.replace('</p>', '') ?? '';
+    toggleSidebarButton.innerHTML = getIsSmallScreen() ? svgIcon : `${$tw.wiki.getTiddlerText('$:/language/Buttons/ShowSideBar/Caption') ?? 'ShowSideBar'} ${svgIcon}`;
+  }
 }
 
 export function getCustomButtons() {
@@ -22,7 +27,7 @@ export function getCustomButtons() {
       hint: $tw.wiki.getTiddlerText('$:/language/Buttons/FullScreen/Hint') ?? 'Exit',
       click: () => {
         // Remove initialParams so it won't affect next open
-        $tw.wiki.deleteTiddler('$:/state/Calendar/PageLayout/EventCalendar/initialParams')
+        $tw.wiki.deleteTiddler('$:/state/Calendar/PageLayout/EventCalendar/initialParams');
         $tw.wiki.setText('$:/layout', 'text', undefined, '');
       },
     },
@@ -32,8 +37,17 @@ export function getCustomButtons() {
       hint: $tw.wiki.getTiddlerText('$:/language/Search/Standard/Hint') ?? 'Search',
       click: () => {
         // Remove initialParams so it won't affect next open
-        $tw.wiki.deleteTiddler('$:/state/Calendar/PageLayout/EventCalendar/initialParams')
+        $tw.wiki.deleteTiddler('$:/state/Calendar/PageLayout/EventCalendar/initialParams');
         $tw.wiki.setText('$:/layout', 'text', undefined, '$:/plugins/linonetwo/tw-calendar/tiddlywiki-ui/PageLayout/EventsCalendarSearchLayout');
+      },
+    },
+    toggleSidebar: {
+      /** set by setToolbarIcons() above */
+      text: '',
+      hint: $tw.wiki.getTiddlerText('$:/language/Buttons/ShowSideBar/Caption') ?? 'ShowSideBar',
+      click: () => {
+        const opened = ($tw.wiki.getTiddlerText('$:/state/event-calendar-sidebar') ?? 'no') === 'yes';
+        $tw.wiki.setText('$:/state/event-calendar-sidebar', 'text', undefined, opened ? 'no' : 'yes');
       },
     },
   });

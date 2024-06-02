@@ -21,12 +21,17 @@ tc-page-container tc-page-view-$(storyviewTitle)$ tc-language-$(languageTitle)$ 
 		<$navigator story="$:/StoryList" history="$:/HistoryList" openLinkFromInsideRiver={{$:/config/Navigation/openLinkFromInsideRiver}} openLinkFromOutsideRiver={{$:/config/Navigation/openLinkFromOutsideRiver}} relinkOnRename={{$:/config/RelinkOnRename}}>
 			{{$:/core/ui/CommandPaletteTemplate}}
 			<main class="tw-calendar-layout-main-area">
-				<$calendar
-					height="100vh"
-					filter="[all[tiddlers]!is[system]field:calendarEntry[yes]]"
-					initialView={{$:/state/Calendar/PageLayout/EventCalendar/initialParams!!initialView}}
-					initialDate={{$:/state/Calendar/PageLayout/EventCalendar/initialParams!!initialDate}}
-				/>
+				<div class="event-calendar-container">
+					<$calendar
+						height="100%"
+						filter="[all[tiddlers]!is[system]field:calendarEntry[yes]]"
+						initialView={{$:/state/Calendar/PageLayout/EventCalendar/initialParams!!initialView}}
+						initialDate={{$:/state/Calendar/PageLayout/EventCalendar/initialParams!!initialDate}}
+					/>
+				</div>
+				<$reveal state="$:/state/event-calendar-sidebar" type="match" text="yes" default="no" retain="yes" animate="yes">
+					{{$:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/ViewTemplate/EventCalendarSidebar}}
+				</$reveal>
 			</main>
 		</$navigator>
 	</div>

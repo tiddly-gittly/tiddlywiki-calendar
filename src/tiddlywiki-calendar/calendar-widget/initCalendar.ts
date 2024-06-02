@@ -135,7 +135,7 @@ function getToolbarSettings(context: IContext): CalendarOptions {
         // we can't add a date picker to title, so have to add prevYear,nextYear here to quick navigate between long time
         left: `prev,next prevYear,nextYear today searchLayout`,
         center: 'title',
-        right: `${calendarLayout ? 'backToDefaultLayout ' : ''}dayGridMonth,timeGridWeek,timeGridThreeDay,timeGridDay,listWeek`,
+        right: `${calendarLayout ? 'backToDefaultLayout ' : ''}dayGridMonth,timeGridWeek,timeGridThreeDay,timeGridDay,listWeek toggleSidebar`,
       },
     footerToolbar: getIsSmallScreen() && context.hideToolbar !== true
       ? {

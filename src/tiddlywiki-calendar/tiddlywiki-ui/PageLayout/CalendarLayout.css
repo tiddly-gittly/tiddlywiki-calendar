@@ -6,6 +6,8 @@ div.tc-page-container.tw-calendar-layout-container {
 .tw-calendar-layout-main-area {
   height: 100%;
   width: 100%;
+  display: flex;
+  flex-direction: row;
 }
 
 .tw-calendar-draggable-region {
@@ -55,6 +57,17 @@ div.tc-page-container.tw-calendar-layout-container {
   margin: 0;
   height: 100%;
   width: 100%;
+}
+
+.event-calendar-container {
+  height: 100vh;
+  flex: 1;
+}
+.tw-calendar-layout-main-area div.event-calendar-sidebar {
+  position: initial;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
 }
 
 .tc-page-controls svg.tc-image-tmd-calendar-cursor {
