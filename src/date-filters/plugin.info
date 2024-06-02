@@ -1,0 +1,9 @@
+{
+  "title": "$:/plugins/linonetwo/date-filters",
+  "name": "date-filters",
+  "author": "linonetwo",
+  "description": "Filters for getting week range and preparing visualization data.",
+  "plugin-type": "plugin",
+  "version": "1.0.0",
+  "list": "readme"
+}
