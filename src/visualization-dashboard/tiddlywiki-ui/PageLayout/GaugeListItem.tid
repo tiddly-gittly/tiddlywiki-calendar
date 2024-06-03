@@ -1,13 +1,20 @@
 title: $:/plugins/linonetwo/visualization-dashboard/tiddlywiki-ui/PageLayout/GaugeListItem
 
+\procedure dblclickactions()
+<$action-setfield $tiddler="$:/layout" text="" />
+<$action-navigate $to=<<currentTiddler>> />
+\end
+
 \procedure list-item()
-<$draggable tiddler=<<currentTiddler>> tag="h3" class="visualization-dashboard-layout-gauge-item-title" >
-	<% if [all[current]has[caption]] %>
-		<$transclude field="caption"/>
-	<% else %>
-		<$view field="title"/>
-	<% endif %>
-</$draggable>
+<$eventcatcher selector="h3.visualization-dashboard-layout-gauge-item-title" $dblclick=<<dblclickactions>> tag="div">
+	<$draggable tiddler=<<currentTiddler>> tag="h3" class="visualization-dashboard-layout-gauge-item-title" >
+		<% if [all[current]has[caption]] %>
+			<$transclude field="caption"/>
+		<% else %>
+			<$view field="title"/>
+		<% endif %>
+	</$draggable>
+</$eventcatcher>
 <div class="visualization-dashboard-layout-gauge-item-body">
 	<$transclude field="text" mode="block"/>
 </div>
