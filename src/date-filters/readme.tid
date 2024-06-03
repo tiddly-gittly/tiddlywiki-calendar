@@ -36,3 +36,5 @@ Filters for getting week range and preparing visualization data.
 <<.operator-example f4.2 "[all[tiddlers]!is[system]field:calendarEntry[yes]tag[Sleeping]] :filter[get[startDate]compare:date:gteq<weekstart>compare:date:lteq<now [UTC]YYYY0MM0DD0hh0mm0ssXXX>] +[counthours[]]">>
 
 <<.operator-example f5 "[daystart[0],[7]] [dayend[0],[7]]">>
+
+<<.operator-example f6 "[weekstart[]addweekday[]] [weekstart[]addweekday[4]]">>

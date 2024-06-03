@@ -1,12 +1,11 @@
 title: $:/plugins/linonetwo/visualization-dashboard/ViewTemplate/WeekJournalSelect
 
-\import [[$:/plugins/linonetwo/visualization-dashboard/tiddlywiki-ui/PageLayout/GaugeListItem]]
 \whitespace trim
 \procedure lingo-base() $:/plugins/linonetwo/visualization-dashboard/language/
+\procedure currentWeekIndexTiddler() $:/temp/VisualizationDashboard/CurrentWeekIndex
 \function week-start-this-week()
 [weekstart{$:/temp/VisualizationDashboard/CurrentWeekIndex}format:date{$:/config/NewJournal/Title}]
 \end
-
 \function week-end-this-week()
 [weekend{$:/temp/VisualizationDashboard/CurrentWeekIndex}format:date{$:/config/NewJournal/Title}]
 \end
