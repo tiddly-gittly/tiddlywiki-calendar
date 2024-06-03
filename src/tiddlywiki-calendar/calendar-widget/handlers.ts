@@ -11,11 +11,13 @@ import type { IContext } from './initCalendar';
 export function getHandlers(context: IContext): CalendarOptions {
   function putEvent(event: EventImpl | EventApi, newTiddler?: ITiddlerFields) {
     // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
-    if (event.start === null || event.end === null) return;
+    // when an existed event is dragged to full-day, the `end` is null, but it should have a title
+    if (event.start === null || (event.end === null && !event.title)) return;
     const originalEventTiddler = newTiddler ?? $tw.wiki.getTiddler(event.title ?? '')?.fields;
     if (originalEventTiddler === undefined) return;
     const startDate = $tw.utils.stringifyDate(event.start);
-    const endDate = $tw.utils.stringifyDate(event.end);
+    // when drag to full-date event, the `end` will be `null`, make it full-day event by add a day to it.
+    const endDate = $tw.utils.stringifyDate(event.end ?? new Date(event.start.getTime() + 86_400_000));
     const startDateKey = context.startDateFields?.[0] ?? 'startDate';
     const endDateKey = context.endDateFields?.[0] ?? 'endDate';
     $tw.wiki.addTiddler({
