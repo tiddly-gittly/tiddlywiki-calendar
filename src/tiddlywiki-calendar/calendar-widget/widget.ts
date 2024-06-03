@@ -102,6 +102,9 @@ class CalendarWidget extends Widget {
       this.refreshTiddlerEventCalendar();
       refreshed = true;
     }
+    if (refreshed) {
+      this.refreshChildren(changedTiddlers);
+    }
     return refreshed;
   }
 
