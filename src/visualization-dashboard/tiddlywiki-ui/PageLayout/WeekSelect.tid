@@ -1,0 +1,34 @@
+title: $:/plugins/linonetwo/visualization-dashboard/ViewTemplate/WeekJournalSelect
+
+\import [[$:/plugins/linonetwo/visualization-dashboard/tiddlywiki-ui/PageLayout/GaugeListItem]]
+\whitespace trim
+\procedure lingo-base() $:/plugins/linonetwo/visualization-dashboard/language/
+\function week-start-this-week()
+[weekstart{$:/temp/VisualizationDashboard/CurrentWeekIndex}format:date{$:/config/NewJournal/Title}]
+\end
+
+\function week-end-this-week()
+[weekend{$:/temp/VisualizationDashboard/CurrentWeekIndex}format:date{$:/config/NewJournal/Title}]
+\end
+
+<div class="visualization-dashboard-week-select-container">
+  <$button>
+    <<lingo PrevWeek>>
+    <$action-createtiddler
+      $basetitle=<<currentWeekIndexTiddler>>
+      $overwrite="yes"
+      text={{{[<currentWeekIndexTiddler>get[text]else[0]add[1]]}}}
+    />
+  </$button>
+
+  <<week-start-this-week>><$text text=" - " /><<week-end-this-week>>
+
+  <$button>
+    <<lingo NextWeek>>
+    <$action-createtiddler
+      $basetitle=<<currentWeekIndexTiddler>>
+      $overwrite="yes"
+      text={{{[<currentWeekIndexTiddler>get[text]else[0]subtract[1]]}}}
+    />
+  </$button>
+</div>

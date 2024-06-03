@@ -8,6 +8,8 @@ VisualizationDashboardLayout/Caption: 可视化大屏
 VisualizationDashboardLayout/Description: 可视化大屏集中展示统计日历事件和知识库活动的图表
 VisualizationDashboardLayout/Exit: 退出并返回默认布局
 VisualizationDashboardLayout/ExistingGaugesCount: 已有仪表数
+PrevWeek: 上一周
+NextWeek: 下一周
 Modal/CreateGaugeModal/Button/Open/Caption: 创建仪表
 Modal/CreateGaugeModal/Button/Cancel/Caption: 取消
 Modal/CreateGaugeModal/Button/Create/Caption: 创建
