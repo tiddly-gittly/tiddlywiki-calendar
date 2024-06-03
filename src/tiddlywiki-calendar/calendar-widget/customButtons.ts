@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
+import { Draggable } from '@fullcalendar/interaction';
 import { getIsSmallScreen } from './constants';
-
+import { IContext } from './initCalendar';
 export function setToolbarIcons() {
   const backToDefaultLayoutButton = document.querySelector('.fc-backToDefaultLayout-button');
   if (backToDefaultLayoutButton) {
@@ -19,7 +20,7 @@ export function setToolbarIcons() {
   }
 }
 
-export function getCustomButtons() {
+export function getCustomButtons(context: IContext) {
   return ({
     backToDefaultLayout: {
       /** set by setToolbarIcons() above */
@@ -48,6 +49,18 @@ export function getCustomButtons() {
       click: () => {
         const opened = ($tw.wiki.getTiddlerText('$:/state/event-calendar-sidebar') ?? 'no') === 'yes';
         $tw.wiki.setText('$:/state/event-calendar-sidebar', 'text', undefined, opened ? 'no' : 'yes');
+        if (!opened) {
+          // is about to open
+          setTimeout(() => {
+            const sidebarContainer = context.containerElement?.parentElement?.parentElement?.querySelector<HTMLDivElement>('.event-calendar-sidebar');
+            if (!sidebarContainer) return;
+            // eslint-disable-next-line no-new
+            new Draggable(sidebarContainer, {
+              itemSelector: '.tc-draggable',
+              appendTo: context.containerElement,
+            });
+          }, 1);
+        }
       },
     },
   });

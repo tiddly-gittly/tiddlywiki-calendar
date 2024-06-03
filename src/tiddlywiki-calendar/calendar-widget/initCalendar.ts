@@ -128,7 +128,7 @@ function getToolbarSettings(context: IContext): CalendarOptions {
     };
   }
   return {
-    customButtons: getCustomButtons(),
+    customButtons: getCustomButtons(context),
     headerToolbar: getIsSmallScreen() || context.hideToolbar === true
       ? false
       : {

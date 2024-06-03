@@ -2,8 +2,9 @@
 /* eslint-disable unicorn/no-null */
 import { Modal } from '$:/core/modules/utils/dom/modal.js';
 import { autoPlacement, computePosition, shift } from '@floating-ui/dom';
-import type { CalendarOptions } from '@fullcalendar/core';
+import type { CalendarOptions, EventApi } from '@fullcalendar/core';
 import type { EventImpl } from '@fullcalendar/core/internal';
+import { ITiddlerFields } from 'tiddlywiki';
 import { draftTiddlerCaptionTitle, draftTiddlerTitle, isMobile } from './constants';
 import type { IContext } from './initCalendar';
 
@@ -24,17 +25,17 @@ function notifyNavigatorSaveTiddler(parameters: { event: MouseEvent; title: stri
 }
 
 export function getHandlers(context: IContext): CalendarOptions {
-  function putEvent(event: EventImpl, jsEvent: MouseEvent) {
+  function putEvent(event: EventImpl | EventApi, newTiddler?: ITiddlerFields) {
     // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
-    if (event.start === null || event.end === null || !event.title) return;
-    const originalEventTiddler = $tw.wiki.getTiddler(event.title);
+    if (event.start === null || event.end === null) return;
+    const originalEventTiddler = newTiddler ?? $tw.wiki.getTiddler(event.title ?? '')?.fields;
     if (originalEventTiddler === undefined) return;
     const startDate = $tw.utils.stringifyDate(event.start);
     const endDate = $tw.utils.stringifyDate(event.end);
     const startDateKey = context.startDateFields?.[0] ?? 'startDate';
     const endDateKey = context.endDateFields?.[0] ?? 'endDate';
     $tw.wiki.addTiddler({
-      ...originalEventTiddler.fields,
+      ...originalEventTiddler,
       [startDateKey]: startDate,
       [endDateKey]: endDate,
       modified: new Date(),
@@ -167,14 +168,30 @@ export function getHandlers(context: IContext): CalendarOptions {
       titleInputElement?.focus?.();
     },
     eventResize(info) {
-      putEvent(info.event, info.jsEvent);
+      putEvent(info.event);
       // eslint-disable-next-line @typescript-eslint/no-confusing-void-expression
-      info.relatedEvents.forEach((event) => putEvent(event, info.jsEvent));
+      info.relatedEvents.forEach((event) => putEvent(event));
     },
+    /** When drop after drag existing event from calendar */
     eventDrop(info) {
-      putEvent(info.event, info.jsEvent);
+      putEvent(info.event);
       // eslint-disable-next-line @typescript-eslint/no-confusing-void-expression
-      info.relatedEvents.forEach((event) => putEvent(event, info.jsEvent));
+      info.relatedEvents.forEach((event) => putEvent(event));
+    },
+    /** When drop new event from the sidebar */
+    eventReceive(info) {
+      const randomTitle = $tw.utils.formatDateString(new Date(), '[UTC]YYYY0MM0DD0hh0mm0ss0XXX');
+      const tags = $tw.utils.parseStringArray(info.draggedEl.dataset.tags ?? '');
+      putEvent(info.event, {
+        title: randomTitle,
+        caption: '',
+        tags,
+        text: '',
+        type: 'text/vnd.tiddlywiki',
+        calendarEntry: 'yes',
+      });
+      // remove the shadow event. Wait for real event to be created.
+      info.event.remove();
     },
     eventMouseEnter(info) {
       // use this until https://github.com/Jermolene/TiddlyWiki5/discussions/7989 fixed
