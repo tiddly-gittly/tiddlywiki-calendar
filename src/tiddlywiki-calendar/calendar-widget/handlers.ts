@@ -8,22 +8,6 @@ import { ITiddlerFields } from 'tiddlywiki';
 import { draftTiddlerCaptionTitle, draftTiddlerTitle, isMobile } from './constants';
 import type { IContext } from './initCalendar';
 
-function notifyNavigatorSaveTiddler(parameters: { event: MouseEvent; title: string }, context: IContext) {
-  window.requestIdleCallback(
-    () => {
-      context.widget?.dispatchEvent({
-        type: 'tm-save-tiddler',
-        // param: param,
-        paramObject: { suppressNavigation: 'yes' },
-        event: parameters.event,
-        tiddlerTitle: parameters.title,
-      });
-      context.widget?.dispatchEvent({ type: 'tm-auto-save-wiki' });
-    },
-    { timeout: 2000 },
-  );
-}
-
 export function getHandlers(context: IContext): CalendarOptions {
   function putEvent(event: EventImpl | EventApi, newTiddler?: ITiddlerFields) {
     // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
@@ -40,7 +24,6 @@ export function getHandlers(context: IContext): CalendarOptions {
       [endDateKey]: endDate,
       modified: new Date(),
     });
-    notifyNavigatorSaveTiddler({ title: event.title, event: jsEvent }, context);
   }
   const handlers: CalendarOptions = {
     // eslint-disable-next-line @typescript-eslint/no-misused-promises
