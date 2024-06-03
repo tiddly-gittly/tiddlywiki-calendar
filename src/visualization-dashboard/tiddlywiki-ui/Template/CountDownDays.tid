@@ -6,7 +6,7 @@ targetTiddler:
 targetValue: 30
 color: #66ccff
 
-\function days() [{!!targetTiddler}!daysbetween[]]
+\function days() [{!!targetTiddler}!daysbetween<currentDate>]
 \function dayPercentage() [<days>divide{!!targetValue}multiply[100]floor[]]
 \function color() [{!!targetTiddler}get[color]else{!!color}]
 \function dateString() [{!!targetTiddler}get[endDate]] :else[{!!targetTiddler}get[startDate]] +[format:date[YYYY MMM DD]]

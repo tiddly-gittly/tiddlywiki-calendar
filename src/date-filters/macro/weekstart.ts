@@ -27,5 +27,6 @@ exports.run = (offsetString: string): string => {
   if (Number.isNaN(offset)) {
     offset = 0;
   }
+  // TODO: get <currentDateWeekOffset> variable here
   return $tw.utils.formatDateString(getStartDateOfWeek(offset), '[UTC]YYYY0MM0DD0hh0mm0ss0XXX');
 };

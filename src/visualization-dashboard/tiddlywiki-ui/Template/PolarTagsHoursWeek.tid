@@ -5,10 +5,10 @@ description: <<lingo GaugeTemplate/PolarTagsHoursWeek/Description $:/plugins/lin
 targetTiddler: 
 color: #66ccff
 
-\function dayStartDate() [daystart[],<dayIndex>]
-\function dayEndDate() [dayend[],<dayIndex>]
+\function weekStartDate() [weekstart<currentDateWeekOffset>,<currentDay>]
+\function weekEndDate() [weekend<currentDateWeekOffset>,<currentDay>]
 \function hoursThisWeek()
-  [all[tiddlers]field:calendarEntry[yes]in-tagtree-of:inclusive<currentTag>] :filter[get[startDate]compare:date:gteq<weekstart>compare:date:lteq<weekend>] +[counthours[]]
+  [all[tiddlers]field:calendarEntry[yes]in-tagtree-of:inclusive<currentTag>] :filter[get[startDate]compare:date:gteq<weekStartDate>compare:date:lteq<weekEndDate>] +[counthours[]]
 \end
 
 \procedure series()

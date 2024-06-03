@@ -5,8 +5,8 @@ description: <<lingo GaugeTemplate/BarTagDaysWeek/Description $:/plugins/linonet
 targetTiddler: 
 color: #66ccff
 
-\function dayStartDate() [daystart[],<dayIndex>]
-\function dayEndDate() [dayend[],<dayIndex>]
+\function dayStartDate() [daystart<currentDateWeekOffset>,<dayIndex>]
+\function dayEndDate() [dayend<currentDateWeekOffset>,<dayIndex>]
 \function countsToday()
   [all[tiddlers]field:calendarEntry[yes]in-tagtree-of:inclusive{!!targetTiddler}] :filter[get[startDate]compare:date:gteq<dayStartDate>compare:date:lteq<dayEndDate>] +[count[]]
 \end
