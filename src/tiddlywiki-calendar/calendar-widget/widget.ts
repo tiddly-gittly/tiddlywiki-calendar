@@ -85,6 +85,8 @@ class CalendarWidget extends Widget {
       Object.keys(changedTiddlers).some((changedTiddlerTitle) => {
         // if setting changed, refresh the whole calendar, to make options take effect
         if (changedTiddlerTitle.startsWith('$:/plugins/linonetwo/tw-calendar/settings')) return true;
+        // when sidebar toggle, need to do full refresh, otherwise the UI will break.
+        if (changedTiddlerTitle.startsWith('$:/state/event-calendar-sidebar')) return true;
         return false;
       })
     ) {

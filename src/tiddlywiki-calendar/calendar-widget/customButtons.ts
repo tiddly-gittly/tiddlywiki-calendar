@@ -15,12 +15,16 @@ export function setToolbarIcons() {
   }
   const toggleSidebarButton = document.querySelector('.fc-toggleSidebar-button');
   if (toggleSidebarButton) {
-    const svgIcon = $tw.wiki.renderTiddler('text/html', '$:/core/images/chevron-left')?.replace('<p>', '')?.replace('</p>', '') ?? '';
+    const sidebarOpened = ($tw.wiki.getTiddlerText('$:/state/event-calendar-sidebar') ?? 'no') === 'yes';
+    const svgIcon = $tw.wiki.renderTiddler('text/html', sidebarOpened ? '$:/core/images/chevron-right' : '$:/core/images/chevron-left')?.replace('<p>', '')?.replace('</p>', '') ??
+      '';
     toggleSidebarButton.innerHTML = getIsSmallScreen() ? svgIcon : `${$tw.wiki.getTiddlerText('$:/language/Buttons/ShowSideBar/Caption') ?? 'ShowSideBar'} ${svgIcon}`;
   }
 }
 
 export function getCustomButtons(context: IContext) {
+  const sidebarOpened = ($tw.wiki.getTiddlerText('$:/state/event-calendar-sidebar') ?? 'no') === 'yes';
+
   return ({
     backToDefaultLayout: {
       /** set by setToolbarIcons() above */
@@ -45,11 +49,13 @@ export function getCustomButtons(context: IContext) {
     toggleSidebar: {
       /** set by setToolbarIcons() above */
       text: '',
-      hint: $tw.wiki.getTiddlerText('$:/language/Buttons/ShowSideBar/Caption') ?? 'ShowSideBar',
+      hint: sidebarOpened
+        ? ($tw.wiki.getTiddlerText('$:/language/Buttons/CloseSideBar/Caption') ?? 'CloseSideBar')
+        : ($tw.wiki.getTiddlerText('$:/language/Buttons/ShowSideBar/Caption') ?? 'ShowSideBar'),
       click: () => {
-        const opened = ($tw.wiki.getTiddlerText('$:/state/event-calendar-sidebar') ?? 'no') === 'yes';
-        $tw.wiki.setText('$:/state/event-calendar-sidebar', 'text', undefined, opened ? 'no' : 'yes');
-        if (!opened) {
+        const sidebarOpened = ($tw.wiki.getTiddlerText('$:/state/event-calendar-sidebar') ?? 'no') === 'yes';
+        $tw.wiki.setText('$:/state/event-calendar-sidebar', 'text', undefined, sidebarOpened ? 'no' : 'yes');
+        if (!sidebarOpened) {
           // is about to open
           setTimeout(() => {
             const sidebarContainer = context.containerElement?.parentElement?.parentElement?.querySelector<HTMLDivElement>('.event-calendar-sidebar');
