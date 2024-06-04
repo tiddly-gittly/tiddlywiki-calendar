@@ -1,7 +1,7 @@
 title: $:/plugins/linonetwo/visualization-dashboard/tiddlywiki-ui/PageLayout/GaugeListItem
 
 \procedure dblclickactions()
-<$action-setfield $tiddler="$:/layout" text="" />
+<$action-setfield $tiddler="$:/layout" text="" $timestamp="no" />
 <$action-navigate $to=<<currentTiddler>> />
 \end
 
