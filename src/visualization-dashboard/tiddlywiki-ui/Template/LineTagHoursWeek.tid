@@ -5,8 +5,8 @@ description: <<lingo GaugeTemplate/LineTagHoursWeek/Description $:/plugins/linon
 targetTiddler: 
 color: #66ccff
 
-\function dayStartDate() [daystart<currentDateWeekOffset>,<dayIndex>]
-\function dayEndDate() [dayend<currentDateWeekOffset>,<dayIndex>]
+\function dayStartDate() [daystart<weekIndex>,<dayIndex>]
+\function dayEndDate() [dayend<weekIndex>,<dayIndex>]
 \function hoursToday()
   [all[tiddlers]field:calendarEntry[yes]in-tagtree-of:inclusive{!!targetTiddler}] :filter[get[startDate]compare:date:gteq<dayStartDate>compare:date:lteq<dayEndDate>] +[counthours[]]
 \end
