@@ -18,4 +18,4 @@ Modal/CreateEvent/Label/Caption: 标题
 Modal/CreateEvent/Label/Text: 内容
 Modal/CreateEvent/Label/Cancel: 取消
 Modal/CreateEvent/Label/Create: 创建
-EventsCalendar/Sidebar/EmptyMessage: 暂无侧边栏条目！你可以添加带有 `$:/tags/EventCalendarSideBarSegment` 标签的条目，让它出现在这里（或安装有这样条目的社区插件）。条目上可以这样添加可拖拽的内容：`<$draggable data-event=`{ "duration": "01:00" }` data-tags="标签">`
+EventsCalendar/Sidebar/EmptyMessage: 暂无侧边栏条目！你可以添加带有 `$:/tags/EventCalendarSideBarSegment` 标签的条目，让它出现在这里（或安装有这样条目的社区插件）。条目上可以这样添加可拖拽的内容：`<$draggable data-event='{ "duration": "01:00" }' data-tags="标签">`

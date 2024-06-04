@@ -18,4 +18,4 @@ Modal/CreateEvent/Label/Caption: Caption
 Modal/CreateEvent/Label/Text: Text
 Modal/CreateEvent/Label/Cancel: Cancel
 Modal/CreateEvent/Label/Create: Create
-EventsCalendar/Sidebar/EmptyMessage: There are no sidebar tiddlers available at this time! You can add tiddlers with tag `$:/tags/EventCalendarSideBarSegment` to appear here (or install community plugins that have such tiddlers). Draggable content can be added to the entry like this: `<$draggable data-event=`{ "duration": "01:00" }` data-tags="Tags">`
+EventsCalendar/Sidebar/EmptyMessage: There are no sidebar tiddlers available at this time! You can add tiddlers with tag `$:/tags/EventCalendarSideBarSegment` to appear here (or install community plugins that have such tiddlers). Draggable content can be added to the entry like this: `<$draggable data-event='{ "duration": "01:00" }' data-tags="Tags">`

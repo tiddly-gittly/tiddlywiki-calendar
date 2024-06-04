@@ -6,7 +6,7 @@ title: $:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/ViewTempla
 $:/config/SideBarSegments/Visibility/$(listItem)$
 \end
 \procedure emptyMessage()
-<<EventsCalendar/Sidebar/EmptyMessage>>
+<<lingo EventsCalendar/Sidebar/EmptyMessage>>
 \end
 
 
