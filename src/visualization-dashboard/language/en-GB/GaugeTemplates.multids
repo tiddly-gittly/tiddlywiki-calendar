@@ -24,3 +24,6 @@ GaugeTemplate/PolarTagsHoursWeek/Description: A circular bar chart showing the d
 GaugeTemplateGroup/HeatMap/Caption: Heat Map
 GaugeTemplate/HeatMapTiddlersYear/Caption: Tiddler heat map This year
 GaugeTemplate/HeatMapTiddlersYear/Description: A heat map showing the number of tiddlers created each day of the year, including created and modified.
+GaugeTemplateGroup/Network/Caption: Network
+GaugeTemplate/TheBrain2LevelTag/Caption: 2-order tag association brain chart
+GaugeTemplate/TheBrain2LevelTag/Description: A network diagram showing the 2-order associative tags of a tag, i.e., the subentries of the tiddlers with this tag and their relationships.

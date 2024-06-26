@@ -25,3 +25,6 @@ GaugeTemplate/PolarTagsHoursWeek/Description: 用环形柱状图展示所选的�
 GaugeTemplateGroup/HeatMap/Caption: 热力图
 GaugeTemplate/HeatMapTiddlersYear/Caption: 本年条目热力图
 GaugeTemplate/HeatMapTiddlersYear/Description: 用热力图展示365天内「知识库内所有条目」每日的变更次数，包括创建和修改。
+GaugeTemplateGroup/Network/Caption: 网络图
+GaugeTemplate/TheBrain2LevelTag/Caption: 二阶标签关联脑图
+GaugeTemplate/TheBrain2LevelTag/Description: 用网络图展示某个标签的二阶关联标签，即带有这个标签的条目的子条目及其关系。
