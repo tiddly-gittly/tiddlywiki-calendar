@@ -22,3 +22,6 @@ GaugeTemplate/BarTagDaysWeek/Caption: 本周每日标签数
 GaugeTemplate/BarTagDaysWeek/Description: 用柱状图展示某个标签本周每天「带这个标签的条目」的出现天数。（例如本周每天有几次打了「看短视频」标签的条目）
 GaugeTemplate/PolarTagsHoursWeek/Caption: 本周每日各标签小时
 GaugeTemplate/PolarTagsHoursWeek/Description: 用环形柱状图展示所选的各个标签本周每天「带这个标签的条目」的持续时间，在极坐标系上比较本周各项活动的时间。
+GaugeTemplateGroup/HeatMap/Caption: 热力图
+GaugeTemplate/HeatMapTiddlersYear/Caption: 本年条目热力图
+GaugeTemplate/HeatMapTiddlersYear/Description: 用热力图展示365天内「知识库内所有条目」每日的变更次数，包括创建和修改。

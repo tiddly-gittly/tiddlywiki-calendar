@@ -21,3 +21,6 @@ GaugeTemplate/BarTagDaysWeek/Caption: number of tags per day this week.
 GaugeTemplate/BarTagDaysWeek/Description: A bar chart showing the number of days a tag has been tagged each day of the week. (e.g. how many times per day this week were the tiddlers tagged "watch short videos")
 GaugeTemplate/PolarTagsHoursWeek/Caption: Hours per day for each tag this week
 GaugeTemplate/PolarTagsHoursWeek/Description: A circular bar chart showing the duration of 'entries with this tag' for each day of the week for each of the selected tags, comparing the hours of each activity for the week on a polar coordinate system.
+GaugeTemplateGroup/HeatMap/Caption: Heat Map
+GaugeTemplate/HeatMapTiddlersYear/Caption: Tiddler heat map This year
+GaugeTemplate/HeatMapTiddlersYear/Description: A heat map showing the number of tiddlers created each day of the year, including created and modified.
