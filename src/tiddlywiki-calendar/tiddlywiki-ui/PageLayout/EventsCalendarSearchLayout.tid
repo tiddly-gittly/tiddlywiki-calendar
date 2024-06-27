@@ -10,6 +10,10 @@ throttle.refresh: true
 tc-page-container tc-page-view-$(storyviewTitle)$ tc-language-$(languageTitle)$ tw-calendar-layout-container
 \end
 \import [subfilter{$:/core/config/GlobalImportFilter}]
+\procedure redirected-navigate-actions()
+  <$action-setfield $tiddler="$:/layout" text="" />
+  <$action-navigate $to=<<event-navigateTo>> />
+\end
 
 <$vars
 	tv-config-toolbar-icons={{$:/config/Toolbar/Icons}}
@@ -20,50 +24,52 @@ tc-page-container tc-page-view-$(storyviewTitle)$ tc-language-$(languageTitle)$ 
 	languageTitle={{{ [{$:/language}get[name]] }}}>
 	<div class=<<containerClasses>>>
 		<$navigator story="$:/StoryList" history="$:/HistoryList" openLinkFromInsideRiver={{$:/config/Navigation/openLinkFromInsideRiver}} openLinkFromOutsideRiver={{$:/config/Navigation/openLinkFromOutsideRiver}} relinkOnRename={{$:/config/RelinkOnRename}}>
-			{{$:/core/ui/CommandPaletteTemplate}}
-			<main class="tw-calendar-search-layout-main-area">
-				<div class="tw-calendar-search-bar">
-					<div class="tw-calendar-search-bar-icon">
-						<$button to=<<currentTiddler>> tooltip={{$:/language/Buttons/FullScreen/Hint}} style="width: 85%;height: 85%;">
-							{{$:/plugins/linonetwo/tw-calendar/Images/ExitLayout}}
-							<$action-setfield $tiddler="$:/layout" text="" />
-						</$button>
+			<$messagecatcher $tm-navigate=<<redirected-navigate-actions>>>
+				{{$:/core/ui/CommandPaletteTemplate}}
+				<main class="tw-calendar-search-layout-main-area">
+					<div class="tw-calendar-search-bar">
+						<div class="tw-calendar-search-bar-icon">
+							<$button to=<<currentTiddler>> tooltip={{$:/language/Buttons/FullScreen/Hint}} style="width: 85%;height: 85%;">
+								{{$:/plugins/linonetwo/tw-calendar/Images/ExitLayout}}
+								<$action-setfield $tiddler="$:/layout" text="" />
+							</$button>
+						</div>
+						<!-- don't wrap edit-text widget with set or let, otherwise it will keeps refreshing and auto select all text, cause old chars get deleted. -->
+						<$edit-text tag="input" tiddler="$:/temp/volatile/linonetwo/tw-calendar/tiddlywiki-ui/PageLayout/EventsCalendarSearchLayout/keywords" field="text" focus="yes" class="tc-titlebar tc-edit-texteditor tw-calendar-search-bar-text-field"/>
+
+						<$set name="pagination" value={{$:/state/linonetwo/tw-calendar/tiddlywiki-ui/PageLayout/EventsCalendarSearchLayout/pagination}} emptyValue="0">
+							<$let paginationTo={{{ [<pagination>add{$:/plugins/linonetwo/tw-calendar/settings/searchPageLimit}] }}} limit={{$:/plugins/linonetwo/tw-calendar/settings/searchPageLimit}} >
+								<div class="tw-calendar-search-bar-pagination tw-calendar-draggable-region">
+									<$button style="width: 85%;height: 85%;">
+										{{$:/core/images/chevron-left}}
+										<$action-setfield $tiddler="$:/state/linonetwo/tw-calendar/tiddlywiki-ui/PageLayout/EventsCalendarSearchLayout/pagination" text={{{ [<pagination>subtract{$:/plugins/linonetwo/tw-calendar/settings/searchPageLimit}] }}} />
+									</$button>
+
+									<$set name="count" value={{{ [{$:/temp/volatile/linonetwo/tw-calendar/tiddlywiki-ui/PageLayout/EventsCalendarSearchLayout/keywords}length[]compare:number:gt[0]] :then[all[tiddlers]!is[system]field:calendarEntry[yes]search:caption,text,keywords:words{$:/temp/volatile/linonetwo/tw-calendar/tiddlywiki-ui/PageLayout/EventsCalendarSearchLayout/keywords}count[]] }}} emptyValue="0">
+										<<pagination>> ~ <$text text=<<paginationTo>> /> / <$text text=<<count>> />
+									</$set>
+
+									<$button style="width: 85%;height: 85%;">
+										{{$:/core/images/chevron-right}}
+										<$action-setfield $tiddler="$:/state/linonetwo/tw-calendar/tiddlywiki-ui/PageLayout/EventsCalendarSearchLayout/pagination" text=<<paginationTo>> />
+									</$button>
+								</div>
+							</$let>
+						</$set>
+						<div class="tw-calendar-search-bar-icon tw-calendar-draggable-region">
+							{{$:/plugins/linonetwo/tw-calendar/tiddlywiki-ui/Images/CalendarSearchImage}}
+						</div>
 					</div>
-					<!-- don't wrap edit-text widget with set or let, otherwise it will keeps refreshing and auto select all text, cause old chars get deleted. -->
-					<$edit-text tag="input" tiddler="$:/temp/volatile/linonetwo/tw-calendar/tiddlywiki-ui/PageLayout/EventsCalendarSearchLayout/keywords" field="text" focus="yes" class="tc-titlebar tc-edit-texteditor tw-calendar-search-bar-text-field"/>
 
 					<$set name="pagination" value={{$:/state/linonetwo/tw-calendar/tiddlywiki-ui/PageLayout/EventsCalendarSearchLayout/pagination}} emptyValue="0">
-						<$let paginationTo={{{ [<pagination>add{$:/plugins/linonetwo/tw-calendar/settings/searchPageLimit}] }}} limit={{$:/plugins/linonetwo/tw-calendar/settings/searchPageLimit}} >
-							<div class="tw-calendar-search-bar-pagination tw-calendar-draggable-region">
-								<$button style="width: 85%;height: 85%;">
-									{{$:/core/images/chevron-left}}
-									<$action-setfield $tiddler="$:/state/linonetwo/tw-calendar/tiddlywiki-ui/PageLayout/EventsCalendarSearchLayout/pagination" text={{{ [<pagination>subtract{$:/plugins/linonetwo/tw-calendar/settings/searchPageLimit}] }}} />
-								</$button>
-
-								<$set name="count" value={{{ [{$:/temp/volatile/linonetwo/tw-calendar/tiddlywiki-ui/PageLayout/EventsCalendarSearchLayout/keywords}length[]compare:number:gt[0]] :then[all[tiddlers]!is[system]field:calendarEntry[yes]search:caption,text,keywords:words{$:/temp/volatile/linonetwo/tw-calendar/tiddlywiki-ui/PageLayout/EventsCalendarSearchLayout/keywords}count[]] }}} emptyValue="0">
-									<<pagination>> ~ <$text text=<<paginationTo>> /> / <$text text=<<count>> />
-								</$set>
-
-								<$button style="width: 85%;height: 85%;">
-									{{$:/core/images/chevron-right}}
-									<$action-setfield $tiddler="$:/state/linonetwo/tw-calendar/tiddlywiki-ui/PageLayout/EventsCalendarSearchLayout/pagination" text=<<paginationTo>> />
-								</$button>
-							</div>
-						</$let>
+							<$let paginationTo={{{ [<pagination>add{$:/plugins/linonetwo/tw-calendar/settings/searchPageLimit}] }}} limit={{$:/plugins/linonetwo/tw-calendar/settings/searchPageLimit}} >
+								<div class="tw-calendar-search-calendar-container">
+									<$calendar height="100%" filter="[{$:/temp/volatile/linonetwo/tw-calendar/tiddlywiki-ui/PageLayout/EventsCalendarSearchLayout/keywords}length[]compare:number:gt[0]] :then[all[tiddlers]!is[system]field:calendarEntry[yes]search:caption,text,keywords,tags:words{$:/temp/volatile/linonetwo/tw-calendar/tiddlywiki-ui/PageLayout/EventsCalendarSearchLayout/keywords}!sort[startDate]rest<pagination>first<limit>]" />
+								</div>
+							</$let>
 					</$set>
-					<div class="tw-calendar-search-bar-icon tw-calendar-draggable-region">
-						{{$:/plugins/linonetwo/tw-calendar/tiddlywiki-ui/Images/CalendarSearchImage}}
-					</div>
-				</div>
-
-				<$set name="pagination" value={{$:/state/linonetwo/tw-calendar/tiddlywiki-ui/PageLayout/EventsCalendarSearchLayout/pagination}} emptyValue="0">
-						<$let paginationTo={{{ [<pagination>add{$:/plugins/linonetwo/tw-calendar/settings/searchPageLimit}] }}} limit={{$:/plugins/linonetwo/tw-calendar/settings/searchPageLimit}} >
-							<div class="tw-calendar-search-calendar-container">
-								<$calendar height="100%" filter="[{$:/temp/volatile/linonetwo/tw-calendar/tiddlywiki-ui/PageLayout/EventsCalendarSearchLayout/keywords}length[]compare:number:gt[0]] :then[all[tiddlers]!is[system]field:calendarEntry[yes]search:caption,text,keywords,tags:words{$:/temp/volatile/linonetwo/tw-calendar/tiddlywiki-ui/PageLayout/EventsCalendarSearchLayout/keywords}!sort[startDate]rest<pagination>first<limit>]" />
-							</div>
-						</$let>
-				</$set>
-			</main>
+				</main>
+			</$messagecatcher>
 		</$navigator>
 	</div>
 </$vars>

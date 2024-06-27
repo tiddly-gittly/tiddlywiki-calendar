@@ -6,7 +6,6 @@ tags: $:/tw-calendar/EventPreviewMiniViewTemplate
 <div class="tw-calendar-layout-event-preview-top-buttons">
   <$button to=<<currentTiddler>> style="flex: 4;" class="tw-calendar-layout-event-preview-close-button">
     <<lingo Button/OpenInStory/Caption>> {{$:/plugins/linonetwo/tw-calendar/Images/ExitLayout}}
-    <$action-setfield $tiddler="$:/layout" text="" />
   </$button>
   <% if [{$:/layout}match[$:/plugins/linonetwo/tw-calendar/tiddlywiki-ui/PageLayout/EventsCalendarSearchLayout]] %>
     <$button style="flex: 4;" class="tw-calendar-layout-event-preview-close-button">

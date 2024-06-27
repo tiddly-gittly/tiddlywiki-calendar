@@ -14,30 +14,36 @@ tc-page-container tc-page-view-$(storyviewTitle)$ tc-language-$(languageTitle)$ 
 \procedure list-grid-draggable-drop-actions()
 <$macrocall $name="list-tagged-draggable-drop-actions" tag="$:/Tags/VisualizationDashboard/Gauge"/>
 \end
+\procedure redirected-navigate-actions()
+  <$action-setfield $tiddler="$:/layout" text="" />
+  <$action-navigate $to=<<event-navigateTo>> />
+\end
 
 <div class=<<containerClasses>>>
 	<$navigator story="$:/StoryList" history="$:/HistoryList" openLinkFromInsideRiver={{$:/config/Navigation/openLinkFromInsideRiver}} openLinkFromOutsideRiver={{$:/config/Navigation/openLinkFromOutsideRiver}} relinkOnRename={{$:/config/RelinkOnRename}}>
-		{{$:/core/ui/CommandPaletteTemplate}}
-		<main class="visualization-dashboard-layout-main-area">
-			{{$:/plugins/linonetwo/visualization-dashboard/ViewTemplate/WeekJournalSelect}}
-			<div class="visualization-dashboard-layout-gauge-list-container">
-				<$set name="currentDateWeekOffset" filter="[<currentWeekIndexTiddler>get[text]else[0]]">
-					<$set name="currentDate" filter="[weekstart<currentDateWeekOffset>addweekday[]]">
-						<$list filter="[all[shadows+tiddlers]tag[$:/Tags/VisualizationDashboard/Gauge]!is[draft]]">
-							<$droppable
-								actions=<<list-grid-draggable-drop-actions>>
-								tag="div"
-								class="visualization-dashboard-layout-gauge-item-container"
-								style.grid-column=`span ${[{!!grid-column-span}]}$`
-								style.grid-row=`span ${[{!!grid-row-span}]}$`
-								enable=<<tv-enable-drag-and-drop>>
-							>
-								<<list-item>>
-							</$droppable>
-						</$list>
+		<$messagecatcher $tm-navigate=<<redirected-navigate-actions>>>
+			{{$:/core/ui/CommandPaletteTemplate}}
+			<main class="visualization-dashboard-layout-main-area">
+				{{$:/plugins/linonetwo/visualization-dashboard/ViewTemplate/WeekJournalSelect}}
+				<div class="visualization-dashboard-layout-gauge-list-container">
+					<$set name="currentDateWeekOffset" filter="[<currentWeekIndexTiddler>get[text]else[0]]">
+						<$set name="currentDate" filter="[weekstart<currentDateWeekOffset>addweekday[]]">
+							<$list filter="[all[shadows+tiddlers]tag[$:/Tags/VisualizationDashboard/Gauge]!is[draft]]">
+								<$droppable
+									actions=<<list-grid-draggable-drop-actions>>
+									tag="div"
+									class="visualization-dashboard-layout-gauge-item-container"
+									style.grid-column=`span ${[{!!grid-column-span}]}$`
+									style.grid-row=`span ${[{!!grid-row-span}]}$`
+									enable=<<tv-enable-drag-and-drop>>
+								>
+									<<list-item>>
+								</$droppable>
+							</$list>
+						</$set>
 					</$set>
-				</$set>
-			</div>
-		</main>
+				</div>
+			</main>
+		</$messagecatcher>
 	</$navigator>
 </div>
