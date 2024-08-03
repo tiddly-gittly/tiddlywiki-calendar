@@ -1,5 +1,0 @@
-title: $:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/ViewTemplate/captionCascade
-tags: $:/tags/ViewTemplateTitleFilter
-list-before: $:/config/ViewTemplateTitleFilters/system
-
-[field:calendarEntry[yes]then[$:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/ViewTemplate/caption]]

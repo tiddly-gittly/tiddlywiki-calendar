@@ -143,6 +143,7 @@ export function getHandlers(context: IContext): CalendarOptions {
          * See $:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/ViewTemplate/captionCascade
          */
         calendarEntry: 'yes',
+        _is_titleless: 'yes',
         'draft.title': info.startStr,
         text,
         tags,
@@ -173,6 +174,7 @@ export function getHandlers(context: IContext): CalendarOptions {
         text: '',
         type: 'text/vnd.tiddlywiki',
         calendarEntry: 'yes',
+        _is_titleless: 'yes',
       });
       // remove the shadow event. Wait for real event to be created.
       info.event.remove();
