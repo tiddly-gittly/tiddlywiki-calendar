@@ -169,7 +169,6 @@ export function getHandlers(context: IContext): CalendarOptions {
       const tags = $tw.utils.parseStringArray(info.draggedEl.dataset.tags ?? '');
       putEvent(info.event, {
         title: randomTitle,
-        caption: '',
         tags,
         text: '',
         type: 'text/vnd.tiddlywiki',

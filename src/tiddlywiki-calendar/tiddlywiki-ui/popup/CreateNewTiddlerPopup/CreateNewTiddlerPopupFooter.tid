@@ -34,12 +34,20 @@ title: $:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/popup/Crea
     <<lingo Modal/CreateEvent/Label/Create>>
     <!-- Remove draft.title first -->
     <$action-setfield $tiddler="$:/state/Calendar/PageLayout/create-tiddler" $field="draft.title" />
-    <$action-createtiddler
-      $basetitle=<<newtitle>>
-      $template="$:/state/Calendar/PageLayout/create-tiddler"
-      caption={{$:/state/Calendar/PageLayout/create-tiddler-caption!!draft.title}}
-      type="text/vnd.tiddlywiki"
-    />
+    <% if [{$:/state/Calendar/PageLayout/create-tiddler-caption!!draft.title}is[blank]] %>
+      <$action-createtiddler
+        $basetitle=<<newtitle>>
+        $template="$:/state/Calendar/PageLayout/create-tiddler"
+        type="text/vnd.tiddlywiki"
+      />
+    <% else %>
+      <$action-createtiddler
+        $basetitle=<<newtitle>>
+        $template="$:/state/Calendar/PageLayout/create-tiddler"
+        caption={{$:/state/Calendar/PageLayout/create-tiddler-caption!!draft.title}}
+        type="text/vnd.tiddlywiki"
+      />
+    <% endif %>
     <$let currentTiddler=<<createTiddler-title>> >
       <$action-sendmessage $message="tm-save-tiddler" $param=<<currentTiddler>> />
       <$action-sendmessage $message="tm-auto-save-wiki" />
