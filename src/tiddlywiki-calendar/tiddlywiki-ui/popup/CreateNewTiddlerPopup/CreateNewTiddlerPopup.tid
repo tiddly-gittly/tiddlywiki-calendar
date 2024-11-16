@@ -25,7 +25,7 @@ footer: {{$:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/popup/C
       class="tc-edit-texteditor tc-edit-texteditor-body"
       default=""
       placeholder={{$:/language/EditTemplate/Body/Placeholder}}
-      tabindex=-1
+      tabindex="1"
       focus=false
       cancelPopups="yes"
       fileDrop="no"
