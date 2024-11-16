@@ -13,15 +13,13 @@ caption: <<lingo "Name" "$:/plugins/linonetwo/tw-calendar/language/">>
 
 ! <<lingo PluginConfigs>>
 
-!! Add Event Tiddler Modal
+!! <<lingo AddEventTiddlerModal>>
 
-The modal dialog shown when you drag/click on calendar to create a new event.
+<<lingo AddEventTiddlerModal/Description>>
 
-!!! Frequently used tags
+!!! <<lingo "FrequentlyUsedTags/Caption">>
 
-Add tags to be displayed on the create event tiddler popup, so you can click on them to add tag to new tiddler quickly.
-
-Tags can have `caption` field as displayed name. And if tags here form a tag tree, they will be displayed as a tree.
+<<lingo "FrequentlyUsedTags/Description">>
 
 <$vars currentTiddler="$:/plugins/linonetwo/tw-calendar/settings/frequently-used-tags" tagField="text">
 	{{||$:/core/ui/EditTemplate/tags}}
@@ -32,9 +30,9 @@ Tags can have `caption` field as displayed name. And if tags here form a tag tre
 	tags={{$:/plugins/linonetwo/tw-calendar/settings/frequently-used-tags}}
 />
 
-!!! Prefix
+!!! <<lingo "Prefix/Caption">>
 
-Auto add prefix to all created event.
+<<lingo "Prefix/Description">>
 
 <$edit-text
 	tiddler="$:/plugins/linonetwo/tw-calendar/settings/prefix"
@@ -47,21 +45,21 @@ Auto add prefix to all created event.
 	tag="input"
 />
 
-!! Appearance
+!! <<lingo "Appearance/Caption">>
 
-;24 Hour Format:
-:<$checkbox tiddler="$:/plugins/linonetwo/tw-calendar/settings/24hour" field="text" checked="yes" unchecked=""> Show 24 hour format in calendar left slot label and events</$checkbox>
-;First Day: The frequency for displaying time slots.
+;<<lingo "Appearance/24HourFormat">>:
+:<$checkbox tiddler="$:/plugins/linonetwo/tw-calendar/settings/24hour" field="text" checked="yes" unchecked=""> <<lingo "Appearance/24HourFormatDescription">></$checkbox>
+;<<lingo "Appearance/FirstDay">>: <<lingo "Appearance/FirstDayDescription">>
 :<$select tiddler='$:/plugins/linonetwo/tw-calendar/settings/firstDay'>
-	<option value='0'>Sunday</option>
-	<option value='1'>Monday</option>
-	<option value='2'>Tuesday</option>
-	<option value='3'>Wednesday</option>
-	<option value='4'>Thursday</option>
-	<option value='5'>Friday</option>
-	<option value='6'>Saturday</option>
+	<option value='0'><<lingo "DaysOfWeek/Sunday">></option>
+	<option value='1'><<lingo "DaysOfWeek/Monday">></option>
+	<option value='2'><<lingo "DaysOfWeek/Tuesday">></option>
+	<option value='3'><<lingo "DaysOfWeek/Wednesday">></option>
+	<option value='4'><<lingo "DaysOfWeek/Thursday">></option>
+	<option value='5'><<lingo "DaysOfWeek/Friday">></option>
+	<option value='6'><<lingo "DaysOfWeek/Saturday">></option>
 </$select>
-;SlotDuration: The frequency for displaying time slots.
+;<<lingo "Appearance/SlotDuration">>: <<lingo "Appearance/SlotDurationDescription">>
 :<$edit-text tiddler="$:/plugins/linonetwo/tw-calendar/settings/slotDuration" tabindex=-1 focus=false cancelPopups="yes" fileDrop=no tag="input" />
-;Search Page Limit: In search layout, the maximum number of events to display in the list. (Too large will have performance impact).
+;<<lingo "Appearance/SearchPageLimit">>: <<lingo "Appearance/SearchPageLimitDescription">>
 :<$edit-text tiddler="$:/plugins/linonetwo/tw-calendar/settings/searchPageLimit" type="number" min="0" step="1" tabindex=-1 focus=false cancelPopups="yes" fileDrop=no tag="input" />

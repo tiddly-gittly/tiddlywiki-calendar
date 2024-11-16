@@ -12,6 +12,8 @@ TiddlersCalendar/Caption: 条目时间轴
 TiddlersCalendar/Description: 按日期相关字段排列，以日程视图或日历视图查看所有条目
 Button/OpenInStory/Caption: 打开于故事河
 Button/OpenInDay/Caption: 打开于日视图
+AddEventTiddlerModal/Caption: 添加事件条目的弹框
+AddEventTiddlerModal/Description: 当您在日历上拖动/点击以创建新事件时显示的模态对话框。
 Modal/CreateEvent/Caption: 创建事件
 Modal/CreateEvent/Label/Title: 条目名
 Modal/CreateEvent/Label/Caption: 标题
@@ -19,3 +21,23 @@ Modal/CreateEvent/Label/Text: 内容
 Modal/CreateEvent/Label/Cancel: 取消
 Modal/CreateEvent/Label/Create: 创建
 EventsCalendar/Sidebar/EmptyMessage: 暂无侧边栏条目！你可以添加带有 `$:/tags/EventCalendarSideBarSegment` 标签的条目，让它出现在这里（或安装有这样条目的社区插件）。条目上可以这样添加可拖拽的内容：`<$draggable data-event='{ "duration": "01:00" }' data-tags="标签">`
+FrequentlyUsedTags/Caption: 常用标签
+FrequentlyUsedTags/Description: 添加要显示在创建事件条目弹出窗口上的标签，以便您可以点击它们快速将标签添加到新条目中。标签可以有 `caption` 字段作为显示名称。如果这里的标签形成标签树，它们将显示为树状结构。
+Prefix/Caption: 前缀
+Prefix/Description: 自动为所有创建的事件添加前缀。
+Appearance/Caption: 外观
+Appearance/24HourFormat: 24小时制
+Appearance/24HourFormatDescription: 在日历左侧标签和事件中显示24小时制
+Appearance/FirstDay: 第一日
+Appearance/FirstDayDescription: 一周的第一天
+Appearance/SlotDuration: 时间段持续时间
+Appearance/SlotDurationDescription: 显示时间段的频率。
+Appearance/SearchPageLimit: 搜索页面限制
+Appearance/SearchPageLimitDescription: 在搜索布局中，列表中显示的最大事件数。（过大将影响性能）。
+DaysOfWeek/Sunday: 星期日
+DaysOfWeek/Monday: 星期一
+DaysOfWeek/Tuesday: 星期二
+DaysOfWeek/Wednesday: 星期三
+DaysOfWeek/Thursday: 星期四
+DaysOfWeek/Friday: 星期五
+DaysOfWeek/Saturday: 星期六

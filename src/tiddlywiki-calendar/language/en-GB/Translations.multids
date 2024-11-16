@@ -12,6 +12,8 @@ TiddlersCalendar/Caption: Tiddlers Timeline
 TiddlersCalendar/Description: View all tiddlers as agenda or calendar by their date related fields
 Button/OpenInStory/Caption: Open In Story
 Button/OpenInDay/Caption: Open In Day
+AddEventTiddlerModal/Caption: Modal for Adding Event Tiddler
+AddEventTiddlerModal/Description: The modal dialog shown when you drag/click on calendar to create a new event.
 Modal/CreateEvent/Caption: Create Event
 Modal/CreateEvent/Label/Title: Title
 Modal/CreateEvent/Label/Caption: Caption
@@ -19,3 +21,23 @@ Modal/CreateEvent/Label/Text: Text
 Modal/CreateEvent/Label/Cancel: Cancel
 Modal/CreateEvent/Label/Create: Create
 EventsCalendar/Sidebar/EmptyMessage: There are no sidebar tiddlers available at this time! You can add tiddlers with tag `$:/tags/EventCalendarSideBarSegment` to appear here (or install community plugins that have such tiddlers). Draggable content can be added to the entry like this: `<$draggable data-event='{ "duration": "01:00" }' data-tags="Tags">`
+FrequentlyUsedTags/Caption: Frequently Used Tags
+FrequentlyUsedTags/Description: Add tags to be displayed on the create event tiddler popup, so you can click on them to add tag to new tiddler quickly. Tags can have `caption` field as displayed name. And if tags here form a tag tree, they will be displayed as a tree.
+Prefix/Caption: Prefix
+Prefix/Description: Auto add prefix to all created event.
+Appearance/Caption: Appearance
+Appearance/24HourFormat: 24 Hour Format
+Appearance/24HourFormatDescription: Show 24 hour format in calendar left slot label and events
+Appearance/FirstDay: First Day
+Appearance/FirstDayDescription: First day of the week.
+Appearance/SlotDuration: Slot Duration
+Appearance/SlotDurationDescription: The frequency for displaying time slots.
+Appearance/SearchPageLimit: Search Page Limit
+Appearance/SearchPageLimitDescription: In search layout, the maximum number of events to display in the list. (Too large will have performance impact).
+DaysOfWeek/Sunday: Sunday
+DaysOfWeek/Monday: Monday
+DaysOfWeek/Tuesday: Tuesday
+DaysOfWeek/Wednesday: Wednesday
+DaysOfWeek/Thursday: Thursday
+DaysOfWeek/Friday: Friday
+DaysOfWeek/Saturday: Saturday
