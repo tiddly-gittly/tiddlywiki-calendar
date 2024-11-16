@@ -34,6 +34,10 @@ Appearance/SlotDuration: 时间段持续时间
 Appearance/SlotDurationDescription: 显示时间段的频率。
 Appearance/SearchPageLimit: 搜索页面限制
 Appearance/SearchPageLimitDescription: 在搜索布局中，列表中显示的最大事件数。（过大将影响性能）。
+Appearance/WideScreenDefaultView: 大屏默认视图
+Appearance/WideScreenDefaultViewDescription: 在桌面宽屏上，默认使用更宽的一周视图还是方便对照左侧时间的三日视图
+Appearance/WideScreenDefaultView/ThreeDay: 三日视图
+Appearance/WideScreenDefaultView/Week: 一周视图
 DaysOfWeek/Sunday: 星期日
 DaysOfWeek/Monday: 星期一
 DaysOfWeek/Tuesday: 星期二

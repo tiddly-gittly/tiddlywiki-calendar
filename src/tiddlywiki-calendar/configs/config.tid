@@ -49,6 +49,11 @@ caption: <<lingo "Name" "$:/plugins/linonetwo/tw-calendar/language/">>
 
 ;<<lingo "Appearance/24HourFormat">>:
 :<$checkbox tiddler="$:/plugins/linonetwo/tw-calendar/settings/24hour" field="text" checked="yes" unchecked=""> <<lingo "Appearance/24HourFormatDescription">></$checkbox>
+;<<lingo "Appearance/WideScreenDefaultView">>: <<lingo "Appearance/WideScreenDefaultViewDescription">>
+:<$select tiddler='$:/plugins/linonetwo/tw-calendar/settings/wideScreenDefaultView'>
+	<option value='timeGridThreeDay'><<lingo "Appearance/WideScreenDefaultView/ThreeDay">></option>
+	<option value='timeGridWeek'><<lingo "Appearance/WideScreenDefaultView/Week">></option>
+</$select>
 ;<<lingo "Appearance/FirstDay">>: <<lingo "Appearance/FirstDayDescription">>
 :<$select tiddler='$:/plugins/linonetwo/tw-calendar/settings/firstDay'>
 	<option value='0'><<lingo "DaysOfWeek/Sunday">></option>

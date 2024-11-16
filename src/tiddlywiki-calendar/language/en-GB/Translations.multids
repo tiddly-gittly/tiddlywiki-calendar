@@ -34,6 +34,10 @@ Appearance/SlotDuration: Slot Duration
 Appearance/SlotDurationDescription: The frequency for displaying time slots.
 Appearance/SearchPageLimit: Search Page Limit
 Appearance/SearchPageLimitDescription: In search layout, the maximum number of events to display in the list. (Too large will have performance impact).
+Appearance/WideScreenDefaultView: Wide Screen Default View
+Appearance/WideScreenDefaultViewDescription: On desktop wide screens, use the wider week view or the three-day view that is convenient for comparing the left time.
+Appearance/WideScreenDefaultView/ThreeDay: Three Day View
+Appearance/WideScreenDefaultView/Week: Week View
 DaysOfWeek/Sunday: Sunday
 DaysOfWeek/Monday: Monday
 DaysOfWeek/Tuesday: Tuesday

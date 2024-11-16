@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/prefer-nullish-coalescing */
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 import 'requestidlecallback-polyfill';
 import adaptivePlugin from '@fullcalendar/adaptive';
@@ -71,12 +72,12 @@ export function getSettings(context: IContext): CalendarOptions {
   return {
     locale,
     locales: [zhLocale],
-    // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
     firstDay: Number($tw.wiki.getTiddlerText('$:/plugins/linonetwo/tw-calendar/settings/firstDay') || '1') || 1,
     eventSources: [{ events: searchMode ? getEventByFilter(context) : getEventOnFullCalendarViewChange(context), id: tiddlerEventSourceID }],
     plugins: [momentTimezonePlugin, dayGridPlugin, timeGridPlugin, listPlugin, adaptivePlugin, interactionPlugin],
     views: getCustomViews(locale),
-    initialView: context.initialView ?? (getIsSmallScreen() ? 'timeGridThreeDay' : 'timeGridWeek'),
+    initialView: context.initialView ??
+      (getIsSmallScreen() ? 'timeGridThreeDay' : ($tw.wiki.getTiddlerText('$:/plugins/linonetwo/tw-calendar/settings/wideScreenDefaultView') || 'timeGridWeek')),
     now,
     editable: context.readonly !== true,
     eventContent: getEventContent(context),
