@@ -3,10 +3,10 @@ import { Draggable } from '@fullcalendar/interaction';
 import { getIsSmallScreen } from './constants';
 import { IContext } from './initCalendar';
 export function setToolbarIcons() {
-  const backToDefaultLayoutButton = document.querySelector('.fc-backToDefaultLayout-button');
-  if (backToDefaultLayoutButton) {
-    const svgIcon = $tw.wiki.renderTiddler('text/html', '$:/plugins/linonetwo/tw-calendar/Images/ExitLayout')?.replace('<p>', '')?.replace('</p>', '') ?? '';
-    backToDefaultLayoutButton.innerHTML = getIsSmallScreen() ? svgIcon : `${$tw.wiki.getTiddlerText('$:/language/Buttons/Close/Caption') ?? 'Close'} ${svgIcon}`;
+  const backToStandardLayoutButton = document.querySelector('.fc-backToStandardLayout-button');
+  if (backToStandardLayoutButton) {
+    const svgIcon = $tw.wiki.renderTiddler('text/html', '$:/core/images/standard-layout')?.replace('<p>', '')?.replace('</p>', '') ?? '';
+    backToStandardLayoutButton.innerHTML = getIsSmallScreen() ? svgIcon : `${$tw.wiki.getTiddlerText('$:/language/PageTemplate/Name') ?? 'Close'} ${svgIcon}`;
   }
   const searchLayoutButton = document.querySelector('.fc-searchLayout-button');
   if (searchLayoutButton) {
@@ -26,10 +26,10 @@ export function getCustomButtons(context: IContext) {
   const sidebarOpened = ($tw.wiki.getTiddlerText('$:/state/event-calendar-sidebar') ?? 'no') === 'yes';
 
   return ({
-    backToDefaultLayout: {
+    backToStandardLayout: {
       /** set by setToolbarIcons() above */
       text: '',
-      hint: $tw.wiki.getTiddlerText('$:/language/Buttons/FullScreen/Hint') ?? 'Exit',
+      hint: $tw.wiki.getTiddlerText('$:/language/PageTemplate/Name') ?? 'Exit',
       click: () => {
         // Remove initialParams so it won't affect next open
         $tw.wiki.deleteTiddler('$:/state/Calendar/PageLayout/EventCalendar/initialParams');

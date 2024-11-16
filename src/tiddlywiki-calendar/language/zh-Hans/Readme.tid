@@ -11,7 +11,7 @@ title: $:/plugins/linonetwo/tw-calendar/language/zh-Hans/Readme
 # 提供一个日历部件，使用方法类似于 `<$calendar />`.
 # 使用整个知识库作为数据源，根据 `created` `modified` `startDate` 和 `endDate` 字段聚合条目
 # 拖动以创建带有`startDate`和`endDate`字段的新事件
-# 提供日历视图，使用 `ctrl+shift+L` 切换到该视图，你可以点击 `主页` 按钮返回
+# 提供日历视图，使用 `ctrl+shift+L` 切换到该视图，你可以点击 {{$:/core/images/standard-layout}}{{$:/language/PageTemplate/Name}} 按钮返回标准的故事河布局
 # 添加 `color` 字段以更改颜色。如果缺少 `color` 字段，它会尝试从其上的标签获取颜色。
 
 !! 开发子插件

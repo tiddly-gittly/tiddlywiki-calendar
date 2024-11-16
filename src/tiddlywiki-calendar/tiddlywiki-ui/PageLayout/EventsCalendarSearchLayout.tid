@@ -29,8 +29,8 @@ tc-page-container tc-page-view-$(storyviewTitle)$ tc-language-$(languageTitle)$ 
 				<main class="tw-calendar-search-layout-main-area">
 					<div class="tw-calendar-search-bar">
 						<div class="tw-calendar-search-bar-icon">
-							<$button to=<<currentTiddler>> tooltip={{$:/language/Buttons/FullScreen/Hint}} style="width: 85%;height: 85%;">
-								{{$:/plugins/linonetwo/tw-calendar/Images/ExitLayout}}
+							<$button to=<<currentTiddler>> tooltip={{$:/language/PageTemplate/Name}} style="width: 85%;height: 85%;">
+								{{$:/core/images/standard-layout}}
 								<$action-setfield $tiddler="$:/layout" text="" />
 							</$button>
 						</div>

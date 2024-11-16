@@ -5,7 +5,7 @@ caption: <<lingo Modal/CreateGaugeModal/Caption $:/plugins/linonetwo/visualizati
 \define lingo-base() $:/plugins/linonetwo/visualization-dashboard/language/
 \procedure back-to-default-layout()
 <$button class="button-open-create-gauge-modal-back-to-default-layout">
-  <<lingo VisualizationDashboardLayout/Exit>> {{$:/plugins/linonetwo/tw-calendar/Images/ExitLayout}}
+  <<lingo VisualizationDashboardLayout/Exit>> {{$:/core/images/standard-layout}}
   <$action-setfield $tiddler="$:/layout" text="" />
 </$button>
 \end
