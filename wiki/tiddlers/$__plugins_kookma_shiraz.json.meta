@@ -1,0 +1,15 @@
+author: Mohammad Rahmani
+core-version: >=5.3.5
+dependents: 
+description: Extended markups, tables, images, styles, and procedures
+list: readme license history
+name: Shiraz
+packaged-by: Gatha on 4th October 2024, 10:33:10
+parent-plugin: 
+plugin-priority: 
+plugin-type: plugin
+source: https://github.com/kookma/TW-Shiraz
+stability: STABILITY_1_EXPERIMENTAL
+title: $:/plugins/kookma/shiraz
+type: application/json
+version: 3.0.4
