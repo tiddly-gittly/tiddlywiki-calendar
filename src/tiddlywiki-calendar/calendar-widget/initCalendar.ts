@@ -14,6 +14,7 @@ import type { Widget } from 'tiddlywiki';
 import { getInCalendarLayout, getIsSearchMode, getIsSmallScreen, isMobile, tiddlerEventSourceID } from './constants';
 import { getCustomButtons, setToolbarIcons } from './customButtons';
 import { getCustomViews } from './customView';
+import { enableSidebarDraggable } from './enableDraggable';
 import { getEventContent } from './eventContent';
 import { getEventByFilter, getEventOnFullCalendarViewChange } from './getEvents';
 import { getHandlers } from './handlers';
@@ -61,6 +62,7 @@ export function initCalendar(containerElement: HTMLDivElement, context: IContext
     originalRender();
     setToolbarIcons();
   };
+  enableSidebarDraggable(context);
   return calendar;
 }
 

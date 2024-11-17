@@ -4,7 +4,7 @@ import { widget as Widget } from '$:/core/modules/widgets/widget.js';
 import type { Calendar } from '@fullcalendar/core';
 import { ConnectionObserver } from '@wessberg/connection-observer';
 import debounce from 'lodash/debounce';
-import type { IChangedTiddlers, IParseTreeNode, IWidgetEvent, IWidgetInitialiseOptions } from 'tiddlywiki';
+import type { IChangedTiddlers, IParseTreeNode, IWidgetInitialiseOptions } from 'tiddlywiki';
 
 import { changedTiddlerInViewRange } from './changeDetector';
 import { draftTiddlerTitle, getIsSearchMode, tiddlerEventSourceID } from './constants';
@@ -85,14 +85,22 @@ class CalendarWidget extends Widget {
       Object.keys(changedTiddlers).some((changedTiddlerTitle) => {
         // if setting changed, refresh the whole calendar, to make options take effect
         if (changedTiddlerTitle.startsWith('$:/plugins/linonetwo/tw-calendar/settings')) return true;
-        // when sidebar toggle, need to do full refresh, otherwise the UI will break.
-        if (changedTiddlerTitle.startsWith('$:/state/event-calendar-sidebar')) return true;
         return false;
       })
     ) {
       this.refreshTiddlerEventCalendar(true);
       // this won't cause this.render to be called...
       refreshed = true;
+    }
+    if (
+      Object.keys(changedTiddlers).some((changedTiddlerTitle) => {
+        // when sidebar toggle, need to do full refresh, otherwise the UI will break.
+        if (changedTiddlerTitle.startsWith('$:/state/event-calendar-sidebar')) return true;
+        return false;
+      })
+    ) {
+      this.#calendar?.updateSize();
+      this.#triggerRefetch();
     }
     if (
       getIsSearchMode() &&

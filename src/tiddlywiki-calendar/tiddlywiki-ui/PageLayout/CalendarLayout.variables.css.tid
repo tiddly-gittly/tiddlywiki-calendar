@@ -1,0 +1,7 @@
+title: $:/plugins/linonetwo/tw-calendar/tiddlywiki-ui/PageLayout/CalendarLayout.variables.css
+type: text/vnd.tiddlywiki
+tags: $:/tags/Stylesheet
+
+.tc-page-controls svg.tc-image-tmd-calendar-cursor {
+  fill: <<colour toolbar-options-button>>;
+}

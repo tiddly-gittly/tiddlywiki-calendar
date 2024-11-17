@@ -1,9 +1,9 @@
-title: $:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/ViewTemplate/EventCalendarSidebar
+title: $:/plugins/linonetwo/tw-calendar/tiddlywiki-ui/ViewTemplate/EventCalendarSidebar
 
 \whitespace trim
-\define lingo-base() $:/plugins/linonetwo/tw-calendar/language/
-\define config-title()
-$:/config/SideBarSegments/Visibility/$(listItem)$
+\procedure lingo-base() $:/plugins/linonetwo/tw-calendar/language/
+\function config-title()
+[[$:/config/SideBarSegments/Visibility/]addsuffix<listItem>]
 \end
 \procedure emptyMessage()
 <<lingo EventsCalendar/Sidebar/EmptyMessage>>
