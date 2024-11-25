@@ -5,3 +5,9 @@
   width: 100%;
   align-items: center;
 }
+
+.tw-calendar-event-calendar-sidebar-item {
+  width: 100%;
+  padding: 1em;
+  margin-bottom: 2em;
+}

@@ -1,0 +1,18 @@
+title: EventCalendarSideBarExample
+type: text/vnd.tiddlywiki
+tags: EventCalendarSideBar
+tags: $:/tags/EventCalendarSideBarSegment
+
+!! EventCalendarSideBarExample
+
+<ul>
+  <$list filter="[all[tiddlers]tag[CalendarUsage]]">
+    <$draggable data-event=`{ "duration": "01:00" }` data-tags="Todo">
+      <li>
+        Learn <<currentTiddler>>
+      </li>
+    </$draggable>
+  </$list>
+</ul>
+
+See [[EventCalendarSideBar]] for more information.

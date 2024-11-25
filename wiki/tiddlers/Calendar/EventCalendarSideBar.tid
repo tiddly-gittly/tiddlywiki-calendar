@@ -1,0 +1,28 @@
+title: EventCalendarSideBar
+type: text/vnd.tiddlywiki
+tags: CalendarUsage
+
+!! Creating
+
+Any tiddler with tag `$:/tags/EventCalendarSideBarSegment` will show on the sidebar of the [[event calendar page layout|CalendarPageLayout]].
+
+In this wiki there is an example [[EventCalendarSideBarExample]] that you can play with.
+
+!! Drag & drop
+
+```tid
+<$draggable data-event=`{ "duration": "01:00" }` data-tags="xxx">
+  <<projectTitle>>
+</$draggable>
+```
+
+# Wrap a text with TiddlyWiki's `$draggable` widget.
+# Use `data-event` to set the duration of dropped event.
+# Use `data-tags` to set the tags of dropped event tiddler.
+# Try using `$list` widget to generate a Todo list!
+
+!! Config
+
+You can use `$:/config/SideBarSegments/Visibility/` to control the visibility of the sidebar segments.
+
+For example, try set the text of [[$:/config/SideBarSegments/Visibility/EventCalendarSideBarExample]] to `hide` to hide the example.

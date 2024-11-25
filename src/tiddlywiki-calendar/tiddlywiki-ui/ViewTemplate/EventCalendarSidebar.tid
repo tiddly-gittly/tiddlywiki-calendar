@@ -14,7 +14,9 @@ title: $:/plugins/linonetwo/tw-calendar/tiddlywiki-ui/ViewTemplate/EventCalendar
   <div class="tc-sidebar-header">
     <$list filter="[all[shadows+tiddlers]tag[$:/tags/EventCalendarSideBarSegment]!has[draft.of]]" variable="listItem" emptyMessage=<<emptyMessage>>>
       <$reveal type="nomatch" state=<<config-title>> text="hide"  tag="div">
-        <$transclude tiddler=<<listItem>> mode="block"/>
+        <div class="tw-calendar-event-calendar-sidebar-item">
+          <$transclude tiddler=<<listItem>> mode="block"/>
+        </div>
       </$reveal>
     </$list>
   </div>

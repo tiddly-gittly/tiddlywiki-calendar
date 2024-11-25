@@ -4,4 +4,8 @@ tags: CalendarUsage
 
 You can use <kbd><<displayshortcuts ((layout-switcher))>></kbd> to trigger the page layout switch dialog. See [[official documentation about page layout|https://tiddlywiki.com/#Alternative%20page%20layouts]] for details.
 
-Choose "Calendar" layout will bring you to a full page calendar.
+Choose "Event Calendar" layout will bring you to a full page calendar.
+
+There are also "Search calendar" layout where you can search for events by caption and title.
+
+If you want to see your tiddlers on a calendar, you can open the "Tiddler timeline" layout, which will show your tiddlers on a calendar based on their created, modified, startDate and endDate fields.
