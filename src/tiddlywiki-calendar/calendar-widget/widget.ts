@@ -163,14 +163,14 @@ class CalendarWidget extends Widget {
     return {
       endDateFields: this.getAttribute('endDateFields')?.split(','),
       filter: this.getAttribute('filter'),
-      hideToolbar: (this.getAttribute('hideToolbar') === 'yes') || (this.getAttribute('hideToolbar') === 'true'),
+      hideToolbar: this.getAttribute('hideToolbar') === 'yes',
       initialDate: this.getAttribute('initialDate') || undefined,
       initialView: this.getAttribute('initialView') || undefined,
       defaultTags: $tw.utils.parseStringArray(this.getAttribute('defaultTags') || '') ?? [],
       parentWidget: this.parentWidget,
       widget: this,
       containerElement: this.#containerElement,
-      readonly: (this.getAttribute('readonly') === 'yes') || (this.getAttribute('readonly') === 'true'),
+      readonly: this.getAttribute('readonly') === 'yes',
       // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
       slotDuration: this.getAttribute('slotDuration') || $tw.wiki.getTiddlerText('$:/plugins/linonetwo/tw-calendar/settings/slotDuration'),
       startDateFields: this.getAttribute('startDateFields')?.split(','),
