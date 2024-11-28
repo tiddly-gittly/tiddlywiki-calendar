@@ -20,8 +20,9 @@
   overflow-y: hidden;
   width: 100%;
 }
-.tw-calendar-layout-create-new-tiddler-popup .tw-calendar-tags-input .tw-calendar-frequently-used-tags {
-  max-width: 180%;
+.tw-calendar-frequently-used-tags {
+  max-width: 100%;
+  overflow-x: auto;
 }
 .tw-calendar-layout-create-new-tiddler-popup .tw-calendar-tags-input .tc-edit-tags {
   padding-left: 0;

@@ -2,6 +2,10 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  height: 100%;
+  width: 100%;
+  overflow-y: auto;
+  max-height: 100vh;
 }
 .tw-calendar-layout-event-preview-container .tc-tiddler-frame {
   padding: 1em;

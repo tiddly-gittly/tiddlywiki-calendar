@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 /* eslint-disable unicorn/no-null */
 import { Modal } from '$:/core/modules/utils/dom/modal.js';
-import { autoPlacement, computePosition, shift } from '@floating-ui/dom';
+import { autoPlacement, computePosition, shift, size } from '@floating-ui/dom';
 import type { CalendarOptions, EventApi } from '@fullcalendar/core';
 import type { EventImpl } from '@fullcalendar/core/internal';
 import { ITiddlerFields } from 'tiddlywiki';
@@ -84,6 +84,14 @@ export function getHandlers(context: IContext): CalendarOptions {
             })
             : autoPlacement(),
           shift(),
+          size({
+            apply({ availableWidth, availableHeight, elements }) {
+              Object.assign(elements.floating.style, {
+                maxWidth: `${Math.max(0, availableWidth)}px`,
+                maxHeight: `${Math.max(0, availableHeight)}px`,
+              });
+            },
+          }),
         ],
       });
       Object.assign(eventPreviewElement.style, {
