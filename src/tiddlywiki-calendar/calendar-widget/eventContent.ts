@@ -3,6 +3,7 @@ import type { CustomContentGenerator, EventContentArg } from '@fullcalendar/core
 import type { h, VNode } from '@fullcalendar/core/preact';
 import { allowedTiddlerTypeToPreview, draftTiddlerCaptionTitle, draftTiddlerTitle, DURATION_THRESHOLD_FOR_SHOWING_TIME_AT_BOTTOM } from './constants';
 import type { IContext } from './initCalendar';
+import { lingo } from './lingo';
 
 // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 const dateDurationMacro = require('$:/plugins/linonetwo/tw-calendar/date-duration-macro');
@@ -72,6 +73,11 @@ export function getEventContent(context: IContext): CustomContentGenerator<Event
       duration = $tw.utils.parseDate(endDateString) - $tw.utils.parseDate(startDateString);
     }
     const durationElement = durationText !== undefined && createElement('div', {}, durationText);
+    const isObscured = context.obscureFilter !== undefined &&
+      $tw.wiki.filterTiddlers(context.obscureFilter, context.parentWidget, $tw.wiki.makeTiddlerIterator([argument.event.title])).length > 0;
+    if (isObscured) {
+      return createElement('div', { class: 'fc-event-title-occupied' }, [lingo('Occupied'), timeElement, durationElement]);
+    }
     const captionElement = typeof captionResult === 'string'
       ? createElement('div', { class: tiddlerText ? 'fc-event-title-with-text' : '' }, captionResult)
       : titleElement;

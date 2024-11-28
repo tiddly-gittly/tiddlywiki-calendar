@@ -39,6 +39,8 @@ export interface IContext {
   initialDate?: string;
   /** when calendar open, the initial view it uses */
   initialView?: string;
+  /** a custom filter to hide some tiddlers' details from the calendar. They will shown as "Occupied" */
+  obscureFilter?: string;
   /** Parent widget of the calendar widget */
   parentWidget?: Widget;
   /** make widget content non-editable */

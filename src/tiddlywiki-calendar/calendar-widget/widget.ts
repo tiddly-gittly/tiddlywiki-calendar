@@ -163,6 +163,7 @@ class CalendarWidget extends Widget {
     return {
       endDateFields: this.getAttribute('endDateFields')?.split(','),
       filter: this.getAttribute('filter'),
+      obscureFilter: this.getAttribute('obscureFilter'),
       hideToolbar: this.getAttribute('hideToolbar') === 'yes',
       initialDate: this.getAttribute('initialDate') || undefined,
       initialView: this.getAttribute('initialView') || undefined,
