@@ -1,0 +1,20 @@
+.event-calendar-sidebar {
+    width: 25vw !important;
+    max-width: 25vw !important;
+    min-width: 200px;
+    right: 0;
+    position: relative;
+    display: none;
+    height: calc(100vh - 50px);
+    overflow-y: auto; 
+    overflow-x: hidden;
+    transition: width 0.1s ease;
+}
+
+.tc-sidebar-scrollable:not(.tc-sidebar-hidden) .event-calendar-sidebar {
+    display: block;
+}
+
+.tc-sidebar-scrollable.tc-sidebar-hidden .event-calendar-sidebar {
+    overflow: hidden !important;
+}
