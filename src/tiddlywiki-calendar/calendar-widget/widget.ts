@@ -13719,19 +13719,138 @@ function getCustomButtons(t) {
             text: "",
             hint: $tw.wiki.getTiddlerText("$:/language/PageTemplate/Name") ?? "Exit",
             click: () => {
-                $tw.wiki.deleteTiddler("$:/state/Calendar/PageLayout/EventCalendar/initialParams"), $tw.wiki.setText("$:/layout", "text", void 0, "")
+                $tw.wiki.deleteTiddler("$:/state/Calendar/PageLayout/EventCalendar/initialParams"), 
+                $tw.wiki.setText("$:/layout", "text", void 0, "")
             }
         },
+        
         searchLayout: {
             text: "",
             hint: $tw.wiki.getTiddlerText("$:/language/Search/Standard/Hint") ?? "Search",
             click: () => {
-                $tw.wiki.deleteTiddler("$:/state/Calendar/PageLayout/EventCalendar/initialParams"), $tw.wiki.setText("$:/layout", "text", void 0, "$:/plugins/linonetwo/tw-calendar/tiddlywiki-ui/PageLayout/EventsCalendarSearchLayout")
+                $tw.wiki.deleteTiddler("$:/state/Calendar/PageLayout/EventCalendar/initialParams"), 
+                $tw.wiki.setText("$:/layout", "text", void 0, "$:/plugins/linonetwo/tw-calendar/tiddlywiki-ui/PageLayout/EventsCalendarSearchLayout")
             }
         },
+    
+        // New tag toggle button
+        tagToggle: {
+            text: "Tags",
+            hint: "Toggle Calendar Tags",
+            click: function(e) {
+                const containerEl = document.querySelector('.tiddlywiki-calendar-widget-container');
+                if (!containerEl) {
+                    console.error('Calendar container not found');
+                    return;
+                }
+        
+                // Create popup container
+                let popup = document.getElementById('calendar-tag-popup');
+                if (popup) {
+                    popup.remove();
+                }
+        
+                popup = document.createElement('div');
+                popup.id = 'calendar-tag-popup';
+                popup.className = 'calendar-tag-popup';
+                popup.style.cssText = `
+                    position: absolute;
+                    background: white;
+                    border: 1px solid #ddd;
+                    border-radius: 4px;
+                    padding: 8px;
+                    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+                    z-index: 1000;
+                    min-width: 150px;
+                `;
+        
+                // Get all events and extract tags
+                const tags = new Set();
+                const eventElements = containerEl.querySelectorAll('.fc-event');
+                const checkedTags = new Set(); // Keep track of checked tags
+        
+                eventElements.forEach(eventEl => {
+                    const tagsContainer = eventEl.querySelector('.fc-event-main-tags');
+                    if (tagsContainer) {
+                        const tagSpans = tagsContainer.querySelectorAll('span');
+                        tagSpans.forEach(span => {
+                            if (span.textContent) {
+                                tags.add(span.textContent.trim());
+                                checkedTags.add(span.textContent.trim()); // Initially all tags are checked
+                            }
+                        });
+                    }
+                });
+        
+                // Function to update event visibility
+                const updateEventVisibility = () => {
+                    eventElements.forEach(eventEl => {
+                        const tagsContainer = eventEl.querySelector('.fc-event-main-tags');
+                        if (tagsContainer) {
+                            const eventTags = Array.from(tagsContainer.querySelectorAll('span'))
+                                .map(span => span.textContent.trim());
+                            
+                            // Show event if ANY of its tags are checked
+                            const shouldShow = eventTags.some(tag => checkedTags.has(tag));
+                            eventEl.style.display = shouldShow ? '' : 'none';
+                        }
+                    });
+                };
+        
+                // Create toggle controls
+                if (tags.size > 0) {
+                    const sortedTags = Array.from(tags).sort();
+                    sortedTags.forEach(tag => {
+                        const toggleWrapper = document.createElement('div');
+                        toggleWrapper.style.margin = '4px 0';
+                        
+                        const checkbox = document.createElement('input');
+                        checkbox.type = 'checkbox';
+                        checkbox.id = `tag-toggle-${tag}`;
+                        checkbox.checked = true;
+                        
+                        checkbox.addEventListener('change', function() {
+                            if (this.checked) {
+                                checkedTags.add(tag);
+                            } else {
+                                checkedTags.delete(tag);
+                            }
+                            updateEventVisibility();
+                        });
+                        
+                        const label = document.createElement('label');
+                        label.htmlFor = `tag-toggle-${tag}`;
+                        label.textContent = tag;
+                        label.style.marginLeft = '8px';
+                        
+                        toggleWrapper.appendChild(checkbox);
+                        toggleWrapper.appendChild(label);
+                        popup.appendChild(toggleWrapper);
+                    });
+                } else {
+                    popup.innerHTML = '<div style="padding: 5px;">No tags found</div>';
+                }
+        
+                // Position and show popup
+                document.body.appendChild(popup);
+                const rect = e.target.getBoundingClientRect();
+                popup.style.top = `${rect.bottom + window.scrollY}px`;
+                popup.style.left = `${rect.left + window.scrollX}px`;
+        
+                // Close popup when clicking outside
+                document.addEventListener('click', function closePopup(evt) {
+                    if (!popup.contains(evt.target) && evt.target !== e.target) {
+                        popup.remove();
+                        document.removeEventListener('click', closePopup);
+                    }
+                });
+            }
+        },
+        
         toggleSidebar: e
     }
 }
+
 init_esbuild_inject(), init_esbuild_inject(), init_esbuild_inject();
 var import_moment_timezone3 = __toESM(require_moment_timezone2());
 
@@ -14927,11 +15046,137 @@ function getSearchModeSettings() {
 }
 
 function initCalendar(e, M) {
-    var b = new Calendar(e, getSettings(M));
-    const t = b.render.bind(b);
-    return b.render = function() {
-        t(), setToolbarIcons()
-    }, enableSidebarDraggable(M), b
+    // Create toggle controls container
+    let toggleContainer = document.createElement('div');
+    toggleContainer.className = 'calendar-tag-toggles';
+    e.parentNode.insertBefore(toggleContainer, e);
+    
+    // Initialize calendar with original settings
+    var calendar = new Calendar(e, getSettings(M));
+    
+    // Add tag filtering functionality
+    function updateTagToggles() {
+        // Get all unique tags from events
+        let tags = new Set();
+        calendar.getEvents().forEach(event => {
+            if (event.extendedProps.tags) {
+                event.extendedProps.tags.forEach(tag => tags.add(tag));
+            }
+        });
+        
+        // Create toggle controls if they don't exist
+        tags.forEach(tag => {
+            if (!document.getElementById(`toggle-${tag}`)) {
+                let toggleWrapper = document.createElement('div');
+                toggleWrapper.className = 'tag-toggle';
+                
+                let checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+                checkbox.id = `toggle-${tag}`;
+                checkbox.checked = true;
+                
+                checkbox.addEventListener('change', function() {
+                    // Show/hide events based on tag selection
+                    calendar.getEvents().forEach(event => {
+                        if (event.extendedProps.tags && 
+                            event.extendedProps.tags.includes(tag)) {
+                            if (this.checked) {
+                                event.setProp('display', 'auto');
+                            } else {
+                                event.setProp('display', 'none');
+                            }
+                        }
+                    });
+                });
+                
+                let label = document.createElement('label');
+                label.htmlFor = `toggle-${tag}`;
+                label.textContent = tag;
+                
+                toggleWrapper.appendChild(checkbox);
+                toggleWrapper.appendChild(label);
+                toggleContainer.appendChild(toggleWrapper);
+            }
+        });
+    }
+    
+    // Override render to include tag toggle updates
+    const originalRender = calendar.render.bind(calendar);
+    calendar.render = function() {
+        originalRender();
+        updateTagToggles();
+        setToolbarIcons();
+    };
+    
+    enableSidebarDraggable(M);
+    return calendar;
+}
+
+function organizeEventsByTags(tiddlers) {
+    let eventSources = {};
+    
+    $tw.wiki.each(function(tiddler) {
+        if (tiddler.fields.startDate) {  
+            // If tiddler has no tags, put it in "untagged" category
+            let tags = tiddler.fields.tags || ["untagged"];
+            
+            tags.forEach(tag => {
+                if (!eventSources[tag]) {
+                    eventSources[tag] = {
+                        id: tag,  // Important for removal/adding
+                        events: []
+                    };
+                }
+                
+                eventSources[tag].events.push({
+                    title: tiddler.fields.title,
+                    start: tiddler.fields.startDate,
+                    end: tiddler.fields.endDate,
+                    allDay: tiddler.fields.allDay,
+                    tag: tag
+                });
+            });
+        }
+    });
+    
+    return eventSources;
+}
+
+// Create toggle controls
+function createTagToggles(calendar, eventSources) {
+    let toggleContainer = document.createElement('div');
+    toggleContainer.className = 'calendar-tag-toggles';
+    
+    Object.keys(eventSources).forEach(tag => {
+        let toggleWrapper = document.createElement('div');
+        toggleWrapper.className = 'tag-toggle';
+        
+        let checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.id = `toggle-${tag}`;
+        checkbox.checked = true;  // Default to shown
+        
+        checkbox.addEventListener('change', function() {
+            if (this.checked) {
+                calendar.addEventSource(eventSources[tag]);
+            } else {
+                let source = calendar.getEventSourceById(tag);
+                if (source) {
+                    source.remove();
+                }
+            }
+        });
+        
+        let label = document.createElement('label');
+        label.htmlFor = `toggle-${tag}`;
+        label.textContent = tag;
+        
+        toggleWrapper.appendChild(checkbox);
+        toggleWrapper.appendChild(label);
+        toggleContainer.appendChild(toggleWrapper);
+    });
+    
+    return toggleContainer;
 }
 
 function getSettings(e) {
@@ -14997,13 +15242,14 @@ function getToolbarSettings(e) {
         headerToolbar: !getIsSmallScreen() && !0 !== e.hideToolbar && {
             left: "prev,next prevYear,nextYear today searchLayout",
             center: "title",
-            right: `${b?"backToStandardLayout ":""}dayGridMonth,timeGridWeek,timeGridThreeDay,timeGridDay,listWeek toggleSidebar`
+            right: `${b?"backToStandardLayout ":""}tagToggle dayGridMonth,timeGridWeek,timeGridThreeDay,timeGridDay,listWeek toggleSidebar`
         },
         footerToolbar: !(!getIsSmallScreen() || !0 === e.hideToolbar) && {
             right: "toggleSidebar,today,prev,next",
             left: "timeGridWeek,timeGridThreeDay,timeGridDay,listWeek" + (b ? " backToStandardLayout" : "")
         }
     }
+    
 }
 init_esbuild_inject();
 var CalendarWidget = class extends import_widget.widget {
@@ -15018,11 +15264,11 @@ var CalendarWidget = class extends import_widget.widget {
     #containerElement;
     #mountElement;
     #calendar;
-    #resizing = false;
-    #startX = 0;
-    #startWidth = 0;
-    #mouseMoveHandler = null;
-    #mouseUpHandler = null;
+    // #resizing = false;
+    // #startX = 0;
+    // #startWidth = 0;
+    // #mouseMoveHandler = null;
+    // #mouseUpHandler = null;
 
     refreshTiddlerEventCalendar(e = !1) {
         var M;
