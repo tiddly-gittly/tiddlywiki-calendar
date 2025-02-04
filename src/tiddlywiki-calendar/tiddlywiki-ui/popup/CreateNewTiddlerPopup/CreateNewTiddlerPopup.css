@@ -13,7 +13,7 @@
 }
 .tw-calendar-layout-create-new-tiddler-popup .tw-calendar-tags-input {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: flex-start;
   max-width: 100%;
   overflow-x: auto;

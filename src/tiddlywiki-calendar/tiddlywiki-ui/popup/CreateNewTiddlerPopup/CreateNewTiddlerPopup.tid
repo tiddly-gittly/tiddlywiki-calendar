@@ -32,10 +32,10 @@ footer: {{$:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/popup/C
       minHeight="30px"
     />
     <div class="tw-calendar-tags-input">
-      {{||$:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/popup/FrequentlyUsedTagsList}}
       <div class="tw-calendar-tags-input-new-tag">
       {{||$:/core/ui/EditTemplate/tags}}
       </div>
+      {{||$:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/popup/FrequentlyUsedTagsList}}
     </div>
     <div class="tw-calendar-alarms">
       {{||$:/plugins/linonetwo/tw-calendar/lib/TiddlyTools/Time/Alarms}}
