@@ -1,6 +1,8 @@
 title: $:/plugins/linonetwo/date-filters/readme
 type: text/vnd.tiddlywiki
 
+\define lingo-base() $:/plugins/linonetwo/date-filters/language/
+
 ! date-filters
 
 Filters for getting week range and preparing visualization data.
@@ -38,3 +40,7 @@ Filters for getting week range and preparing visualization data.
 <<.operator-example f5 "[daystart[0],[7]] [dayend[0],[7]]">>
 
 <<.operator-example f6 "[weekstart[]addweekday[]] [weekstart[]addweekday[4]]">>
+
+<<.operator-example f7 "[all[tiddlers]!is[system]field:calendarEntry[yes]tagsfreq[7]]">>
+
+<<.operator-example f7.1 "[all[tiddlers]!is[system]field:calendarEntry[yes]tagsfreq[14]first[5]]">>
