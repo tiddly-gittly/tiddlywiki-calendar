@@ -45,4 +45,6 @@ DaysOfWeek/Wednesday: 星期三
 DaysOfWeek/Thursday: 星期四
 DaysOfWeek/Friday: 星期五
 DaysOfWeek/Saturday: 星期六
+PopularTags/Caption: 热门标签（最近7天）
+PopularTags/EmptyMessage: 最近7天没有带标签的日历条目
 Occupied: 时间段已占用

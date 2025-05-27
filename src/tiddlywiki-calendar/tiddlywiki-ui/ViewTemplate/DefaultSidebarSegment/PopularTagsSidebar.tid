@@ -1,0 +1,41 @@
+title: $:/plugins/linonetwo/tw-calendar/tiddlywiki-ui/ViewTemplate/DefaultSidebarSegment/PopularTagsSidebar
+tags: $:/tags/EventCalendarSideBarSegment
+
+\whitespace trim
+\procedure lingo-base() $:/plugins/linonetwo/tw-calendar/language/
+\function sevenDaysAgo()
+[<now [UTC]YYYY0MM0DD0hh0mm0ss0XXX>] :map[substractdays[7]]
+\end
+
+!! <<lingo PopularTags/Caption>>
+
+<div class="tw-calendar-popular-tags-container">
+  <$list 
+    filter="[all[tiddlers]!is[system]field:calendarEntry[yes]tagsfreq[7]first[10]]" 
+    variable="tagInfo"
+    emptyMessage="<p class='tw-calendar-empty-list-help-text'><<lingo PopularTags/EmptyMessage>></p>"
+  >
+    <$let 
+      tags={{{ [<tagInfo>split[|]first[]] }}}
+      count={{{ [<tagInfo>split[|]nth[2]] }}}
+      avgDuration={{{ [<tagInfo>split[|]nth[3]] }}}
+      durationData={{{ [<avgDuration>addprefix[{ "duration": "]addsuffix[:00" }]] }}}
+    >
+      <div class="tw-calendar-popular-tag-item">
+        <$draggable data-event=<<durationData>> data-tags=<<tags>>>
+          <div class="tw-calendar-popular-tag-content">
+            <span class="tw-calendar-popular-tag-name" title=<<tags>>>
+              <$list filter="[<tags>enlist-input[]]">
+                {{||$:/core/ui/TagTemplate}}
+              </$list>
+            </span>
+            <div class="tw-calendar-popular-tag-stats">
+              <span class="tw-calendar-popular-tag-count">×<<count>></span>
+              <span class="tw-calendar-popular-tag-duration">~<<avgDuration>>h</span>
+            </div>
+          </div>
+        </$draggable>
+      </div>
+    </$let>
+  </$list>
+</div>

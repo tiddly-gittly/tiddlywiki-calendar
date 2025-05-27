@@ -1,0 +1,107 @@
+title: $:/plugins/linonetwo/tw-calendar/tiddlywiki-ui/ViewTemplate/DefaultSidebarSegment/PopularTagsSidebarStyle
+tags: [[$:/tags/Stylesheet]]
+
+.tw-calendar-popular-tags-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  padding: 0.5em 0;
+}
+
+.tw-calendar-popular-tag-item {
+  background: <<color tiddler-background>>;
+  border: 1px solid <<color tiddler-border>>;
+  border-radius: 4px;
+  padding: 0.5em;
+  cursor: grab;
+  transition: all 0.2s ease;
+}
+
+.tw-calendar-popular-tag-item:hover {
+  background: <<color primary>>;
+  color: <<color background>>;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.tw-calendar-popular-tag-item:active {
+  cursor: grabbing;
+  transform: translateY(0);
+}
+
+.tw-calendar-popular-tag-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.tw-calendar-popular-tag-name {
+  font-weight: 500;
+  flex: 1;
+  min-width: 0;
+  overflow-y: auto;
+  overflow-x: scroll;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  position: relative; /* Add relative positioning for tooltip */
+  cursor: help; /* Show help cursor on hover */
+}
+
+/* Hide scrollbars in WebKit browsers (Chrome, Safari) */
+.tw-calendar-popular-tag-name::-webkit-scrollbar {
+  display: none;
+}
+
+.tw-calendar-popular-tag-stats {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  font-size: 0.8em;
+  opacity: 0.8;
+  margin-left: 0.5em;
+  flex-shrink: 0;
+}
+
+.tw-calendar-popular-tag-count {
+  font-weight: 600;
+  color: <<color primary>>;
+}
+
+.tw-calendar-popular-tag-duration {
+  color: <<color muted-foreground>>;
+}
+
+.tw-calendar-popular-tag-item:hover .tw-calendar-popular-tag-count,
+.tw-calendar-popular-tag-item:hover .tw-calendar-popular-tag-duration {
+  color: inherit;
+}
+
+/* Empty state styles */
+.tw-calendar-empty-list-help-text {
+  color: <<color muted-foreground>>;
+  font-style: italic;
+  text-align: center;
+  margin: 1em 0;
+  padding: 1em;
+  border: 1px dashed <<color muted-foreground>>;
+  border-radius: 4px;
+  background: <<color tiddler-background>>;
+}
+
+/* Responsive design */
+@media (max-width: 600px) {
+  .tw-calendar-popular-tag-content {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25em;
+  }
+  
+  .tw-calendar-popular-tag-stats {
+    flex-direction: row;
+    gap: 0.5em;
+    margin-left: 0;
+  }
+}

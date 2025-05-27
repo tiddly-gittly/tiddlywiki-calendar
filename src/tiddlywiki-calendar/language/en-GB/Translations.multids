@@ -45,4 +45,6 @@ DaysOfWeek/Wednesday: Wednesday
 DaysOfWeek/Thursday: Thursday
 DaysOfWeek/Friday: Friday
 DaysOfWeek/Saturday: Saturday
+PopularTags/Caption: Popular Tags (Recent 7 Days)
+PopularTags/EmptyMessage: No tagged calendar entries in the recent 7 days
 Occupied: Duration occupied
