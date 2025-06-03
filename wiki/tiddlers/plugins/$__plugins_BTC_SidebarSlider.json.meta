@@ -1,0 +1,8 @@
+author: Simon Huber
+dependents: 
+description: A sidebar slider
+list: readme license
+plugin-type: plugin
+title: $:/plugins/BTC/SidebarSlider
+type: application/json
+version: 0.0.16

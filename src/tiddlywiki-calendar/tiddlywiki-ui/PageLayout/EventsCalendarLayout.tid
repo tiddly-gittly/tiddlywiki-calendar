@@ -26,6 +26,8 @@ tc-page-container tc-language-$(languageTitle)$ tw-calendar-layout-container
 			<$messagecatcher $tm-navigate=<<redirected-navigate-actions>>>
 				{{$:/plugins/linonetwo/tw-calendar/tiddlywiki-ui/ViewTemplate/EventCalendarSidebar}}
 				{{$:/core/ui/CommandPaletteTemplate}}
+				{{$:/plugins/BTC/SidebarSlider/ui/PageTemplate/show-sidebar}}
+				{{$:/plugins/BTC/SidebarSlider/PageTemplate/sidebar-slider}}
 				<main class="tw-calendar-layout-main-area">
 					<div class="event-calendar-container">
 						<$calendar
