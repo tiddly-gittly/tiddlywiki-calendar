@@ -21,6 +21,19 @@ In this wiki there is an example [[EventCalendarSideBarExample]] that you can pl
 # Use `data-tags` to set the tags of dropped event tiddler.
 # Try using `$list` widget to generate a Todo list!
 
+!! Custom Layout
+
+If you are creating a custom layout (not using the built-in [[event calendar page layout|CalendarPageLayout]]), you need to specify the `draggableContainer` parameter in your `$calendar` widget to enable drag & drop functionality:
+
+```tid
+<$calendar
+  draggableContainer=".your-sidebar-container"
+  // ...other parameters...
+/>
+```
+
+The `draggableContainer` should be a CSS selector that points to the container element containing your draggable items. For example, if your sidebar has class `tc-sidebar-scrollable`, you would use `draggableContainer=".tc-sidebar-scrollable"`.
+
 !! Config
 
 You can use `$:/config/SideBarSegments/Visibility/` to control the visibility of the sidebar segments.

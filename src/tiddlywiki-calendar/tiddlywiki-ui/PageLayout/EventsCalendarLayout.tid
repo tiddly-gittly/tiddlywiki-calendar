@@ -6,7 +6,7 @@ icon: $:/plugins/linonetwo/tw-calendar/tiddlywiki-ui/Images/EventCalendar
 
 \whitespace trim
 \define containerClasses()
-tc-page-container tc-page-view-$(storyviewTitle)$ tc-language-$(languageTitle)$ tw-calendar-layout-container
+tc-page-container tc-language-$(languageTitle)$ tw-calendar-layout-container
 \end
 \import [subfilter{$:/core/config/GlobalImportFilter}]
 \procedure redirected-navigate-actions()
@@ -24,6 +24,7 @@ tc-page-container tc-page-view-$(storyviewTitle)$ tc-language-$(languageTitle)$ 
 	<div class=<<containerClasses>>>
 		<$navigator story="$:/StoryList" history="$:/HistoryList" openLinkFromInsideRiver={{$:/config/Navigation/openLinkFromInsideRiver}} openLinkFromOutsideRiver={{$:/config/Navigation/openLinkFromOutsideRiver}} relinkOnRename={{$:/config/RelinkOnRename}}>
 			<$messagecatcher $tm-navigate=<<redirected-navigate-actions>>>
+				{{$:/plugins/linonetwo/tw-calendar/tiddlywiki-ui/ViewTemplate/EventCalendarSidebar}}
 				{{$:/core/ui/CommandPaletteTemplate}}
 				<main class="tw-calendar-layout-main-area">
 					<div class="event-calendar-container">
@@ -32,11 +33,9 @@ tc-page-container tc-page-view-$(storyviewTitle)$ tc-language-$(languageTitle)$ 
 							filter="[all[tiddlers]!is[system]field:calendarEntry[yes]]"
 							initialView={{$:/state/Calendar/PageLayout/EventCalendar/initialParams!!initialView}}
 							initialDate={{$:/state/Calendar/PageLayout/EventCalendar/initialParams!!initialDate}}
+							draggableContainer=".event-calendar-sidebar.tc-sidebar-scrollable"
 						/>
 					</div>
-					<$reveal state="$:/state/event-calendar-sidebar" type="match" text="yes" default="no" retain="yes" animate="yes">
-						{{$:/plugins/linonetwo/tw-calendar/tiddlywiki-ui/ViewTemplate/EventCalendarSidebar}}
-					</$reveal>
 				</main>
 			</$messagecatcher>
 		</$navigator>

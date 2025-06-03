@@ -26,6 +26,7 @@ export interface IContext {
    * When adding tiddler in the calender, add these tags by default.
    */
   defaultTags?: string[];
+  draggableContainerElement?: HTMLDivElement | undefined;
   /**
    * corresponding end date field to startDateFields. When using multiple pairs of fields, their index in the array should be the same.
    * Use empty string if some of start field don't have a corresponding end field
@@ -144,7 +145,7 @@ function getToolbarSettings(context: IContext): CalendarOptions {
       },
     footerToolbar: getIsSmallScreen() && context.hideToolbar !== true
       ? {
-        right: `searchLayout today,prev,next`,
+        right: `toggleSidebar today,prev,next`,
         left: `timeGridThreeDay,timeGridDay,listWeek${calendarLayout ? ' backToStandardLayout' : ''}`,
       }
       : false,

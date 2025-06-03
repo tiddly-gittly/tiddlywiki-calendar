@@ -7,8 +7,11 @@ import { IContext } from './initCalendar';
  */
 export function enableSidebarDraggable(context: IContext) {
   setTimeout(() => {
-    const sidebarContainer = context.containerElement?.parentElement?.parentElement?.querySelector<HTMLDivElement>('.event-calendar-sidebar');
-    if (!sidebarContainer) return;
+    const sidebarContainer = context.draggableContainerElement;
+    if (!sidebarContainer) {
+      console.warn('enableSidebarDraggable: sidebarContainer not found');
+      return;
+    }
     // eslint-disable-next-line no-new
     new Draggable(sidebarContainer, {
       itemSelector: '.tc-draggable',

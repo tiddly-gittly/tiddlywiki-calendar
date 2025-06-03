@@ -160,6 +160,7 @@ class CalendarWidget extends Widget {
 
   getContext(): IContext {
     /* eslint-disable @typescript-eslint/strict-boolean-expressions */
+    const draggableContainerElementSelector = this.getAttribute('draggableContainer');
     return {
       endDateFields: this.getAttribute('endDateFields')?.split(','),
       filter: this.getAttribute('filter'),
@@ -171,6 +172,7 @@ class CalendarWidget extends Widget {
       parentWidget: this.parentWidget,
       widget: this,
       containerElement: this.#containerElement,
+      draggableContainerElement: draggableContainerElementSelector ? document.querySelector<HTMLDivElement>(draggableContainerElementSelector) ?? undefined : undefined,
       readonly: this.getAttribute('readonly') === 'yes',
       // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
       slotDuration: this.getAttribute('slotDuration') || $tw.wiki.getTiddlerText('$:/plugins/linonetwo/tw-calendar/settings/slotDuration'),

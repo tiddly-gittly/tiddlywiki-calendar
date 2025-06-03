@@ -5,3 +5,52 @@ tags: $:/tags/Stylesheet
 .tc-page-controls svg.tc-image-tmd-calendar-cursor {
   fill: <<colour toolbar-options-button>>;
 }
+.tw-calendar-layout-container div.event-calendar-sidebar {
+  width: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth}};
+}
+<%if [[$:/state/event-calendar-sidebar]text[yes]] %>
+div.tw-calendar-layout-container div.event-calendar-sidebar.tc-sidebar-scrollable {
+  display: flex;
+}
+.tw-calendar-layout-main-area {
+  margin-left: {{$:/themes/tiddlywiki/vanilla/metrics/storyleft}};
+  margin-right: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth}};
+}
+<%else%>
+.tw-calendar-layout-container div.event-calendar-sidebar {
+  display: none;
+}
+<%endif%>
+@media (max-width: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}}) {
+  .tw-calendar-layout-container div.event-calendar-sidebar {
+    position: fixed;
+		top: {{$:/themes/tiddlywiki/vanilla/metrics/storytop}};
+		left: {{$:/themes/tiddlywiki/vanilla/metrics/storyright}};
+		bottom: 0;
+		right: 0;
+		overflow-y: auto;
+		overflow-x: auto;
+		-webkit-overflow-scrolling: touch;
+		margin: 0 0 0 -42px;
+		padding: 71px 0 0 0;
+    left: auto;
+		bottom: 0;
+		right: 0;
+		width: calc({{$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth}} / 1.5);
+  }
+	<%if [[$:/state/event-calendar-sidebar]text[yes]] %>
+		.tw-calendar-layout-main-area {
+			margin-right: calc({{$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth}} / 1.5);
+		}
+	<%endif%>
+}
+@media (max-width: {{{ [{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}divide[1.5]] }}}px) {
+  .tw-calendar-layout-container div.event-calendar-sidebar {
+		width: calc({{$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth}} / 2);
+  }
+	<%if [[$:/state/event-calendar-sidebar]text[yes]] %>
+		.tw-calendar-layout-main-area {
+			margin-right: calc({{$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth}} / 2);
+		}
+	<%endif%>
+}

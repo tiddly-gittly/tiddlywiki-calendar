@@ -29,7 +29,7 @@ type: text/vnd.tiddlywiki
 }
 
 /** make it possible to drag the app using this bar in TidGi, when titleBar is closed */
-<$reveal type="match" state="$:/state/titleBarOpened" text="no">
+<%if [[$:/state/titleBarOpened]text[no]] %>
 .fc-header-toolbar, .fc-scrollgrid-section-header {
   cursor: grab;
   -webkit-app-region: drag;
@@ -40,11 +40,12 @@ type: text/vnd.tiddlywiki
 .fc-scrollgrid-section-header a {
   -webkit-app-region: no-drag;
 }
-</$reveal>
+<%endif%>
 
 .tiddlywiki-calendar-widget-container {
   min-height: 400px;
   height: 100%;
+  background-color: <<colour page-background>>;
 }
 .tiddlywiki-calendar-widget-container table {
   margin: unset;
@@ -89,6 +90,9 @@ type: text/vnd.tiddlywiki
 }
 .fc button.fc-button-primary > svg.tc-image-button {
   fill: <<colour button-foreground>>;
+}
+.fc-toolbar.fc-footer-toolbar {
+  flex-wrap: wrap;
 }
 
 .fc-col-header-cell-cushion {
