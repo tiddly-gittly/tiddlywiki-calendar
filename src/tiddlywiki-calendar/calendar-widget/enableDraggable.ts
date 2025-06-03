@@ -16,6 +16,7 @@ export function enableSidebarDraggable(context: IContext) {
     new Draggable(sidebarContainer, {
       itemSelector: '.tc-draggable',
       appendTo: context.containerElement,
+      longPressDelay: 500,
     });
   }, 1);
 }

@@ -7,6 +7,7 @@ import type { EventImpl } from '@fullcalendar/core/internal';
 import { ITiddlerFields } from 'tiddlywiki';
 import { draftTiddlerCaptionTitle, draftTiddlerTitle, isMobile } from './constants';
 import type { IContext } from './initCalendar';
+import debounce from 'lodash/debounce';
 
 export function getHandlers(context: IContext): CalendarOptions {
   function putEvent(event: EventImpl | EventApi, newTiddler?: ITiddlerFields) {
@@ -27,6 +28,19 @@ export function getHandlers(context: IContext): CalendarOptions {
       modified: new Date(),
     });
   }
+  const debouncedCreateEvent = debounce((info) => {
+    const randomTitle = $tw.utils.formatDateString(new Date(), '[UTC]YYYY0MM0DD0hh0mm0ss0XXX');
+    const tags = $tw.utils.parseStringArray(info.draggedEl.dataset.tags ?? '');
+    putEvent(info.event, {
+      title: randomTitle,
+      tags,
+      text: '',
+      type: 'text/vnd.tiddlywiki',
+      calendarEntry: 'yes',
+      _is_titleless: 'yes',
+    });
+  }, 300);
+
   const handlers: CalendarOptions = {
     // eslint-disable-next-line @typescript-eslint/no-misused-promises
     eventClick: async (info) => {
@@ -174,18 +188,10 @@ export function getHandlers(context: IContext): CalendarOptions {
     },
     /** When drop new event from the sidebar */
     eventReceive(info) {
-      const randomTitle = $tw.utils.formatDateString(new Date(), '[UTC]YYYY0MM0DD0hh0mm0ss0XXX');
-      const tags = $tw.utils.parseStringArray(info.draggedEl.dataset.tags ?? '');
-      putEvent(info.event, {
-        title: randomTitle,
-        tags,
-        text: '',
-        type: 'text/vnd.tiddlywiki',
-        calendarEntry: 'yes',
-        _is_titleless: 'yes',
-      });
-      // remove the shadow event. Wait for real event to be created.
+      // remove the shadow event immediately to avoid UI issues
       info.event.remove();
+      // debounce the actual event creation
+      debouncedCreateEvent(info);
     },
     eventMouseEnter(info) {
       // use this until https://github.com/Jermolene/TiddlyWiki5/discussions/7989 fixed
