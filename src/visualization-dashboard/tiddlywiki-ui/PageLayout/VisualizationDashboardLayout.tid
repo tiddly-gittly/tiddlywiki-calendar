@@ -26,24 +26,28 @@ tc-page-container tc-page-view-$(storyviewTitle)$ tc-language-$(languageTitle)$ 
 			<main class="visualization-dashboard-layout-main-area">
 				{{$:/plugins/linonetwo/visualization-dashboard/ViewTemplate/WeekJournalSelect}}
 				<div class="visualization-dashboard-layout-gauge-list-container">
-					<$set name="currentDateWeekOffset" filter="[<currentWeekIndexTiddler>get[text]else[0]]">
-						<$set name="currentDate" filter="[weekstart<currentDateWeekOffset>addweekday[]]">
-							<$list filter="[all[shadows+tiddlers]tag[$:/Tags/VisualizationDashboard/Gauge]!is[draft]]">
-								<$droppable
-									actions=<<list-grid-draggable-drop-actions>>
-									tag="div"
-									class="visualization-dashboard-layout-gauge-item-container"
-									style.grid-column=`span ${[{!!grid-column-span}]}$`
-									style.grid-row=`span ${[{!!grid-row-span}]}$`
-									enable=<<tv-enable-drag-and-drop>>
-								>
-									<<list-item>>
-								</$droppable>
-							</$list>
-						</$set>
-					</$set>
+					<$let 
+						currentDateWeekOffset={{{ [<currentWeekIndexTiddler>get[text]else[0]] }}}
+						currentDate={{{ [weekstart<currentDateWeekOffset>addweekday[]] }}}
+						weekStartDate={{{ [weekstart<currentDateWeekOffset>,<currentDay>] }}}
+						weekEndDate={{{ [weekend<currentDateWeekOffset>,<currentDay>] }}}
+					>
+						<$list filter="[all[shadows+tiddlers]tag[$:/Tags/VisualizationDashboard/Gauge]!is[draft]]">
+							<$droppable
+								actions=<<list-grid-draggable-drop-actions>>
+								tag="div"
+								class="visualization-dashboard-layout-gauge-item-container"
+								style.grid-column=`span ${[{!!grid-column-span}]}$`
+								style.grid-row=`span ${[{!!grid-row-span}]}$`
+								enable=<<tv-enable-drag-and-drop>>
+							>
+								<<list-item>>
+							</$droppable>
+						</$list>
+					</$let>
 				</div>
 			</main>
 		</$messagecatcher>
 	</$navigator>
+</div>
 </div>

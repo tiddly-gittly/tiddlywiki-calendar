@@ -6,6 +6,6 @@
   "plugin-type": "plugin",
   "parent-plugin": "$:/plugins/linonetwo/tw-calendar",
   "dependents": "$:/plugins/Gk0Wk/echarts $:/plugins/linonetwo/in-tagtree-of $:/plugins/linonetwo/date-filters",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "list": "readme config tree"
 }

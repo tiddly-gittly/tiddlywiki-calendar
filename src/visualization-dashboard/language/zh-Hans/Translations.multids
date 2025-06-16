@@ -9,6 +9,7 @@ VisualizationDashboardLayout/Description: 可视化大屏集中展示统计日�
 VisualizationDashboardLayout/Exit: 退出并返回默认布局
 VisualizationDashboardLayout/ExistingGaugesCount: 已有仪表数
 PrevWeek: 上一周
+Now: 现在
 NextWeek: 下一周
 Modal/CreateGaugeModal/Button/Open/Caption: 创建仪表
 Modal/CreateGaugeModal/Button/Cancel/Caption: 取消

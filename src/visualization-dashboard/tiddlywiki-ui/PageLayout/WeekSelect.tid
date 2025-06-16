@@ -20,6 +20,15 @@ title: $:/plugins/linonetwo/visualization-dashboard/ViewTemplate/WeekJournalSele
     />
   </$button>
 
+  <$button>
+    <<lingo Now>>
+    <$action-createtiddler
+      $basetitle=<<currentWeekIndexTiddler>>
+      $overwrite="yes"
+      text="0"
+    />
+  </$button>
+
   <<week-start-this-week>><$text text=" - " /><<week-end-this-week>>
 
   <$button>
