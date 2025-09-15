@@ -20,7 +20,9 @@ Modal/CreateEvent/Label/Caption: 标题
 Modal/CreateEvent/Label/Text: 内容
 Modal/CreateEvent/Label/Cancel: 取消
 Modal/CreateEvent/Label/Create: 创建
-EventsCalendar/Sidebar/EmptyMessage: 暂无侧边栏条目！你可以添加带有 `$:/tags/EventCalendarSideBarSegment` 标签的条目，让它出现在这里（或安装有这样条目的社区插件）。条目上可以这样添加可拖拽的内容：`<$draggable data-event='{ "duration": "01:00" }' data-tags="标签">`
+EventsCalendar/Sidebar/HelpMessage: 你可以添加带有 `$:/tags/EventCalendarSideBarSegment` 标签的条目，让它出现在这里（或安装有这样条目的社区插件）。条目上可以这样添加可拖拽的内容：`<$draggable data-event='{ "duration": "01:00" }' data-tags="标签">`。 `data-event` 属性可以设置拖拽创建的事件的持续时间等信息，`data-tags` 属性可以自动为创建的事件添加标签。
+EventsCalendar/Sidebar/HelpMessageCreateButton: 点击创建一个侧边栏条目
+EventsCalendar/Sidebar/ExampleNewTiddlerContent: `<$draggable data-event='{ "duration": "02:00" }' data-tags="标签1 标签2">`* 拖动我到日历以创建一个持续2小时并带有「标签1」和「标签2」标签的新事件`</$draggable>`
 FrequentlyUsedTags/Caption: 常用标签
 FrequentlyUsedTags/Description: 添加要显示在创建事件条目弹出窗口上的标签，以便您可以点击它们快速将标签添加到新条目中。标签可以有 `caption` 字段作为显示名称。如果这里的标签形成标签树，它们将显示为树状结构。
 Prefix/Caption: 前缀

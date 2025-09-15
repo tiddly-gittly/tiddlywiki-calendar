@@ -20,7 +20,9 @@ Modal/CreateEvent/Label/Caption: Caption
 Modal/CreateEvent/Label/Text: Text
 Modal/CreateEvent/Label/Cancel: Cancel
 Modal/CreateEvent/Label/Create: Create
-EventsCalendar/Sidebar/EmptyMessage: There are no sidebar tiddlers available at this time! You can add tiddlers with tag `$:/tags/EventCalendarSideBarSegment` to appear here (or install community plugins that have such tiddlers). Draggable content can be added to the entry like this: `<$draggable data-event='{ "duration": "01:00" }' data-tags="Tags">`
+EventsCalendar/Sidebar/HelpMessage: You can add tiddlers with tag `$:/tags/EventCalendarSideBarSegment` to appear here (or install community plugins that have such tiddlers). Draggable content can be added to the entry like this: `<$draggable data-event='{ "duration": "01:00" }' data-tags="Tags">`. The `data-event` attribute can set information like duration for the event created by dragging, and the `data-tags` attribute can automatically add tags to the created event.
+EventsCalendar/Sidebar/HelpMessageCreateButton: Click to create a calendar sidebar tiddler
+EventsCalendar/Sidebar/ExampleNewTiddlerContent: `<$draggable data-event='{ "duration": "02:00" }' data-tags=" Tag1 Tag2">`* Drag me to calendar to create a new event with 2 hour duration and tags "Tag1" and "Tag2"`</$draggable>`
 FrequentlyUsedTags/Caption: Frequently Used Tags
 FrequentlyUsedTags/Description: Add tags to be displayed on the create event tiddler popup, so you can click on them to add tag to new tiddler quickly. Tags can have `caption` field as displayed name. And if tags here form a tag tree, they will be displayed as a tree.
 Prefix/Caption: Prefix
