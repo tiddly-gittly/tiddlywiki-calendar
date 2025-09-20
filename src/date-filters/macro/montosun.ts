@@ -1,6 +1,4 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable unicorn/no-null */
-/* eslint-disable @typescript-eslint/strict-boolean-expressions */
 
 /**
  * Get the `['一', '二', '三', '四', '五', '六', '日']` of the week.
