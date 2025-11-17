@@ -54,6 +54,12 @@ caption: <<lingo "Name" "$:/plugins/linonetwo/tw-calendar/language/">>
 	<option value='timeGridThreeDay'><<lingo "Appearance/WideScreenDefaultView/ThreeDay">></option>
 	<option value='timeGridWeek'><<lingo "Appearance/WideScreenDefaultView/Week">></option>
 </$select>
+;<<lingo "Appearance/MobileEnabledButtons">>: <<lingo "Appearance/MobileEnabledButtonsDescription">>
+:<$checkbox tiddler="$:/plugins/linonetwo/tw-calendar/settings/mobileEnabledButtons" listField="list" checked="dayGridMonth"> <<lingo "Appearance/MobileEnabledButtons/Month">></$checkbox>
+:<$checkbox tiddler="$:/plugins/linonetwo/tw-calendar/settings/mobileEnabledButtons" listField="list" checked="timeGridWeek"> <<lingo "Appearance/MobileEnabledButtons/Week">></$checkbox>
+:<$checkbox tiddler="$:/plugins/linonetwo/tw-calendar/settings/mobileEnabledButtons" listField="list" checked="timeGridThreeDay"> <<lingo "Appearance/MobileEnabledButtons/ThreeDay">></$checkbox>
+:<$checkbox tiddler="$:/plugins/linonetwo/tw-calendar/settings/mobileEnabledButtons" listField="list" checked="timeGridDay"> <<lingo "Appearance/MobileEnabledButtons/Day">></$checkbox>
+:<$checkbox tiddler="$:/plugins/linonetwo/tw-calendar/settings/mobileEnabledButtons" listField="list" checked="listWeek"> <<lingo "Appearance/MobileEnabledButtons/List">></$checkbox>
 ;<<lingo "Appearance/FirstDay">>: <<lingo "Appearance/FirstDayDescription">>
 :<$select tiddler='$:/plugins/linonetwo/tw-calendar/settings/firstDay'>
 	<option value='0'><<lingo "DaysOfWeek/Sunday">></option>

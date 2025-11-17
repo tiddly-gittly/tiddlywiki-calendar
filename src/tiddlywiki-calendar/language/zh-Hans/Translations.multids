@@ -40,6 +40,13 @@ Appearance/WideScreenDefaultView: 大屏默认视图
 Appearance/WideScreenDefaultViewDescription: 在桌面宽屏上，默认使用更宽的一周视图还是方便对照左侧时间的三日视图
 Appearance/WideScreenDefaultView/ThreeDay: 三日视图
 Appearance/WideScreenDefaultView/Week: 一周视图
+Appearance/MobileEnabledButtons: 移动端显示的按钮
+Appearance/MobileEnabledButtonsDescription: 移动端屏幕小，显示按钮过多容易出现UI拥挤，但如果你很需要这些按钮，可以让它们显示出来。默认只显示"三日"、"日"和"列表"视图。
+Appearance/MobileEnabledButtons/Month: 月
+Appearance/MobileEnabledButtons/Week: 周
+Appearance/MobileEnabledButtons/ThreeDay: 三日
+Appearance/MobileEnabledButtons/Day: 日
+Appearance/MobileEnabledButtons/List: 列表
 DaysOfWeek/Sunday: 星期日
 DaysOfWeek/Monday: 星期一
 DaysOfWeek/Tuesday: 星期二

@@ -40,6 +40,13 @@ Appearance/WideScreenDefaultView: Wide Screen Default View
 Appearance/WideScreenDefaultViewDescription: On desktop wide screens, use the wider week view or the three-day view that is convenient for comparing the left time.
 Appearance/WideScreenDefaultView/ThreeDay: Three Day View
 Appearance/WideScreenDefaultView/Week: Week View
+Appearance/MobileEnabledButtons: Buttons Shown on Mobile
+Appearance/MobileEnabledButtonsDescription: Mobile screens are small, and displaying too many buttons can cause UI crowding. However, if you need these buttons, you can enable them here. By default, only "Three Day", "Day", and "List" views are shown.
+Appearance/MobileEnabledButtons/Month: month
+Appearance/MobileEnabledButtons/Week: week
+Appearance/MobileEnabledButtons/ThreeDay: 3 day
+Appearance/MobileEnabledButtons/Day: day
+Appearance/MobileEnabledButtons/List: list
 DaysOfWeek/Sunday: Sunday
 DaysOfWeek/Monday: Monday
 DaysOfWeek/Tuesday: Tuesday

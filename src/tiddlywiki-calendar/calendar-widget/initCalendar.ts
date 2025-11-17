@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/prefer-nullish-coalescing */
-/* eslint-disable @typescript-eslint/strict-boolean-expressions */
 import 'requestidlecallback-polyfill';
 import adaptivePlugin from '@fullcalendar/adaptive';
 import { Calendar, type CalendarOptions } from '@fullcalendar/core';
@@ -133,6 +131,13 @@ function getToolbarSettings(context: IContext): CalendarOptions {
       footerToolbar: false,
     };
   }
+
+  // Get mobile enabled buttons from settings
+  const mobileEnabledButtonsList = $tw.wiki.getTiddlerList('$:/plugins/linonetwo/tw-calendar/settings/mobileEnabledButtons');
+  const mobileEnabledButtons = mobileEnabledButtonsList && mobileEnabledButtonsList.length > 0
+    ? mobileEnabledButtonsList.join(',')
+    : 'timeGridThreeDay,timeGridDay,listWeek'; // default buttons
+
   return {
     customButtons: getCustomButtons(context),
     headerToolbar: getIsSmallScreen() || context.hideToolbar === true
@@ -146,7 +151,7 @@ function getToolbarSettings(context: IContext): CalendarOptions {
     footerToolbar: getIsSmallScreen() && context.hideToolbar !== true
       ? {
         right: `toggleSidebar today,prev,next`,
-        left: `timeGridThreeDay,timeGridDay,listWeek${calendarLayout ? ' backToStandardLayout' : ''}`,
+        left: `${mobileEnabledButtons}${calendarLayout ? ' backToStandardLayout' : ''}`,
       }
       : false,
   };
