@@ -47,7 +47,7 @@
     "moment-timezone": "^0.6.0",
     "npm-check-updates": "^19.1.2",
     "requestidlecallback-polyfill": "^1.0.2",
-    "tiddlywiki": "^5.3.8",
+    "tiddlywiki": "github:TiddlyWiki/TiddlyWiki5#94aa37fe7e7031fe883166ca8fb7dc7bbeaf0ec7",
     "tiddlywiki-plugin-dev": "^0.5.3"
   },
   "devDependencies": {
