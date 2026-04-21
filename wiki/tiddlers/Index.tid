@@ -13,6 +13,11 @@ type: text/vnd.tiddlywiki
 
 [img width=300px [demosite.png]]
 
-!!! [[VisualizationDash|VisualizationDashboard]]
+!!! [[VisualizationDashboard]]
 
 [img width=300px [visualization-dashboard.png]]
+
+!!! [[TagTreePickerMacro|$:/plugins/linonetwo/tag-tree-picker-macro/readme]]
+
+[img width=300px [tag-tree-picker-macro1.png]]
+[img width=300px [tag-tree-picker-macro2.png]]
