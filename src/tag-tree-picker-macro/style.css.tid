@@ -1,0 +1,9 @@
+creator: LinOnetwo
+tags: $:/tags/Stylesheet
+title: $:/plugins/linonetwo/tw-calendar/style.css
+type: text/vnd.tiddlywiki
+
+.linonetwo-tag-tree-picker-macro button {
+  border: 0;
+  cursor: pointer;
+}

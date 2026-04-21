@@ -1,0 +1,77 @@
+title: $:/plugins/linonetwo/tag-tree-picker-macro/readme
+type: text/vnd.tiddlywiki
+
+!! Macro usage
+
+This traditional tag list will show tags in a line:
+
+```tw5
+<$vars currentTiddler="$:/plugins/linonetwo/tw-calendar/settings/frequently-used-tags" tagField="text">
+	{{||$:/core/ui/EditTemplate/tags}}
+</$vars>
+```
+
+But this plugin provides a `tag-tree-picker` macro to show tags in a tree:
+
+```tw5
+<$transclude
+	$variable="tag-tree-picker"
+	tags={{TiddlerWithListOfTags}}
+/>
+```
+
+`tags` parameter receive a list of tiddler name, if those tiddlers have tree relationship, show then as tree.
+
+To make click-on-it work, you need to define `tag-tree-button-action` macro in the context, this is work as a `onClick` callback action:
+
+```tw5
+<!-- Use this to make tags work as link -->
+\define tag-tree-button-action(tagName)
+<$action-navigate $to="$tagName$" />
+\end
+
+<!-- Use this to make it work as normal tag picker, using targetTiddler variable. -->
+\define tag-tree-button-action(tagName)
+<$action-listops $tags="[[$tagName$]]" $tiddler="""$(targetTiddler)$""" />
+\end
+
+<!-- Same tag picker as above, but add tags to Index tiddler. -->
+\define tag-tree-button-action(tagName)
+<$action-listops $tags="[[$tagName$]]" $tiddler="Index" />
+\end
+```
+
+Note that tags in this tree are buttons, so action is not "add tag to currentTiddler" by default, you need to define the onClick action you want.
+
+!! Example
+
+A tag picker
+
+```tw5
+\define tag-tree-button-action(tagName)
+<$action-listops $tags="[[$tagName$]]" $tiddler="""$(targetTiddler)$""" />
+\end
+
+\define empty-list-help-text()
+<p class="tw-calendar-empty-list-help-text">
+You can goto <a href="/#%24%3A%2Fplugins%2Flinonetwo%2Ftw-calendar%2Ftiddlywiki-ui%2FControlPanel%2FSettings">Plugin Setting</a> in control panel or plugin page, add frequently used tags here.
+</p>
+\end
+
+<div class="tw-calendar-frequently-used-tags">
+  <$let targetTiddler=<<currentTiddler>> >
+    <$list filter="[list[$:/plugins/linonetwo/tw-calendar/settings/frequently-used-tags!!text]first[]then[yes]]" storyview="pop" emptyMessage=<<empty-list-help-text>>>
+      <div class="tc-edit-tags">
+        <$transclude
+          $variable="input-only-tag-tree"
+          tags={{$:/plugins/linonetwo/tw-calendar/settings/frequently-used-tags}}
+        />
+      </div>
+    </$list>
+  </$let>
+</div>
+```
+
+[img[Screenshot1.png]]
+
+[img[Screenshot2.png]]
