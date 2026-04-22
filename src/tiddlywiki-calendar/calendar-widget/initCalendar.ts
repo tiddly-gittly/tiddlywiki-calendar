@@ -7,6 +7,7 @@ import interactionPlugin from '@fullcalendar/interaction';
 import listPlugin from '@fullcalendar/list';
 import momentTimezonePlugin from '@fullcalendar/moment-timezone';
 import timeGridPlugin from '@fullcalendar/timegrid';
+import rrulePlugin from '@fullcalendar/rrule';
 import moment from 'moment-timezone';
 import type { Widget } from 'tiddlywiki';
 import { getInCalendarLayout, getIsSearchMode, getIsSmallScreen, isMobile, tiddlerEventSourceID } from './constants';
@@ -77,7 +78,7 @@ export function getSettings(context: IContext): CalendarOptions {
     locales: [zhLocale],
     firstDay: Number($tw.wiki.getTiddlerText('$:/plugins/linonetwo/tw-calendar/settings/firstDay') || '1') || 1,
     eventSources: [{ events: searchMode ? getEventByFilter(context) : getEventOnFullCalendarViewChange(context), id: tiddlerEventSourceID }],
-    plugins: [momentTimezonePlugin, dayGridPlugin, timeGridPlugin, listPlugin, adaptivePlugin, interactionPlugin],
+    plugins: [momentTimezonePlugin, dayGridPlugin, timeGridPlugin, listPlugin, adaptivePlugin, interactionPlugin, rrulePlugin],
     views: getCustomViews(locale),
     initialView: context.initialView ??
       (getIsSmallScreen() ? 'timeGridThreeDay' : ($tw.wiki.getTiddlerText('$:/plugins/linonetwo/tw-calendar/settings/wideScreenDefaultView') || 'timeGridWeek')),

@@ -5,6 +5,7 @@ import type { EventInput, EventSourceFunc, EventSourceFuncArg } from '@fullcalen
 import type { ITiddlerFields, Tiddler } from 'tiddlywiki';
 import { draftTiddlerTitle } from './constants';
 import type { IContext } from './initCalendar';
+import { allDayDateLength, isAllDaySpan, normalizeRRule, parseTwDate, toDurationInput } from './rrule';
 
 export enum CalendarEventType {
   /** Real event created by the calendar */
@@ -15,7 +16,6 @@ export enum CalendarEventType {
   CustomField,
 }
 const normalTiddlerEventLengthInHour = 1;
-const allDayDateLength = 60 * 60 * 24 * 1000;
 
 /**
  * Get event based on filter and date range of current calendar view.
@@ -26,12 +26,16 @@ export const getEventOnFullCalendarViewChange = (context: IContext): EventSource
   const sourceFilter = context?.filter ? `${context.filter} [[${draftTiddlerTitle}]]` : `[all[tiddlers]!is[system]] [[${draftTiddlerTitle}]]`;
   const getFilterOnField = (field: string) => `${sourceFilter}:filter[get[${field}]compare:date:gteq[${startTwString}]compare:date:lteq[${endTwString}]]`;
   const fields = context.startDateFields ?? ['created', 'modified', 'startDate'];
-  const titles = fields
+  const periodTitles = fields
     .map(getFilterOnField)
     .flatMap((filter) => $tw.wiki.filterTiddlers(filter))
     .filter(function onlyUnique(value, index, array) {
       return array.indexOf(value) === index;
     });
+  const recurringTitles = $tw.wiki.filterTiddlers(`${sourceFilter}:filter[has[rrule]]`);
+  const titles = [...periodTitles, ...recurringTitles].filter(function onlyUnique(value, index, array) {
+    return array.indexOf(value) === index;
+  });
   const eventsOnPeriod = getEvents(titles, context);
   return eventsOnPeriod;
 };
@@ -62,14 +66,9 @@ export function getEvents(tiddlerTitles: string[], context: IContext): EventInpu
 const contrastColour: (colour: string, fallbackTarget: string, colourFore: string, colourBack: string) => number[] | string =
   // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
   require('$:/core/modules/macros/contrastcolour.js').run;
-const parseDate = (twDate: string) => {
-  const result = $tw.utils.parseDate(twDate);
-  if (result === null) throw new Error('null result from parseDate');
-  return result;
-};
 
 function mapTiddlerFieldsToFullCalendarEventObject(fields: ITiddlerFields, context: IContext, palette: Record<string, string>): EventInput[] {
-  const { title, startDate, endDate, created, modified, color, tags } = fields;
+  const { title, startDate, endDate, created, modified, color, tags, rrule } = fields;
   const backgroundColor = color ?? tags?.map((tagName) => $tw.wiki.getTiddler(tagName)?.fields?.color).find(Boolean);
   let textColor: string | undefined;
   if (backgroundColor !== undefined) {
@@ -88,6 +87,24 @@ function mapTiddlerFieldsToFullCalendarEventObject(fields: ITiddlerFields, conte
     backgroundColor,
     textColor,
   };
+  if (typeof rrule === 'string' && rrule.trim() !== '') {
+    const recurringStart = typeof startDate === 'string' ? parseTwDate(startDate) : undefined;
+    const recurringEnd = typeof endDate === 'string' ? parseTwDate(endDate) : undefined;
+    const allDay = isAllDaySpan(recurringStart, recurringEnd);
+    return [
+      {
+        ...options,
+        startEditable: false,
+        durationEditable: false,
+        allDay,
+        rrule: normalizeRRule(rrule, recurringStart, allDay),
+        ...(recurringStart !== undefined && recurringEnd !== undefined ? { duration: toDurationInput(recurringStart, recurringEnd) } : {}),
+        extendedProps: {
+          type: CalendarEventType.Event,
+        },
+      },
+    ];
+  }
   /**
    * Use user defined fields for top priority, and hide all other type of events, so only events that user want to see will show. User can add default fields if they want to see the full result.
    */
@@ -99,7 +116,7 @@ function mapTiddlerFieldsToFullCalendarEventObject(fields: ITiddlerFields, conte
         // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions, array-callback-return
         if (!startDateFieldValue) return;
         try {
-          startDateFromField = parseDate(startDateFieldValue);
+          startDateFromField = parseTwDate(startDateFieldValue);
         } catch (error) {
           throw new Error(
             `field ${fieldName} in tiddler ${title} is not a valid date format: ${startDateFieldValue} , causing ${(error as Error).message} ${(error as Error).stack ?? ''}`,
@@ -113,7 +130,7 @@ function mapTiddlerFieldsToFullCalendarEventObject(fields: ITiddlerFields, conte
           endDateFromFieldValue = fields[correspondingEndFieldName] as string | undefined;
           if (endDateFromFieldValue !== undefined) {
             try {
-              endDateFromField = parseDate(endDateFromFieldValue);
+              endDateFromField = parseTwDate(endDateFromFieldValue);
             } catch (error) {
               throw new Error(
                 `field ${correspondingEndFieldName} in tiddler ${title} is not a valid date format: ${endDateFromFieldValue} , causing ${(error as Error).message} ${
@@ -150,8 +167,8 @@ function mapTiddlerFieldsToFullCalendarEventObject(fields: ITiddlerFields, conte
    * If it has startDate and endDate, means this is an event created by the calendar
    */
   if (typeof startDate === 'string' && typeof endDate === 'string') {
-    const start = parseDate(startDate);
-    const end = parseDate(endDate);
+    const start = parseTwDate(startDate);
+    const end = parseTwDate(endDate);
     return [
       {
         ...options,

@@ -18,8 +18,15 @@ Modal/CreateEvent/Caption: Create Event
 Modal/CreateEvent/Label/Title: Title
 Modal/CreateEvent/Label/Caption: Caption
 Modal/CreateEvent/Label/Text: Text
+Modal/CreateEvent/Label/Recurrence: Recurrence Rule
+Modal/CreateEvent/Label/RecurrenceDescription: Enter the RRULE body only, for example FREQ=MONTHLY;INTERVAL=1. DTSTART will be inferred from the event start time.
 Modal/CreateEvent/Label/Cancel: Cancel
 Modal/CreateEvent/Label/Create: Create
+Modal/CreateEvent/Recurrence/None: No Repeat
+Modal/CreateEvent/Recurrence/Daily: Daily
+Modal/CreateEvent/Recurrence/Weekly: Weekly
+Modal/CreateEvent/Recurrence/Monthly: Monthly
+Modal/CreateEvent/Recurrence/Yearly: Yearly
 EventsCalendar/Sidebar/HelpMessage: You can add tiddlers with tag `$:/tags/EventCalendarSideBarSegment` to appear here (or install community plugins that have such tiddlers). Draggable content can be added to the entry like this: `<$draggable data-event='{ "duration": "01:00" }' data-tags="Tags">`. The `data-event` attribute can set information like duration for the event created by dragging, and the `data-tags` attribute can automatically add tags to the created event.
 EventsCalendar/Sidebar/HelpMessageCreateButton: Click to create a calendar sidebar tiddler
 EventsCalendar/Sidebar/ExampleNewTiddlerContent: `<$draggable data-event='{ "duration": "02:00" }' data-tags=" Tag1 Tag2">`* Drag me to calendar to create a new event with 2 hour duration and tags "Tag1" and "Tag2"`</$draggable>`

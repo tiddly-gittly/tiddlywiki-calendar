@@ -9,6 +9,7 @@ title: $:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/popup/Crea
   draft.title=""
   startDate=""
   endDate=""
+  rrule=""
 />
 <$action-setfield
   $tiddler="$:/state/Calendar/PageLayout/create-tiddler-caption"

@@ -28,7 +28,11 @@ Modal/CreateGaugeModal/Description/Description: Describe the gauge in detail.
 Modal/CreateGaugeModal/Enabled/Caption: Enabled
 Modal/CreateGaugeModal/Enabled/Description: Toggle to enable or disable the gauge.
 Modal/CreateGaugeModal/targetTiddler/Caption: Target tiddler.
-Modal/CreateGaugeModal/targetTiddler/Description: Tiddler used by the visualization, can be a time reference point, or may be a tag name, depending on specific logic of vis template
+Modal/CreateGaugeModal/targetTiddler/Description: Tiddlers used by the visualization. For recurring trackers, the list is pre-filtered to recurring calendar entries.
+Modal/CreateGaugeModal/targetTiddler/AvailableCaption: Available tiddlers
+Modal/CreateGaugeModal/targetTiddler/Placeholder: Select a tiddler
+Modal/CreateGaugeModal/targetTiddler/AddButton: Add
+Modal/CreateGaugeModal/targetTiddler/SelectedCaption: Selected tiddlers
 Modal/CreateGaugeModal/targetValue/Caption: Target value.
 Modal/CreateGaugeModal/targetValue/Description: value used by the visualization logic, typically as denominator of a percentage, e.g. total hours, subject to the specific logic of the vis template
 Modal/CreateGaugeModal/color/Caption: Color
@@ -44,3 +48,11 @@ Tag/GaugeTemplate/Caption: Gauge template tag
 Tag/GaugeTemplate/Description: The tiddler will be listed in the list of templates in the "Quick create new gauge from templates" modal for the user to select and be used to copy into a new gauge.
 Tag/GaugeTemplateGroup/Caption: Gauge template group
 Tag/GaugeTemplateGroup/Description: Grouping in template list
+GaugeTemplate/SubscriptionTracker/Caption: Recurring Event Progress
+GaugeTemplate/SubscriptionTracker/Description: Show recurring calendar entries as ECharts bars, with progress to the next due date.
+GaugeTemplate/SubscriptionTracker/ChartTitle: Recurring Event Progress
+GaugeTemplate/SubscriptionTracker/Empty: No recurring calendar entries to display
+GaugeTemplate/SubscriptionTracker/Tooltip/NextDue: Next due
+GaugeTemplate/SubscriptionTracker/Tooltip/NoNextDue: No upcoming occurrence
+GaugeTemplate/SubscriptionTracker/Tooltip/RemainingDays: Days remaining
+GaugeTemplate/SubscriptionTracker/Tooltip/Progress: Current cycle

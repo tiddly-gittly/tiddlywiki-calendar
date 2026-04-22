@@ -1,0 +1,104 @@
+title: $:/plugins/linonetwo/visualization-dashboard/tiddlywiki-ui/Template/SubscriptionTracker
+tags: $:/Tags/VisualizationDashboard/GaugeTemplate $:/Tags/VisualizationDashboard/BarChart
+caption: <<lingo GaugeTemplate/SubscriptionTracker/Caption $:/plugins/linonetwo/visualization-dashboard/language/>>
+description: <<lingo GaugeTemplate/SubscriptionTracker/Description $:/plugins/linonetwo/visualization-dashboard/language/>>
+targetTiddler: 
+targetTiddlerFilter: [all[tiddlers]field:calendarEntry[yes]has[rrule]]
+color: #66ccff
+
+\define lingo-base() $:/plugins/linonetwo/visualization-dashboard/language/
+\procedure chartTitle() <<lingo GaugeTemplate/SubscriptionTracker/ChartTitle>>
+\procedure emptyText() <<lingo GaugeTemplate/SubscriptionTracker/Empty>>
+\procedure nextDueLabel() <<lingo GaugeTemplate/SubscriptionTracker/Tooltip/NextDue>>
+\procedure noNextDueLabel() <<lingo GaugeTemplate/SubscriptionTracker/Tooltip/NoNextDue>>
+\procedure remainingDaysLabel() <<lingo GaugeTemplate/SubscriptionTracker/Tooltip/RemainingDays>>
+\procedure progressLabel() <<lingo GaugeTemplate/SubscriptionTracker/Tooltip/Progress>>
+\procedure onBarDoubleClick()
+function(params, parentWidget) {
+  if (!params || !params.data || !params.data.tiddlerTitle) return;
+  $tw.wiki.addTiddler({ title: '$:/layout', text: '' });
+  new $tw.Story().navigateTiddler(params.data.tiddlerTitle);
+}
+\end
+
+<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;">
+  <$wikify name="trackerData" text=<<subscriptiontrackerdata>>>
+    <$echarts dblclick=<<onBarDoubleClick>> $text=```
+      var tracker = $(trackerData)$;
+      var items = tracker.items || [];
+      option = {
+        title: {
+          text: '$(chartTitle)$',
+          left: 'center',
+        },
+        tooltip: {
+          trigger: 'item',
+          formatter: function(params) {
+            var item = items[params.dataIndex];
+            if (!item) return '';
+            var dueText = item.nextDue ? '$(nextDueLabel)$: ' + item.nextDue + '<br/>' : '$(noNextDueLabel)$<br/>';
+            var remainingText = Number.isFinite(item.remainingDays) ? '$(remainingDaysLabel)$: ' + item.remainingDays + '<br/>' : '';
+            return item.label + '<br/>' + dueText + remainingText + '$(progressLabel)$: ' + item.progress + '%';
+          }
+        },
+        grid: {
+          left: '8%',
+          right: '4%',
+          bottom: '8%',
+          top: '24%',
+          containLabel: true
+        },
+        xAxis: {
+          type: 'category',
+          position: 'top',
+          data: items.map(function(item) {
+            return item.label;
+          }),
+          axisLabel: {
+            interval: 0,
+            width: 100,
+            overflow: 'truncate'
+          }
+        },
+        yAxis: {
+          type: 'value',
+          max: 100,
+          axisLabel: {
+            formatter: '{value}%'
+          }
+        },
+        graphic: items.length > 0 ? [] : [{
+          type: 'text',
+          left: 'center',
+          top: 'middle',
+          style: {
+            text: '$(emptyText)$',
+            fill: '#888',
+            fontSize: 14,
+          }
+        }],
+        series: [
+          {
+            name: '周期进度 (%)',
+            type: 'bar',
+            data: items.map(function(item) {
+              return {
+                value: item.progress,
+                tiddlerTitle: item.title,
+                itemStyle: {
+                  color: item.color || '#66ccff',
+                  borderRadius: [0, 5, 5, 0]
+                }
+              };
+            }),
+            label: {
+              show: true,
+              position: 'top',
+              formatter: '{c}%'
+            }
+          }
+        ]
+      };
+    ```/>
+  </$wikify>
+</div>

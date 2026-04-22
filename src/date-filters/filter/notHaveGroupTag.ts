@@ -8,7 +8,7 @@ export const notHaveGroupTag = ((source, _operator): string[] => {
   if (!gaugeMetaTag || !gaugeTemplateGroupMetaTag) return results;
   source(function(tiddler, title) {
     if (tiddler) {
-      const tags = tiddler.fields.tags.filter(tag => tag !== gaugeMetaTag);
+      const tags = (tiddler.fields.tags ?? []).filter(tag => tag !== gaugeMetaTag);
       const tagsOfTags = tags.flatMap(tag => $tw.wiki.getTiddler(tag)?.fields?.tags ?? []);
       // if don't have other tag, or every tag is not template group tag
       if (tagsOfTags.length === 0 || !tagsOfTags.includes(gaugeTemplateGroupMetaTag)) {
