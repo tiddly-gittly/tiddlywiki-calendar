@@ -33,6 +33,8 @@ Modal/CreateGaugeModal/targetTiddler/AvailableCaption: 可选条目
 Modal/CreateGaugeModal/targetTiddler/Placeholder: 选择一个条目
 Modal/CreateGaugeModal/targetTiddler/AddButton: 添加
 Modal/CreateGaugeModal/targetTiddler/SelectedCaption: 已选条目
+Modal/CreateGaugeModal/targetTiddlerFilter/Caption: 筛选过滤器
+Modal/CreateGaugeModal/targetTiddlerFilter/Description: TiddlyWiki 过滤表达式，用于限制目标条目的候选范围。留空则展示所有条目。
 Modal/CreateGaugeModal/targetValue/Caption: 目标值
 Modal/CreateGaugeModal/targetValue/Description: 可视化逻辑所用的值，一般作为百分比的分母，例如总时长，以具体逻辑为准
 Modal/CreateGaugeModal/color/Caption: 颜色

@@ -33,6 +33,8 @@ Modal/CreateGaugeModal/targetTiddler/AvailableCaption: Available tiddlers
 Modal/CreateGaugeModal/targetTiddler/Placeholder: Select a tiddler
 Modal/CreateGaugeModal/targetTiddler/AddButton: Add
 Modal/CreateGaugeModal/targetTiddler/SelectedCaption: Selected tiddlers
+Modal/CreateGaugeModal/targetTiddlerFilter/Caption: Filter expression
+Modal/CreateGaugeModal/targetTiddlerFilter/Description: TiddlyWiki filter expression to narrow down candidate tiddlers. Leave empty to show all tiddlers.
 Modal/CreateGaugeModal/targetValue/Caption: Target value.
 Modal/CreateGaugeModal/targetValue/Description: value used by the visualization logic, typically as denominator of a percentage, e.g. total hours, subject to the specific logic of the vis template
 Modal/CreateGaugeModal/color/Caption: Color

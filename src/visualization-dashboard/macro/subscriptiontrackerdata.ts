@@ -64,11 +64,15 @@ exports.params = [];
 
 exports.run = function run(): string {
   const gaugeTitle = this.getVariable('currentTiddler');
-  const selectedTitlesText = gaugeTitle ? $tw.wiki.getTiddler(gaugeTitle)?.fields.targetTiddler : undefined;
+  const gaugeFields = gaugeTitle ? $tw.wiki.getTiddler(gaugeTitle)?.fields : undefined;
+  const selectedTitlesText = gaugeFields?.targetTiddler;
   const selectedTitles = typeof selectedTitlesText === 'string'
     ? ($tw.wiki.tiddlerExists(selectedTitlesText) ? [selectedTitlesText] : $tw.utils.parseStringArray(selectedTitlesText))
     : [];
-  const titles = selectedTitles.length > 0 ? selectedTitles : $tw.wiki.filterTiddlers('[all[tiddlers]field:calendarEntry[yes]has[rrule]]');
+  const fallbackFilter = typeof gaugeFields?.targetTiddlerFilter === 'string' && gaugeFields.targetTiddlerFilter.trim() !== ''
+    ? gaugeFields.targetTiddlerFilter
+    : '[all[tiddlers]field:calendarEntry[yes]has[rrule]]';
+  const titles = selectedTitles.length > 0 ? selectedTitles : $tw.wiki.filterTiddlers(fallbackFilter);
   const now = new Date();
   const items = titles
     .map((title) => buildTrackerItem(title, now))

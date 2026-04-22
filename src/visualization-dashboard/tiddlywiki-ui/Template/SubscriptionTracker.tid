@@ -22,83 +22,94 @@ function(params, parentWidget) {
 \end
 
 <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;">
-  <$wikify name="trackerData" text=<<subscriptiontrackerdata>>>
-    <$echarts dblclick=<<onBarDoubleClick>> $text=```
-      var tracker = $(trackerData)$;
-      var items = tracker.items || [];
-      option = {
-        title: {
-          text: '$(chartTitle)$',
-          left: 'center',
-        },
-        tooltip: {
-          trigger: 'item',
-          formatter: function(params) {
-            var item = items[params.dataIndex];
-            if (!item) return '';
-            var dueText = item.nextDue ? '$(nextDueLabel)$: ' + item.nextDue + '<br/>' : '$(noNextDueLabel)$<br/>';
-            var remainingText = Number.isFinite(item.remainingDays) ? '$(remainingDaysLabel)$: ' + item.remainingDays + '<br/>' : '';
-            return item.label + '<br/>' + dueText + remainingText + '$(progressLabel)$: ' + item.progress + '%';
-          }
-        },
-        grid: {
-          left: '8%',
-          right: '4%',
-          bottom: '8%',
-          top: '24%',
-          containLabel: true
-        },
-        xAxis: {
-          type: 'category',
-          position: 'top',
+<$wikify name="chartTitleText" text=<<chartTitle>>>
+<$wikify name="emptyTextText" text=<<emptyText>>>
+<$wikify name="nextDueLabelText" text=<<nextDueLabel>>>
+<$wikify name="noNextDueLabelText" text=<<noNextDueLabel>>>
+<$wikify name="remainingDaysLabelText" text=<<remainingDaysLabel>>>
+<$wikify name="progressLabelText" text=<<progressLabel>>>
+<$wikify name="trackerData" text=<<subscriptiontrackerdata>>>
+  <$echarts dblclick=<<onBarDoubleClick>> $text=```
+    var tracker = $(trackerData)$;
+    var items = tracker.items || [];
+    option = {
+      title: {
+        text: '$(chartTitleText)$',
+        left: 'center',
+      },
+      tooltip: {
+        trigger: 'item',
+        formatter: function(params) {
+          var item = items[params.dataIndex];
+          if (!item) return '';
+          var dueText = item.nextDue ? '$(nextDueLabelText)$: ' + item.nextDue + '<br/>' : '$(noNextDueLabelText)$<br/>';
+          var remainingText = Number.isFinite(item.remainingDays) ? '$(remainingDaysLabelText)$: ' + item.remainingDays + '<br/>' : '';
+          return item.label + '<br/>' + dueText + remainingText + '$(progressLabelText)$: ' + item.progress + '%';
+        }
+      },
+      grid: {
+        left: '2%',
+        right: '2%',
+        bottom: '2%',
+        top: '36px',
+        containLabel: true
+      },
+      xAxis: {
+        type: 'value',
+        max: 100,
+        show: false
+      },
+      yAxis: {
+        type: 'category',
+        data: items.map(function(item) { return item.label; }),
+        inverse: true,
+        axisLine: { show: false },
+        axisTick: { show: false },
+        axisLabel: {
+          width: 120,
+          overflow: 'truncate',
+          fontSize: 12
+        }
+      },
+      graphic: items.length > 0 ? [] : [{
+        type: 'text',
+        left: 'center',
+        top: 'middle',
+        style: {
+          text: '$(emptyTextText)$',
+          fill: '#888',
+          fontSize: 14,
+        }
+      }],
+      series: [
+        {
+          name: '$(progressLabel)$',
+          type: 'bar',
           data: items.map(function(item) {
-            return item.label;
+            return {
+              value: item.progress,
+              tiddlerTitle: item.title,
+              itemStyle: {
+                color: item.color || '#66ccff',
+                borderRadius: [0, 4, 4, 0]
+              }
+            };
           }),
-          axisLabel: {
-            interval: 0,
-            width: 100,
-            overflow: 'truncate'
-          }
-        },
-        yAxis: {
-          type: 'value',
-          max: 100,
-          axisLabel: {
-            formatter: '{value}%'
-          }
-        },
-        graphic: items.length > 0 ? [] : [{
-          type: 'text',
-          left: 'center',
-          top: 'middle',
-          style: {
-            text: '$(emptyText)$',
-            fill: '#888',
-            fontSize: 14,
-          }
-        }],
-        series: [
-          {
-            name: '周期进度 (%)',
-            type: 'bar',
-            data: items.map(function(item) {
-              return {
-                value: item.progress,
-                tiddlerTitle: item.title,
-                itemStyle: {
-                  color: item.color || '#66ccff',
-                  borderRadius: [0, 5, 5, 0]
-                }
-              };
-            }),
-            label: {
-              show: true,
-              position: 'top',
-              formatter: '{c}%'
-            }
-          }
-        ]
-      };
+          label: {
+            show: true,
+            position: 'right',
+            formatter: '{c}%'
+          },
+          barMaxWidth: 28
+        }
+      ]
+    };
     ```/>
   </$wikify>
+</$wikify>
+</$wikify>
+</$wikify>
+</$wikify>
+</$wikify>
+</$wikify>
 </div>
