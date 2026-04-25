@@ -58,3 +58,11 @@ GaugeTemplate/SubscriptionTracker/Tooltip/NextDue: 下次到期
 GaugeTemplate/SubscriptionTracker/Tooltip/NoNextDue: 没有下一次触发时间
 GaugeTemplate/SubscriptionTracker/Tooltip/RemainingDays: 剩余天数
 GaugeTemplate/SubscriptionTracker/Tooltip/Progress: 当前周期
+Command/AddDualTagGraph/Caption: ➕ 创建双标签关系图谱（临时/永久）
+Command/AddDualTagGraph/Description: 创建一个显示两个标签交集的知识图谱大屏项
+Command/AddDualTagGraph/startTiddler/Caption: 起点条目/标签
+Command/AddDualTagGraph/startTiddler/Description: 输入起点的条目名或标签名
+Command/AddDualTagGraph/endTiddler/Caption: 终点条目/标签
+Command/AddDualTagGraph/endTiddler/Description: 输入终点的条目名或标签名
+Command/AddDualTagGraph/dashboardTitle/Caption: 图谱大屏名称（留空即为临时图谱）
+Command/AddDualTagGraph/dashboardTitle/Description: 为此图谱输入一个标题（若留空，则自动成为方便阅后即焚的临时条目）

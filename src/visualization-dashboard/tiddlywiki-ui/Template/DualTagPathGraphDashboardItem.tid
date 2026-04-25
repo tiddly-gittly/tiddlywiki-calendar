@@ -1,0 +1,26 @@
+title: $:/plugins/linonetwo/visualization-dashboard/tiddlywiki-ui/Template/DualTagPathGraphDashboardItem
+startTiddler: 
+endTiddler: 
+levels: 1
+pathMaxDistance: 8
+relationTypes: [[tag-parent]] [[tag-child]] [[link]] [[backlink]] [[transclude]] [[backtransclude]] [[list]] [[backlist]]
+excludeFilter: [is[shadow]is[system]]
+
+\procedure startTiddler() {{!!startTiddler}}
+\procedure endTiddler() {{!!endTiddler}}
+\procedure levels() {{!!levels}}
+\procedure pathMaxDistance() {{!!pathMaxDistance}}
+\procedure relationTypes() {{!!relationTypes}}
+\procedure excludeFilter() {{!!excludeFilter}}
+\procedure endpointFilter() [{!!startTiddler}] [{!!endTiddler}] +[format:titlelist[]]
+
+<$wikify name="pathFilter" text="""<$macrocall $name="dualtaggraphpath" startTiddler={{!!startTiddler}} endTiddler={{!!endTiddler}} maxDistance={{!!pathMaxDistance}} relationTypes={{!!relationTypes}} excludeFilter={{!!excludeFilter}} />""">
+  <div style="height: 400px; width: 100%; margin: 0 auto;">
+    <$list filter="[<pathFilter>!is[blank]]" variable="ignore">
+      <$echarts $tiddler="$:/plugins/Gk0Wk/echarts/addons/TheBrain.js" aliasField="caption" levels=<<levels>> $height="100%" excludeFilter=<<excludeFilter>> focussedTiddler=<<pathFilter>> />
+    </$list>
+    <$list filter="[<pathFilter>is[blank]]" variable="ignore">
+      <$echarts $tiddler="$:/plugins/Gk0Wk/echarts/addons/TheBrain.js" aliasField="caption" levels=<<levels>> $height="100%" excludeFilter=<<excludeFilter>> focussedTiddler=<<endpointFilter>> />
+    </$list>
+  </div>
+</$wikify>

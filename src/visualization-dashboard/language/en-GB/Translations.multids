@@ -58,3 +58,11 @@ GaugeTemplate/SubscriptionTracker/Tooltip/NextDue: Next due
 GaugeTemplate/SubscriptionTracker/Tooltip/NoNextDue: No upcoming occurrence
 GaugeTemplate/SubscriptionTracker/Tooltip/RemainingDays: Days remaining
 GaugeTemplate/SubscriptionTracker/Tooltip/Progress: Current cycle
+Command/AddDualTagGraph/Caption: ➕ Create Dual Tag Relation Graph (Temp/Perm)
+Command/AddDualTagGraph/Description: Create a dashboard item showing intersection of two tags
+Command/AddDualTagGraph/startTiddler/Caption: Start Tag/Tiddler
+Command/AddDualTagGraph/startTiddler/Description: Input the first tag or tiddler
+Command/AddDualTagGraph/endTiddler/Caption: End Tag/Tiddler
+Command/AddDualTagGraph/endTiddler/Description: Input the second tag or tiddler
+Command/AddDualTagGraph/dashboardTitle/Caption: Dashboard Title (empty for temp)
+Command/AddDualTagGraph/dashboardTitle/Description: Title for this dashboard (will be temp if left empty)

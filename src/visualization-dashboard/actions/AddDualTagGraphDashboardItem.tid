@@ -1,0 +1,31 @@
+title: $:/plugins/linonetwo/visualization-dashboard/tiddlywiki-ui/Command/AddDualTagGraphDashboardItem
+tags: $:/tags/Actions $:/tags/CommandPaletteCommand
+caption: <<lingo Command/AddDualTagGraph/Caption "$:/plugins/linonetwo/visualization-dashboard/language/">>
+description: <<lingo Command/AddDualTagGraph/Description "$:/plugins/linonetwo/visualization-dashboard/language/">>
+action-variables: startTiddler endTiddler dashboardTitle
+startTiddler/type: text
+startTiddler/caption: <<lingo Command/AddDualTagGraph/startTiddler/Caption "$:/plugins/linonetwo/visualization-dashboard/language/">>
+startTiddler/description: <<lingo Command/AddDualTagGraph/startTiddler/Description "$:/plugins/linonetwo/visualization-dashboard/language/">>
+startTiddler/autocomplete-filter: [all[tiddlers]]
+endTiddler/type: text
+endTiddler/caption: <<lingo Command/AddDualTagGraph/endTiddler/Caption "$:/plugins/linonetwo/visualization-dashboard/language/">>
+endTiddler/description: <<lingo Command/AddDualTagGraph/endTiddler/Description "$:/plugins/linonetwo/visualization-dashboard/language/">>
+endTiddler/autocomplete-filter: [all[tiddlers]]
+dashboardTitle/type: text
+dashboardTitle/caption: <<lingo Command/AddDualTagGraph/dashboardTitle/Caption "$:/plugins/linonetwo/visualization-dashboard/language/">>
+dashboardTitle/description: <<lingo Command/AddDualTagGraph/dashboardTitle/Description "$:/plugins/linonetwo/visualization-dashboard/language/">>
+
+<$let
+  finalTitle={{{ [<dashboardTitle>is[blank]then[$:/temp/Dashboard/DualTagGraph/]addsuffix<startTiddler>addsuffix[ - ]addsuffix<endTiddler>] ~[<dashboardTitle>] }}}
+  isTemp={{{ [<dashboardTitle>is[blank]then[yes]else[no]] }}}
+  dashboardTemplate="$:/plugins/linonetwo/visualization-dashboard/tiddlywiki-ui/Template/DualTagPathGraphDashboardItem"
+>
+  <$list filter="[<isTemp>match[yes]]" variable="ignored">
+    <$action-createtiddler $basetitle=<<finalTitle>> $template=<<dashboardTemplate>> startTiddler=<<startTiddler>> endTiddler=<<endTiddler>> />
+    <$action-navigate $to=<<finalTitle>> />
+  </$list>
+  <$list filter="[<isTemp>match[no]]" variable="ignored">
+    <$action-createtiddler $basetitle=<<finalTitle>> $template=<<dashboardTemplate>> tags={{{ [[$:/Tags/VisualizationDashboard/Gauge]] [<startTiddler>] [<endTiddler>] +[format:titlelist[]] }}} startTiddler=<<startTiddler>> endTiddler=<<endTiddler>> />
+    <$action-navigate $to=<<finalTitle>> />
+  </$list>
+</$let>
