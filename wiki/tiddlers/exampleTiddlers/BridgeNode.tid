@@ -1,0 +1,6 @@
+title: BridgeNode
+type: text/vnd.tiddlywiki
+tags: TagExample
+color: #00796b
+
+A bridge that links directly to [[NodeE]] from the TagExample tree.

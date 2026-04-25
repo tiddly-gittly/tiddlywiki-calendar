@@ -1,0 +1,6 @@
+title: NodeA
+type: text/vnd.tiddlywiki
+tags: TagExample
+color: #1976d2
+
+Start of the path. Links to [[NodeB]] and also references [[NodeC]].

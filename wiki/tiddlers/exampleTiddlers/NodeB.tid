@@ -1,0 +1,6 @@
+title: NodeB
+type: text/vnd.tiddlywiki
+tags: SubTagExample
+color: #388e3c
+
+Middle node via link. It transcludes {{NodeD}}.
