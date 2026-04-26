@@ -6,29 +6,37 @@
   width: 100%;
   overflow-y: auto;
   max-height: 100vh;
+  border-radius: 8px;
+  overflow: hidden;
 }
+
 .tw-calendar-layout-event-preview-container .tc-tiddler-frame {
-  padding: 1em;
+  padding: 16px;
   margin: 0;
   max-width: 100%;
   max-height: 100%;
 }
+
 .tw-calendar-layout-event-preview-container .tw-calendar-layout-event-preview-top-buttons {
   width: 100%;
   height: 40px;
   display: flex;
   flex-direction: row;
 }
+
 .tw-calendar-layout-event-preview-container input,
 .tw-calendar-layout-event-preview-container textarea {
   width: 100%;
 }
+
 .tw-calendar-layout-event-preview-container .tc-titlebar {
   margin-top: 5px;
 }
+
 .tw-calendar-layout-event-preview-container .tw-calendar-time-range-preview {
   margin-top: 15px;
 }
+
 .tw-calendar-layout-event-preview-container .tw-calendar-layout-event-preview-bottom-buttons {
   width: 100%;
   height: 30px;
@@ -36,10 +44,39 @@
   flex-direction: row-reverse;
   margin-top: 2em;
 }
+
+/* Modern input styling for event preview */
+.tw-calendar-layout-event-preview-container .tw-calendar-caption-input,
+.tw-calendar-layout-event-preview-container .tw-calendar-text-input {
+  width: 100%;
+  border-radius: 6px;
+  padding: 12px 16px;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+  margin-bottom: 8px;
+  box-sizing: border-box;
+}
+
+.tw-calendar-layout-event-preview-container .tw-calendar-caption-input:focus,
+.tw-calendar-layout-event-preview-container .tw-calendar-text-input:focus {
+  outline: none;
+}
+
+.tw-calendar-layout-event-preview-container .tw-calendar-caption-input {
+  font-weight: 600;
+  font-size: 1.125rem;
+}
+
+.tw-calendar-layout-event-preview-container .tw-calendar-text-input {
+  min-height: 80px;
+  resize: vertical;
+  font-family: inherit;
+  line-height: 1.5;
+}
+
 .tiddlywiki-calendar-widget-event-preview {
   width: min-content;
   min-width: 30vw;
-
   max-height: 80vh;
   max-width: 100vw;
   position: absolute;
@@ -48,7 +85,36 @@
   padding: 5px;
   border-radius: 4px;
   z-index: 100;
-
   opacity: 0.9;
   backdrop-filter: blur(10px);
+}
+
+/* Animations */
+.tw-calendar-layout-event-preview-container .tw-calendar-caption-input,
+.tw-calendar-layout-event-preview-container .tw-calendar-text-input {
+  animation: fadeIn 0.2s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive */
+@media (max-width: 960px) {
+  .tw-calendar-layout-event-preview-container .tc-tiddler-frame {
+    padding: 8px;
+  }
+
+  .tw-calendar-layout-event-preview-container .tw-calendar-caption-input,
+  .tw-calendar-layout-event-preview-container .tw-calendar-text-input {
+    font-size: 16px;
+    padding: 10px 14px;
+  }
 }

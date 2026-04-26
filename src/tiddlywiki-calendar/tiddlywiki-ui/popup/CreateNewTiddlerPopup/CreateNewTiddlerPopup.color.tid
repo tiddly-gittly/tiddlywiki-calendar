@@ -1,0 +1,59 @@
+title: $:/plugins/linonetwo/tw-calendar/tiddlywiki-ui/popup/CreateNewTiddlerPopup.color
+tags: $:/tags/Stylesheet
+type: text/vnd.tiddlywiki
+
+\import [[$:/themes/tiddlywiki/vanilla/base]]
+
+/* Modal container colors */
+.tw-calendar-layout-create-new-tiddler-popup {
+  background: <<colour tiddler-background>>;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Tags and alarms section colors */
+.tw-calendar-layout-create-new-tiddler-popup .tw-calendar-tags-input,
+.tw-calendar-alarms {
+  background: <<colour tiddler-editor-background>>;
+  border: 1px solid <<colour tiddler-editor-border>>;
+}
+
+/* Input fields colors */
+.tw-calendar-caption-input,
+.tw-calendar-text-input {
+  background: <<colour tiddler-editor-background>>;
+  border: 1px solid <<colour tiddler-editor-border>>;
+  color: <<colour foreground>>;
+}
+
+.tw-calendar-caption-input:focus,
+.tw-calendar-text-input:focus {
+  border-color: <<colour primary>>;
+  outline: 2px solid <<colour primary>>;
+  outline-offset: 2px;
+}
+
+/* Label text color */
+.tw-calendar-layout-create-new-tiddler-popup small {
+  color: <<colour muted-foreground>>;
+}
+
+/* Event preview container colors */
+.tw-calendar-layout-event-preview-container {
+  background: <<colour tiddler-background>>;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Event preview input colors */
+.tw-calendar-layout-event-preview-container .tw-calendar-caption-input,
+.tw-calendar-layout-event-preview-container .tw-calendar-text-input {
+  background: <<colour tiddler-editor-background>>;
+  border: 1px solid <<colour tiddler-editor-border>>;
+  color: <<colour foreground>>;
+}
+
+.tw-calendar-layout-event-preview-container .tw-calendar-caption-input:focus,
+.tw-calendar-layout-event-preview-container .tw-calendar-text-input:focus {
+  border-color: <<colour primary>>;
+  outline: 2px solid <<colour primary>>;
+  outline-offset: 2px;
+}

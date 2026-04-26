@@ -3,22 +3,26 @@ tags: $:/tw-calendar/EventPreviewMiniViewTemplate
 
 <$edit-text
   field="caption"
-  class="tc-titlebar tc-edit-texteditor"
+  tag="input"
+  class="tc-titlebar tc-edit-texteditor tw-calendar-caption-input"
   tabindex=1
   focus={{{ [{$:/config/AutoFocus}match[title]then[true]] ~[[false]] }}}
-  tabindex={{$:/config/EditTabIndex}}
   cancelPopups="yes"
   fileDrop=no
+  inputmode="text"
+  autocomplete="off"
 />
 Text:
 <$edit-text
   field="text"
-  class="tc-edit-texteditor tc-edit-texteditor-body"
+  class="tc-edit-texteditor tc-edit-texteditor-body tw-calendar-text-input"
   default=""
   placeholder={{$:/language/EditTemplate/Body/Placeholder}}
-  tabindex=-1
+  tabindex=2
   focus=false
   cancelPopups="yes"
   fileDrop=no
-  minHeight="30px"
+  minHeight="80px"
+  inputmode="text"
+  autocomplete="off"
 />

@@ -25,13 +25,13 @@ title: $:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/popup/Crea
 <$wikify name="newtitle" text="{{$:/plugins/linonetwo/tw-calendar/settings/prefix}}{{$:/state/Calendar/PageLayout/create-tiddler!!draft.title}}" >
 
 <div class="tw-calendar-footer-buttons">
-  <$button class="tw-calendar-footer-button" message="tm-close-tiddler">
+  <$button class="tw-calendar-footer-button tw-calendar-footer-button-cancel" message="tm-close-tiddler">
     <<lingo Modal/CreateEvent/Label/Cancel>>
     <<cleanUpAction>>
   </$button>
   
 
-  <$button class="tw-calendar-footer-button" message="tm-close-tiddler">
+  <$button class="tw-calendar-footer-button tw-calendar-footer-button-create" message="tm-close-tiddler">
     <<lingo Modal/CreateEvent/Label/Create>>
     <!-- Remove draft.title first -->
     <$action-setfield $tiddler="$:/state/Calendar/PageLayout/create-tiddler" $field="draft.title" />

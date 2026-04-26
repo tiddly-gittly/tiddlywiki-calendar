@@ -1,71 +1,348 @@
 .tw-calendar-layout-create-new-tiddler-popup {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
+  gap: 16px;
   width: 100%;
+  box-shadow: none !important;
 }
-.tw-calendar-layout-create-new-tiddler-popup .tw-calendar-title-input {
-  width: 100%;
-}
-.tw-calendar-layout-create-new-tiddler-popup {
-  margin: 10px 0;
-}
-.tw-calendar-layout-create-new-tiddler-popup .tw-calendar-tags-input {
+
+.tw-calendar-layout-form-group {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  max-width: 100%;
-  overflow-x: auto;
-  overflow-y: hidden;
   width: 100%;
 }
-.tw-calendar-frequently-used-tags {
-  max-width: 100%;
-  overflow-x: auto;
+
+.tw-calendar-layout-form-row {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  width: 100%;
 }
-.tw-calendar-layout-create-new-tiddler-popup .tw-calendar-tags-input .tc-edit-tags {
+
+	@media (max-width: 600px) {
+  .tw-calendar-layout-form-row {
+    flex-direction: column;
+  }
+}
+
+.tw-calendar-caption-input,
+.tw-calendar-text-input {
+  width: 100%;
+  border-radius: 8px;
+  padding: 12px 14px;
+  font-size: 1rem;
+  border: 1px solid transparent;
+  background: #f7f9fa;
+  box-sizing: border-box;
+  transition: all 0.2s ease;
+}
+.tw-calendar-caption-input:focus,
+.tw-calendar-text-input:focus {
+  outline: none;
+  background: #ffffff;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+.tw-calendar-caption-input {
+  font-size: 1.25rem;
+  font-weight: 600;
+  padding: 14px 16px;
+}
+.tw-calendar-text-input {
+  min-height: 80px;
+  resize: vertical;
+  line-height: 1.6;
+}
+
+.tw-calendar-details-group {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+.tw-calendar-details-summary {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  cursor: pointer;
+  font-weight: 600;
+  color: #333;
+  background: #f0f2f5;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  width: 100%;
+  text-align: left;
+  transition: background 0.2s;
+  font-size: 1.05rem;
+}
+.tw-calendar-details-summary:hover {
+  background: #e4e6e9;
+}
+.tw-calendar-summary-icon {
+  display: inline-flex;
+  align-items: center;
+  color: #555;
+}
+.tw-calendar-summary-icon svg {
+  width: 1.2em;
+  height: 1.2em;
+  fill: currentColor;
+}
+.tw-calendar-summary-text {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.tw-calendar-details-content {
+  padding: 12px;
+  margin-top: 6px;
+  background: #fcfcfc;
+  border-radius: 8px;
+  border: 1px solid #eee;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+  width: 100%;
+  box-size: border-box;
+}
+
+.tw-calendar-tags-input,
+.tw-calendar-frequently-used-tags {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  width: 100%;
+  overflow: visible;
+}
+.tw-calendar-tags-input-new-tag { margin-bottom: 8px; width: 100%; }
+.tw-calendar-layout-create-new-tiddler-popup .tc-edit-tags {
   padding-left: 0;
   border: unset;
-  width: 180%;
-}
-.tw-calendar-empty-list-help-text {
-  margin: 0;
-}
-.tw-calendar-layout-create-new-tiddler-popup .tc-edit-texteditor {
   width: 100%;
 }
 
-.tw-calendar-footer-buttons {
+.tw-calendar-time-range-preview {
   display: flex;
-  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  background: #f0f2f5;
+  padding: 12px 14px;
+  border-radius: 8px;
+  font-size: 1rem;
+  color: #444;
+  font-weight: 500;
+  flex-wrap: wrap;
 }
-.tw-calendar-footer-button {
-  width: 50%;
-  height: 3em;
-  margin-top: 10px;
+.tw-calendar-time-range-preview-range-text {
+  color: #888;
+  font-size: 0.9em;
+}
+.tc-date-picker {
+  background: transparent;
+  border: 1px solid transparent;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: bold;
+  color: #3b82f6;
+  padding: 2px 6px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+.tc-date-picker:hover {
+  background: rgba(59, 130, 246, 0.1);
 }
 
-span.tc-add-tag-name input {
-  min-width: 5em;
-}
-.tw-calendar-alarms {
+.tw-calendar-alarms-wrapper {
   display: flex;
   flex-direction: column;
-  overflow-x: auto;
   width: 100%;
-  margin-top: 2em;
 }
-.tw-calendar-alarms input.alarmMsg {
+.tw-calendar-alarms-wrapper table {
+  border-collapse: collapse;
+  width: 100%;
+}
+.tw-calendar-alarms-wrapper td {
+  padding: 6px;
+  border-bottom: 1px solid #f0f0f0;
+}
+.tw-calendar-alarms-wrapper input {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 4px 6px;
+}
+.tw-calendar-alarms-wrapper input.alarmMsg {
   margin-top: 0.5em;
   width: 100%;
 }
-.tw-calendar-alarms input.alarmEdit {
-  width: 2em;
+.tw-calendar-alarms-wrapper input.alarmEdit { width: 3em; text-align: center; }
+.tw-calendar-alarms-wrapper input.alarmEdit.alarmEditYear { width: 4.5em; }
+.tc-drop-down.tw-calendar-layout-create-new-tiddler-popup { box-shadow: none !important; border: 1px solid #e0e0e0; border-radius: 12px; padding: 20px; }
+.tc-drop-down:has(.tw-calendar-layout-create-new-tiddler-popup) {
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.06) !important;
+  border: 1px solid #eaeaea !important;
+  padding: 16px !important;
+  background: white;
 }
-.tw-calendar-alarms input.alarmEdit.alarmEditYear {
-  width: 4em;
+
+.tw-calendar-time-range-preview {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center;
+  background: transparent !important;
+  padding: 8px 12px !important;
+  border-radius: 8px !important;
+  border: 1px solid #e0e0e0;
+  gap: 12px !important;
 }
-.tw-calendar-alarms .alarmTable td {
-  vertical-align: middle;
+.tw-calendar-time-range-preview-range-text svg {
+  width: 1em; height: 1em; fill: #aaa;
+}
+.tc-date-picker {
+  background: #fff;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  padding: 6px 10px;
+  font-size: 1.05rem;
+  color: #333;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-weight: 500;
+}
+.tc-date-picker:hover {
+  background: #f0f0f0;
+}
+
+/* ======== Footer Buttons Modernization ======== */
+.tw-calendar-footer-buttons {
+  display: flex !important;
+  justify-content: flex-end !important;
+  gap: 12px;
+  width: 100%;
+  margin-top: 16px;
+}
+.tw-calendar-footer-button {
+  height: 2.8em !important;
+  padding: 0 24px !important;
+  border-radius: 8px !important;
+  font-weight: 600 !important;
+  font-size: 1rem !important;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: auto !important;
+  margin-top: 0 !important;
+}
+
+@media (max-width: 600px) {
+  .tw-calendar-footer-buttons {
+    flex-direction: column-reverse !important;
+    gap: 8px;
+  }
+  .tw-calendar-footer-button {
+    width: 100% !important;
+  }
+}
+
+.tw-calendar-footer-button-cancel {
+  background: white !important;
+  color: #555 !important;
+  border: 1px solid #ccc !important;
+}
+.tw-calendar-footer-button-cancel:hover {
+  background: #f5f5f5 !important;
+  color: #111 !important;
+  border-color: #999 !important;
+}
+
+.tw-calendar-footer-button-create {
+  background: #3b82f6 !important;
+  color: white !important;
+  border: none !important;
+}
+.tw-calendar-footer-button-create:hover {
+  background: #2563eb !important;
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.4);
+}
+
+/* ======== Alarms and Recurrence Overflow & Mobile Adaptation ======== */
+.tw-calendar-alarms-wrapper,
+.tw-calendar-recurrence-wrapper {
+  overflow-x: auto;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+@media (max-width: 600px) {
+  .tw-calendar-alarms-wrapper table,
+  .tw-calendar-alarms-wrapper tbody,
+  .tw-calendar-alarms-wrapper tr,
+  .tw-calendar-alarms-wrapper td,
+  .tw-calendar-recurrence-wrapper table,
+  .tw-calendar-recurrence-wrapper tbody,
+  .tw-calendar-recurrence-wrapper tr,
+  .tw-calendar-recurrence-wrapper td {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  .tw-calendar-alarms-wrapper tr,
+  .tw-calendar-recurrence-wrapper tr {
+    margin-bottom: 12px;
+    border: 1px solid #e0e0e0;
+    padding: 8px;
+    border-radius: 8px;
+    background: #fafafa;
+  }
+  
+  .tw-calendar-alarms-wrapper td,
+  .tw-calendar-recurrence-wrapper td {
+    padding: 6px 4px;
+    border-bottom: none;
+    text-align: left;
+  }
+  
+  .tw-calendar-alarms-wrapper input,
+  .tw-calendar-alarms-wrapper select,
+  .tw-calendar-alarms-wrapper button {
+    width: 100% !important;
+    box-sizing: border-box;
+    margin-bottom: 4px;
+  }
+}
+/* 修复移动端时间输入框太宽的问题 */
+@media (max-width: 600px) {
+  .tw-calendar-time-range-preview {
+    flex-direction: column !important;
+    gap: 8px !important;
+    align-items: flex-start !important;
+    justify-content: flex-start !important;
+  }
+  .tc-date-picker {
+    width: 100%;
+    text-align: left;
+    box-sizing: border-box;
+  }
+}
+
+/* Hide default date macro border and handle wrapping */
+.tw-calendar-time-range-preview-range-text {
+  display: flex !important;
+  align-items: center !important;
+}
+
+@media (max-width: 600px) {
+  .tw-calendar-time-range-preview-range-text {
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    gap: 4px;
+  }
+  .tw-calendar-time-range-preview-range-text span {
+    text-align: center;
+  }
+  .tw-calendar-time-range-preview-range-text svg {
+    transform: rotate(90deg); /* Arrow points down on mobile */
+  }
 }
