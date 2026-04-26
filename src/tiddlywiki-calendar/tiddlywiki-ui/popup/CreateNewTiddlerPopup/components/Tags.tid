@@ -1,0 +1,11 @@
+title: $:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/popup/CreateNewTiddlerPopup/components/Tags
+tags: $:/tw-calendar/CreateNewTiddlerPopupTemplate
+
+<div class="tw-calendar-layout-form-group tw-calendar-layout-form-tags mt-4" style="margin-top: 16px;">
+  <div class="tw-calendar-tags-input">
+    <div class="tw-calendar-tags-input-new-tag">
+      {{||$:/core/ui/EditTemplate/tags}}
+    </div>
+    {{||$:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/popup/FrequentlyUsedTagsList}}
+  </div>
+</div>

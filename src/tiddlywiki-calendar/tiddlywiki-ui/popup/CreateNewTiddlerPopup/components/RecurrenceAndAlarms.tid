@@ -1,0 +1,58 @@
+title: $:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/popup/CreateNewTiddlerPopup/components/RecurrenceAndAlarms
+tags: $:/tw-calendar/CreateNewTiddlerPopupTemplate
+
+<div class="tw-calendar-layout-form-row" style="margin-top: 16px;">
+  <!-- 重复次数：独立折叠组件 -->
+  <div class="tw-calendar-details-group">
+    <$reveal type="nomatch" state=<<qualify "$:/state/tw-calendar/popup/CreateNewTiddler/recurrence">> text="show">
+      <$button set=<<qualify "$:/state/tw-calendar/popup/CreateNewTiddler/recurrence">> setTo="show" class="tc-btn-invisible tw-calendar-details-summary">
+        <span class="tw-calendar-summary-icon">{{$:/core/images/refresh-button}}</span>
+        <span class="tw-calendar-summary-text">
+          <$list filter="[<currentTiddler>has[rrule]]" emptyMessage="不重复">
+            <$view field="rrule"/>
+          </$list>
+        </span>
+      </$button>
+    </$reveal>
+    <$reveal type="match" state=<<qualify "$:/state/tw-calendar/popup/CreateNewTiddler/recurrence">> text="show">
+      <$button set=<<qualify "$:/state/tw-calendar/popup/CreateNewTiddler/recurrence">> setTo="hide" class="tc-btn-invisible tw-calendar-details-summary">
+        <span class="tw-calendar-summary-icon">{{$:/core/images/refresh-button}}</span>
+        <span class="tw-calendar-summary-text">
+          <$list filter="[<currentTiddler>has[rrule]]" emptyMessage="不重复">
+            <$view field="rrule"/>
+          </$list>
+        </span>
+      </$button>
+      <div class="tw-calendar-details-content tw-calendar-recurrence-wrapper">
+        {{||$:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/popup/EditRecurrence}}
+      </div>
+    </$reveal>
+  </div>
+
+  <!-- 时间提醒：独立折叠组件 -->
+  <div class="tw-calendar-details-group">
+    <$reveal type="nomatch" state=<<qualify "$:/state/tw-calendar/popup/CreateNewTiddler/alarms">> text="show">
+      <$button set=<<qualify "$:/state/tw-calendar/popup/CreateNewTiddler/alarms">> setTo="show" class="tc-btn-invisible tw-calendar-details-summary">
+        <span class="tw-calendar-summary-icon">{{$:/core/images/notifications}}</span>
+        <span class="tw-calendar-summary-text">
+          <$list filter="[<currentTiddler>has[alarms]]" emptyMessage="轻点添加提醒">
+            已设置提醒
+          </$list>
+        </span>
+      </$button>
+    </$reveal>
+    <$reveal type="match" state=<<qualify "$:/state/tw-calendar/popup/CreateNewTiddler/alarms">> text="show">
+      <$button set=<<qualify "$:/state/tw-calendar/popup/CreateNewTiddler/alarms">> setTo="hide" class="tc-btn-invisible tw-calendar-details-summary">
+        <span class="tw-calendar-summary-icon">{{$:/core/images/notifications}}</span>
+        <span class="tw-calendar-summary-text">
+          <$list filter="[<currentTiddler>has[alarms]]" emptyMessage="轻点添加提醒">
+            已设置提醒
+          </$list>
+        </span>
+      </$button>
+      <div class="tw-calendar-details-content tw-calendar-alarms-wrapper">
+        {{||$:/plugins/linonetwo/tw-calendar/lib/TiddlyTools/Time/Alarms}}
+      </div>
+    </$reveal>
+  </div>
+</div>

@@ -1,0 +1,19 @@
+title: $:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/popup/CreateNewTiddlerPopup/components/Caption
+tags: $:/tw-calendar/CreateNewTiddlerPopupTemplate
+
+<div class="tw-calendar-layout-form-group tw-calendar-layout-form-title">
+  <$edit-text
+    tiddler="$:/state/Calendar/PageLayout/create-tiddler-caption"
+    field="draft.title"
+    tag="input"
+    class="tc-titlebar tc-edit-texteditor tw-calendar-caption-input"
+    default=""
+    placeholder="输入日程标题"
+    tabindex="1"
+    focus="true"
+    cancelPopups="yes"
+    fileDrop="no"
+    inputmode="text"
+    autocomplete="off"
+  />
+</div>

@@ -1,0 +1,7 @@
+title: $:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/popup/CreateNewTiddlerPopup/components/Time
+tags: $:/tw-calendar/CreateNewTiddlerPopupTemplate
+
+<div class="tw-calendar-layout-form-group tw-calendar-layout-form-datetime" style="margin-top: 16px;">
+  <!-- 仅展示日历特定的 EditTime -->
+  {{||$:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/ViewTemplate/EditTime}}
+</div>

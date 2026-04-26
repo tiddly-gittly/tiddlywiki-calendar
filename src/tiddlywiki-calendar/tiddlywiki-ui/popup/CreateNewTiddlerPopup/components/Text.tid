@@ -1,0 +1,17 @@
+title: $:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/popup/CreateNewTiddlerPopup/components/Text
+tags: $:/tw-calendar/CreateNewTiddlerPopupTemplate
+
+<div class="tw-calendar-layout-form-group tw-calendar-layout-form-text">
+  <$edit-text
+    field="text"
+    class="tc-edit-texteditor tc-edit-texteditor-body tw-calendar-text-input"
+    default=""
+    placeholder="添加描述..."
+    tabindex="2"
+    focus="false"
+    cancelPopups="yes"
+    fileDrop="no"
+    minHeight="80px"
+    inputmode="text"
+  />
+</div>
