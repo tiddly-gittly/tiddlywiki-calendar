@@ -1,0 +1,12 @@
+title: $:/plugins/linonetwo/tw-calendar/changelog
+type: text/vnd.tiddlywiki
+
+! 2.4.2
+
+* Added a native date picker entry point on the calendar title for quick date jumping.
+* Added agenda timeline styling for list views.
+* Fixed search result ordering so newer items appear above older items on the same page.
+
+! 2.4.1
+
+* Previous release.
