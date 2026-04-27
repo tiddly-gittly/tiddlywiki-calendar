@@ -39,6 +39,9 @@ Prefix/Description: 自动为所有创建的事件添加前缀。
 Appearance/Caption: 外观
 Appearance/24HourFormat: 24小时制
 Appearance/24HourFormatDescription: 在日历左侧标签和事件中显示24小时制
+Appearance/Timeline: 显示时间轴
+Appearance/TimelineDescription: 在日程（列表）视图的左侧绘制一条竖线，作为时间轴。
+Appearance/TimelineCheckbox: 默认启用
 Appearance/FirstDay: 第一日
 Appearance/FirstDayDescription: 一周的第一天
 Appearance/SlotDuration: 时间段持续时间

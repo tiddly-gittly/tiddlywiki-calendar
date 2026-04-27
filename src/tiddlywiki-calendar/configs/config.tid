@@ -60,6 +60,8 @@ caption: <<lingo "Name" "$:/plugins/linonetwo/tw-calendar/language/">>
 :<$checkbox tiddler="$:/plugins/linonetwo/tw-calendar/settings/mobileEnabledButtons" listField="list" checked="timeGridThreeDay"> <<lingo "Appearance/MobileEnabledButtons/ThreeDay">></$checkbox>
 :<$checkbox tiddler="$:/plugins/linonetwo/tw-calendar/settings/mobileEnabledButtons" listField="list" checked="timeGridDay"> <<lingo "Appearance/MobileEnabledButtons/Day">></$checkbox>
 :<$checkbox tiddler="$:/plugins/linonetwo/tw-calendar/settings/mobileEnabledButtons" listField="list" checked="listWeek"> <<lingo "Appearance/MobileEnabledButtons/List">></$checkbox>
+;<<lingo "Appearance/Timeline">>: <<lingo "Appearance/TimelineDescription">>
+:<$checkbox tiddler="$:/plugins/linonetwo/tw-calendar/settings/agenda-timeline" field="text" checked="yes" unchecked="no" default="yes"> <<lingo "Appearance/TimelineCheckbox">></$checkbox>
 ;<<lingo "Appearance/FirstDay">>: <<lingo "Appearance/FirstDayDescription">>
 :<$select tiddler='$:/plugins/linonetwo/tw-calendar/settings/firstDay'>
 	<option value='0'><<lingo "DaysOfWeek/Sunday">></option>

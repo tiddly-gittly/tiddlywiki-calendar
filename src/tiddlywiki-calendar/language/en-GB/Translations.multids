@@ -39,6 +39,9 @@ Prefix/Description: Auto add prefix to all created event.
 Appearance/Caption: Appearance
 Appearance/24HourFormat: 24 Hour Format
 Appearance/24HourFormatDescription: Show 24 hour format in calendar left slot label and events
+Appearance/Timeline: Timeline
+Appearance/TimelineDescription: Draw a vertical line on the left side of the agenda (list) view as a timeline.
+Appearance/TimelineCheckbox: Enable by default
 Appearance/FirstDay: First Day
 Appearance/FirstDayDescription: First day of the week.
 Appearance/SlotDuration: Slot Duration

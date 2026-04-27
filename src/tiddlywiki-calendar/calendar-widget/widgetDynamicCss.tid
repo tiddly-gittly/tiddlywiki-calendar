@@ -7,4 +7,27 @@ type: text/vnd.tiddlywiki
   background-color: <<colour modal-background>>;
   border-color: <<colour modal-border>>;
 }
+
+<$list filter="[{$:/plugins/linonetwo/tw-calendar/settings/agenda-timeline}match[yes]]">
+.fc-list-event-graphic {
+  position: relative;
+}
+.fc-list-event-graphic::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  height: calc(100% + 1px);
+  width: 2px;
+  left: calc(50% - 1px);
+  background-color: var(--fc-list-event-border-color, <<colour table-border>>);
+  z-index: 0;
+}
+.fc-list-event-dot {
+  position: relative;
+  z-index: 1;
+  background-color: <<colour background>>;
+  box-shadow: 0 0 0 2px <<colour background>>;
+}
+</$list>
 </$importvariables>

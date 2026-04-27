@@ -5,7 +5,7 @@ import { autoPlacement, computePosition, shift, size } from '@floating-ui/dom';
 import type { CalendarOptions, EventApi } from '@fullcalendar/core';
 import type { EventImpl } from '@fullcalendar/core/internal';
 import { ITiddlerFields } from 'tiddlywiki';
-import { draftTiddlerCaptionTitle, draftTiddlerTitle, isMobile } from './constants';
+import { draftTiddlerCaptionTitle, draftTiddlerTitle, getIsSearchMode, isMobile } from './constants';
 import type { IContext } from './initCalendar';
 import debounce from 'lodash/debounce';
 
@@ -43,6 +43,106 @@ export function getHandlers(context: IContext): CalendarOptions {
 
   const handlers: CalendarOptions = {
     // eslint-disable-next-line @typescript-eslint/no-misused-promises
+    eventDidMount: (info) => {
+      // In searchResultList, we want to reverse the DOM order so newest days appear first
+      // We do this reliably by deferring it to a microtask after events finish rendering
+      if (getIsSearchMode() && info.view.type === 'searchResultList') {
+        const tbody = info.el.closest('tbody');
+        if (tbody && !tbody.dataset.reverseScheduled) {
+          tbody.dataset.reverseScheduled = 'true';
+          queueMicrotask(() => {
+            delete tbody.dataset.reverseScheduled;
+            if (tbody.dataset.reversed === 'true') return;
+            
+            const children = Array.from(tbody.children);
+            if (children.length === 0) return;
+
+            const reversedGroups = [];
+            let currentGroup: Element[] = [];
+            
+            for (const el of children) {
+              if (el.classList.contains('fc-list-day')) {
+                if (currentGroup.length > 0) {
+                  reversedGroups.unshift(currentGroup);
+                }
+                currentGroup = [el];
+              } else {
+                currentGroup.splice(1, 0, el);
+              }
+            }
+            if (currentGroup.length > 0) {
+              reversedGroups.unshift(currentGroup);
+            }
+
+            tbody.innerHTML = '';
+            reversedGroups.forEach(group => {
+              group.forEach(el => tbody.appendChild(el));
+            });
+            tbody.dataset.reversed = 'true';
+          });
+        }
+      }
+    },
+    datesSet: (info) => {
+      // Add native date picker to the toolbar title for quick jumping
+      const rootEl = context.containerElement;
+      if (!rootEl) return;
+      const titleEl = rootEl.querySelector('.fc-toolbar-title') as HTMLElement | null;
+      if (titleEl) {
+        let input = titleEl.querySelector<HTMLInputElement>('.tw-calendar-date-picker-hidden');
+        if (!input) {
+          titleEl.style.cursor = 'pointer';
+          queueMicrotask(() => {
+            input = document.createElement('input');
+            input.type = 'date';
+            input.className = 'tw-calendar-date-picker-hidden';
+            Object.assign(input.style, {
+              position: 'absolute',
+              bottom: '0',
+              left: '0',
+              width: '1px',
+              height: '1px',
+              opacity: '0',
+              pointerEvents: 'none',
+              border: 'none',
+              padding: '0',
+            });
+            input.addEventListener('change', (e) => {
+              const target = e.target as HTMLInputElement;
+              if (target.value) {
+                // The value is YYYY-MM-DD. gotoDate expects a valid date or date string.
+                info.view.calendar.gotoDate(target.value);
+              }
+            });
+            titleEl.append(input);
+            titleEl.addEventListener('click', (e) => {
+              if (e.target !== input) {
+                try {
+                  input?.showPicker();
+                } catch {
+                  // Fallback for older browsers
+                  input?.focus();
+                  input?.click();
+                }
+              }
+            });
+            
+            // Sync value: Approximate the viewed center date
+            const midDate = new Date((info.start.getTime() + info.end.getTime()) / 2);
+            // Format as local YYYY-MM-DD
+            const tzOffset = midDate.getTimezoneOffset() * 60000;
+            const localISOTime = new Date(midDate.getTime() - tzOffset).toISOString().slice(0, 10);
+            input.value = localISOTime;
+          });
+        } else {
+          // If already exists, just update the value
+          const midDate = new Date((info.start.getTime() + info.end.getTime()) / 2);
+          const tzOffset = midDate.getTimezoneOffset() * 60000;
+          const localISOTime = new Date(midDate.getTime() - tzOffset).toISOString().slice(0, 10);
+          input.value = localISOTime;
+        }
+      }
+    },
     eventClick: async (info) => {
       if (!context.widget) return;
       const previewWidgetDataName = 'tiddlywiki-calendar-widget-event-preview';
