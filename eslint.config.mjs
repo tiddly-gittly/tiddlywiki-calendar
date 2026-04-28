@@ -8,6 +8,9 @@ const __dirname = dirname(__filename);
 export default [
   ...tidgiConfig,
   {
+    ignores: ['src/tiddlywiki-calendar/tiddlywiki-ui/libs/TiddlyTools_Time/**'],
+  },
+  {
     languageOptions: {
       parserOptions: {
         projectService: {

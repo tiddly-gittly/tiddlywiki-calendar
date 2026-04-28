@@ -1,7 +1,5 @@
-/* eslint-disable unicorn/no-null */
-/* eslint-disable @typescript-eslint/strict-boolean-expressions */
 import { IFilterOperator } from 'tiddlywiki';
-import { countUniqueDays, getMidpointDate } from './dateUtils';
+import { countUniqueDays, getMidpointDate } from './dateUtilities';
 
 /**
  * Count how many days of input tiddlers appear, more than one times in a day count as 1 time.
@@ -11,9 +9,9 @@ import { countUniqueDays, getMidpointDate } from './dateUtils';
  * [all[tiddlers]!is[system]field:calendarEntry[yes]tag[Sleeping]] :filter[get[startDate]compare:date:gteq<weekstart>compare:date:lteq<now [UTC]YYYY0MM0DD0hh0mm0ssXXX>] +[countdaysappear[]]
  * ```
  */
-export const countdaysappear = ((source, operator): string[] => {
+export const countdaysappear = ((source, _operator): string[] => {
   const datePoints: Date[] = [];
-  source(function(tiddler, title) {
+  source(function(tiddler, _title) {
     let datePoint: Date | null = null;
     if (tiddler?.fields.startDate && tiddler.fields.endDate) {
       const startDate = $tw.utils.parseDate(tiddler.fields.startDate as string);

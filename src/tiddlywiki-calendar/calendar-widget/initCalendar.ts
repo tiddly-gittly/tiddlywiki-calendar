@@ -6,8 +6,8 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import listPlugin from '@fullcalendar/list';
 import momentTimezonePlugin from '@fullcalendar/moment-timezone';
-import timeGridPlugin from '@fullcalendar/timegrid';
 import rrulePlugin from '@fullcalendar/rrule';
+import timeGridPlugin from '@fullcalendar/timegrid';
 import moment from 'moment-timezone';
 import type { Widget } from 'tiddlywiki';
 import { getInCalendarLayout, getIsSearchMode, getIsSmallScreen, isMobile, tiddlerEventSourceID } from './constants';
@@ -135,7 +135,7 @@ function getToolbarSettings(context: IContext): CalendarOptions {
 
   // Get mobile enabled buttons from settings
   const mobileEnabledButtonsList = $tw.wiki.getTiddlerList('$:/plugins/linonetwo/tw-calendar/settings/mobileEnabledButtons');
-  const mobileEnabledButtons = mobileEnabledButtonsList && mobileEnabledButtonsList.length > 0
+  const mobileEnabledButtons = mobileEnabledButtonsList.length > 0
     ? mobileEnabledButtonsList.join(',')
     : 'timeGridThreeDay,timeGridDay,listWeek'; // default buttons
 

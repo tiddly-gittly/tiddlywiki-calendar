@@ -1,7 +1,7 @@
 {
   "url": "https://github.com/tiddly-gittly/tiddlywiki-calendar",
   "license": "MIT",
-  "version": "0.0.4",
+  "version": "2.5.0",
   "scripts": {
     "dev": "tiddlywiki-plugin-dev dev",
     "dev:lan": "tiddlywiki-plugin-dev dev --lan",
@@ -38,6 +38,18 @@
     "*.{js,jsx,mjs,mjsx,cjs,cjsx}": [
       "node --max_old_space_size=8192 ./node_modules/eslint/bin/eslint.js --fix --color --cache --quiet"
     ]
+  },
+  "pnpm": {
+    "overrides": {
+      "typescript-eslint": "8.59.1",
+      "@typescript-eslint/eslint-plugin": "8.59.1",
+      "@typescript-eslint/parser": "8.59.1",
+      "@typescript-eslint/project-service": "8.59.1",
+      "@typescript-eslint/tsconfig-utils": "8.59.1",
+      "@typescript-eslint/type-utils": "8.59.1",
+      "@typescript-eslint/typescript-estree": "8.59.1",
+      "@typescript-eslint/utils": "8.59.1"
+    }
   },
   "dependencies": {
     "@floating-ui/dom": "^1.7.6",

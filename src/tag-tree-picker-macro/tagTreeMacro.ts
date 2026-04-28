@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable unicorn/prevent-abbreviations */
+
 /*
 Display passed-in tiddler names in a tree like <<toc>> respect to their tag relationship
 */

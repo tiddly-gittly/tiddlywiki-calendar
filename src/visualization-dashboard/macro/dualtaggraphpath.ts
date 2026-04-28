@@ -1,8 +1,23 @@
-/* eslint-disable @typescript-eslint/strict-boolean-expressions */
-
 const DEFAULT_MAX_DISTANCE = 8;
 const DEFAULT_RELATION_TYPES = ['tag-parent', 'tag-child', 'link', 'backlink', 'transclude', 'backtransclude', 'list', 'backlist'] as const;
 const ALLOWED_RELATION_TYPES = new Set<string>(DEFAULT_RELATION_TYPES);
+
+type MacroDefinition = {
+  name: string;
+  params: Array<{ name: string }>;
+  run: (startTiddler: string, endTiddler: string, maxDistance: string, relationTypes: string, excludeFilter: string) => string;
+};
+
+type BooleanLookup = Partial<Record<string, true>>;
+type DistanceLookup = Partial<Record<string, number>>;
+type PathLookup = Partial<Record<string, string | undefined>>;
+type NeighborCache = Partial<Record<string, string[]>>;
+
+const macro = exports as MacroDefinition;
+
+function toStringArray(value: unknown): string[] {
+  return Array.isArray(value) ? value.filter((item): item is string => typeof item === 'string') : [];
+}
 
 function parseNonNegativeInteger(value: string | undefined, fallback: number): number {
   const parsed = parseInt(value || '', 10);
@@ -10,7 +25,7 @@ function parseNonNegativeInteger(value: string | undefined, fallback: number): n
 }
 
 function parseRelationTypes(value: string | undefined): string[] {
-  const parsed = ($tw.utils.parseStringArray(value || '') as string[] | null) ?? [];
+  const parsed = toStringArray($tw.utils.parseStringArray(value || ''));
   const normalized = parsed.filter((type) => ALLOWED_RELATION_TYPES.has(type));
   return normalized.length > 0 ? normalized : [...DEFAULT_RELATION_TYPES];
 }
@@ -18,28 +33,28 @@ function parseRelationTypes(value: string | undefined): string[] {
 function readListField(title: string, fieldName: string): string[] {
   const tiddler = $tw.wiki.getTiddler(title);
   if (!tiddler) return [];
-  return ($tw.utils.parseStringArray(tiddler.fields[fieldName] as string | undefined || '') as string[] | null) ?? [];
+  return toStringArray($tw.utils.parseStringArray((tiddler.fields[fieldName] as string | undefined) || ''));
 }
 
-function buildExcludedTitles(excludeFilter: string | undefined): Record<string, true> {
-  if (!excludeFilter) return Object.create(null);
+function buildExcludedTitles(excludeFilter: string | undefined): BooleanLookup {
+  if (!excludeFilter) return {};
   try {
-    const titles = $tw.wiki.filterTiddlers(excludeFilter);
-    const excludedTitles: Record<string, true> = Object.create(null);
+    const titles = toStringArray($tw.wiki.filterTiddlers(excludeFilter));
+    const excludedTitles: BooleanLookup = {};
     for (const title of titles) {
       excludedTitles[title] = true;
     }
     return excludedTitles;
   } catch {
-    return Object.create(null);
+    return {};
   }
 }
 
 function addNeighbors(
   result: string[],
   titles: string[],
-  excludedTitles: Record<string, true>,
-  endPoints: Record<string, true>,
+  excludedTitles: BooleanLookup,
+  endPoints: BooleanLookup,
   currentTitle: string,
 ): void {
   for (const title of titles) {
@@ -54,12 +69,12 @@ function addNeighbors(
 function getNeighbors(
   title: string,
   relationTypes: string[],
-  excludedTitles: Record<string, true>,
-  endPoints: Record<string, true>,
-  cache: Record<string, string[]>,
+  excludedTitles: BooleanLookup,
+  endPoints: BooleanLookup,
+  cache: NeighborCache,
 ): string[] {
   const cacheKey = `${title}\u0000${relationTypes.join(' ')}`;
-  if (cache[cacheKey]) {
+  if (cache[cacheKey] !== undefined) {
     return cache[cacheKey].slice(0);
   }
 
@@ -95,7 +110,7 @@ function getNeighbors(
   return neighbors;
 }
 
-function reconstructPath(previousByTitle: Record<string, string | undefined>, endTitle: string): string[] {
+function reconstructPath(previousByTitle: PathLookup, endTitle: string): string[] {
   const path: string[] = [];
   let title: string | undefined = endTitle;
   while (title !== undefined) {
@@ -109,9 +124,9 @@ function tiddlerExists(title: string): boolean {
   return $tw.wiki.tiddlerExists(title) || $tw.wiki.isShadowTiddler(title);
 }
 
-exports.name = 'dualtaggraphpath';
+macro.name = 'dualtaggraphpath';
 
-exports.params = [
+macro.params = [
   { name: 'startTiddler' },
   { name: 'endTiddler' },
   { name: 'maxDistance' },
@@ -119,7 +134,7 @@ exports.params = [
   { name: 'excludeFilter' },
 ];
 
-exports.run = function (
+macro.run = function(
   startTiddler: string,
   endTiddler: string,
   maxDistance: string,
@@ -135,15 +150,15 @@ exports.run = function (
   const parsedMaxDistance = parseNonNegativeInteger(maxDistance, DEFAULT_MAX_DISTANCE);
   const parsedRelationTypes = parseRelationTypes(relationTypes);
   const excludedTitles = buildExcludedTitles(excludeFilter);
-  const endPoints: Record<string, true> = Object.create(null);
+  const endPoints: BooleanLookup = {};
   endPoints[startTiddler] = true;
   endPoints[endTiddler] = true;
 
   const queue: string[] = [startTiddler];
   let queueIndex = 0;
-  const previousByTitle: Record<string, string | undefined> = Object.create(null);
-  const distanceByTitle: Record<string, number> = Object.create(null);
-  const neighborCache: Record<string, string[]> = Object.create(null);
+  const previousByTitle: PathLookup = {};
+  const distanceByTitle: DistanceLookup = {};
+  const neighborCache: NeighborCache = {};
 
   previousByTitle[startTiddler] = undefined;
   distanceByTitle[startTiddler] = 0;
@@ -152,11 +167,12 @@ exports.run = function (
     const currentTitle = queue[queueIndex];
     queueIndex += 1;
     const currentDistance = distanceByTitle[currentTitle];
+    if (currentDistance === undefined) continue;
     if (currentDistance >= parsedMaxDistance) continue;
 
     const neighbors = getNeighbors(currentTitle, parsedRelationTypes, excludedTitles, endPoints, neighborCache);
     for (const neighborTitle of neighbors) {
-      if (distanceByTitle[neighborTitle] !== undefined) continue;
+      if (neighborTitle in distanceByTitle) continue;
       previousByTitle[neighborTitle] = currentTitle;
       distanceByTitle[neighborTitle] = currentDistance + 1;
       if (neighborTitle === endTiddler) {

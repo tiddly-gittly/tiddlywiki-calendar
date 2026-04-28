@@ -1,7 +1,5 @@
-/* eslint-disable unicorn/no-null */
-/* eslint-disable @typescript-eslint/strict-boolean-expressions */
 import { IFilterOperator } from 'tiddlywiki';
-import { getStartDateOfWeek } from './dateUtils';
+import { getStartDateOfWeek } from './dateUtilities';
 
 /**
  * Get the start date of the week.

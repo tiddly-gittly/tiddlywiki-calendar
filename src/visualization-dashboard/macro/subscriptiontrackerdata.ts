@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/strict-boolean-expressions */
 import { rrulestr } from 'rrule';
 import { isAllDaySpan, normalizeRRule, safeParseTwDate } from '../../tiddlywiki-calendar/calendar-widget/rrule';
 
@@ -14,18 +13,32 @@ type TrackerItem = {
   label: string;
 };
 
+type MacroContext = {
+  getVariable: (name: string) => string | undefined;
+};
+
+type MacroDefinition = {
+  name: string;
+  params: never[];
+  run: (this: MacroContext) => string;
+};
+
+const macro = exports as MacroDefinition;
+
 const clamp = (value: number, min: number, max: number): number => Math.min(Math.max(value, min), max);
 
 const formatDueDate = (date?: Date): string => {
   if (date === undefined) return '';
-  return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')} ${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}`;
+  return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')} ${String(date.getHours()).padStart(2, '0')}:${
+    String(date.getMinutes()).padStart(2, '0')
+  }`;
 };
 
 const resolveCalendarEntryColor = (fields: Record<string, unknown>): string | undefined => {
   if (typeof fields.color === 'string' && fields.color.trim() !== '') return fields.color;
   if (!Array.isArray(fields.tags)) return undefined;
   return fields.tags
-    .map((tagName) => typeof tagName === 'string' ? $tw.wiki.getTiddler(tagName)?.fields?.color : undefined)
+    .map((tagName) => typeof tagName === 'string' ? $tw.wiki.getTiddler(tagName)?.fields.color : undefined)
     .find((color): color is string => typeof color === 'string' && color.trim() !== '');
 };
 
@@ -58,11 +71,11 @@ const buildTrackerItem = (title: string, now: Date): TrackerItem | undefined => 
   };
 };
 
-exports.name = 'subscriptiontrackerdata';
+macro.name = 'subscriptiontrackerdata';
 
-exports.params = [];
+macro.params = [];
 
-exports.run = function run(): string {
+macro.run = function run(this: MacroContext): string {
   const gaugeTitle = this.getVariable('currentTiddler');
   const gaugeFields = gaugeTitle ? $tw.wiki.getTiddler(gaugeTitle)?.fields : undefined;
   const selectedTitlesText = gaugeFields?.targetTiddler;

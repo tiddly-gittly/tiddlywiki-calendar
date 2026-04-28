@@ -1,14 +1,14 @@
-/* eslint-disable @typescript-eslint/strict-boolean-expressions */
 import type { CustomContentGenerator, EventContentArg } from '@fullcalendar/core';
 import type { h, VNode } from '@fullcalendar/core/preact';
 import { allowedTiddlerTypeToPreview, draftTiddlerCaptionTitle, draftTiddlerTitle, DURATION_THRESHOLD_FOR_SHOWING_TIME_AT_BOTTOM } from './constants';
 import type { IContext } from './initCalendar';
 import { lingo } from './lingo';
 
-// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-const dateDurationMacro = require('$:/plugins/linonetwo/tw-calendar/date-duration-macro');
-// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-const getDateDuration = dateDurationMacro.run as (startDateString: string, endDateString: string) => string;
+// eslint-disable-next-line @typescript-eslint/no-require-imports
+const dateDurationMacro = require('$:/plugins/linonetwo/tw-calendar/date-duration-macro') as {
+  run: (startDateString: string, endDateString: string) => string;
+};
+const getDateDuration = dateDurationMacro.run;
 
 /**
  * Get content of event in 'timeGridThreeDay' and 'timeGridWeek'
@@ -17,7 +17,7 @@ const getDateDuration = dateDurationMacro.run as (startDateString: string, endDa
 export function getEventContent(context: IContext): CustomContentGenerator<EventContentArg> {
   return (argument, createElement: typeof h) => {
     // if this tiddler is calendar draft, use draft caption instead
-    const titleText = argument.event.title === draftTiddlerTitle ? ($tw.wiki.getTiddler(draftTiddlerCaptionTitle)?.fields?.['draft.title'] ?? '...') : argument.event.title;
+    const titleText = argument.event.title === draftTiddlerTitle ? ($tw.wiki.getTiddler(draftTiddlerCaptionTitle)?.fields['draft.title'] ?? '...') : argument.event.title;
     const titleElement = createElement('div', {}, titleText);
     const timeElement = createElement('div', {}, argument.timeText);
     const tiddler = $tw.wiki.getTiddler(argument.event.title);
@@ -25,7 +25,7 @@ export function getEventContent(context: IContext): CustomContentGenerator<Event
     /** this is for empty tiddler or tiddler not created (when user select range of time to create one), normally we will use captionElement below */
     if (tiddler === undefined) {
       let durationElement: VNode | undefined;
-      if (argument.event._instance !== undefined && argument.event.end instanceof Date && argument.event.start instanceof Date) {
+      if (argument.event.end instanceof Date && argument.event.start instanceof Date) {
         const startDate = $tw.utils.formatDateString(argument.event.start, '[UTC]YYYY0MM0DD0hh0mm0ss0XXX');
         const endDate = $tw.utils.formatDateString(argument.event.end, '[UTC]YYYY0MM0DD0hh0mm0ss0XXX');
         const durationText = getDateDuration(startDate, endDate);
@@ -55,7 +55,7 @@ export function getEventContent(context: IContext): CustomContentGenerator<Event
         const newWidgetNode = context.widget.makeChildWidget(astNode);
         // render tw content needs a temp real dom element, can't use vdom from `createElement`
         const temporaryEle = context.widget.document.createElement('div');
-        // eslint-disable-next-line unicorn/no-null
+
         newWidgetNode.render(temporaryEle, null);
         captionResult = temporaryEle.textContent;
       } else {
@@ -72,7 +72,7 @@ export function getEventContent(context: IContext): CustomContentGenerator<Event
       // @ts-expect-error The left-hand side of an arithmetic operation must be of type 'any', 'number', 'bigint' or an enum type.ts(2362)
       duration = $tw.utils.parseDate(endDateString) - $tw.utils.parseDate(startDateString);
     }
-    const durationElement = durationText !== undefined && createElement('div', {}, durationText);
+    const durationElement = durationText !== '' ? createElement('div', {}, durationText) : undefined;
     const isObscured = context.obscureFilter !== undefined &&
       $tw.wiki.filterTiddlers(context.obscureFilter, context.parentWidget, $tw.wiki.makeTiddlerIterator([argument.event.title])).length > 0;
     if (isObscured) {
@@ -86,10 +86,11 @@ export function getEventContent(context: IContext): CustomContentGenerator<Event
       return captionElement;
     }
     // on timeGridDay view, show full text, but ignore too long text that causes lagging
-    const textElement = allowedTiddlerTypeToPreview.includes(tiddler.fields.type ?? '')
-      ? createElement('div', {}, (tiddlerText ?? '').substring(0, 2000))
+    const tiddlerType = typeof tiddler.fields.type === 'string' ? tiddler.fields.type : '';
+    const textElement = allowedTiddlerTypeToPreview.includes(tiddlerType)
+      ? createElement('div', {}, tiddlerText.substring(0, 2000))
       : createElement('div', {}, `(${tiddler.fields.type} too large)`);
-    const tagsElement = createElement('div', { class: 'fc-event-main-tags' }, tiddler.fields.tags?.map?.((tag) => createElement('span', {}, tag)));
+    const tagsElement = createElement('div', { class: 'fc-event-main-tags' }, tiddler.fields.tags?.map((tag) => createElement('span', {}, tag)));
     const contents = createElement('div', {}, [captionElement, tagsElement, timeElement, durationElement, textElement]);
     if (duration >= DURATION_THRESHOLD_FOR_SHOWING_TIME_AT_BOTTOM) {
       return createElement('div', { style: 'height: 100%; display: flex; flex-direction: column; justify-content: space-between;' }, [

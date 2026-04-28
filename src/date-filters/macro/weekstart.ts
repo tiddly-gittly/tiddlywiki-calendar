@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable unicorn/no-null */
-/* eslint-disable @typescript-eslint/strict-boolean-expressions */
-import { getStartDateOfWeek } from '../filter/dateUtils';
+
+import { getStartDateOfWeek } from '../filter/dateUtilities';
 
 /**
  * Get the start date of the week.

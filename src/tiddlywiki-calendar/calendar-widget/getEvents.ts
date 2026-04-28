@@ -1,6 +1,5 @@
-/* eslint-disable @typescript-eslint/strict-boolean-expressions */
 /* eslint-disable @typescript-eslint/require-await */
-/* eslint-disable unicorn/no-array-callback-reference */
+
 import type { EventInput, EventSourceFunc, EventSourceFuncArg } from '@fullcalendar/core';
 import type { ITiddlerFields, Tiddler } from 'tiddlywiki';
 import { draftTiddlerTitle } from './constants';
@@ -23,7 +22,7 @@ const normalTiddlerEventLengthInHour = 1;
 export const getEventOnFullCalendarViewChange = (context: IContext): EventSourceFunc => async (argument: EventSourceFuncArg) => {
   const { start, end } = argument;
   const [startTwString, endTwString] = [start, end].map((date) => $tw.utils.stringifyDate(date));
-  const sourceFilter = context?.filter ? `${context.filter} [[${draftTiddlerTitle}]]` : `[all[tiddlers]!is[system]] [[${draftTiddlerTitle}]]`;
+  const sourceFilter = context.filter ? `${context.filter} [[${draftTiddlerTitle}]]` : `[all[tiddlers]!is[system]] [[${draftTiddlerTitle}]]`;
   const getFilterOnField = (field: string) => `${sourceFilter}:filter[get[${field}]compare:date:gteq[${startTwString}]compare:date:lteq[${endTwString}]]`;
   const fields = context.startDateFields ?? ['created', 'modified', 'startDate'];
   const periodTitles = fields
@@ -62,14 +61,15 @@ export function getEvents(tiddlerTitles: string[], context: IContext): EventInpu
   return fullCalendarEvents;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-const contrastColour: (colour: string, fallbackTarget: string, colourFore: string, colourBack: string) => number[] | string =
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-  require('$:/core/modules/macros/contrastcolour.js').run;
+type ContrastColour = (colour: string, fallbackTarget: string, colourFore: string, colourBack: string) => number[] | string;
+
+// eslint-disable-next-line @typescript-eslint/no-require-imports
+const contrastColourModule = require('$:/core/modules/macros/contrastcolour.js') as { run: ContrastColour };
+const contrastColour = contrastColourModule.run;
 
 function mapTiddlerFieldsToFullCalendarEventObject(fields: ITiddlerFields, context: IContext, palette: Record<string, string>): EventInput[] {
   const { title, startDate, endDate, created, modified, color, tags, rrule } = fields;
-  const backgroundColor = color ?? tags?.map((tagName) => $tw.wiki.getTiddler(tagName)?.fields?.color).find(Boolean);
+  const backgroundColor = color ?? (Array.isArray(tags) ? tags.map((tagName) => $tw.wiki.getTiddler(tagName)?.fields.color).find(Boolean) : undefined);
   let textColor: string | undefined;
   if (backgroundColor !== undefined) {
     const contractColorResult = contrastColour(backgroundColor, palette['tag-background'], palette.foreground, palette.background);
@@ -113,7 +113,7 @@ function mapTiddlerFieldsToFullCalendarEventObject(fields: ITiddlerFields, conte
       .map((fieldName, index) => {
         const startDateFieldValue = fields[fieldName] as string | undefined;
         let startDateFromField: Date;
-        // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions, array-callback-return
+
         if (!startDateFieldValue) return;
         try {
           startDateFromField = parseTwDate(startDateFieldValue);
@@ -125,7 +125,7 @@ function mapTiddlerFieldsToFullCalendarEventObject(fields: ITiddlerFields, conte
         const correspondingEndFieldName = context.endDateFields?.[index];
         let endDateFromFieldValue: string | undefined;
         let endDateFromField: Date | undefined;
-        // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
+
         if (correspondingEndFieldName) {
           endDateFromFieldValue = fields[correspondingEndFieldName] as string | undefined;
           if (endDateFromFieldValue !== undefined) {

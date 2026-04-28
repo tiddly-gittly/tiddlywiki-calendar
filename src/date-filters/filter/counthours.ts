@@ -1,7 +1,5 @@
-/* eslint-disable unicorn/no-null */
-/* eslint-disable @typescript-eslint/strict-boolean-expressions */
 import { IFilterOperator } from 'tiddlywiki';
-import { getDiffInHours } from './dateUtils';
+import { getDiffInHours } from './dateUtilities';
 
 /**
  * Count hours of input tiddlers.
@@ -11,9 +9,9 @@ import { getDiffInHours } from './dateUtils';
  * [all[tiddlers]!is[system]field:calendarEntry[yes]tag[Sleeping]] :filter[get[startDate]compare:date:gteq<weekstart>compare:date:lteq<now [UTC]YYYY0MM0DD0hh0mm0ssXXX>] +[counthours[]]
  * ```
  */
-export const counthours = ((source, operator): string[] => {
+export const counthours = ((source, _operator): string[] => {
   let result = 0;
-  source(function(tiddler, title) {
+  source(function(tiddler, _title) {
     if (tiddler?.fields.startDate && tiddler.fields.endDate) {
       const startDate = $tw.utils.parseDate(tiddler.fields.startDate as string);
       const endDate = $tw.utils.parseDate(tiddler.fields.endDate as string);

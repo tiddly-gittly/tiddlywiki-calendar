@@ -9,7 +9,7 @@ exports.name = 'montosun';
 exports.params = [];
 
 exports.run = (): string => {
-  const languageCode = $tw.wiki.getTiddler($tw.wiki.getTiddlerText('$:/language', 'en-GB'))?.fields?.name;
+  const languageCode = $tw.wiki.getTiddler($tw.wiki.getTiddlerText('$:/language', 'en-GB'))?.fields.name;
   if (languageCode === 'en-GB') {
     return `['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']`;
   }

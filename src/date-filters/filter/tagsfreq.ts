@@ -1,7 +1,5 @@
-/* eslint-disable unicorn/no-null */
-/* eslint-disable @typescript-eslint/strict-boolean-expressions */
 import { IFilterOperator } from 'tiddlywiki';
-import { getDiffInHours } from './dateUtils';
+import { getDiffInHours } from './dateUtilities';
 
 /**
  * Convert hours to HH:MM:SS format, rounded to nearest 15 minutes
@@ -39,7 +37,7 @@ export const tagsfreq = ((source, operator): string[] => {
   const cutoffDate = new Date(now.getTime() - daysLimit * 24 * 60 * 60 * 1000);
 
   // Statistics for tag combination frequency and duration
-  const tagGroupStats: Record<string, { count: number; totalDuration: number }> = {};
+  const tagGroupStats: Partial<Record<string, { count: number; totalDuration: number }>> = {};
 
   source(function(tiddler, _title) {
     if (!tiddler) return;
@@ -115,22 +113,21 @@ export const tagsfreq = ((source, operator): string[] => {
       if (userTags.length > 0) {
         // Use stringifyList to safely handle tags with spaces
         const tagGroup = $tw.utils.stringifyList(userTags);
-
-        if (!tagGroupStats[tagGroup]) {
-          tagGroupStats[tagGroup] = { count: 0, totalDuration: 0 };
-        }
-        tagGroupStats[tagGroup].count++;
-        tagGroupStats[tagGroup].totalDuration += duration;
+        const tagGroupStat = tagGroupStats[tagGroup] ?? { count: 0, totalDuration: 0 };
+        tagGroupStat.count++;
+        tagGroupStat.totalDuration += duration;
+        tagGroupStats[tagGroup] = tagGroupStat;
       }
     }
   });
 
   // Convert to result array and sort
   const results = Object.entries(tagGroupStats)
-    .map(([tagGroup, stats]) => {
+    .flatMap(([tagGroup, stats]) => {
+      if (stats === undefined) return [];
       const avgDuration = stats.totalDuration / stats.count;
       const avgDurationFormatted = formatDuration(avgDuration);
-      return `${tagGroup}|${stats.count}|${avgDurationFormatted}`;
+      return [`${tagGroup}|${stats.count}|${avgDurationFormatted}`];
     })
     .sort((a, b) => {
       const countA = Number(a.split('|')[1]);

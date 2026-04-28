@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable unicorn/no-null */
-/* eslint-disable @typescript-eslint/strict-boolean-expressions */
-import { getEndDateOfWeek } from '../filter/dateUtils';
+
+import { getEndDateOfWeek } from '../filter/dateUtilities';
 
 /**
  * Get the end date of the week.

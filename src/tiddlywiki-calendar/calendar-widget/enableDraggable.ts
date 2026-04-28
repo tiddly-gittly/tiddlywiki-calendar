@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/strict-boolean-expressions */
 import { Draggable } from '@fullcalendar/interaction';
 import { IContext } from './initCalendar';
 
@@ -12,7 +11,7 @@ export function enableSidebarDraggable(context: IContext) {
       console.warn('enableSidebarDraggable: sidebarContainer not found');
       return;
     }
-    // eslint-disable-next-line no-new
+
     new Draggable(sidebarContainer, {
       itemSelector: '.tc-draggable',
       appendTo: context.containerElement,

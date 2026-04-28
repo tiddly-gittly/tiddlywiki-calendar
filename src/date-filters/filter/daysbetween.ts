@@ -1,7 +1,5 @@
-/* eslint-disable unicorn/no-null */
-/* eslint-disable @typescript-eslint/strict-boolean-expressions */
 import { IFilterOperator } from 'tiddlywiki';
-import { getDateToCompareFromTiddler, getDateToCompareOrTodayFromOperand, getDiffInDays } from './dateUtils';
+import { getDateToCompareFromTiddler, getDateToCompareOrTodayFromOperand, getDiffInDays } from './dateUtilities';
 
 /**
  * Count days between input and today.
