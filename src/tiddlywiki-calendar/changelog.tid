@@ -1,6 +1,12 @@
 title: $:/plugins/linonetwo/tw-calendar/changelog
 type: text/vnd.tiddlywiki
 
+! 2.5.0
+
+* Added recurrence quick actions, RRULE summaries, and occurrence-aware recurrence editing in create and preview popups.
+* Restored the reliable post-display caption focus fallback for the create-event modal and documented why the native focus attribute alone is not enough there.
+* Updated lint and typecheck compatibility for the current TypeScript toolchain.
+
 ! 2.4.2
 
 * Added a native date picker entry point on the calendar title for quick date jumping.
