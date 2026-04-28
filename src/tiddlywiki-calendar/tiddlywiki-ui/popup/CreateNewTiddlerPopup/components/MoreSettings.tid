@@ -1,0 +1,26 @@
+title: $:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/popup/CreateNewTiddlerPopup/components/MoreSettings
+tags: $:/tw-calendar/CreateNewTiddlerPopupTemplate
+
+<div class="tw-calendar-layout-form-row tw-calendar-layout-form-more-settings" style="margin-top: 16px;">
+  <div class="tw-calendar-details-group tw-calendar-more-settings-group">
+    <$reveal type="nomatch" state=<<qualify "$:/state/tw-calendar/popup/CreateNewTiddler/moreSettings">> text="show">
+      <$button set=<<qualify "$:/state/tw-calendar/popup/CreateNewTiddler/moreSettings">> setTo="show" class="tc-btn-invisible tw-calendar-details-summary">
+        <span class="tw-calendar-summary-icon">{{$:/core/images/options-button}}</span>
+        <span class="tw-calendar-summary-text">
+          <span>更多设置</span>
+        </span>
+      </$button>
+    </$reveal>
+    <$reveal type="match" state=<<qualify "$:/state/tw-calendar/popup/CreateNewTiddler/moreSettings">> text="show">
+      <$button set=<<qualify "$:/state/tw-calendar/popup/CreateNewTiddler/moreSettings">> setTo="hide" class="tc-btn-invisible tw-calendar-details-summary">
+        <span class="tw-calendar-summary-icon">{{$:/core/images/down-arrow}}</span>
+        <span class="tw-calendar-summary-text">
+          <span>收起更多</span>
+        </span>
+      </$button>
+      <div class="tw-calendar-details-content tw-calendar-more-settings-wrapper">
+        {{||$:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/popup/EventPreview/PluginDefaultViewTemplate}}
+      </div>
+    </$reveal>
+  </div>
+</div>

@@ -5,15 +5,12 @@ tags: $:/tw-calendar/CreateNewTiddlerPopupTemplate
   <$edit-text
     tiddler="$:/state/Calendar/PageLayout/create-tiddler-caption"
     field="draft.title"
-    tag="input"
     class="tc-titlebar tc-edit-texteditor tw-calendar-caption-input"
     default=""
     placeholder="输入日程标题"
     tabindex="1"
-    focus="true"
+    focus="yes"
     cancelPopups="yes"
     fileDrop="no"
-    inputmode="text"
-    autocomplete="off"
   />
 </div>
