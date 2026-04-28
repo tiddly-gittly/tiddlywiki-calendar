@@ -4,56 +4,79 @@ type: text/vnd.tiddlywiki
 
 \import [[$:/themes/tiddlywiki/vanilla/base]]
 
+.tw-calendar-layout-create-new-tiddler-popup,
+.tw-calendar-layout-event-preview-container,
+.tc-drop-down:has(.tw-calendar-layout-create-new-tiddler-popup) {
+  --tw-calendar-surface: <<colour tiddler-background>>;
+  --tw-calendar-editor-surface: <<colour tiddler-editor-background>>;
+  --tw-calendar-surface-muted: color-mix(in srgb, <<colour tiddler-editor-background>> 80%, <<colour tiddler-background>>);
+  --tw-calendar-surface-hover: color-mix(in srgb, <<colour tiddler-editor-background>> 60%, <<colour tiddler-background>>);
+  --tw-calendar-surface-alt: color-mix(in srgb, <<colour tiddler-editor-background>> 90%, <<colour tiddler-background>>);
+  --tw-calendar-border: <<colour tiddler-editor-border>>;
+  --tw-calendar-border-soft: color-mix(in srgb, <<colour tiddler-editor-border>> 75%, transparent);
+  --tw-calendar-text: <<colour foreground>>;
+  --tw-calendar-text-muted: <<colour muted-foreground>>;
+  --tw-calendar-accent: <<colour primary>>;
+  --tw-calendar-accent-soft: color-mix(in srgb, <<colour primary>> 14%, transparent);
+  --tw-calendar-accent-border: color-mix(in srgb, <<colour primary>> 45%, <<colour tiddler-editor-border>>);
+  --tw-calendar-shadow-subtle: 0 2px 8px color-mix(in srgb, <<colour foreground>> 6%, transparent);
+  --tw-calendar-shadow-strong: 0 4px 20px color-mix(in srgb, <<colour foreground>> 12%, transparent);
+  --tw-calendar-button-bg: <<colour button-background>>;
+  --tw-calendar-button-bg-hover: <<colour button-background-hover>>;
+  --tw-calendar-button-fg: <<colour button-foreground>>;
+  --tw-calendar-button-border: <<colour button-border>>;
+}
+
 /* Modal container colors */
 .tw-calendar-layout-create-new-tiddler-popup {
-  background: <<colour tiddler-background>>;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  background: var(--tw-calendar-surface);
+  box-shadow: var(--tw-calendar-shadow-strong);
 }
 
 /* Tags and alarms section colors */
 .tw-calendar-layout-create-new-tiddler-popup .tw-calendar-tags-input,
 .tw-calendar-alarms {
-  background: <<colour tiddler-editor-background>>;
-  border: 1px solid <<colour tiddler-editor-border>>;
+  background: var(--tw-calendar-editor-surface);
+  border: 1px solid var(--tw-calendar-border);
 }
 
 /* Input fields colors */
 .tw-calendar-caption-input,
 .tw-calendar-text-input {
-  background: <<colour tiddler-editor-background>>;
-  border: 1px solid <<colour tiddler-editor-border>>;
-  color: <<colour foreground>>;
+  background: var(--tw-calendar-editor-surface);
+  border: 1px solid var(--tw-calendar-border);
+  color: var(--tw-calendar-text);
 }
 
 .tw-calendar-caption-input:focus,
 .tw-calendar-text-input:focus {
-  border-color: <<colour primary>>;
-  outline: 2px solid <<colour primary>>;
+  border-color: var(--tw-calendar-accent);
+  outline: 2px solid var(--tw-calendar-accent);
   outline-offset: 2px;
 }
 
 /* Label text color */
 .tw-calendar-layout-create-new-tiddler-popup small {
-  color: <<colour muted-foreground>>;
+  color: var(--tw-calendar-text-muted);
 }
 
 /* Event preview container colors */
 .tw-calendar-layout-event-preview-container {
-  background: <<colour tiddler-background>>;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  background: var(--tw-calendar-surface);
+  box-shadow: var(--tw-calendar-shadow-strong);
 }
 
 /* Event preview input colors */
 .tw-calendar-layout-event-preview-container .tw-calendar-caption-input,
 .tw-calendar-layout-event-preview-container .tw-calendar-text-input {
-  background: <<colour tiddler-editor-background>>;
-  border: 1px solid <<colour tiddler-editor-border>>;
-  color: <<colour foreground>>;
+  background: var(--tw-calendar-editor-surface);
+  border: 1px solid var(--tw-calendar-border);
+  color: var(--tw-calendar-text);
 }
 
 .tw-calendar-layout-event-preview-container .tw-calendar-caption-input:focus,
 .tw-calendar-layout-event-preview-container .tw-calendar-text-input:focus {
-  border-color: <<colour primary>>;
-  outline: 2px solid <<colour primary>>;
+  border-color: var(--tw-calendar-accent);
+  outline: 2px solid var(--tw-calendar-accent);
   outline-offset: 2px;
 }

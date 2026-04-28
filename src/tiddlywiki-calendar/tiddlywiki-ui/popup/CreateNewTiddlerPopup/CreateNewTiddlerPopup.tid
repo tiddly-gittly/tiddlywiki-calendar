@@ -7,9 +7,26 @@ footer: {{$:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/popup/C
 \define lingo-base() $:/plugins/linonetwo/tw-calendar/language/
 
 <div class="tw-calendar-layout-create-new-tiddler-popup">
+  <div class="tw-calendar-layout-form-group tw-calendar-layout-form-title">
+    <!-- Keep focus="true" to document the intent, but in this modal it is not sufficient by itself.
+         The reliable post-display focus fallback lives in src/tiddlywiki-calendar/calendar-widget/handlers.ts. -->
+    <$edit-text
+      tiddler="$:/state/Calendar/PageLayout/create-tiddler-caption"
+      field="draft.title"
+      class="tc-titlebar tc-edit-texteditor tw-calendar-caption-input"
+      default=""
+      placeholder="输入日程标题"
+      tabindex="1"
+      focus="true"
+      cancelPopups="yes"
+      fileDrop="no"
+    />
+  </div>
   <$let currentTiddler="$:/state/Calendar/PageLayout/create-tiddler">
-    <$list filter="[all[shadows+tiddlers]tag[$:/tw-calendar/CreateNewTiddlerPopupTemplate]!is[draft]]" variable="listItem">
-      <$transclude tiddler=<<listItem>>/>
-    </$list>
+    <$vars twCalendarOccurrenceStartDate={{$:/state/Calendar/PageLayout/create-tiddler!!startDate}} twCalendarOccurrenceEndDate={{$:/state/Calendar/PageLayout/create-tiddler!!endDate}} twCalendarRecurrenceEditorStateTitle="$:/temp/tw-calendar/recurrence-editor/$:/state/Calendar/PageLayout/create-tiddler">
+      <$list filter="[all[shadows+tiddlers]tag[$:/tw-calendar/CreateNewTiddlerPopupTemplate]!is[draft]]" variable="listItem">
+        <$transclude tiddler=<<listItem>>/>
+      </$list>
+    </$vars>
   </$let>
 </div>

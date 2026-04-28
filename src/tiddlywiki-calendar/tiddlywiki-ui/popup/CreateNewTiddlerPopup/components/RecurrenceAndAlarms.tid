@@ -9,7 +9,7 @@ tags: $:/tw-calendar/CreateNewTiddlerPopupTemplate
         <span class="tw-calendar-summary-icon">{{$:/core/images/refresh-button}}</span>
         <span class="tw-calendar-summary-text">
           <$list filter="[<currentTiddler>has[rrule]]" emptyMessage="不重复">
-            <$view field="rrule"/>
+            <$macrocall $name="rrule-summary-macro" rrule={{!!rrule}} />
           </$list>
         </span>
       </$button>
@@ -19,7 +19,7 @@ tags: $:/tw-calendar/CreateNewTiddlerPopupTemplate
         <span class="tw-calendar-summary-icon">{{$:/core/images/refresh-button}}</span>
         <span class="tw-calendar-summary-text">
           <$list filter="[<currentTiddler>has[rrule]]" emptyMessage="不重复">
-            <$view field="rrule"/>
+            <$macrocall $name="rrule-summary-macro" rrule={{!!rrule}} />
           </$list>
         </span>
       </$button>

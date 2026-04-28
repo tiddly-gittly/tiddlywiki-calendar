@@ -3,17 +3,17 @@ tags: $:/tw-calendar/EventPreviewMiniViewTemplate
 
 \procedure lingo-base() $:/plugins/linonetwo/tw-calendar/language/
 
+<$wikify name="intervalDefault" text="<$macrocall $name='rrule-field-macro' rrule={{!!rrule}} field='INTERVAL' fallback='1' />">
+<$wikify name="countDefault" text="<$macrocall $name='rrule-field-macro' rrule={{!!rrule}} field='COUNT' fallback='' />">
+
 <div class="tw-calendar-recurrence-input">
   <div><<lingo Modal/CreateEvent/Label/Recurrence>></div>
-  <$edit-text
-    tag=input
-    field="rrule"
-    class="tc-edit-texteditor"
-    placeholder="FREQ=MONTHLY;INTERVAL=1"
-    cancelPopups="yes"
-    fileDrop="no"
-  />
-  <div class="tw-calendar-layout-event-preview-top-buttons">
+  <$list filter="[<currentTiddler>has[rrule]]" emptyMessage={{$:/language/Modal/CreateEvent/Recurrence/None}}>
+    <div class="tw-calendar-recurrence-human-summary">
+      <$macrocall $name="rrule-summary-macro" rrule={{!!rrule}} />
+    </div>
+  </$list>
+  <div class="tw-calendar-layout-event-preview-top-buttons tw-calendar-recurrence-presets">
     <$button class="tw-calendar-recurrence-button">
       <<lingo Modal/CreateEvent/Recurrence/None>>
       <$action-setfield $tiddler=<<currentTiddler>> rrule="" />
@@ -35,23 +35,87 @@ tags: $:/tw-calendar/EventPreviewMiniViewTemplate
       <$action-setfield $tiddler=<<currentTiddler>> rrule="FREQ=YEARLY" />
     </$button>
   </div>
-  <div class="tw-calendar-recurrence-interval">
+  <div class="tw-calendar-recurrence-quick-action tw-calendar-recurrence-interval">
     <span><<lingo Modal/CreateEvent/Label/Interval>></span>
     <$edit-text
       tag=input
       type=number
-      field="rrule-interval"
+      tiddler=<<twCalendarRecurrenceEditorStateTitle>>
+      field="interval"
       class="tc-edit-texteditor"
       placeholder="2"
-      default="2"
+      default=<<intervalDefault>>
       min="1"
       cancelPopups="yes"
       fileDrop="no"
     />
     <$button class="tw-calendar-recurrence-button">
       <<lingo Modal/CreateEvent/Label/ApplyInterval>>
-      <$action-setfield $tiddler=<<currentTiddler>> rrule={{{ [<currentTiddler>get[rrule]else[FREQ=DAILY]] [<currentTiddler>get[rrule-interval]else[2]addprefix[;INTERVAL=]] +[join[]] }}} />
+      <$wikify name="nextValue" text={{{ [<twCalendarRecurrenceEditorStateTitle>get[interval]else<intervalDefault>] }}}>
+      <$wikify name="nextRule" text="<$macrocall $name='rrule-action-macro' action='set-interval' rrule={{!!rrule}} value=<<nextValue>> startDate=<<twCalendarOccurrenceStartDate>> endDate=<<twCalendarOccurrenceEndDate>> />">
+        <$action-setfield $tiddler=<<currentTiddler>> rrule=<<nextRule>> />
+      </$wikify>
+      </$wikify>
     </$button>
+  </div>
+  <$list filter="[<currentTiddler>has[rrule]]">
+    <div class="tw-calendar-recurrence-quick-action tw-calendar-recurrence-count">
+      <span><<lingo Modal/CreateEvent/Label/Count>></span>
+      <$edit-text
+        tag=input
+        type=number
+        tiddler=<<twCalendarRecurrenceEditorStateTitle>>
+        field="count"
+        class="tc-edit-texteditor"
+        placeholder="10"
+        default=<<countDefault>>
+        min="1"
+        cancelPopups="yes"
+        fileDrop="no"
+      />
+      <$button class="tw-calendar-recurrence-button">
+        <<lingo Modal/CreateEvent/Label/ApplyCount>>
+        <$wikify name="nextValue" text={{{ [<twCalendarRecurrenceEditorStateTitle>get[count]else<countDefault>] }}}>
+        <$wikify name="nextRule" text="<$macrocall $name='rrule-action-macro' action='set-count' rrule={{!!rrule}} value=<<nextValue>> startDate=<<twCalendarOccurrenceStartDate>> endDate=<<twCalendarOccurrenceEndDate>> />">
+          <$action-setfield $tiddler=<<currentTiddler>> rrule=<<nextRule>> />
+        </$wikify>
+        </$wikify>
+      </$button>
+    </div>
+    <div class="tw-calendar-recurrence-quick-action tw-calendar-recurrence-until">
+      <$button class="tw-calendar-recurrence-button tw-calendar-recurrence-button-secondary">
+        <<lingo Modal/CreateEvent/Label/UntilCurrentOccurrence>>
+        <$wikify name="nextRule" text="<$macrocall $name='rrule-action-macro' action='set-until-current' rrule={{!!rrule}} startDate=<<twCalendarOccurrenceStartDate>> endDate=<<twCalendarOccurrenceEndDate>> />">
+          <$action-setfield $tiddler=<<currentTiddler>> rrule=<<nextRule>> />
+        </$wikify>
+      </$button>
+    </div>
+  </$list>
+  <div class="tw-calendar-recurrence-advanced">
+    <$reveal type="nomatch" state=<<qualify "$:/state/tw-calendar/popup/CreateNewTiddler/recurrence-advanced">> text="show">
+      <$button set=<<qualify "$:/state/tw-calendar/popup/CreateNewTiddler/recurrence-advanced">> setTo="show" class="tc-btn-invisible tw-calendar-recurrence-advanced-toggle">
+        <<lingo Modal/CreateEvent/Label/Advanced>>
+      </$button>
+    </$reveal>
+    <$reveal type="match" state=<<qualify "$:/state/tw-calendar/popup/CreateNewTiddler/recurrence-advanced">> text="show">
+      <$button set=<<qualify "$:/state/tw-calendar/popup/CreateNewTiddler/recurrence-advanced">> setTo="hide" class="tc-btn-invisible tw-calendar-recurrence-advanced-toggle">
+        <<lingo Modal/CreateEvent/Label/HideAdvanced>>
+      </$button>
+      <div class="tw-calendar-recurrence-advanced-content">
+        <label class="tw-calendar-recurrence-raw-label"><<lingo Modal/CreateEvent/Label/RawRRule>></label>
+        <$edit-text
+          tag=input
+          field="rrule"
+          class="tc-edit-texteditor tw-calendar-recurrence-raw-input"
+          placeholder="FREQ=MONTHLY;INTERVAL=1"
+          cancelPopups="yes"
+          fileDrop="no"
+        />
+      </div>
+    </$reveal>
   </div>
   <small><<lingo Modal/CreateEvent/Label/RecurrenceDescription>></small>
 </div>
+
+</$wikify>
+</$wikify>

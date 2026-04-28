@@ -1,20 +1,27 @@
-/* eslint-disable @typescript-eslint/strict-boolean-expressions */
-/* eslint-disable unicorn/no-null */
 import { Modal } from '$:/core/modules/utils/dom/modal.js';
 import { autoPlacement, computePosition, shift, size } from '@floating-ui/dom';
 import type { CalendarOptions, EventApi } from '@fullcalendar/core';
 import type { EventImpl } from '@fullcalendar/core/internal';
+import debounce from 'lodash/debounce';
 import { ITiddlerFields } from 'tiddlywiki';
 import { draftTiddlerCaptionTitle, draftTiddlerTitle, getIsSearchMode, isMobile } from './constants';
 import type { IContext } from './initCalendar';
-import debounce from 'lodash/debounce';
+
+type ReceivedEventInfo = {
+  draggedEl: HTMLElement;
+  event: EventApi;
+};
 
 export function getHandlers(context: IContext): CalendarOptions {
+  const focusCreateNewTiddlerPopupTitleInput = () => {
+    const titleInputElement = document.querySelector<HTMLInputElement>('.tw-calendar-layout-create-new-tiddler-popup .tw-calendar-caption-input');
+    titleInputElement?.focus();
+  };
+
   function putEvent(event: EventImpl | EventApi, newTiddler?: ITiddlerFields) {
-    // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
     // when an existed event is dragged to full-day, the `end` is null, but it should have a title
     if (event.start === null || (event.end === null && !event.title)) return;
-    const originalEventTiddler = newTiddler ?? $tw.wiki.getTiddler(event.title ?? '')?.fields;
+    const originalEventTiddler = newTiddler ?? $tw.wiki.getTiddler(event.title)?.fields;
     if (originalEventTiddler === undefined) return;
     const startDate = $tw.utils.stringifyDate(event.start);
     // when drag to full-date event, the `end` will be `null`, make it full-day event by add a day to it.
@@ -28,7 +35,7 @@ export function getHandlers(context: IContext): CalendarOptions {
       modified: new Date(),
     });
   }
-  const debouncedCreateEvent = debounce((info) => {
+  const debouncedCreateEvent = debounce((info: ReceivedEventInfo) => {
     const randomTitle = $tw.utils.formatDateString(new Date(), '[UTC]YYYY0MM0DD0hh0mm0ss0XXX');
     const tags = $tw.utils.parseStringArray(info.draggedEl.dataset.tags ?? '');
     putEvent(info.event, {
@@ -42,7 +49,6 @@ export function getHandlers(context: IContext): CalendarOptions {
   }, 300);
 
   const handlers: CalendarOptions = {
-    // eslint-disable-next-line @typescript-eslint/no-misused-promises
     eventDidMount: (info) => {
       // In searchResultList, we want to reverse the DOM order so newest days appear first
       // We do this reliably by deferring it to a microtask after events finish rendering
@@ -53,21 +59,21 @@ export function getHandlers(context: IContext): CalendarOptions {
           queueMicrotask(() => {
             delete tbody.dataset.reverseScheduled;
             if (tbody.dataset.reversed === 'true') return;
-            
+
             const children = Array.from(tbody.children);
             if (children.length === 0) return;
 
             const reversedGroups = [];
             let currentGroup: Element[] = [];
-            
-            for (const el of children) {
-              if (el.classList.contains('fc-list-day')) {
+
+            for (const element of children) {
+              if (element.classList.contains('fc-list-day')) {
                 if (currentGroup.length > 0) {
                   reversedGroups.unshift(currentGroup);
                 }
-                currentGroup = [el];
+                currentGroup = [element];
               } else {
-                currentGroup.splice(1, 0, el);
+                currentGroup.splice(1, 0, element);
               }
             }
             if (currentGroup.length > 0) {
@@ -75,8 +81,8 @@ export function getHandlers(context: IContext): CalendarOptions {
             }
 
             tbody.innerHTML = '';
-            reversedGroups.forEach(group => {
-              group.forEach(el => tbody.appendChild(el));
+            reversedGroups.forEach((group) => {
+              group.forEach((element) => tbody.appendChild(element));
             });
             tbody.dataset.reversed = 'true';
           });
@@ -85,13 +91,13 @@ export function getHandlers(context: IContext): CalendarOptions {
     },
     datesSet: (info) => {
       // Add native date picker to the toolbar title for quick jumping
-      const rootEl = context.containerElement;
-      if (!rootEl) return;
-      const titleEl = rootEl.querySelector('.fc-toolbar-title') as HTMLElement | null;
-      if (titleEl) {
-        let input = titleEl.querySelector<HTMLInputElement>('.tw-calendar-date-picker-hidden');
+      const rootElement = context.containerElement;
+      if (!rootElement) return;
+      const titleElement = rootElement.querySelector<HTMLElement>('.fc-toolbar-title');
+      if (titleElement) {
+        let input = titleElement.querySelector<HTMLInputElement>('.tw-calendar-date-picker-hidden');
         if (!input) {
-          titleEl.style.cursor = 'pointer';
+          titleElement.style.cursor = 'pointer';
           queueMicrotask(() => {
             input = document.createElement('input');
             input.type = 'date';
@@ -107,26 +113,30 @@ export function getHandlers(context: IContext): CalendarOptions {
               border: 'none',
               padding: '0',
             });
-            input.addEventListener('change', (e) => {
-              const target = e.target as HTMLInputElement;
+            input.addEventListener('change', (event) => {
+              const target = event.target as HTMLInputElement;
               if (target.value) {
                 // The value is YYYY-MM-DD. gotoDate expects a valid date or date string.
                 info.view.calendar.gotoDate(target.value);
               }
             });
-            titleEl.append(input);
-            titleEl.addEventListener('click', (e) => {
-              if (e.target !== input) {
+            titleElement.append(input);
+            titleElement.addEventListener('click', (event) => {
+              const pickerInput = input;
+              if (pickerInput === null || event.target === pickerInput) {
+                return;
+              }
+              if (event.target !== pickerInput) {
                 try {
-                  input?.showPicker();
+                  pickerInput.showPicker();
                 } catch {
                   // Fallback for older browsers
-                  input?.focus();
-                  input?.click();
+                  pickerInput.focus();
+                  pickerInput.click();
                 }
               }
             });
-            
+
             // Sync value: Approximate the viewed center date
             const midDate = new Date((info.start.getTime() + info.end.getTime()) / 2);
             // Format as local YYYY-MM-DD
@@ -146,6 +156,8 @@ export function getHandlers(context: IContext): CalendarOptions {
     eventClick: async (info) => {
       if (!context.widget) return;
       const previewWidgetDataName = 'tiddlywiki-calendar-widget-event-preview';
+      const recurrenceEditorStateTitle = `$:/temp/tw-calendar/recurrence-editor/${info.event.title}`;
+      $tw.wiki.deleteTiddler(recurrenceEditorStateTitle);
       // delete previous element if exist
       const previousEventPreviewElement = context.containerElement?.querySelector<HTMLDivElement>('.tiddlywiki-calendar-widget-event-preview');
       const removePopup = (popupElementToRemove: HTMLDivElement | null | undefined) => {
@@ -162,7 +174,7 @@ export function getHandlers(context: IContext): CalendarOptions {
         if (previousTitle === info.event.title) return;
       }
       const tiddler = $tw.wiki.getTiddler(info.event.title);
-      if (tiddler?.hasField?.('_is_skinny')) {
+      if (tiddler?.hasField('_is_skinny')) {
         // trigger lazyLoad after render, don't block UI rendering.
         setTimeout(() => {
           // Tell any listeners about the need to lazily load $tw.wiki tiddler
@@ -175,12 +187,13 @@ export function getHandlers(context: IContext): CalendarOptions {
       eventPreviewElement.classList.add('tiddlywiki-calendar-widget-event-preview');
       eventPreviewElement.dataset.tiddler = info.event.title;
 
-      if (!eventPreviewElement) return;
       const newWidgetNode = context.widget.makeChildWidget({
         type: 'tiddler',
         children: $tw.wiki.parseText(
           'text/vnd.tiddlywiki',
-          `{{${info.event.title}||$:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/popup/EventPreview}}`,
+          `<$vars twCalendarOccurrenceStartDate="${$tw.utils.stringifyDate(info.event.start ?? new Date())}" twCalendarOccurrenceEndDate="${
+            info.event.end ? $tw.utils.stringifyDate(info.event.end) : ''
+          }" twCalendarRecurrenceEditorStateTitle="${recurrenceEditorStateTitle}">{{${info.event.title}||$:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/popup/EventPreview}}</$vars>`,
           { parseAsInline: true },
         ).tree,
       }, { variables: context.widget.variables });
@@ -214,13 +227,11 @@ export function getHandlers(context: IContext): CalendarOptions {
       });
       // add event listener to close button
       const closeButtons = eventPreviewElement.querySelectorAll<HTMLButtonElement>('button.tw-calendar-layout-event-preview-close-button');
-      if (closeButtons) {
-        closeButtons.forEach(closeButton => {
-          closeButton.addEventListener('click', () => {
-            removePopup(eventPreviewElement);
-          });
+      closeButtons.forEach((closeButton) => {
+        closeButton.addEventListener('click', () => {
+          removePopup(eventPreviewElement);
         });
-      }
+      });
     },
     /**
      * Triggered when a date/time selection is made.
@@ -229,6 +240,8 @@ export function getHandlers(context: IContext): CalendarOptions {
      */
     select(info) {
       if (context.readonly === true) return;
+      const recurrenceEditorStateTitle = '$:/temp/tw-calendar/recurrence-editor/$:/state/Calendar/PageLayout/create-tiddler';
+      $tw.wiki.deleteTiddler(recurrenceEditorStateTitle);
       let text = '';
       // handle full-date event, make them tw standard journal
       if (info.view.type === 'dayGridMonth') {
@@ -271,9 +284,7 @@ export function getHandlers(context: IContext): CalendarOptions {
         tags,
       });
       new Modal($tw.wiki).display('$:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/popup/CreateNewTiddlerPopup');
-      const titleInputElement = document.querySelector<HTMLInputElement>('.tw-calendar-layout-create-new-tiddler-popup > .tc-titlebar.tc-edit-texteditor');
-      // fix title not auto focus in modal
-      titleInputElement?.focus?.();
+      focusCreateNewTiddlerPopupTitleInput();
     },
     eventResize(info) {
       putEvent(info.event);
@@ -296,7 +307,7 @@ export function getHandlers(context: IContext): CalendarOptions {
     eventMouseEnter(info) {
       // use this until https://github.com/Jermolene/TiddlyWiki5/discussions/7989 fixed
       const tiddler = $tw.wiki.getTiddler(info.event.title);
-      if (tiddler?.hasField?.('_is_skinny')) {
+      if (tiddler?.hasField('_is_skinny')) {
         // trigger lazyLoad after render, don't block UI rendering.
         setTimeout(() => {
           // Tell any listeners about the need to lazily load $tw.wiki tiddler

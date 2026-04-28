@@ -19,6 +19,7 @@ title: $:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/popup/Crea
 <$action-setfield      $tiddler="$:/state/Calendar/PageLayout/create-tiddler" alarms="" />
 <$action-deletetiddler $tiddler="$:/temp/time/alarms_input/$:/state/Calendar/PageLayout/create-tiddler"  />
 <$action-deletetiddler $tiddler="$:/temp/time/alarms_msg/$:/state/Calendar/PageLayout/create-tiddler" />
+<$action-deletetiddler $tiddler="$:/temp/tw-calendar/recurrence-editor/$:/state/Calendar/PageLayout/create-tiddler" />
 \end
 
 <!-- learn this from twMat https://groups.google.com/g/tiddlywiki/c/XXbzgRmcXF0 -->

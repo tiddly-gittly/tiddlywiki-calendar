@@ -15,7 +15,7 @@ tags: $:/tw-calendar/EventPreviewMiniViewTemplate
         $basetitle="$:/state/Calendar/PageLayout/EventCalendar/initialParams"
         $overwrite="yes"
         initialView="timeGridDay"
-        initialDate={{!!startDate}}
+        initialDate=<<twCalendarOccurrenceStartDate>>
       >
       <!-- After initial value is set, switch to the layout and let it use initial values -->
         <$action-setfield $tiddler="$:/layout" text="$:/plugins/linonetwo/tw-calendar/tiddlywiki-ui/PageLayout/EventsCalendarLayout" />
