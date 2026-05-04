@@ -46,7 +46,7 @@ export function getEventContent(context: IContext): CustomContentGenerator<Event
      * This might be empty due to lazy load.
      * But Lazy loading is very slow, make drag-create lagging on first open, so disable it here. Search `lazyLoad` in this repo to find where we do it.
      */
-    const tiddlerText = tiddler.fields.text;
+    const tiddlerText = tiddler.getFieldString('text', '');
     let captionResult: string | undefined | null;
     if (typeof tiddler.fields.caption === 'string' && context.widget !== undefined) {
       if (tiddler.fields.caption.includes('{{')) {
@@ -86,11 +86,11 @@ export function getEventContent(context: IContext): CustomContentGenerator<Event
       return captionElement;
     }
     // on timeGridDay view, show full text, but ignore too long text that causes lagging
-    const tiddlerType = typeof tiddler.fields.type === 'string' ? tiddler.fields.type : '';
+    const tiddlerType = tiddler.getFieldString('type', '');
     const textElement = allowedTiddlerTypeToPreview.includes(tiddlerType)
       ? createElement('div', {}, tiddlerText.substring(0, 2000))
       : createElement('div', {}, `(${tiddler.fields.type} too large)`);
-    const tagsElement = createElement('div', { class: 'fc-event-main-tags' }, tiddler.fields.tags?.map((tag) => createElement('span', {}, tag)));
+    const tagsElement = createElement('div', { class: 'fc-event-main-tags' }, tiddler.getFieldList('tags').map((tag) => createElement('span', {}, tag)));
     const contents = createElement('div', {}, [captionElement, tagsElement, timeElement, durationElement, textElement]);
     if (duration >= DURATION_THRESHOLD_FOR_SHOWING_TIME_AT_BOTTOM) {
       return createElement('div', { style: 'height: 100%; display: flex; flex-direction: column; justify-content: space-between;' }, [

@@ -1,6 +1,12 @@
 title: $:/plugins/linonetwo/tw-calendar/changelog
 type: text/vnd.tiddlywiki
 
+! 2.5.1
+
+* Fixed calendar event preview rendering for tiddlers that do not have a text field.
+* Added a Playwright regression test covering missing-text event previews.
+* Enforced typecheck and lint checks in validation and release workflows.
+
 ! 2.5.0
 
 * Added recurrence quick actions, RRULE summaries, and occurrence-aware recurrence editing in create and preview popups.

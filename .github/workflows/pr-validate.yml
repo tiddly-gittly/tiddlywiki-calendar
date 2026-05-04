@@ -52,13 +52,15 @@ jobs:
       - name: Install Dependencies
         run: pnpm install
 
+      - name: Run Type Check
+        run: pnpm run check
+
       - name: Install Playwright Browser
         if: ${{ hashFiles('wiki/tiddlers/tests/playwright/**/*.ts') != '' }}
         run: pnpm exec playwright install --with-deps chromium
 
       - name: Lint Code
         run: pnpm exec eslint ./src --max-warnings 0
-        continue-on-error: true
 
       - name: Run Tests
         run: pnpm run test
