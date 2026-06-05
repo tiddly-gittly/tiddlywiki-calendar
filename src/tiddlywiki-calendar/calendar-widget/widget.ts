@@ -12,6 +12,7 @@ class CalendarWidget extends Widget {
   #calendar?: Calendar;
   #containerElement?: HTMLDivElement;
   #mountElement?: HTMLDivElement;
+  #debouncedTriggerRefetch: () => void;
   connectionObserver = new ConnectionObserver(entries => {
     for (const { connected } of entries) {
       if (!connected) {
@@ -24,6 +25,9 @@ class CalendarWidget extends Widget {
   constructor(parseTreeNode: IParseTreeNode, options?: IWidgetInitialiseOptions) {
     super(parseTreeNode, options);
     this.refreshTiddlerEventCalendar = debounce(this.refreshTiddlerEventCalendar.bind(this), 500);
+    this.#debouncedTriggerRefetch = debounce(() => {
+      this.#triggerRefetch();
+    }, 300);
   }
 
   /**
@@ -72,7 +76,8 @@ class CalendarWidget extends Widget {
     }
     if (shouldRefreshChangedTiddlers) {
       if (shouldRefreshImmediately) {
-        this.#triggerRefetch();
+        // Use debounced refetch for draft tiddler changes to avoid frequent re-rendering during user input (especially on mobile with voice input).
+        this.#debouncedTriggerRefetch();
       } else {
         this.refreshTiddlerEventCalendar();
       }
