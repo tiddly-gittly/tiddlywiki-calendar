@@ -1,6 +1,14 @@
 title: $:/plugins/linonetwo/tw-calendar/changelog
 type: text/vnd.tiddlywiki
 
+! 2.5.2
+
+* Debounced draft tiddler refetch to fix mobile input lag (especially voice input).
+* Replaced `<$edit-text>` with `<$edit>` widget in create and preview popups for global editor plugin support (CodeMirror, ProseMirror).
+* Unified event preview popup UI with create popup: same inputs, tags, time, recurrence, alarms, and more-settings layout.
+* Fixed mobile preview popup occlusion by using runtime viewport detection and fixed positioning.
+* Refactored preview popup to reuse `CreateNewTiddlerPopup` shared components instead of maintaining duplicate preview-specific ones.
+
 ! 2.5.1
 
 * Fixed calendar event preview rendering for tiddlers that do not have a text field.
