@@ -1,5 +1,7 @@
 title: $:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/popup/EditAlarm
-tags: $:/tw-calendar/EventPreviewMiniViewTemplate
+
+<!-- NOTE: Alarm editor is now provided by the shared RecurrenceAndAlarms component.
+     Kept for backward compatibility (still transcluded by RecurrenceAndAlarms). -->
 
 <div class="tw-calendar-alarms">
   {{||$:/plugins/linonetwo/tw-calendar/lib/TiddlyTools/Time/Alarms}}

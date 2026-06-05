@@ -11,7 +11,48 @@ title: $:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/popup/Even
     class={{{ tc-tiddler-exists tc-tiddler-frame tc-tiddler-view-frame [{!!class}] +[join[ ]] }}}
     role="article"
   >
-    <!-- ignore system view templates (for example title and text, which already exist as input, so don't need them), only support UI added by other plugins (for example SuperTag) -->
+    <!-- Top buttons: open in story river / close -->
+    {{||$:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/popup/EventPreview/TopButtons}}
+
+    <!-- Title input: same style as create popup, editing actual tiddler caption -->
+    <div class="tw-calendar-layout-form-group tw-calendar-layout-form-title">
+      <$edit
+        field="caption"
+        tag="input"
+        class="tc-titlebar tc-edit-texteditor tw-calendar-caption-input"
+        tabindex=1
+        focus={{{ [{$:/config/AutoFocus}match[title]then[true]] ~[[false]] }}}
+        cancelPopups="yes"
+        fileDrop=no
+        inputmode="text"
+        autocomplete="off"
+      />
+    </div>
+
+    <!-- Body text: reuse create popup component -->
+    {{||$:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/popup/CreateNewTiddlerPopup/components/Text}}
+
+    <!-- Tags: reuse create popup component -->
+    {{||$:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/popup/CreateNewTiddlerPopup/components/Tags}}
+
+    <!-- Time range: reuse create popup component -->
+    {{||$:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/popup/CreateNewTiddlerPopup/components/Time}}
+
+    <!-- Recurrence and Alarms: reuse create popup component (collapsed by default) -->
+    {{||$:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/popup/CreateNewTiddlerPopup/components/RecurrenceAndAlarms}}
+
+    <!-- More Settings: reuse create popup component (collapsed by default) -->
+    {{||$:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/popup/CreateNewTiddlerPopup/components/MoreSettings}}
+
+    <!-- Bottom buttons: delete -->
+    <div class="tw-calendar-layout-event-preview-bottom-buttons">
+      <$button tooltip={{$:/language/Buttons/Delete/Hint}} aria-label={{$:/language/Buttons/Delete/Caption}} class="tw-calendar-layout-event-preview-close-button">
+        <$text text={{$:/language/Buttons/Delete/Caption}}/> {{$:/core/images/delete-button}}
+        <$action-sendmessage $message="tm-delete-tiddler" param=<<currentTiddler>>/>
+      </$button>
+    </div>
+
+    <!-- Extension point for plugins -->
     <$list filter="[all[shadows+tiddlers]tag[$:/tw-calendar/EventPreviewMiniViewTemplate]!is[draft]]" variable="listItem">
       <$transclude tiddler=<<listItem>>/>
     </$list>

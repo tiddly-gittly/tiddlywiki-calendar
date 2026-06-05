@@ -1,6 +1,7 @@
 /* ============================================================
    Event Preview Popup Styles
-   Aligned with CreateNewTiddlerPopup.css for visual consistency
+   Preview popup reuses CreateNewTiddlerPopup components and styles.
+   This file only contains preview-specific container and positioning rules.
    ============================================================ */
 
 /* Container inside the floating popup */
@@ -24,7 +25,7 @@
 }
 
 /* ---------- Buttons ---------- */
-.tw-calendar-layout-event-preview-container .tw-calendar-layout-event-preview-top-buttons {
+.tw-calendar-layout-event-preview-top-buttons {
   width: 100%;
   min-height: 40px;
   display: flex;
@@ -33,7 +34,7 @@
   flex-shrink: 0;
 }
 
-.tw-calendar-layout-event-preview-container .tw-calendar-layout-event-preview-bottom-buttons {
+.tw-calendar-layout-event-preview-bottom-buttons {
   width: 100%;
   min-height: 30px;
   display: flex;
@@ -42,46 +43,7 @@
   flex-shrink: 0;
 }
 
-/* ---------- Inputs (aligned with CreateNewTiddlerPopup.css) ---------- */
-.tw-calendar-layout-event-preview-container .tw-calendar-caption-input,
-.tw-calendar-layout-event-preview-container .tw-calendar-text-input {
-  width: 100%;
-  border-radius: 8px;
-  padding: 12px 14px;
-  font-size: 1rem;
-  border: 1px solid transparent;
-  background: var(--tw-calendar-editor-surface);
-  box-sizing: border-box;
-  transition: all 0.2s ease;
-}
-
-.tw-calendar-layout-event-preview-container .tw-calendar-caption-input:focus,
-.tw-calendar-layout-event-preview-container .tw-calendar-text-input:focus {
-  outline: none;
-  background: var(--tw-calendar-surface);
-  border-color: var(--tw-calendar-accent);
-  box-shadow: 0 0 0 3px var(--tw-calendar-accent-soft);
-}
-
-.tw-calendar-layout-event-preview-container .tw-calendar-caption-input {
-  font-size: 1.25rem;
-  font-weight: 600;
-  padding: 14px 16px;
-}
-
-.tw-calendar-layout-event-preview-container .tw-calendar-text-input {
-  min-height: 80px;
-  resize: vertical;
-  font-family: inherit;
-  line-height: 1.6;
-}
-
-/* Time range preview spacing */
-.tw-calendar-layout-event-preview-container .tw-calendar-time-range-preview {
-  margin-top: 0;
-}
-
-/* ---------- Floating popup root (positioned by floating-ui) ---------- */
+/* ---------- Floating popup root (positioned by floating-ui on desktop) ---------- */
 .tiddlywiki-calendar-widget-event-preview {
   width: min-content;
   min-width: 30vw;
@@ -95,23 +57,6 @@
   z-index: 100;
   opacity: 0.9;
   backdrop-filter: blur(10px);
-}
-
-/* ---------- Animations ---------- */
-.tw-calendar-layout-event-preview-container .tw-calendar-caption-input,
-.tw-calendar-layout-event-preview-container .tw-calendar-text-input {
-  animation: fadeIn 0.2s ease-in-out;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-4px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
 
 /* ============================================================
@@ -131,11 +76,5 @@
 
   .tw-calendar-layout-event-preview-container .tc-tiddler-frame {
     padding: 12px;
-  }
-
-  .tw-calendar-layout-event-preview-container .tw-calendar-caption-input,
-  .tw-calendar-layout-event-preview-container .tw-calendar-text-input {
-    font-size: 16px;
-    padding: 10px 14px;
   }
 }

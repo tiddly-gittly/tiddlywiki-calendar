@@ -1,5 +1,7 @@
 title: $:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/popup/EventPreview/EditTitleAndText
-tags: $:/tw-calendar/EventPreviewMiniViewTemplate
+
+<!-- NOTE: Title and body editors are now inline in EventPreview.tid using shared
+     CreateNewTiddlerPopup components. Kept for backward compatibility. -->
 
 <$edit
   field="caption"
@@ -9,19 +11,6 @@ tags: $:/tw-calendar/EventPreviewMiniViewTemplate
   focus={{{ [{$:/config/AutoFocus}match[title]then[true]] ~[[false]] }}}
   cancelPopups="yes"
   fileDrop=no
-  inputmode="text"
-  autocomplete="off"
-/>
-<$edit
-  field="text"
-  class="tc-edit-texteditor tc-edit-texteditor-body tw-calendar-text-input"
-  default=""
-  placeholder={{$:/language/EditTemplate/Body/Placeholder}}
-  tabindex=2
-  focus=false
-  cancelPopups="yes"
-  fileDrop=no
-  minHeight="80px"
   inputmode="text"
   autocomplete="off"
 />

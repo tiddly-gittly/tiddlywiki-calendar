@@ -1,5 +1,7 @@
 title: $:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/popup/EventPreview/EditTags
-tags: $:/tw-calendar/EventPreviewMiniViewTemplate
+
+<!-- NOTE: Tags editor is now provided by the shared CreateNewTiddlerPopup/components/Tags.
+     Kept for backward compatibility. -->
 
 <div class="tw-calendar-tags-input">
   <div class="tw-calendar-tags-input-new-tag">
