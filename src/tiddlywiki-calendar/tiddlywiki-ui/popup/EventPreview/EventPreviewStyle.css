@@ -1,84 +1,92 @@
+/* ============================================================
+   Event Preview Popup Styles
+   Aligned with CreateNewTiddlerPopup.css for visual consistency
+   ============================================================ */
+
+/* Container inside the floating popup */
 .tw-calendar-layout-event-preview-container {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  height: 100%;
   width: 100%;
+  height: 100%;
   overflow-y: auto;
-  max-height: 100vh;
   border-radius: 8px;
-  overflow: hidden;
+  box-sizing: border-box;
 }
 
 .tw-calendar-layout-event-preview-container .tc-tiddler-frame {
   padding: 16px;
   margin: 0;
   max-width: 100%;
-  max-height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
+/* ---------- Buttons ---------- */
 .tw-calendar-layout-event-preview-container .tw-calendar-layout-event-preview-top-buttons {
   width: 100%;
-  height: 40px;
+  min-height: 40px;
   display: flex;
   flex-direction: row;
-}
-
-.tw-calendar-layout-event-preview-container input,
-.tw-calendar-layout-event-preview-container textarea {
-  width: 100%;
-}
-
-.tw-calendar-layout-event-preview-container .tc-titlebar {
-  margin-top: 5px;
-}
-
-.tw-calendar-layout-event-preview-container .tw-calendar-time-range-preview {
-  margin-top: 15px;
+  gap: 8px;
+  flex-shrink: 0;
 }
 
 .tw-calendar-layout-event-preview-container .tw-calendar-layout-event-preview-bottom-buttons {
   width: 100%;
-  height: 30px;
+  min-height: 30px;
   display: flex;
   flex-direction: row-reverse;
-  margin-top: 2em;
+  margin-top: auto;
+  flex-shrink: 0;
 }
 
-/* Modern input styling for event preview */
+/* ---------- Inputs (aligned with CreateNewTiddlerPopup.css) ---------- */
 .tw-calendar-layout-event-preview-container .tw-calendar-caption-input,
 .tw-calendar-layout-event-preview-container .tw-calendar-text-input {
   width: 100%;
-  border-radius: 6px;
-  padding: 12px 16px;
+  border-radius: 8px;
+  padding: 12px 14px;
   font-size: 1rem;
-  transition: all 0.2s ease;
-  margin-bottom: 8px;
+  border: 1px solid transparent;
+  background: var(--tw-calendar-editor-surface);
   box-sizing: border-box;
+  transition: all 0.2s ease;
 }
 
 .tw-calendar-layout-event-preview-container .tw-calendar-caption-input:focus,
 .tw-calendar-layout-event-preview-container .tw-calendar-text-input:focus {
   outline: none;
+  background: var(--tw-calendar-surface);
+  border-color: var(--tw-calendar-accent);
+  box-shadow: 0 0 0 3px var(--tw-calendar-accent-soft);
 }
 
 .tw-calendar-layout-event-preview-container .tw-calendar-caption-input {
+  font-size: 1.25rem;
   font-weight: 600;
-  font-size: 1.125rem;
+  padding: 14px 16px;
 }
 
 .tw-calendar-layout-event-preview-container .tw-calendar-text-input {
   min-height: 80px;
   resize: vertical;
   font-family: inherit;
-  line-height: 1.5;
+  line-height: 1.6;
 }
 
+/* Time range preview spacing */
+.tw-calendar-layout-event-preview-container .tw-calendar-time-range-preview {
+  margin-top: 0;
+}
+
+/* ---------- Floating popup root (positioned by floating-ui) ---------- */
 .tiddlywiki-calendar-widget-event-preview {
   width: min-content;
   min-width: 30vw;
+  max-width: 600px;
   max-height: 80vh;
-  max-width: 100vw;
   position: absolute;
   top: 0;
   left: 0;
@@ -89,7 +97,7 @@
   backdrop-filter: blur(10px);
 }
 
-/* Animations */
+/* ---------- Animations ---------- */
 .tw-calendar-layout-event-preview-container .tw-calendar-caption-input,
 .tw-calendar-layout-event-preview-container .tw-calendar-text-input {
   animation: fadeIn 0.2s ease-in-out;
@@ -106,10 +114,23 @@
   }
 }
 
-/* Responsive */
+/* ============================================================
+   Mobile / Responsive
+   ============================================================ */
 @media (max-width: 960px) {
+  .tiddlywiki-calendar-widget-event-preview {
+    min-width: unset;
+    width: calc(100vw - 16px);
+    max-width: calc(100vw - 16px);
+    max-height: calc(100vh - 16px);
+    left: 8px !important;
+    right: 8px !important;
+    top: 8px !important;
+    bottom: 8px !important;
+  }
+
   .tw-calendar-layout-event-preview-container .tc-tiddler-frame {
-    padding: 8px;
+    padding: 12px;
   }
 
   .tw-calendar-layout-event-preview-container .tw-calendar-caption-input,

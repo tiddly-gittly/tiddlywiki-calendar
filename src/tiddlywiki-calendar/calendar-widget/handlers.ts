@@ -4,7 +4,7 @@ import type { CalendarOptions, EventApi } from '@fullcalendar/core';
 import type { EventImpl } from '@fullcalendar/core/internal';
 import debounce from 'lodash/debounce';
 import { ITiddlerFields } from 'tiddlywiki';
-import { draftTiddlerCaptionTitle, draftTiddlerTitle, getIsSearchMode, isMobile } from './constants';
+import { draftTiddlerCaptionTitle, draftTiddlerTitle, getIsSearchMode } from './constants';
 import type { IContext } from './initCalendar';
 
 type ReceivedEventInfo = {
@@ -202,29 +202,42 @@ export function getHandlers(context: IContext): CalendarOptions {
       context.widget.children.push(newWidgetNode);
       newWidgetNode.render(eventPreviewElement, null);
       const eventElement = info.el;
-      const { x, y } = await computePosition(eventElement, eventPreviewElement, {
-        middleware: [
-          isMobile
-            ? autoPlacement({
-              crossAxis: true,
-              allowedPlacements: ['top', 'bottom', 'right'],
-            })
-            : autoPlacement(),
-          shift(),
-          size({
-            apply({ availableWidth, availableHeight, elements }) {
-              Object.assign(elements.floating.style, {
-                maxWidth: `${Math.max(0, availableWidth)}px`,
-                maxHeight: `${Math.max(0, availableHeight)}px`,
-              });
-            },
-          }),
-        ],
-      });
-      Object.assign(eventPreviewElement.style, {
-        left: `${x}px`,
-        top: `${y}px`,
-      });
+      const isMobileViewport = window.innerWidth < 960;
+      if (isMobileViewport) {
+        // On mobile: use fixed positioning for full-screen-like popup to avoid clipping
+        Object.assign(eventPreviewElement.style, {
+          position: 'fixed',
+          inset: '8px',
+          width: 'auto',
+          height: 'auto',
+          maxWidth: 'none',
+          maxHeight: 'none',
+          left: '8px',
+          top: '8px',
+          right: '8px',
+          bottom: '8px',
+          zIndex: '1000',
+        });
+      } else {
+        const { x, y } = await computePosition(eventElement, eventPreviewElement, {
+          middleware: [
+            autoPlacement(),
+            shift(),
+            size({
+              apply({ availableWidth, availableHeight, elements }) {
+                Object.assign(elements.floating.style, {
+                  maxWidth: `${Math.max(0, availableWidth)}px`,
+                  maxHeight: `${Math.max(0, availableHeight)}px`,
+                });
+              },
+            }),
+          ],
+        });
+        Object.assign(eventPreviewElement.style, {
+          left: `${x}px`,
+          top: `${y}px`,
+        });
+      }
       // add event listener to close button
       const closeButtons = eventPreviewElement.querySelectorAll<HTMLButtonElement>('button.tw-calendar-layout-event-preview-close-button');
       closeButtons.forEach((closeButton) => {
