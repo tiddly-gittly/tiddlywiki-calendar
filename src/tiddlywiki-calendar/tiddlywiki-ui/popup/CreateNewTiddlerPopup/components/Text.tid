@@ -2,7 +2,7 @@ title: $:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/popup/Crea
 tags: $:/tw-calendar/CreateNewTiddlerPopupTemplate
 
 <div class="tw-calendar-layout-form-group tw-calendar-layout-form-text">
-  <$edit-text
+  <$edit
     field="text"
     class="tc-edit-texteditor tc-edit-texteditor-body tw-calendar-text-input"
     default=""

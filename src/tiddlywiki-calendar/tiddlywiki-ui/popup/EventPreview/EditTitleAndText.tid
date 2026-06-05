@@ -1,7 +1,7 @@
 title: $:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/popup/EventPreview/EditTitleAndText
 tags: $:/tw-calendar/EventPreviewMiniViewTemplate
 
-<$edit-text
+<$edit
   field="caption"
   tag="input"
   class="tc-titlebar tc-edit-texteditor tw-calendar-caption-input"
@@ -12,8 +12,7 @@ tags: $:/tw-calendar/EventPreviewMiniViewTemplate
   inputmode="text"
   autocomplete="off"
 />
-Text:
-<$edit-text
+<$edit
   field="text"
   class="tc-edit-texteditor tc-edit-texteditor-body tw-calendar-text-input"
   default=""
