@@ -1,7 +1,0 @@
-title: $:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/popup/EventPreview/PluginDefaultViewTemplate
-
-<!-- NOTE: Plugin view templates are now shown via the shared MoreSettings component.
-     Kept for backward compatibility (still transcluded by MoreSettings). -->
-<$list filter="[all[shadows]tag[$:/tags/ViewTemplate]prefix[$:/plugins/]] [all[tiddlers]tag[$:/tags/ViewTemplate]!is[draft]]" variable="listItem">
-  <$transclude tiddler=<<listItem>>/>
-</$list>

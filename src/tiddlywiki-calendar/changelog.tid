@@ -1,6 +1,10 @@
 title: $:/plugins/linonetwo/tw-calendar/changelog
 type: text/vnd.tiddlywiki
 
+! 2.5.3
+
+* Reverted title input from `<$edit>` back to `<$edit-text>` for better compatibility.
+
 ! 2.5.2
 
 * Debounced draft tiddler refetch to fix mobile input lag (especially voice input).

@@ -16,7 +16,7 @@ title: $:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/popup/Even
 
     <!-- Title input: same style as create popup, editing actual tiddler caption -->
     <div class="tw-calendar-layout-form-group tw-calendar-layout-form-title">
-      <$edit
+      <$edit-text
         field="caption"
         tag="input"
         class="tc-titlebar tc-edit-texteditor tw-calendar-caption-input"
