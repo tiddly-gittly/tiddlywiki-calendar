@@ -23,11 +23,14 @@ const openEventCalendarLayout = async (page: import('@playwright/test').Page) =>
   await showEventCalendarLayout(page);
 };
 
-const getDisplayedCalendarDate = async (page: import('@playwright/test').Page) =>
-  page.locator('.fc-timegrid-col[data-date]').first().getAttribute('data-date');
+const getDisplayedCalendarDate = async (page: import('@playwright/test').Page) => page.locator('.fc-timegrid-col[data-date]').first().getAttribute('data-date');
 
-const openCreateEventPopup = async (page: import('@playwright/test').Page) => {
-  const popupCreated = await page.evaluate(async () => {
+interface OpenCreateEventPopupOptions {
+  tags?: string[];
+}
+
+const openCreateEventPopup = async (page: import('@playwright/test').Page, options: OpenCreateEventPopupOptions = {}) => {
+  const popupCreated = await page.evaluate(async (popupOptions) => {
     const tw = (window as unknown as Window & {
       $tw: {
         modules: {
@@ -57,15 +60,19 @@ const openCreateEventPopup = async (page: import('@playwright/test').Page) => {
       _is_titleless: 'yes',
       'draft.title': 'Test Event',
       text: '',
-      tags: [],
+      tags: popupOptions.tags ?? [],
       rrule: '',
     });
 
     new Modal(tw.wiki).display('$:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/popup/CreateNewTiddlerPopup');
     document.querySelector<HTMLInputElement>('.tw-calendar-layout-create-new-tiddler-popup .tw-calendar-caption-input')?.focus();
-    await new Promise<void>((resolve) => requestAnimationFrame(() => resolve()));
+    await new Promise<void>((resolve) =>
+      requestAnimationFrame(() => {
+        resolve();
+      })
+    );
     return Boolean(document.querySelector('.tw-calendar-caption-input'));
-  });
+  }, options);
   expect(popupCreated).toBe(true);
   await expect(page.locator('.tw-calendar-caption-input')).toBeVisible();
 };
@@ -215,4 +222,80 @@ test('existing recurring event pre-fills interval and count from rrule', async (
   await expect(page.locator('.tw-calendar-recurrence-count input.tc-edit-texteditor')).toHaveValue('7');
   await expect.poll(async () => readTiddlerField(page, recurringTitle, 'rrule-interval')).toBe('');
   await expect.poll(async () => readTiddlerField(page, recurringTitle, 'rrule-count')).toBe('');
+});
+
+test('plugin view templates are rendered inside More Settings', async ({ page }) => {
+  await openEventCalendarLayout(page);
+
+  await page.evaluate(() => {
+    const tw = (window as unknown as Window & {
+      $tw: {
+        wiki: {
+          addTiddler: (fields: Record<string, unknown>) => void;
+        };
+      };
+    }).$tw;
+
+    tw.wiki.addTiddler({
+      title: '$:/plugins/test/calendar-more-settings-test-template',
+      tags: '$:/tags/ViewTemplate',
+      text: '<div class="tw-calendar-test-plugin-view-template">CalendarPluginViewTemplateWorks</div>',
+    });
+  });
+
+  await openCreateEventPopup(page);
+
+  const moreSettingsButton = page.getByRole('button', { name: '更多设置' });
+  await expect(moreSettingsButton).toBeVisible();
+  await moreSettingsButton.click();
+
+  const moreSettingsWrapper = page.locator('.tw-calendar-more-settings-wrapper');
+  await expect(moreSettingsWrapper).toBeVisible();
+  await expect(moreSettingsWrapper).toContainText('CalendarPluginViewTemplateWorks');
+});
+
+test('super-tag form is rendered inside More Settings', async ({ page }) => {
+  const traitTagTitle = 'TestCalendarSleepTrait';
+  const superTagTitle = 'TestCalendarSleepSuperTag';
+
+  await openEventCalendarLayout(page);
+
+  await page.evaluate(({ traitTag, superTag }) => {
+    const tw = (window as unknown as Window & {
+      $tw: {
+        wiki: {
+          addTiddler: (fields: Record<string, unknown>) => void;
+        };
+      };
+    }).$tw;
+
+    tw.wiki.addTiddler({
+      title: traitTag,
+      tags: '$:/SuperTag/TraitTag',
+      schema: JSON.stringify({
+        type: 'object',
+        properties: {
+          deepSleepDuration: {
+            type: 'number',
+            title: 'Deep Sleep Duration',
+          },
+        },
+      }),
+    });
+
+    tw.wiki.addTiddler({
+      title: superTag,
+      tags: traitTag,
+    });
+  }, { traitTag: traitTagTitle, superTag: superTagTitle });
+
+  await openCreateEventPopup(page, { tags: [superTagTitle] });
+
+  const moreSettingsButton = page.getByRole('button', { name: '更多设置' });
+  await expect(moreSettingsButton).toBeVisible();
+  await moreSettingsButton.click();
+
+  const moreSettingsWrapper = page.locator('.tw-calendar-more-settings-wrapper');
+  await expect(moreSettingsWrapper).toBeVisible();
+  await expect(moreSettingsWrapper).toContainText('Deep Sleep Duration');
 });

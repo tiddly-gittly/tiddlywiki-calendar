@@ -1,6 +1,11 @@
 title: $:/plugins/linonetwo/tw-calendar/changelog
 type: text/vnd.tiddlywiki
 
+! 2.5.4
+
+* Restored `PluginDefaultViewTemplate` and `EditRecurrence` templates that were accidentally removed in 2.5.3, fixing missing plugin view templates in More Settings and missing recurrence editor in event preview.
+* Added Playwright regression tests for plugin view templates and SuperTag form rendering inside More Settings.
+
 ! 2.5.3
 
 * Reverted title input from `<$edit>` back to `<$edit-text>` for better compatibility.

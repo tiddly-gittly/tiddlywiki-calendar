@@ -14,7 +14,7 @@ export default [
     languageOptions: {
       parserOptions: {
         projectService: {
-          allowDefaultProject: ['./*.js', './*.mjs', './wiki/tiddlers/tests/playwright/*.ts'],
+          allowDefaultProject: ['./*.js', './*.mjs', './*.ts', './wiki/tiddlers/tests/playwright/*.ts'],
         },
         tsconfigRootDir: __dirname,
       },

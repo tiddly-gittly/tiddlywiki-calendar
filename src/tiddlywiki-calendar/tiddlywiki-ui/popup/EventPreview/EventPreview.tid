@@ -38,8 +38,8 @@ title: $:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/popup/Even
     <!-- Time range: reuse create popup component -->
     {{||$:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/popup/CreateNewTiddlerPopup/components/Time}}
 
-    <!-- Recurrence and Alarms: reuse create popup component (collapsed by default) -->
-    {{||$:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/popup/CreateNewTiddlerPopup/components/RecurrenceAndAlarms}}
+    <!-- Recurrence and Alarms: reuse create popup component (expanded by default in preview) -->
+    {{||$:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/popup/EditRecurrence}}
 
     <!-- More Settings: reuse create popup component (collapsed by default) -->
     {{||$:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/popup/CreateNewTiddlerPopup/components/MoreSettings}}

@@ -20,11 +20,19 @@ export default defineConfig({
     url: baseURL,
     reuseExistingServer: !process.env.CI,
     timeout: 120 * 1000,
+    env: {
+      TIDDLYWIKI_PLUGIN_DEV_PORT: '8080',
+    },
   },
   projects: [
     {
       name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
+      use: {
+        ...devices['Desktop Chrome'],
+        launchOptions: {
+          executablePath: process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH ?? '/snap/bin/chromium',
+        },
+      },
     },
   ],
 });
