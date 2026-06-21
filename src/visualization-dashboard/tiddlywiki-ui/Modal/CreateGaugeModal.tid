@@ -22,13 +22,18 @@ footer: {{$:/plugins/linonetwo/visualization-dashboard/tiddlywiki-ui/Modal/Creat
     </div>
   <% endif %>
 \end
-\define conditional-field-tag-picker(fieldName)
+
+\define tag-picker-body(fieldName, tagListFilter:"")
+  <$let currentTiddler=<<draft-tiddler>> tagField="$fieldName$" newTagNameTiddler=<<qualify "$:/temp/NewTagName">>>>
+    <$macrocall $name="tag-picker" tagField=<<tagField>> tiddler=<<currentTiddler>> tagListFilter=<<tagListFilter>> />
+  </$let>
+\end
+
+\define conditional-field-tag-picker(fieldName, tagListFilter:"")
   <% if [<draft-tiddler>has:field[$fieldName$]] %>
     <div class="visualization-dashboard-new-gauge-field">
       <span class="visualization-dashboard-new-gauge-field-label"><<lingo Modal/CreateGaugeModal/$fieldName$/Caption>></span>
-      <$let currentTiddler=<<draft-tiddler>> saveTiddler=<<draft-tiddler>> tagField="$fieldName$" newTagNameTiddler=<<qualify "$:/temp/NewTagName">>>
-        {{||$:/core/ui/EditTemplate/tags}}
-      </$let>
+      <<tag-picker-body "$fieldName$" tagListFilter:"$tagListFilter$">>
       <span class="visualization-dashboard-new-gauge-field-description"><<lingo Modal/CreateGaugeModal/$fieldName$/Description>></span>
     </div>
   <% endif %>
@@ -84,15 +89,19 @@ footer: {{$:/plugins/linonetwo/visualization-dashboard/tiddlywiki-ui/Modal/Creat
 <!-- Fields that possible required by some template -->
 <!-- // TODO: reflect to auto generate form use SuperTag? -->
 <% if [<draft-tiddler>has:field[targetTiddler]] %>
-  <div class="visualization-dashboard-new-gauge-field">
-    <span class="visualization-dashboard-new-gauge-field-label"><<lingo Modal/CreateGaugeModal/targetTiddler/Caption>></span>
-    <$let draftTiddlerRef=<<draft-tiddler>>>
-      <$wikify name="resolvedFilter" text={{{[<draftTiddlerRef>get[targetTiddlerFilter]]}}}>
-        <<tag-picker tiddler=<<draft-tiddler>> tagField:"targetTiddler" tagListFilter=<<resolvedFilter>>>>
-      </$wikify>
-    </$let>
-    <span class="visualization-dashboard-new-gauge-field-description"><<lingo Modal/CreateGaugeModal/targetTiddler/Description>></span>
-  </div>
+  <$let draftTiddlerRef=<<draft-tiddler>> filterText={{{[<draftTiddlerRef>get[targetTiddlerFilter]]}}}} currentTiddler=<<draft-tiddler>> saveTiddler=<<draft-tiddler>> tagField="targetTiddler" newTagNameTiddler=<<qualify "$:/temp/NewTagName">>>>
+    <div class="visualization-dashboard-new-gauge-field">
+      <span class="visualization-dashboard-new-gauge-field-label"><<lingo Modal/CreateGaugeModal/targetTiddler/Caption>></span>
+      <% if [<filterText>trim[]is[blank]] %>
+        <<tag-picker-body targetTiddler>>
+      <% else %>
+        <$wikify name="resolvedFilter" text={{{[<filterText>trim[]]]}}}>
+          <<tag-picker-body targetTiddler tagListFilter=<<resolvedFilter>>>>
+        </$wikify>
+      <% endif %>
+      <span class="visualization-dashboard-new-gauge-field-description"><<lingo Modal/CreateGaugeModal/targetTiddler/Description>></span>
+    </div>
+  </$let>
 <% endif %>
 <% if [<draft-tiddler>has:field[targetTiddlerFilter]] %>
   <div class="visualization-dashboard-new-gauge-field">

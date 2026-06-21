@@ -1,0 +1,9 @@
+title: $:/plugins/linonetwo/visualization-dashboard/changelog
+type: text/vnd.tiddlywiki
+
+! 1.3.2
+* Fixed quick-create gauge modal `targetTiddler` field: tag picker now properly accepts custom entries via the add button.
+* Fixed `targetTiddler` filter expression that caused "Missing [ in filter expression" error when empty.
+* Refactored modal tag picker to use core `tag-picker` macro directly, eliminating nested field wrappers.
+* Added Playwright regression test for modal tag picker custom entry behavior.
+* Added plugin changelog file for release tracking.
