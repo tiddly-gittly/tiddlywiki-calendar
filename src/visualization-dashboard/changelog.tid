@@ -1,6 +1,11 @@
 title: $:/plugins/linonetwo/visualization-dashboard/changelog
 type: text/vnd.tiddlywiki
 
+! 1.3.3
+* Fixed CreateGaugeModal widget syntax errors (extra `}}`,`>>>>`) that caused `> 目标条目 >` display corruption and tag-picker failure.
+* Fixed `标签` field: replaced broken `{{||$:/core/ui/EditTemplate/tags}}` transclusion with direct `tag-picker-body` helper.
+* Fixed `tagListFilter` to default to `[all[tiddlers]!is[system]sort[title]]` when `targetTiddlerFilter` is blank, so dropdown shows proper tiddler suggestions instead of "找不到标签".
+* Rewrote E2E tests to simulate real user flow (button click → template select → tag entry).
 ! 1.3.2
 * Fixed quick-create gauge modal `targetTiddler` field: tag picker now properly accepts custom entries via the add button.
 * Fixed `targetTiddler` filter expression that caused "Missing [ in filter expression" error when empty.
