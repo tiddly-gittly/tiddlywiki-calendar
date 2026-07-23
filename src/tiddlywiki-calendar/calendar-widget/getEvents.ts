@@ -63,8 +63,8 @@ export function getEvents(tiddlerTitles: string[], context: IContext): EventInpu
   const fullCalendarEvents = tiddlerTitles
     .map((title) => $tw.wiki.getTiddler(title))
     .filter((tiddler): tiddler is Tiddler => tiddler !== undefined)
-    .map((tiddler) => (stripRRule && tiddler.fields.rrule !== undefined ? { ...tiddler, fields: { ...tiddler.fields, rrule: undefined } } : tiddler))
     .map((tiddler) => tiddler.fields)
+    .map((fields) => (stripRRule && fields.rrule !== undefined ? { ...fields, rrule: undefined } : fields))
     .flatMap((tiddlerField) => mapTiddlerFieldsToFullCalendarEventObject(tiddlerField, context, currentPalette));
   return fullCalendarEvents;
 }
