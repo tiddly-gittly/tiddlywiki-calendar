@@ -15,7 +15,9 @@ export function getSearchModeSettings(): CalendarOptions {
     eventDurationEditable: false,
     eventStartEditable: false,
     /**
-     * work with `duration: { years: 1000 }` of `searchResultList` in `src/tiddlywiki-calendar/calendar-widget/customView.ts` to show a unlimited list.
+     * Work with `duration: { years: 1000 }` of `searchResultList` in `customView.ts` so matching
+     * tiddlers from any year can appear in one list (FullCalendar otherwise truncates list views).
+     * Recurring events must NOT pass unbounded RRULE in search mode — see `getEvents.ts`.
      * @url https://github.com/fullcalendar/fullcalendar/issues/7432
      */
     initialDate: '1500-01-01',

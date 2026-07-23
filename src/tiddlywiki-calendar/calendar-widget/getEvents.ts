@@ -2,7 +2,7 @@
 
 import type { EventInput, EventSourceFunc, EventSourceFuncArg } from '@fullcalendar/core';
 import type { ITiddlerFields, Tiddler } from 'tiddlywiki';
-import { draftTiddlerTitle } from './constants';
+import { draftTiddlerTitle, getIsSearchMode } from './constants';
 import type { IContext } from './initCalendar';
 import { allDayDateLength, isAllDaySpan, normalizeRRule, parseTwDate, toDurationInput } from './rrule';
 
@@ -53,9 +53,17 @@ export const getEventByFilter = (context: IContext): EventSourceFunc => async (_
 
 export function getEvents(tiddlerTitles: string[], context: IContext): EventInput[] {
   const currentPalette: Record<string, string> = $tw.wiki.getTiddlerData($tw.wiki.getTiddlerText('$:/palette') ?? '$:/palettes/Vanilla');
+  /**
+   * Search layout spans ~1000 years so every matching tiddler can appear in one list. Passing an unbounded RRULE
+   * there expands YEARLY/DAILY series into hundreds/thousands of rows and freezes the page. Search should list
+   * matching entries once, so we drop the `rrule` field at the source and let recurring tiddlers fall back to
+   * their own `startDate`/`endDate` (or created/modified) like any other tiddler.
+   */
+  const stripRRule = getIsSearchMode();
   const fullCalendarEvents = tiddlerTitles
     .map((title) => $tw.wiki.getTiddler(title))
     .filter((tiddler): tiddler is Tiddler => tiddler !== undefined)
+    .map((tiddler) => (stripRRule && tiddler.fields.rrule !== undefined ? { ...tiddler, fields: { ...tiddler.fields, rrule: undefined } } : tiddler))
     .map((tiddler) => tiddler.fields)
     .flatMap((tiddlerField) => mapTiddlerFieldsToFullCalendarEventObject(tiddlerField, context, currentPalette));
   return fullCalendarEvents;
