@@ -144,6 +144,73 @@ test('recurrence quick actions apply COUNT and UNTIL rules', async ({ page }) =>
   await expect(page.locator('.tw-calendar-recurrence-raw-input')).toHaveValue(/UNTIL=/);
 });
 
+test('yearly alarms and raw alarm source are editable while creating an event', async ({ page }) => {
+  await openEventCalendarLayout(page);
+  await openCreateEventPopup(page);
+
+  await page.getByRole('button', { name: '轻点添加提醒' }).click();
+  const alarms = page.locator('.tw-calendar-alarms-wrapper');
+  await alarms.locator('.tw-calendar-alarm-frequency').selectOption('yearly');
+  await alarms.locator('.tw-calendar-alarm-month:visible').selectOption('04');
+  await alarms.locator('.tw-calendar-alarm-day:visible').selectOption('28');
+
+  const timeInputs = alarms.locator('input.alarmEdit:not(.alarmEditYear)');
+  await timeInputs.nth(0).fill('08');
+  await timeInputs.nth(1).fill('45');
+  await timeInputs.nth(2).fill('00');
+  await alarms.getByRole('button', { name: 'add alarm' }).click();
+
+  await expect.poll(async () => readDraftField(page, 'alarms')).toContain('yearly;....-04-28;08:45:00;');
+
+  await alarms.getByRole('button', { name: '编辑提醒源码' }).click();
+  const sourceInput = alarms.locator('.tw-calendar-alarm-source-input');
+  await expect(sourceInput).toBeVisible();
+  await sourceInput.fill('daily;;07:30:00;Wake-up');
+  await expect.poll(async () => readDraftField(page, 'alarms')).toBe('daily;;07:30:00;Wake-up');
+});
+
+test('raw alarm source is editable on an existing event', async ({ page }) => {
+  const eventTitle = 'Existing Alarm Source Event';
+
+  await page.goto('/#Index');
+  await page.evaluate((title) => {
+    const tw = (window as unknown as Window & {
+      $tw: {
+        utils: {
+          stringifyDate: (date: Date) => string;
+        };
+        wiki: {
+          addTiddler: (fields: Record<string, unknown>) => void;
+        };
+      };
+    }).$tw;
+    const start = new Date();
+    start.setHours(12, 0, 0, 0);
+
+    tw.wiki.addTiddler({
+      title,
+      caption: title,
+      startDate: tw.utils.stringifyDate(start),
+      endDate: tw.utils.stringifyDate(new Date(start.getTime() + 60 * 60 * 1000)),
+      calendarEntry: 'yes',
+      alarms: 'yearly;....-04-28;08:45:00;Anniversary',
+      text: '',
+      tags: [],
+    });
+  }, eventTitle);
+
+  await showEventCalendarLayout(page);
+  await page.locator('.fc-timeGridDay-button').click();
+  await page.getByText(eventTitle).first().click();
+  await page.getByRole('button', { name: '已设置提醒' }).click();
+  await page.getByRole('button', { name: '编辑提醒源码' }).click();
+
+  const sourceInput = page.locator('.tw-calendar-alarm-source-input');
+  await expect(sourceInput).toHaveValue('yearly;....-04-28;08:45:00;Anniversary');
+  await sourceInput.fill('monthly;....-..-28;08:45:00;Monthly reminder');
+  await expect.poll(async () => readTiddlerField(page, eventTitle, 'alarms')).toBe('monthly;....-..-28;08:45:00;Monthly reminder');
+});
+
 test('until current occurrence uses clicked recurring instance time', async ({ page }) => {
   const recurringTitle = 'Recurring Preview Test Event';
 

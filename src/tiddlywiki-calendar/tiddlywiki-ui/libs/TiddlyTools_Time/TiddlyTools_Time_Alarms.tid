@@ -11,6 +11,7 @@ author: EricShulman
 \define alarms_input()      $:/temp/time/alarms_input/$(currentTiddler)$
 \define alarms_msg()        $:/temp/time/alarms_msg/$(freq)$/$(this_time)$
 \define alarms_defaultmsg() BEEP! BEEP! BEEP!
+\procedure lingo-base() $:/plugins/linonetwo/tw-calendar/language/
 
 \define alarms_form()
 <style> .alarmEdit { width:3em; text-align:center; } </style>
@@ -19,6 +20,8 @@ author: EricShulman
 <<alarms_form_time>>
 <span style={{{ [<alarms_input>get[freq]match[monthly]then[position:absolute]else[display:none;]] }}}>
    on the <<alarms_form_day>> day of the month</span>
+<span style={{{ [<alarms_input>get[freq]match[yearly]then[position:absolute]else[display:none;]] }}}>
+   on <<alarms_form_month>> <<alarms_form_day>> every year</span>
 <span style={{{ [<alarms_input>!has[freq]] [<alarms_input>get[freq]match[once]] +[limit[1]] +[else[visibility:hidden;]] }}}>
    on <<alarms_form_year>> <<alarms_form_month>> <<alarms_form_day>></span>
 <br>
@@ -30,10 +33,11 @@ author: EricShulman
 \end
 
 \define alarms_form_freq()
-<$select tiddler=<<alarms_input>> field="freq" default="once" actions="<$action-deletefield $tiddler=<<alarms_input>> year month day />">
-   <option value="once">Once</option>
-   <option value="monthly">Monthly</option>
-   <option value="daily">Daily</option>
+<$select class="tw-calendar-alarm-frequency" tiddler=<<alarms_input>> field="freq" default="once" actions="<$action-deletefield $tiddler=<<alarms_input>> year month day />">
+   <option value="once"><<lingo Modal/CreateEvent/AlarmFrequency/Once>></option>
+   <option value="yearly"><<lingo Modal/CreateEvent/AlarmFrequency/Yearly>></option>
+   <option value="monthly"><<lingo Modal/CreateEvent/AlarmFrequency/Monthly>></option>
+   <option value="daily"><<lingo Modal/CreateEvent/AlarmFrequency/Daily>></option>
    <$list filter="[all[shadows]prefix[$:/language/Date/Long/Day/]]">
       <option value={{{ [<currentTiddler>get[text]] }}}>
          {{{ [<currentTiddler>get[text]] }}}s
@@ -47,7 +51,7 @@ author: EricShulman
 \end
 
 \define alarms_form_month()
-<$select tiddler=<<alarms_input>> field="month" default=<<now 0MM>>>
+<$select class="tw-calendar-alarm-month" tiddler=<<alarms_input>> field="month" default=<<now 0MM>>>
    <$list filter="[range[1,12]]">
       <option value={{{ [<currentTiddler>pad[2]] }}}>
          {{{ [<currentTiddler>addprefix[$:/language/Date/Long/Month/]get[text]] }}}
@@ -66,7 +70,7 @@ author: EricShulman
 <$set name="dpm"   filter="[<leap>!match[]]" value="31 29 31 30 31 30 31 31 30 31 30 31" emptyValue=<<dpm>>>
 <$set name="dm"    value={{{ [<dpm>split[ ]nth<month>] }}}> <!-- days in this month -->
 <$set name="dm"    filter="[<freq>match[monthly]]" value="31" emptyValue=<<dm>>>
-<$select tiddler=<<alarms_input>> field="day" default=<<now 0DD>>>
+<$select class="tw-calendar-alarm-day" tiddler=<<alarms_input>> field="day" default=<<now 0DD>>>
    <$list filter="[range<dm>]">
       <option value={{{ [<currentTiddler>pad[2]] }}}>
          <<currentTiddler>><$transclude tiddler={{{ [[$:/language/Date/DaySuffix/]addsuffix<currentTiddler>] }}}/>
@@ -122,6 +126,7 @@ author: EricShulman
 <!-- ASSEMBLE NEW DATE -->
 <$vars  date={{{ [<year>addsuffix[-]addsuffix<month>addsuffix[-]addsuffix<day>] }}}>
 <$set   name="date" filter="[<freq>match[once]]"    value=<<date>>  emptyValue="">
+<$set   name="date" filter="[<freq>match[yearly]]" value={{{ [[....-]addsuffix<month>addsuffix[-]addsuffix<day>] }}} emptyValue=<<date>>>
 <$set   name="date" filter="[<freq>match[monthly]]" value={{{ [[....-..-]addsuffix<day>] }}} emptyValue=<<date>>>
 <!-- ASSEMBLE NEW TIME (ZERO-PADDED) -->
 <$vars  hour={{{ [<hour>pad[2]] }}} min={{{ [<min>pad[2]] }}} sec={{{ [<sec>pad[2]] }}}>
@@ -305,19 +310,21 @@ author: EricShulman
 <$list filter="[<freq>match[once]]"     >  <<date>> at </$list>
 <$list filter="[<freq>match[daily]]"    > Every day at </$list>
 <$list filter="[<freq>match[monthly]]"  > <<day>><<suffix>> of the month at </$list>
-<$list filter="[<freq>!match[once]then<freq>!match[monthly]then<freq>!match[daily]]"> <<freq>>s at </$list>
+<$list filter="[<freq>match[yearly]]"   > <$text text={{{ [<date>split[-]nth[2]addprefix[$:/language/Date/Long/Month/]get[text]] }}}/> <<day>><<suffix>> every year at </$list>
+<$list filter="[<freq>!match[once]then<freq>!match[yearly]then<freq>!match[monthly]then<freq>!match[daily]]"> <<freq>>s at </$list>
 <$list filter="[<time>!match[--:--:--]]"> <<time>> </$list>
 <$list filter="[<time>match[--:--:--]]">  startup  </$list>
 \end
 
 \define alarms_tick()
 <!-- CALLED EVERY SECOND FROM TiddlyTools/Time/Ticker -->
-<$vars this_date=<<now "YYYY-0MM-0DD">> this_time=<<now "0hh:0mm:0ss">> this_day=<<now "DDD">> this_daynum=<<now "0DD">>>
+<$vars this_date=<<now "YYYY-0MM-0DD">> this_time=<<now "0hh:0mm:0ss">> this_day=<<now "DDD">> this_month=<<now "0MM">> this_daynum=<<now "0DD">>>
 <$list filter="[has[alarms]!has[draft.of]]">
 <$list filter="[<currentTiddler>enlist{!!alarms}]" variable="this_alarm">
    <$vars freq={{{ [<this_alarm>split[;]nth[1]] }}}
           date={{{ [<this_alarm>split[;]nth[2]] }}}
         daynum={{{ [<this_alarm>split[;]nth[2]split[-]nth[3]] }}}
+       monthnum={{{ [<this_alarm>split[;]nth[2]split[-]nth[2]] }}}
           time={{{ [<this_alarm>split[;]nth[3]] }}}
            msg={{{ [<this_alarm>split[;]nth[4]decodeuricomponent[]] }}}>
    <$reveal default=<<freq>> type="match" text="once">
@@ -327,6 +334,13 @@ author: EricShulman
       <$vars when={{{ [<date>search-replace:g[-],[]] [<time>search-replace:g[--],[00]search-replace:g[:],[]] +[join[]addsuffix[000]] }}}>
       <$reveal default=<<when>> type="lt" text=<<now "YYYY0MM0DD0hh0mm0ss000">>> <<alarms_expire>> </$reveal>
       </$vars>
+   </$reveal>
+   <$reveal default=<<freq>> type="match" text="yearly">
+      <$reveal default=<<monthnum>> type="match" text=<<this_month>>>
+         <$reveal default=<<daynum>> type="match" text=<<this_daynum>>>
+            <$reveal default=<<time>> type="match" text=<<this_time>>> <<alarms_trigger>> </$reveal>
+         </$reveal>
+      </$reveal>
    </$reveal>
    <$reveal default=<<freq>> type="match" text="monthly">
       <$reveal default=<<daynum>> type="match" text=<<this_daynum>>>
@@ -346,12 +360,13 @@ author: EricShulman
 
 \define alarms_startup()
 <!-- CALLED AT STARTUP FROM TiddlyTools/Time/Ticker -->
-<$vars this_date=<<now "YYYY-0MM-0DD">> this_day=<<now "DDD">> this_daynum=<<now "0DD">>>
+<$vars this_date=<<now "YYYY-0MM-0DD">> this_day=<<now "DDD">> this_month=<<now "0MM">> this_daynum=<<now "0DD">>>
 <$list filter="[has[alarms]!has[draft.of]]">
 <$list filter="[<currentTiddler>enlist{!!alarms}]" variable="this_alarm">
    <$vars freq={{{ [<this_alarm>split[;]nth[1]] }}}
           date={{{ [<this_alarm>split[;]nth[2]] }}}
         daynum={{{ [<this_alarm>split[;]nth[2]split[-]nth[3]] }}}
+       monthnum={{{ [<this_alarm>split[;]nth[2]split[-]nth[2]] }}}
           time={{{ [<this_alarm>split[;]nth[3]] }}}
            msg={{{ [<this_alarm>split[;]nth[4]decodeuricomponent[]] }}}>
    <$reveal default=<<time>> type="match" text="--:--:--">
@@ -360,6 +375,11 @@ author: EricShulman
          <$vars when={{{ [<date>search-replace:g[-],[]addsuffix[000000000]] }}}>
          <$reveal default=<<when>> type="lt" text=<<now "YYYY0MM0DD0hh0mm0ss000">>> <<alarms_expire>> </$reveal>
          </$vars>
+      </$reveal>
+      <$reveal default=<<freq>> type="match" text="yearly">
+         <$reveal default=<<monthnum>> type="match" text=<<this_month>>>
+            <$reveal default=<<daynum>> type="match" text=<<this_daynum>>> <<alarms_trigger>> </$reveal>
+         </$reveal>
       </$reveal>
       <$reveal default=<<freq>> type="match" text="monthly">
          <$reveal default=<<daynum>> type="match" text=<<this_daynum>>> <<alarms_trigger>> </$reveal>
@@ -408,3 +428,27 @@ author: EricShulman
 <$list filter="[{!!alarms}!match[]]" variable="has_alarms">
    <<alarms_list>>
 </$list>
+<div class="tw-calendar-alarm-source-editor">
+   <$reveal type="nomatch" state=<<qualify "$:/state/tw-calendar/alarms/source-editor">> text="show">
+      <$button set=<<qualify "$:/state/tw-calendar/alarms/source-editor">> setTo="show" class="tc-btn-invisible tw-calendar-alarm-source-toggle">
+         <<lingo Modal/CreateEvent/AlarmSource/Show>>
+      </$button>
+   </$reveal>
+   <$reveal type="match" state=<<qualify "$:/state/tw-calendar/alarms/source-editor">> text="show">
+      <$button set=<<qualify "$:/state/tw-calendar/alarms/source-editor">> setTo="hide" class="tc-btn-invisible tw-calendar-alarm-source-toggle">
+         <<lingo Modal/CreateEvent/AlarmSource/Hide>>
+      </$button>
+      <div class="tw-calendar-alarm-source-content">
+         <label class="tw-calendar-alarm-source-label"><<lingo Modal/CreateEvent/AlarmSource/Label>></label>
+         <$edit-text
+            tag="textarea"
+            field="alarms"
+            class="tc-edit-texteditor tw-calendar-alarm-source-input"
+            placeholder="[[yearly;....-08-26;09:00:00;Anniversary]]"
+            cancelPopups="yes"
+            fileDrop="no"
+         />
+         <small><<lingo Modal/CreateEvent/AlarmSource/Description>></small>
+      </div>
+   </$reveal>
+</div>

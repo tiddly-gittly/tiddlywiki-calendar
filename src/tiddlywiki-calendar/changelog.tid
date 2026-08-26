@@ -1,6 +1,13 @@
 title: $:/plugins/linonetwo/tw-calendar/changelog
 type: text/vnd.tiddlywiki
 
+! 2.6.0
+
+* Added yearly alarms with month-and-day scheduling in both timed and startup alarm checks.
+* Added a collapsible alarm source editor to event creation and preview forms for directly editing the cron-like `alarms` field.
+* Added the shared alarm details component to event previews, restoring alarm editing after an event has been created without changing the existing expanded recurrence editor.
+* Added responsive, theme-aware styling and Playwright coverage for yearly alarms and raw source editing.
+
 ! 2.5.7
 
 * Fixed search layout freezing when matching recurring events: search results now show each recurring tiddler once instead of expanding every RRULE occurrence across the ~1000-year search list range (e.g. yearly events through 2499).

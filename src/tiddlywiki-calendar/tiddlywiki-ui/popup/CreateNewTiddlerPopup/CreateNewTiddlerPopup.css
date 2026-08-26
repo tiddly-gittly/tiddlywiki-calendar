@@ -266,6 +266,40 @@
 }
 .tw-calendar-alarms-wrapper input.alarmEdit { width: 3em; text-align: center; }
 .tw-calendar-alarms-wrapper input.alarmEdit.alarmEditYear { width: 4.5em; }
+.tw-calendar-alarm-source-editor {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 12px;
+  width: 100%;
+}
+.tw-calendar-alarm-source-toggle {
+  align-self: flex-start;
+  color: var(--tw-calendar-text-muted);
+  cursor: pointer;
+  text-decoration: underline;
+}
+.tw-calendar-alarm-source-content {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 10px 12px;
+  background: var(--tw-calendar-surface-alt);
+  border: 1px dashed var(--tw-calendar-border-soft);
+  border-radius: 8px;
+}
+.tw-calendar-alarm-source-label {
+  color: var(--tw-calendar-text-muted);
+  font-size: 0.95rem;
+}
+.tw-calendar-alarm-source-input {
+  box-sizing: border-box;
+  min-height: 6em;
+  width: 100%;
+  resize: vertical;
+  font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace;
+  line-height: 1.5;
+}
 .tc-drop-down.tw-calendar-layout-create-new-tiddler-popup { box-shadow: none !important; border: 1px solid var(--tw-calendar-border); border-radius: 12px; padding: 20px; }
 .tc-drop-down:has(.tw-calendar-layout-create-new-tiddler-popup) {
   border-radius: 12px;

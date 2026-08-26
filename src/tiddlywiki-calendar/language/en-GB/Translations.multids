@@ -41,6 +41,16 @@ Modal/CreateEvent/Label/Times: times
 Modal/CreateEvent/Label/Advanced: Advanced
 Modal/CreateEvent/Label/HideAdvanced: Hide Advanced
 Modal/CreateEvent/Label/RawRRule: Raw RRULE
+Modal/CreateEvent/AlarmSource/Show: Edit alarm source
+Modal/CreateEvent/AlarmSource/Hide: Hide alarm source
+Modal/CreateEvent/AlarmSource/Label: Alarm source
+Modal/CreateEvent/AlarmSource/Description: Advanced: edit the alarms field directly. Use one list item per alarm in the format frequency;date;time;message. Wrap entries containing spaces in double square brackets.
+Modal/CreateEvent/AlarmFrequency/Once: Once
+Modal/CreateEvent/AlarmFrequency/Yearly: Yearly
+Modal/CreateEvent/AlarmFrequency/Monthly: Monthly
+Modal/CreateEvent/AlarmFrequency/Daily: Daily
+Modal/CreateEvent/AlarmSummary/Add: Add a reminder
+Modal/CreateEvent/AlarmSummary/Configured: Reminder configured
 EventsCalendar/Sidebar/HelpMessage: You can add tiddlers with tag `$:/tags/EventCalendarSideBarSegment` to appear here (or install community plugins that have such tiddlers). Draggable content can be added to the entry like this: `<$draggable data-event='{ "duration": "01:00" }' data-tags="Tags">`. The `data-event` attribute can set information like duration for the event created by dragging, and the `data-tags` attribute can automatically add tags to the created event.
 EventsCalendar/Sidebar/HelpMessageCreateButton: Click to create a calendar sidebar tiddler
 EventsCalendar/Sidebar/ExampleNewTiddlerContent: `<$draggable data-event='{ "duration": "02:00" }' data-tags=" Tag1 Tag2">`* Drag me to calendar to create a new event with 2 hour duration and tags "Tag1" and "Tag2"`</$draggable>`
