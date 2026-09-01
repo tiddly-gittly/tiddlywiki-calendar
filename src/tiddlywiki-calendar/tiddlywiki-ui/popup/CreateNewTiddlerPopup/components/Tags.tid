@@ -1,10 +1,28 @@
 title: $:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/popup/CreateNewTiddlerPopup/components/Tags
 tags: $:/tw-calendar/CreateNewTiddlerPopupTemplate
 
+\import [[$:/core/ui/EditTemplate/tags]]
+
+\define calendar-tag-picker-filter() [list[$:/plugins/linonetwo/tw-calendar/settings/frequently-used-tags!!text]sort[title]] [tags[]!list[$:/plugins/linonetwo/tw-calendar/settings/frequently-used-tags!!text]sort[title]]
+
 <div class="tw-calendar-layout-form-group tw-calendar-layout-form-tags mt-4" style="margin-top: 16px;">
   <div class="tw-calendar-tags-input">
     <div class="tw-calendar-tags-input-new-tag">
-      {{||$:/core/ui/EditTemplate/tags}}
+      <$let saveTiddler=<<currentTiddler>> tagField="tags">
+        <div class="tc-edit-tags">
+          <$list filter="[<currentTiddler>get<tagField>enlist-input[]sort[title]]" storyview="pop">
+            <$macrocall $name="tag-body"
+              colour={{{ [<currentTiddler>] :cascade[all[shadows+tiddlers]tag[$:/tags/TiddlerColourFilter]!is[draft]get[text]] }}}
+              palette={{$:/palette}}
+              icon={{{ [<currentTiddler>] :cascade[all[shadows+tiddlers]tag[$:/tags/TiddlerIconFilter]!is[draft]get[text]] }}}
+              tagField=<<tagField>>
+            />
+          </$list>
+          <$let tabIndex={{$:/config/EditTabIndex}} cancelPopups="yes">
+            <$macrocall $name="tag-picker" tagField=<<tagField>> tagListFilter=<<calendar-tag-picker-filter>>/>
+          </$let>
+        </div>
+      </$let>
     </div>
     {{||$:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/popup/FrequentlyUsedTagsList}}
   </div>

@@ -1,0 +1,80 @@
+.tw-calendar-tentative-control {
+  width: 100%;
+  margin: 0.45rem 0;
+}
+
+.tw-calendar-tentative-control-state {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  min-width: 0;
+}
+
+.tw-calendar-tentative-control-state--tentative {
+  padding: 0.65rem 0.75rem;
+  border: 1px dashed currentColor;
+  border-radius: 0.45rem;
+  background: color-mix(in srgb, currentColor 5%, transparent);
+}
+
+.tw-calendar-tentative-control-state--confirmed {
+  justify-content: flex-end;
+}
+
+.tw-calendar-tentative-control-icon {
+  display: inline-flex;
+  flex: 0 0 auto;
+}
+
+.tw-calendar-tentative-control-icon svg,
+.tw-calendar-tentative-control-button svg {
+  width: 1em;
+  height: 1em;
+  fill: currentColor;
+  vertical-align: -0.12em;
+}
+
+.tw-calendar-tentative-control-copy {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  min-width: 0;
+  line-height: 1.3;
+}
+
+.tw-calendar-tentative-control-title {
+  font-size: 0.95em;
+}
+
+.tw-calendar-tentative-control-description {
+  opacity: 0.72;
+  font-size: 0.85em;
+}
+
+.tw-calendar-tentative-control-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  flex: 0 0 auto;
+  padding: 0.38rem 0.62rem;
+  border: 1px solid currentColor;
+  border-radius: 0.35rem;
+  line-height: 1.2;
+}
+
+.tw-calendar-tentative-control-button:hover,
+.tw-calendar-tentative-control-button:focus-visible {
+  background: color-mix(in srgb, currentColor 10%, transparent);
+}
+
+@media (max-width: 480px) {
+  .tw-calendar-tentative-control-state--tentative {
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .tw-calendar-tentative-control-button {
+    width: 100%;
+  }
+}

@@ -15,6 +15,7 @@ export enum CalendarEventType {
   CustomField,
 }
 const normalTiddlerEventLengthInHour = 1;
+export const tentativeEventClassName = 'tw-calendar-event-tentative';
 
 /**
  * Get event based on filter and date range of current calendar view.
@@ -77,6 +78,8 @@ const contrastColour = contrastColourModule.run;
 
 function mapTiddlerFieldsToFullCalendarEventObject(fields: ITiddlerFields, context: IContext, palette: Record<string, string>): EventInput[] {
   const { title, startDate, endDate, created, modified, color, tags, rrule } = fields;
+  const isTentative = fields.calendarEntry === 'yes' && fields.status === 'tentative';
+  const tentativeExtendedProps = isTentative ? { status: 'tentative' } : {};
   const backgroundColor = color ?? (Array.isArray(tags) ? tags.map((tagName) => $tw.wiki.getTiddler(tagName)?.fields.color).find(Boolean) : undefined);
   let textColor: string | undefined;
   if (backgroundColor !== undefined) {
@@ -94,6 +97,7 @@ function mapTiddlerFieldsToFullCalendarEventObject(fields: ITiddlerFields, conte
     display: 'block',
     backgroundColor,
     textColor,
+    classNames: isTentative ? [tentativeEventClassName] : [],
   };
   if (typeof rrule === 'string' && rrule.trim() !== '') {
     const recurringStart = typeof startDate === 'string' ? parseTwDate(startDate) : undefined;
@@ -109,6 +113,7 @@ function mapTiddlerFieldsToFullCalendarEventObject(fields: ITiddlerFields, conte
         ...(recurringStart !== undefined && recurringEnd !== undefined ? { duration: toDurationInput(recurringStart, recurringEnd) } : {}),
         extendedProps: {
           type: CalendarEventType.Event,
+          ...tentativeExtendedProps,
         },
       },
     ];
@@ -164,6 +169,7 @@ function mapTiddlerFieldsToFullCalendarEventObject(fields: ITiddlerFields, conte
           allDay: endDateFromField - startDateFromField === allDayDateLength,
           extendedProps: {
             type: CalendarEventType.CustomField,
+            ...tentativeExtendedProps,
           },
         };
         return result;
@@ -186,6 +192,7 @@ function mapTiddlerFieldsToFullCalendarEventObject(fields: ITiddlerFields, conte
         allDay: end - start === allDayDateLength,
         extendedProps: {
           type: CalendarEventType.Event,
+          ...tentativeExtendedProps,
         },
       },
     ];
@@ -201,6 +208,7 @@ function mapTiddlerFieldsToFullCalendarEventObject(fields: ITiddlerFields, conte
     durationEditable: false,
     extendedProps: {
       type: CalendarEventType.NormalTiddler,
+      ...tentativeExtendedProps,
     },
   };
   if (created !== undefined) {

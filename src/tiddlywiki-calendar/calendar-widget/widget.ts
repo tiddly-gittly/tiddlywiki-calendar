@@ -53,6 +53,7 @@ class CalendarWidget extends Widget {
   refresh(changedTiddlers: IChangedTiddlers): boolean {
     let refreshed = false;
     const context = this.getContext();
+    const startDateKey = context.startDateFields?.[0] ?? 'startDate';
     const endDateKey = context.endDateFields?.[0] ?? 'endDate';
     let shouldRefreshChangedTiddlers = false;
     let shouldRefreshImmediately = false;
@@ -64,7 +65,7 @@ class CalendarWidget extends Widget {
       }
       if (changedTiddlerTitle.startsWith('$:/state/')) continue;
       if (changedTiddlers[changedTiddlerTitle].modified === true) {
-        if (changedTiddlerInViewRange(changedTiddlerTitle, this.#calendar, endDateKey)) {
+        if (changedTiddlerInViewRange(changedTiddlerTitle, this.#calendar, endDateKey, startDateKey)) {
           shouldRefreshChangedTiddlers = true;
           break;
         }

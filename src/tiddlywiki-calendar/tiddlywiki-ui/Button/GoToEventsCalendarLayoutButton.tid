@@ -1,14 +1,15 @@
 title: $:/plugins/linonetwo/tw-calendar/tiddlywiki-ui/GoToEventsCalendarLayoutButton
-caption: {{$:/plugins/linonetwo/tw-calendar/tiddlywiki-ui/Images/GoToCalendarImage}} {{$:/language/Buttons/GoToEventsCalendarLayoutButton/Caption}}
-description: {{$:/language/Buttons/GoToEventsCalendarLayoutButton/Description}}
+caption: {{$:/plugins/linonetwo/tw-calendar/tiddlywiki-ui/Images/GoToCalendarImage}} <<lingo "Buttons/GoToEventsCalendar/Caption" "$:/plugins/linonetwo/tw-calendar/language/">>
+description: <<lingo "Buttons/GoToEventsCalendar/Description" "$:/plugins/linonetwo/tw-calendar/language/">>
 
 \whitespace trim
-<$button tooltip={{$:/language/Buttons/GoToEventsCalendarLayoutButton/Hint}} aria-label={{$:/language/Buttons/GoToEventsCalendarLayoutButton/Caption}} class=<<tv-config-toolbar-class>>>
+\procedure lingo-base() $:/plugins/linonetwo/tw-calendar/language/
+<$button tooltip=<<lingo Buttons/GoToEventsCalendar/Hint>> aria-label=<<lingo Buttons/GoToEventsCalendar/Caption>> class=<<tv-config-toolbar-class>>>
   <$action-setfield $tiddler="$:/layout" text="$:/plugins/linonetwo/tw-calendar/tiddlywiki-ui/PageLayout/EventsCalendarLayout"/>
   <$list filter="[<tv-config-toolbar-icons>match[yes]]">
     {{$:/plugins/linonetwo/tw-calendar/tiddlywiki-ui/Images/GoToCalendarImage}}
   </$list>
   <$list filter="[<tv-config-toolbar-text>match[yes]]">
-    <span class="tc-btn-text"><$text text={{$:/language/Buttons/GoToEventsCalendarLayoutButton/Caption}}/></span>
+    <span class="tc-btn-text"><<lingo Buttons/GoToEventsCalendar/Caption>></span>
   </$list>
 </$button>

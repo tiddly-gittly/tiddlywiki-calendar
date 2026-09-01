@@ -77,6 +77,33 @@ type: text/vnd.tiddlywiki
   cursor: pointer;
 }
 
+/** Tentative calendar entries use an outlined treatment in grid and time views. */
+.fc .fc-event.tw-calendar-event-tentative {
+  background: transparent !important;
+  border-width: 2px;
+  border-style: dashed !important;
+  color: <<colour foreground>> !important;
+}
+.fc .fc-event.tw-calendar-event-tentative .fc-event-main {
+  color: <<colour foreground>>;
+}
+
+/** FullCalendar renders list events as table rows, so outline their cells instead. */
+.fc .fc-list-event.tw-calendar-event-tentative > td {
+  border-top: 2px dashed <<colour table-border>>;
+  border-bottom: 2px dashed <<colour table-border>>;
+}
+.fc .fc-list-event.tw-calendar-event-tentative > td:first-child {
+  border-left: 2px dashed <<colour table-border>>;
+}
+.fc .fc-list-event.tw-calendar-event-tentative > td:last-child {
+  border-right: 2px dashed <<colour table-border>>;
+}
+.fc .fc-list-event.tw-calendar-event-tentative .fc-list-event-dot {
+  background: transparent;
+  border-style: dashed;
+}
+
 .fc-daygrid-event > div {
   overflow: hidden;
   text-overflow: ellipsis;

@@ -31,7 +31,7 @@ tags: $:/tags/EventCalendarSideBarSegment
             </span>
             <div class="tw-calendar-popular-tag-stats">
               <span class="tw-calendar-popular-tag-count">×<<count>></span>
-              <span class="tw-calendar-popular-tag-duration">~<<avgDuration>>h</span>
+              <span class="tw-calendar-popular-tag-duration">~<<avgDuration>><<lingo PopularTags/HourAbbreviation>></span>
             </div>
           </div>
         </$draggable>

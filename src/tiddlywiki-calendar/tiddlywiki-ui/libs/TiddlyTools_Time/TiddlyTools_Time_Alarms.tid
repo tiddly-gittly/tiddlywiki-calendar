@@ -1,5 +1,5 @@
 alarms: 
-caption: Alarms
+caption: <<lingo Modal/CreateEvent/Alarm/Heading $:/plugins/linonetwo/tw-calendar/language/>>
 created: 20200811043857487
 modified: 20220725122018915
 tags: 
@@ -10,20 +10,20 @@ author: EricShulman
 
 \define alarms_input()      $:/temp/time/alarms_input/$(currentTiddler)$
 \define alarms_msg()        $:/temp/time/alarms_msg/$(freq)$/$(this_time)$
-\define alarms_defaultmsg() BEEP! BEEP! BEEP!
+\define alarms_defaultmsg() <<lingo Modal/CreateEvent/Alarm/DefaultMessage>>
 \procedure lingo-base() $:/plugins/linonetwo/tw-calendar/language/
 
 \define alarms_form()
 <style> .alarmEdit { width:3em; text-align:center; } </style>
 <<alarms_form_freq>>
- at 
+ <<lingo Modal/CreateEvent/Alarm/Form/At>>
 <<alarms_form_time>>
 <span style={{{ [<alarms_input>get[freq]match[monthly]then[position:absolute]else[display:none;]] }}}>
-   on the <<alarms_form_day>> day of the month</span>
+   <<lingo Modal/CreateEvent/Alarm/Form/MonthlyPrefix>> <<alarms_form_day>> <<lingo Modal/CreateEvent/Alarm/Form/MonthlySuffix>></span>
 <span style={{{ [<alarms_input>get[freq]match[yearly]then[position:absolute]else[display:none;]] }}}>
-   on <<alarms_form_month>> <<alarms_form_day>> every year</span>
+   <<lingo Modal/CreateEvent/Alarm/Form/YearlyPrefix>> <<alarms_form_month>> <<alarms_form_day>> <<lingo Modal/CreateEvent/Alarm/Form/YearlySuffix>></span>
 <span style={{{ [<alarms_input>!has[freq]] [<alarms_input>get[freq]match[once]] +[limit[1]] +[else[visibility:hidden;]] }}}>
-   on <<alarms_form_year>> <<alarms_form_month>> <<alarms_form_day>></span>
+   <<lingo Modal/CreateEvent/Alarm/Form/On>> <<alarms_form_year>> <<alarms_form_month>> <<alarms_form_day>></span>
 <br>
 <<alarms_form_msg>>
 <br>
@@ -40,7 +40,7 @@ author: EricShulman
    <option value="daily"><<lingo Modal/CreateEvent/AlarmFrequency/Daily>></option>
    <$list filter="[all[shadows]prefix[$:/language/Date/Long/Day/]]">
       <option value={{{ [<currentTiddler>get[text]] }}}>
-         {{{ [<currentTiddler>get[text]] }}}s
+         {{{ [<currentTiddler>get[text]] }}}
       </option>
    </$list>
 </$select>
@@ -107,8 +107,10 @@ author: EricShulman
 \end
 
 \define alarms_form_msg()
+<$wikify name="alarmMessagePlaceholder" text="<<lingo Modal/CreateEvent/Alarm/Form/MessagePlaceholder>>">
 <style> .alarmMsg { width:calc(100% - 4.5em); } </style>
-<$edit-text tag="input" class="alarmMsg" tiddler=<<alarms_input>> field="msg" default="" placeholder="enter a message" />
+<$edit-text tag="input" class="alarmMsg" tiddler=<<alarms_input>> field="msg" default="" placeholder=<<alarmMessagePlaceholder>> />
+</$wikify>
 \end
 
 \define alarms_add()
@@ -137,33 +139,41 @@ author: EricShulman
 <!-- ADD/UPDATE ALARMS -->
 <$vars old_alarm={{{ [<alarms_input>get[old_alarm]] }}}>
 <$reveal default=<<old_alarm>> type="match" text="" style="flex:1;margin-right:1em;">
-   <$button class="tc-button tt-button" style="width:100%" tooltip="add alarm">
+   <$wikify name="alarmAddTooltip" text="<<lingo Modal/CreateEvent/Alarm/Tooltip/Add>>">
+   <$button class="tc-button tt-button" style="width:100%" tooltip=<<alarmAddTooltip>>>
       {{$:/core/images/new-button}}
       <$action-listops $tiddler=<<currentTiddler>> $field="alarms" $subfilter="[<newalarm>]" />
       <$action-deletetiddler $tiddler=<<alarms_input>> />
    </$button>
+   </$wikify>
 </$reveal>
 <$reveal default=<<old_alarm>> type="nomatch" text="" style="flex:1;margin-right:1em;">
-   <$button class="tc-button tt-button" tooltip="update alarm" style="width:100%">
+   <$wikify name="alarmUpdateTooltip" text="<<lingo Modal/CreateEvent/Alarm/Tooltip/Update>>">
+   <$button class="tc-button tt-button" tooltip=<<alarmUpdateTooltip>> style="width:100%">
       {{$:/core/images/done-button}}
       <$action-listops $tiddler=<<currentTiddler>> $field="alarms" $subfilter="[<newalarm>] +[replace<old_alarm>]" />
       <$action-deletetiddler $tiddler=<<alarms_input>> />
    </$button>
+   </$wikify>
 </$reveal>
 </$vars>
 \end
 
 \define alarms_reset()
-<$button class="tc-button tt-button" style="flex:1;margin-left:1em" tooltip="reset input">
+<$wikify name="alarmResetTooltip" text="<<lingo Modal/CreateEvent/Alarm/Tooltip/Reset>>">
+<$button class="tc-button tt-button" style="flex:1;margin-left:1em" tooltip=<<alarmResetTooltip>>>
    {{$:/core/images/close-button}}
    <$action-deletetiddler $tiddler=<<alarms_input>> />
 </$button>
+</$wikify>
 \end
 
 \define alarms_edit()
-<$button class="tc-button tt-button" tooltip="edit this alarm" actions=<<alarms_edit_actions>>>
+<$wikify name="alarmEditTooltip" text="<<lingo Modal/CreateEvent/Alarm/Tooltip/Edit>>">
+<$button class="tc-button tt-button" tooltip=<<alarmEditTooltip>> actions=<<alarms_edit_actions>>>
    {{$:/core/images/edit-button}}
 </$button>
+</$wikify>
 \end
 
 \define alarms_edit_actions()
@@ -181,9 +191,10 @@ author: EricShulman
 \end
 
 \define alarms_delete()
-<$button class="tc-button tt-button" tooltip="delete this alarm"> {{$:/core/images/delete-button}}
+<$wikify name="alarmDeleteTooltip" text="<<lingo Modal/CreateEvent/Alarm/Tooltip/Delete>>">
+<$button class="tc-button tt-button" tooltip=<<alarmDeleteTooltip>>> {{$:/core/images/delete-button}}
    <$action-setfield $tiddler="$(alarms_msg)$"
-      subtitle="""Confirm: delete alarm"""
+      subtitle="""<<lingo Modal/CreateEvent/Alarm/Delete/Title $:/plugins/linonetwo/tw-calendar/language/>>"""
       text="""
          <$vars this_alarm="$(this_alarm)$">
          <$vars msg={{{ [<this_alarm>split[;]nth[4]] }}}>
@@ -194,35 +205,37 @@ author: EricShulman
          </$vars>
          </$vars>
          <br>&nbsp;<br>
-         @@font-size:1.5em; Are you sure you want to delete this alarm? @@
+         @@font-size:1.5em; <<lingo Modal/CreateEvent/Alarm/Delete/Prompt $:/plugins/linonetwo/tw-calendar/language/>> @@
       """
       footer="""
-         <$button class="tc-button tt-button" message="tm-close-tiddler"> cancel
+         <$button class="tc-button tt-button" message="tm-close-tiddler"> <<lingo Modal/CreateEvent/Alarm/Button/Cancel $:/plugins/linonetwo/tw-calendar/language/>>
             <$action-deletetiddler $tiddler="$(alarms_msg)$" />
          </$button>
-         <$button class="tc-button tt-button" message="tm-close-tiddler"> delete
+         <$button class="tc-button tt-button" message="tm-close-tiddler"> <<lingo Modal/CreateEvent/Alarm/Button/Delete $:/plugins/linonetwo/tw-calendar/language/>>
             <$action-listops $tiddler="$(currentTiddler)$" $field="alarms" $subfilter="-[[$(this_alarm)$]]" />
             <$action-deletetiddler $tiddler="$(alarms_msg)$" />
          </$button>
       """ />
    <$action-sendmessage $message="tm-modal" $param="$(alarms_msg)$" />
 </$button>
+</$wikify>
 \end
 
 \define alarms_deleteall()
+<$wikify name="alarmDeleteAllTooltip" text="<<lingo Modal/CreateEvent/Alarm/Tooltip/DeleteAll>>">
 <$list filter="[<currentTiddler>!has[alarms]!has[draft.of]]">
-   <$button class="tc-btn-invisible" tooltip="delete all alarms"> @@fill:gray;{{$:/core/images/delete-button}}@@ </$button>
+   <$button class="tc-btn-invisible" tooltip=<<alarmDeleteAllTooltip>>> @@fill:gray;{{$:/core/images/delete-button}}@@ </$button>
 </$list>
 <$list filter="[<currentTiddler>has[alarms]!has[draft.of]]">
-<$button class="tc-btn-invisible" tooltip="delete all alarms"> {{$:/core/images/delete-button}}
+<$button class="tc-btn-invisible" tooltip=<<alarmDeleteAllTooltip>>> {{$:/core/images/delete-button}}
    <$action-setfield $tiddler="$(alarms_msg)$"
-      subtitle="""Confirm: delete all alarms"""
-      text="""@@font-size:1.5em; Are you sure you want to delete all alarms?@@"""
+      subtitle="""<<lingo Modal/CreateEvent/Alarm/DeleteAll/Title $:/plugins/linonetwo/tw-calendar/language/>>"""
+      text="""@@font-size:1.5em; <<lingo Modal/CreateEvent/Alarm/DeleteAll/Prompt $:/plugins/linonetwo/tw-calendar/language/>>@@"""
       footer="""
-         <$button class="tc-button tt-button" message="tm-close-tiddler"> cancel
+         <$button class="tc-button tt-button" message="tm-close-tiddler"> <<lingo Modal/CreateEvent/Alarm/Button/Cancel $:/plugins/linonetwo/tw-calendar/language/>>
             <$action-deletetiddler $tiddler="$(alarms_msg)$" />
          </$button>
-         <$button class="tc-button tt-button" message="tm-close-tiddler"> delete
+         <$button class="tc-button tt-button" message="tm-close-tiddler"> <<lingo Modal/CreateEvent/Alarm/Button/Delete $:/plugins/linonetwo/tw-calendar/language/>>
             <$action-setfield      $tiddler="$(currentTiddler)$" alarms="" />
             <$action-deletetiddler $tiddler="$(alarms_input)$"             />
             <$action-deletetiddler $tiddler="$(alarms_msg)$"               />
@@ -230,32 +243,40 @@ author: EricShulman
       """ />
    <$action-sendmessage $message="tm-modal" $param="$(alarms_msg)$" />
 </$button>
+</$list>
+</$wikify>
 \end
 
 \define alarms_toggle()
 \whitespace trim
+<$wikify name="alarmPauseTooltip" text="<<lingo Modal/CreateEvent/Alarm/Tooltip/Pause>>">
+<$wikify name="alarmResumeTooltip" text="<<lingo Modal/CreateEvent/Alarm/Tooltip/Resume>>">
+<$wikify name="alarmExpiredTooltip" text="<<lingo Modal/CreateEvent/Alarm/Tooltip/EditExpired>>">
 <$vars freq={{{ [<this_alarm>split[;]nth[1]split[@]first[]] }}}
      paused={{{ [<this_alarm>split[;]nth[1]split[@]rest[]]  }}}
        date={{{ [<this_alarm>split[;]nth[2]] }}}
        time={{{ [<this_alarm>split[;]nth[3]] }}}
         msg={{{ [<this_alarm>split[;]nth[4]] }}}>
 <$reveal default=<<paused>> type="match" text="">
-   <$button class="tc-btn-invisible" tooltip="this alarm is active... click to pause" actions=<<alarms_pause>>>
+   <$button class="tc-btn-invisible" tooltip=<<alarmPauseTooltip>> actions=<<alarms_pause>>>
       ''<<alarms_show>>'' {{$:/core/images/timestamp-on}}
    </$button>
 </$reveal>
 <$reveal default=<<paused>> type="nomatch" text="">
    <$reveal default=<<paused>> type="match" text="paused">
-      <$button class="tc-btn-invisible" tooltip="this alarm is paused... click to resume" actions=<<alarms_resume>>>
+      <$button class="tc-btn-invisible" tooltip=<<alarmResumeTooltip>> actions=<<alarms_resume>>>
          @@color:#999;fill:#999; ''<<alarms_show>>''@@ {{$:/core/images/timestamp-off}}
       </$button>
    </$reveal>
    <$reveal default=<<paused>> type="match" text="expired">
-      <$button class="tc-btn-invisible" tooltip="this alarm has expired... click to edit" actions=<<alarms_edit_actions>>>
+      <$button class="tc-btn-invisible" tooltip=<<alarmExpiredTooltip>> actions=<<alarms_edit_actions>>>
          @@color:#999;fill:#999; ''<<alarms_show>>''@@ {{$:/core/images/done-button}}
       </$button>
    </$reveal>
 </$reveal>
+</$wikify>
+</$wikify>
+</$wikify>
 \end
 
 \define alarms_pause()
@@ -276,9 +297,12 @@ author: EricShulman
 \define alarms_heading()
 <$vars time=<<now "DDD, MMM DDth YYYY 0hh:0mm:0ss">>>
 <span style="float:right;font-size:80%;">''<<time>>''</span>
-<span title={{{ [[open ]addsuffix<currentTiddler>] }}}>
-<$link>''<$view field="caption">Alarms</$view>''</$link>
+<$wikify name="alarmOpenTooltip" text="<<lingo Modal/CreateEvent/Alarm/Tooltip/Open>> <<currentTiddler>>">
+<span title=<<alarmOpenTooltip>>>
+<$link>''<$view field="caption"><<lingo Modal/CreateEvent/Alarm/Heading>></$view>''</$link>
 <<alarms_deleteall>>
+</span>
+</$wikify>
 \end
 
 \define alarms_list()
@@ -291,7 +315,7 @@ author: EricShulman
    <td style="white-space:nowrap;text-align:right;padding:0 0.5em;"> <<alarms_toggle>> </td>
    <td>
       <$vars msg={{{ [<this_alarm>split[;]nth[4]decodeuricomponent[]] }}}>
-      <$list filter="[<msg>is[tiddler]]">  Action: <$link to=<<msg>> />                                  </$list>
+      <$list filter="[<msg>is[tiddler]]"> <<lingo Modal/CreateEvent/Alarm/Action>> <$link to=<<msg>> /> </$list>
       <$list filter="[<msg>!is[tiddler]]"> <$text text={{{ [<msg>!match[]else<alarms_defaultmsg>] }}} /> </$list>
       </$vars>
    </td>
@@ -307,13 +331,13 @@ author: EricShulman
         day={{{ [<this_alarm>split[;]nth[2]split[-]nth[3]trim:prefix[0]] }}}
        time={{{ [<this_alarm>split[;]nth[3]] }}}>
 <$vars suffix={{{ [[$:/language/Date/DaySuffix/]addsuffix<day>get[text]] }}}>
-<$list filter="[<freq>match[once]]"     >  <<date>> at </$list>
-<$list filter="[<freq>match[daily]]"    > Every day at </$list>
-<$list filter="[<freq>match[monthly]]"  > <<day>><<suffix>> of the month at </$list>
-<$list filter="[<freq>match[yearly]]"   > <$text text={{{ [<date>split[-]nth[2]addprefix[$:/language/Date/Long/Month/]get[text]] }}}/> <<day>><<suffix>> every year at </$list>
-<$list filter="[<freq>!match[once]then<freq>!match[yearly]then<freq>!match[monthly]then<freq>!match[daily]]"> <<freq>>s at </$list>
+<$list filter="[<freq>match[once]]"     > <<date>> <<lingo Modal/CreateEvent/Alarm/Display/At>> </$list>
+<$list filter="[<freq>match[daily]]"    > <<lingo Modal/CreateEvent/Alarm/Display/EveryDay>> <<lingo Modal/CreateEvent/Alarm/Display/At>> </$list>
+<$list filter="[<freq>match[monthly]]"  > <<lingo Modal/CreateEvent/Alarm/Display/EveryMonthOn>> <<day>><<suffix>> <<lingo Modal/CreateEvent/Alarm/Display/At>> </$list>
+<$list filter="[<freq>match[yearly]]"   > <<lingo Modal/CreateEvent/Alarm/Display/EveryYearOn>> <$text text={{{ [<date>split[-]nth[2]addprefix[$:/language/Date/Long/Month/]get[text]] }}}/> <<day>><<suffix>> <<lingo Modal/CreateEvent/Alarm/Display/At>> </$list>
+<$list filter="[<freq>!match[once]then<freq>!match[yearly]then<freq>!match[monthly]then<freq>!match[daily]]"> <<lingo Modal/CreateEvent/Alarm/Display/Every>> <<freq>> <<lingo Modal/CreateEvent/Alarm/Display/At>> </$list>
 <$list filter="[<time>!match[--:--:--]]"> <<time>> </$list>
-<$list filter="[<time>match[--:--:--]]">  startup  </$list>
+<$list filter="[<time>match[--:--:--]]"> <<lingo Modal/CreateEvent/Alarm/Display/Startup>> </$list>
 \end
 
 \define alarms_tick()
@@ -393,10 +417,12 @@ author: EricShulman
 \end
 
 \define alarms_trigger()
-<$vars when=<<now "DDD, YYYY-0MM-0DD at 0hh:0mm:0ss">>>
+<$vars alarmDate=<<now "DDD, YYYY-0MM-0DD">> alarmTime=<<now "0hh:0mm:0ss">>>
+<$wikify name="when" text="<<alarmDate>> <<lingo Modal/CreateEvent/Alarm/Display/At>> <<alarmTime>>">
 <$list filter="[<msg>is[tiddler]]"  variable="do_action">  <$transclude tiddler=<<msg>> />      </$list>
 <$list filter="[<msg>!is[tiddler]]" variable="do_message"> <<alarms_message msg:"""$(msg)$""">> </$list>
-<$vars>
+</$wikify>
+</$vars>
 \end
 
 \define alarms_message(msg)
@@ -406,14 +432,14 @@ author: EricShulman
           text={{{ [[$msg$]!match[]else<alarms_defaultmsg>addprefix[@@font-size:2em;]addsuffix[@@]addprefix[<br>&nbsp;<br>]addprefix<when>] }}}
         footer="""
            <$button class="tc-button tt-button" message="tm-close-tiddler">
-              view <$action-deletetiddler $tiddler="$(alarms_msg)$" />
+              <<lingo Modal/CreateEvent/Alarm/Button/View $:/plugins/linonetwo/tw-calendar/language/>> <$action-deletetiddler $tiddler="$(alarms_msg)$" />
               <$list filter="[[$:/StoryList]!contains[$(currentTiddler)$]]">
                  <$action-listops $subfilter="[[$(currentTiddler)$]] +[putfirst[]]" />
               </$list>
               <$action-navigate $to="$(currentTiddler)$"/>
            </$button>
            <$button class="tc-button tt-button" message="tm-close-tiddler">
-              close <$action-deletetiddler $tiddler="$(alarms_msg)$" />
+              <<lingo Modal/CreateEvent/Alarm/Button/Close $:/plugins/linonetwo/tw-calendar/language/>> <$action-deletetiddler $tiddler="$(alarms_msg)$" />
            </$button>
         """ />
    <$action-sendmessage $message="tm-modal" $param=<<alarms_msg>> />
@@ -440,14 +466,16 @@ author: EricShulman
       </$button>
       <div class="tw-calendar-alarm-source-content">
          <label class="tw-calendar-alarm-source-label"><<lingo Modal/CreateEvent/AlarmSource/Label>></label>
+         <$wikify name="alarmSourcePlaceholder" text="<<lingo Modal/CreateEvent/AlarmSource/Placeholder>>">
          <$edit-text
             tag="textarea"
             field="alarms"
             class="tc-edit-texteditor tw-calendar-alarm-source-input"
-            placeholder="[[yearly;....-08-26;09:00:00;Anniversary]]"
+            placeholder=<<alarmSourcePlaceholder>>
             cancelPopups="yes"
             fileDrop="no"
          />
+         </$wikify>
          <small><<lingo Modal/CreateEvent/AlarmSource/Description>></small>
       </div>
    </$reveal>

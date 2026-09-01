@@ -1,11 +1,12 @@
-import type { CalendarOptions, LocaleSingularArg } from '@fullcalendar/core';
+import type { CalendarOptions } from '@fullcalendar/core';
 import { getIsSmallScreen } from './constants';
+import { lingo } from './lingo';
 
-export function getCustomViews(locale: LocaleSingularArg): CalendarOptions['views'] {
+export function getCustomViews(): CalendarOptions['views'] {
   return {
     timeGridThreeDay: {
       type: 'timeGrid',
-      buttonText: locale === 'zh-cn' ? '3日' : (getIsSmallScreen() ? '3d' : '3 day'),
+      buttonText: lingo(getIsSmallScreen() ? 'CalendarView/ThreeDay/Short' : 'CalendarView/ThreeDay/Long'),
       duration: { days: 3 },
       // comment out this after https://github.com/fullcalendar/fullcalendar/issues/7129 solved. the duration option will override the visibleRange option
       // visibleRange: threeDayWith1Previous1NextVisibleRange,
@@ -13,7 +14,7 @@ export function getCustomViews(locale: LocaleSingularArg): CalendarOptions['view
     timeGridDay: {
       type: 'timeGrid',
       duration: { days: 1 },
-      buttonText: locale === 'zh-cn' ? '1日' : (getIsSmallScreen() ? '1d' : 'day'),
+      buttonText: lingo(getIsSmallScreen() ? 'CalendarView/Day/Short' : 'CalendarView/Day/Long'),
     },
     searchResultList: {
       type: 'listYear',

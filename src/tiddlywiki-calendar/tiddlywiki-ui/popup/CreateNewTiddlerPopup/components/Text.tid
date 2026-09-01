@@ -1,12 +1,15 @@
 title: $:/plugins/linonetwo/tw-calendar/calendar-widget/tiddlywiki-ui/popup/CreateNewTiddlerPopup/components/Text
 tags: $:/tw-calendar/CreateNewTiddlerPopupTemplate
 
+\procedure lingo-base() $:/plugins/linonetwo/tw-calendar/language/
+
+<$wikify name="descriptionPlaceholder" text="<<lingo Modal/CreateEvent/Placeholder/Description>>">
 <div class="tw-calendar-layout-form-group tw-calendar-layout-form-text">
   <$edit
     field="text"
     class="tc-edit-texteditor tc-edit-texteditor-body tw-calendar-text-input"
     default=""
-    placeholder="添加描述..."
+    placeholder=<<descriptionPlaceholder>>
     tabindex="2"
     focus="false"
     cancelPopups="yes"
@@ -15,3 +18,4 @@ tags: $:/tw-calendar/CreateNewTiddlerPopupTemplate
     inputmode="text"
   />
 </div>
+</$wikify>
