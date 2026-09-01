@@ -41,7 +41,7 @@ mask-closable: no
 					<$action-setfield $tiddler=<<tentativeCleanupState>> preview=<<tentativeEvent>> />
 					<span class="tw-calendar-tentative-cleanup-row-title">
 						<$view tiddler=<<tentativeEvent>> field="caption" format="text" />
-						<$list filter="[<tentativeEvent>!has[caption]]"><$text text=<<tentativeEvent>> /></$list>
+						<% if [<tentativeEvent>!has[caption]] %><$text text=<<tentativeEvent>> /><% endif %>
 					</span>
 					<span class="tw-calendar-tentative-cleanup-row-time">
 						<$view tiddler=<<tentativeEvent>> field="startDate" format="date" template={{$:/language/DateFormat}} />
@@ -56,27 +56,27 @@ mask-closable: no
 			<$tiddler tiddler=<<previewEvent>>>
 				<h3 class="tw-calendar-tentative-cleanup-preview-title">
 					<$view field="caption" format="text" />
-					<$list filter="[<currentTiddler>!has[caption]]"><$text text=<<currentTiddler>> /></$list>
+					<% if [<currentTiddler>!has[caption]] %><$text text=<<currentTiddler>> /><% endif %>
 				</h3>
 				<dl class="tw-calendar-tentative-cleanup-preview-fields">
 					<dt><<lingo "TentativeCleanup/Preview/Start">></dt>
 					<dd><$view field="startDate" format="date" template={{$:/language/DateFormat}} /></dd>
 					<dt><<lingo "TentativeCleanup/Preview/End">></dt>
 					<dd><$view field="endDate" format="date" template={{$:/language/DateFormat}} /></dd>
-					<$list filter="[<currentTiddler>tags[]limit[1]]" variable="ignore">
+					<% if [<currentTiddler>tags[]limit[1]] %>
 						<dt><<lingo "TentativeCleanup/Preview/Tags">></dt>
 						<dd class="tw-calendar-tentative-cleanup-preview-tags">
 							<$list filter="[<currentTiddler>tags[]sort[]]" variable="eventTag"><span class="tc-tag-label"><$text text=<<eventTag>> /></span></$list>
 						</dd>
-					</$list>
-					<$list filter="[<currentTiddler>has[rrule]]">
+					<% endif %>
+					<% if [<currentTiddler>has[rrule]] %>
 						<dt><<lingo "TentativeCleanup/Preview/Recurrence">></dt>
 						<dd><$macrocall $name="rrule-summary-macro" rrule={{!!rrule}} /></dd>
-					</$list>
+					<% endif %>
 				</dl>
-				<$list filter="[<currentTiddler>has[text]]">
+				<% if [<currentTiddler>has[text]] %>
 					<div class="tw-calendar-tentative-cleanup-preview-text"><$transclude field="text" /></div>
-				</$list>
+				<% endif %>
 			</$tiddler>
 		</$list>
 	</section>

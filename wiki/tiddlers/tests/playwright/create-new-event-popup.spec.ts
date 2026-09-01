@@ -159,6 +159,18 @@ const verifySelectedLanguage = async (page: import('@playwright/test').Page) => 
     tw.wiki.addTiddler({ title: '$:/language', text: '$:/languages/zh-Hans' });
   });
   await page.reload();
+
+  // Re-enter the calendar and create a fresh draft so that the assertions do
+  // not depend on the English modal's rendered state surviving the reload.
+  await openEventCalendarLayout(page);
+  await openCreateEventPopup(page);
+
+  const chinesePopup = page.locator('.tw-calendar-layout-create-new-tiddler-popup');
+  await expect(chinesePopup.locator('.tw-calendar-caption-input')).toHaveAttribute('placeholder', '输入日程标题');
+  await expect(chinesePopup.locator('.tw-calendar-text-input')).toHaveAttribute('placeholder', '添加描述...');
+  await expect(chinesePopup.getByRole('button', { name: '不循环' })).toBeVisible();
+  await expect(chinesePopup.getByRole('button', { name: '轻点添加提醒' })).toBeVisible();
+  await expect(chinesePopup.getByRole('button', { name: '更多设置' })).toBeVisible();
 };
 
 test('recurrence quick actions apply COUNT and UNTIL rules', async ({ page }) => {

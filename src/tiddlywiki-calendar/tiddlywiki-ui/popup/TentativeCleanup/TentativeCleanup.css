@@ -1,7 +1,3 @@
-title: $:/plugins/linonetwo/tw-calendar/tiddlywiki-ui/popup/TentativeCleanup/Styles
-tags: $:/tags/Stylesheet
-type: text/vnd.tiddlywiki
-
 .tw-calendar-tentative-cleanup-config {
 	display: flex;
 	align-items: center;
@@ -35,9 +31,7 @@ type: text/vnd.tiddlywiki
 .tw-calendar-tentative-cleanup-list-pane,
 .tw-calendar-tentative-cleanup-preview-pane {
 	min-width: 0;
-	border: 1px solid <<colour modal-border>>;
 	border-radius: 6px;
-	background: <<colour modal-background>>;
 }
 
 .tw-calendar-tentative-cleanup-list-pane {
@@ -48,16 +42,10 @@ type: text/vnd.tiddlywiki
 .tw-calendar-tentative-cleanup-row {
 	display: flex;
 	align-items: stretch;
-	border-bottom: 1px solid <<colour very-muted-foreground>>;
 }
 
 .tw-calendar-tentative-cleanup-row:last-child {
 	border-bottom: 0;
-}
-
-.tw-calendar-tentative-cleanup-row.is-previewing {
-	background: <<colour tiddler-controls-foreground>>;
-	color: <<colour background>>;
 }
 
 .tw-calendar-tentative-cleanup-checkbox {
@@ -124,7 +112,6 @@ type: text/vnd.tiddlywiki
 .tw-calendar-tentative-cleanup-preview-text {
 	margin-top: 1rem;
 	padding-top: 1rem;
-	border-top: 1px solid <<colour very-muted-foreground>>;
 }
 
 .tw-calendar-tentative-cleanup-empty {
@@ -132,12 +119,7 @@ type: text/vnd.tiddlywiki
 	min-height: 160px;
 	place-items: center;
 	padding: 1rem;
-	color: <<colour muted-foreground>>;
 	text-align: center;
-}
-
-.tw-calendar-tentative-cleanup-delete {
-	color: <<colour alert-highlight>>;
 }
 
 .tw-calendar-tentative-cleanup-delete-label {

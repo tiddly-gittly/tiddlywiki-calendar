@@ -1,0 +1,58 @@
+.tiddlywiki-calendar-widget-container {
+  min-height: 400px;
+  height: 100%;
+}
+
+.tiddlywiki-calendar-widget-container table {
+  margin: unset;
+}
+
+.fc-timegrid-event-harness {
+  overflow: hidden;
+}
+
+.fc-event-main-tags {
+  overflow: hidden;
+}
+
+.fc-event-main-tags > span {
+  word-break: break-all;
+  border: 1px solid;
+  padding: 1px;
+  margin: 1px;
+  margin-right: 2px;
+  margin-bottom: 0;
+  line-height: 2em;
+}
+
+.fc-event-title-with-text {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 15%;
+}
+
+.fc-event {
+  cursor: pointer;
+}
+
+/** Tentative calendar entries use an outlined treatment in grid and time views. */
+.fc .fc-event.tw-calendar-event-tentative {
+  background: transparent !important;
+  border-width: 2px;
+  border-style: dashed !important;
+}
+
+/** FullCalendar renders list events as table rows, so outline their cells instead. */
+.fc .fc-list-event.tw-calendar-event-tentative .fc-list-event-dot {
+  background: transparent;
+  border-style: dashed;
+}
+
+.fc-daygrid-event > div {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.fc-toolbar.fc-footer-toolbar {
+  flex-wrap: wrap;
+}

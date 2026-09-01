@@ -1,6 +1,6 @@
 creator: LinOnetwo
 tags: $:/tags/Stylesheet
-title: $:/plugins/linonetwo/tw-calendar/style.css
+title: $:/plugins/linonetwo/tw-calendar/style.variables.css
 type: text/vnd.tiddlywiki
 
 \rules except horizrule dash
@@ -43,83 +43,34 @@ type: text/vnd.tiddlywiki
 <%endif%>
 
 .tiddlywiki-calendar-widget-container {
-  min-height: 400px;
-  height: 100%;
   background-color: <<colour page-background>>;
 }
-.tiddlywiki-calendar-widget-container table {
-  margin: unset;
-}
 
-.fc-timegrid-event-harness {
-  overflow: hidden;
-}
-.fc-event-main-tags {
-  overflow: hidden;
-}
-.fc-event-main-tags > span {
-  word-break: break-all;
-  border: 1px solid;
-  padding: 1px;
-  margin: 1px;
-  margin-right: 2px;
-  margin-bottom: 0px;
-  line-height: 2em;
-}
-
-.fc-event-title-with-text {
-  text-decoration: underline;
-  text-decoration-thickness: 2px;
-  text-underline-offset: 15%;
-}
-
-.fc-event {
-  cursor: pointer;
-}
-
-/** Tentative calendar entries use an outlined treatment in grid and time views. */
-.fc .fc-event.tw-calendar-event-tentative {
-  background: transparent !important;
-  border-width: 2px;
-  border-style: dashed !important;
+.fc .fc-event.tw-calendar-event-tentative,
+.fc .fc-event.tw-calendar-event-tentative .fc-event-main {
   color: <<colour foreground>> !important;
 }
-.fc .fc-event.tw-calendar-event-tentative .fc-event-main {
-  color: <<colour foreground>>;
-}
 
-/** FullCalendar renders list events as table rows, so outline their cells instead. */
 .fc .fc-list-event.tw-calendar-event-tentative > td {
   border-top: 2px dashed <<colour table-border>>;
   border-bottom: 2px dashed <<colour table-border>>;
 }
+
 .fc .fc-list-event.tw-calendar-event-tentative > td:first-child {
   border-left: 2px dashed <<colour table-border>>;
 }
+
 .fc .fc-list-event.tw-calendar-event-tentative > td:last-child {
   border-right: 2px dashed <<colour table-border>>;
 }
-.fc .fc-list-event.tw-calendar-event-tentative .fc-list-event-dot {
-  background: transparent;
-  border-style: dashed;
-}
 
-.fc-daygrid-event > div {
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.fc button.fc-button-primary {
-  border: <<colour button-border>>;
-}
+.fc button.fc-button-primary,
 .fc button.fc-button-primary:hover {
   border: <<colour button-border>>;
 }
+
 .fc button.fc-button-primary > svg.tc-image-button {
   fill: <<colour button-foreground>>;
-}
-.fc-toolbar.fc-footer-toolbar {
-  flex-wrap: wrap;
 }
 
 .fc-col-header-cell-cushion {

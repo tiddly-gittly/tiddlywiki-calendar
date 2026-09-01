@@ -17,6 +17,9 @@ concurrency:
 
 jobs:
   validate:
+    permissions:
+      contents: read
+      issues: write
     runs-on: ubuntu-latest
     env:
       FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
@@ -60,7 +63,7 @@ jobs:
         run: pnpm exec playwright install --with-deps chromium
 
       - name: Lint Code
-        run: pnpm exec eslint ./src --max-warnings 0
+        run: pnpm run lint --max-warnings 0
 
       - name: Run Tests
         run: pnpm run test
@@ -85,6 +88,7 @@ jobs:
 
       - name: Comment PR with Results
         if: failure() && github.event_name == 'pull_request'
+        continue-on-error: true
         uses: actions/github-script@v9
         with:
           script: |
@@ -97,6 +101,7 @@ jobs:
 
       - name: Comment PR with Success
         if: success() && github.event_name == 'pull_request'
+        continue-on-error: true
         uses: actions/github-script@v9
         with:
           script: |

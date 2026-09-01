@@ -9,6 +9,9 @@ export default defineConfig({
     timeout: 10 * 1000,
   },
   fullyParallel: true,
+  // The development server compiles a large single-file wiki. Limiting concurrency
+  // prevents parallel page loads from exhausting it on CI and developer machines.
+  workers: process.env.CI ? 1 : 4,
   retries: process.env.CI ? 2 : 0,
   reporter: [['list'], ['html', { open: 'never' }]],
   use: {
@@ -29,9 +32,9 @@ export default defineConfig({
       name: 'chromium',
       use: {
         ...devices['Desktop Chrome'],
-        launchOptions: {
-          executablePath: process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH ?? '/snap/bin/chromium',
-        },
+        launchOptions: process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH
+          ? { executablePath: process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH }
+          : {},
       },
     },
   ],
