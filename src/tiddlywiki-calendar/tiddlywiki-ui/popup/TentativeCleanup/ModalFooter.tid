@@ -1,0 +1,26 @@
+title: $:/plugins/linonetwo/tw-calendar/tiddlywiki-ui/popup/TentativeCleanup/ModalFooter
+
+\procedure lingo-base() $:/plugins/linonetwo/tw-calendar/language/
+\procedure selected-tentative-filter() [list[$:/temp/tw-calendar/tentative-cleanup!!selection]] :intersection[all[tiddlers]!is[system]!has[draft.of]field:calendarEntry[yes]field:status[tentative]]
+
+<$let
+	tentativeCleanupState="$:/temp/tw-calendar/tentative-cleanup"
+	selectedTentativeCount={{{ [subfilter<selected-tentative-filter>count[]] }}}
+	nextPreview={{{ [{$:/temp/tw-calendar/tentative-cleanup}get[preview]] -[enlist{$:/temp/tw-calendar/tentative-cleanup!!selection}] [all[tiddlers]!is[system]!has[draft.of]field:calendarEntry[yes]field:status[tentative]] -[enlist{$:/temp/tw-calendar/tentative-cleanup!!selection}] +[unique[]first[]] }}}
+>
+<span class="tw-calendar-tentative-cleanup-delete-label">
+	<$button
+		class="tc-btn-invisible tc-tiddlylink tw-calendar-tentative-cleanup-delete"
+		disabled={{{ [<selectedTentativeCount>match[0]then[yes]else[no]] }}}
+	>
+		<<lingo "TentativeCleanup/DeleteSelectedPrefix">><<selectedTentativeCount>><<lingo "TentativeCleanup/DeleteSelectedSuffix">>
+		<$action-deletetiddler $filter=<<selected-tentative-filter>> />
+		<$action-setfield $tiddler=<<tentativeCleanupState>> selection="" preview=<<nextPreview>> />
+	</$button>
+</span>
+<$button class="tc-btn-invisible tc-tiddlylink">
+	<<lingo "TentativeCleanup/Close">>
+	<$action-deletetiddler $tiddler=<<tentativeCleanupState>> />
+	<$action-sendmessage $message="tm-close-tiddler" />
+</$button>
+</$let>

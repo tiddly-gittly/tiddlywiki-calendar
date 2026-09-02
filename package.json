@@ -2,6 +2,7 @@
   "url": "https://github.com/tiddly-gittly/tiddlywiki-calendar",
   "license": "MIT",
   "version": "2.6.0",
+  "packageManager": "pnpm@9.15.9",
   "scripts": {
     "dev": "tiddlywiki-plugin-dev dev",
     "dev:lan": "tiddlywiki-plugin-dev dev --lan",

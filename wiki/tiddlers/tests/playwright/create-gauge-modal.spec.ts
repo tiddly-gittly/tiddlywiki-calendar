@@ -91,7 +91,8 @@ test.describe('CreateGaugeModal tag picker', () => {
   test('标签 field accepts custom tag via add button', async ({ page }) => {
     await openCreateGaugeModal(page, '$:/plugins/linonetwo/visualization-dashboard/tiddlywiki-ui/Template/BarTagDaysWeek');
 
-    const tagsField = page.locator('.visualization-dashboard-new-gauge-field').filter({ hasText: '标签' }).first();
+    const exactTagsLabel = page.locator('.visualization-dashboard-new-gauge-field-label').getByText('标签', { exact: true });
+    const tagsField = page.locator('.visualization-dashboard-new-gauge-field').filter({ has: exactTagsLabel }).first();
     await expect(tagsField).toBeVisible();
 
     const input = tagsField.locator('input');
@@ -134,12 +135,9 @@ test.describe('CreateGaugeModal tag picker', () => {
     // The label should appear as plain "目标条目" without extra ">" characters
     expect(bodyText).toContain('目标条目');
 
-    // There should be no ">" immediately before or after "目标条目" in the raw HTML
-    const bodyHTML = await body.innerHTML();
-    expect(bodyHTML).not.toContain('&gt;目标条目');
-    expect(bodyHTML).not.toContain('目标条目&gt;');
-    expect(bodyHTML).not.toContain('>目标条目');
-    expect(bodyHTML).not.toContain('目标条目>');
+    // Check rendered text rather than HTML tag delimiters around the label element.
+    expect(bodyText).not.toMatch(/>\s*目标条目/);
+    expect(bodyText).not.toMatch(/目标条目\s*>/);
   });
 
   test('targetTiddlerFilter is respected when set on template', async ({ page }) => {

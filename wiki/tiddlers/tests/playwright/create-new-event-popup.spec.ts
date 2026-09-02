@@ -110,11 +110,74 @@ test('new event popup autofocuses caption after drag create', async ({ page }) =
   await expect(captionInput).toBeFocused();
 });
 
+const verifySelectedLanguage = async (page: import('@playwright/test').Page) => {
+  await page.goto('/#Index');
+  await page.evaluate(() => {
+    const tw = (window as unknown as Window & {
+      $tw: {
+        wiki: {
+          addTiddler: (fields: Record<string, unknown>) => void;
+        };
+      };
+    }).$tw;
+    tw.wiki.addTiddler({ title: '$:/language', text: '$:/languages/en-GB' });
+  });
+  await showEventCalendarLayout(page);
+  await openCreateEventPopup(page);
+
+  const popup = page.locator('.tw-calendar-layout-create-new-tiddler-popup');
+  await expect(popup.locator('.tw-calendar-caption-input')).toHaveAttribute('placeholder', 'Enter event title');
+  await expect(popup.locator('.tw-calendar-text-input')).toHaveAttribute('placeholder', 'Add description...');
+  await expect(popup.getByRole('button', { name: 'No Repeat' })).toBeVisible();
+  await expect(popup.getByRole('button', { name: 'Add a reminder' })).toBeVisible();
+  await expect(popup.getByRole('button', { name: 'More settings' })).toBeVisible();
+
+  await popup.getByRole('button', { name: 'No Repeat' }).click();
+  await popup.getByRole('button', { name: 'Daily' }).click();
+  const intervalSection = popup.locator('.tw-calendar-recurrence-interval');
+  await intervalSection.locator('input.tc-edit-texteditor').fill('4');
+  await intervalSection.getByRole('button', { name: 'Apply', exact: true }).click();
+  await expect(popup.locator('.tw-calendar-recurrence-human-summary')).toContainText('Every 4 days');
+
+  await popup.getByRole('button', { name: 'Add a reminder' }).click();
+  const alarms = popup.locator('.tw-calendar-alarms-wrapper');
+  await expect(alarms.locator('.tw-calendar-alarm-frequency option:checked')).toHaveText('Once');
+  await alarms.locator('.tw-calendar-alarm-frequency').selectOption('yearly');
+  await expect(alarms.locator('.tw-calendar-alarm-frequency option:checked')).toHaveText('Yearly');
+  await expect(alarms.getByRole('button', { name: 'Add alarm' })).toBeVisible();
+  await alarms.getByRole('button', { name: 'Edit alarm source' }).click();
+  await expect(alarms.locator('.tw-calendar-alarm-source-label')).toHaveText('Alarm source');
+
+  await page.evaluate(() => {
+    const tw = (window as unknown as Window & {
+      $tw: {
+        wiki: {
+          addTiddler: (fields: Record<string, unknown>) => void;
+        };
+      };
+    }).$tw;
+    tw.wiki.addTiddler({ title: '$:/language', text: '$:/languages/zh-Hans' });
+  });
+  await page.reload();
+
+  // Re-enter the calendar and create a fresh draft so that the assertions do
+  // not depend on the English modal's rendered state surviving the reload.
+  await openEventCalendarLayout(page);
+  await openCreateEventPopup(page);
+
+  const chinesePopup = page.locator('.tw-calendar-layout-create-new-tiddler-popup');
+  await expect(chinesePopup.locator('.tw-calendar-caption-input')).toHaveAttribute('placeholder', '输入日程标题');
+  await expect(chinesePopup.locator('.tw-calendar-text-input')).toHaveAttribute('placeholder', '添加描述...');
+  await expect(chinesePopup.getByRole('button', { name: '不循环' })).toBeVisible();
+  await expect(chinesePopup.getByRole('button', { name: '轻点添加提醒' })).toBeVisible();
+  await expect(chinesePopup.getByRole('button', { name: '更多设置' })).toBeVisible();
+};
+
 test('recurrence quick actions apply COUNT and UNTIL rules', async ({ page }) => {
   await openEventCalendarLayout(page);
   await openCreateEventPopup(page);
 
-  await page.getByRole('button', { name: '不重复' }).click();
+  await page.getByRole('button', { name: '不循环' }).click();
   await page.getByRole('button', { name: '每日' }).click();
 
   await expect.poll(async () => readDraftField(page, 'rrule')).toBe('FREQ=DAILY');
@@ -158,7 +221,7 @@ test('yearly alarms and raw alarm source are editable while creating an event', 
   await timeInputs.nth(0).fill('08');
   await timeInputs.nth(1).fill('45');
   await timeInputs.nth(2).fill('00');
-  await alarms.getByRole('button', { name: 'add alarm' }).click();
+  await alarms.getByRole('button', { name: '添加提醒' }).click();
 
   await expect.poll(async () => readDraftField(page, 'alarms')).toContain('yearly;....-04-28;08:45:00;');
 
@@ -365,4 +428,8 @@ test('super-tag form is rendered inside More Settings', async ({ page }) => {
   const moreSettingsWrapper = page.locator('.tw-calendar-more-settings-wrapper');
   await expect(moreSettingsWrapper).toBeVisible();
   await expect(moreSettingsWrapper).toContainText('Deep Sleep Duration');
+});
+
+test('event form uses the selected language for all calendar-owned labels', async ({ page }) => {
+  await verifySelectedLanguage(page);
 });

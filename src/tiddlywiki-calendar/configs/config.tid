@@ -13,7 +13,7 @@ caption: <<lingo "Name" "$:/plugins/linonetwo/tw-calendar/language/">>
 
 ! <<lingo PluginConfigs>>
 
-!! <<lingo AddEventTiddlerModal>>
+!! <<lingo AddEventTiddlerModal/Caption>>
 
 <<lingo AddEventTiddlerModal/Description>>
 
@@ -44,6 +44,32 @@ caption: <<lingo "Name" "$:/plugins/linonetwo/tw-calendar/language/">>
 	fileDrop=no
 	tag="input"
 />
+
+!! <<lingo "TentativeCleanup/Config/Caption">>
+
+<<lingo "TentativeCleanup/Config/Description">>
+
+<$let
+	tentativeCleanupState="$:/temp/tw-calendar/tentative-cleanup"
+	tentativeCleanupModal="$:/plugins/linonetwo/tw-calendar/tiddlywiki-ui/popup/TentativeCleanup/Modal"
+	tentativeEventFilter="[all[tiddlers]!is[system]!has[draft.of]field:calendarEntry[yes]field:status[tentative]]"
+>
+<div class="tw-calendar-tentative-cleanup-config">
+	<span class="tw-calendar-tentative-cleanup-count">
+		<<lingo "TentativeCleanup/Config/CountPrefix">><strong><$count filter=<<tentativeEventFilter>> /></strong><<lingo "TentativeCleanup/Config/CountSuffix">>
+	</span>
+	<$button class="tc-btn-invisible tc-tiddlylink tw-calendar-tentative-cleanup-open">
+		<<lingo "TentativeCleanup/Config/Open">>
+		<$action-deletetiddler $tiddler=<<tentativeCleanupState>> />
+		<$action-setfield
+			$tiddler=<<tentativeCleanupState>>
+			selection=""
+			preview={{{ [all[tiddlers]!is[system]!has[draft.of]field:calendarEntry[yes]field:status[tentative]sort[caption]sort[title]first[]] }}}
+		/>
+		<$action-sendmessage $message="tm-modal" $param=<<tentativeCleanupModal>> />
+	</$button>
+</div>
+</$let>
 
 !! <<lingo "Appearance/Caption">>
 

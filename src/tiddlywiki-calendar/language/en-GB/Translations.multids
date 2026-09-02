@@ -31,6 +31,10 @@ Modal/CreateEvent/RecurrenceUnit/Day: day
 Modal/CreateEvent/RecurrenceUnit/Week: week
 Modal/CreateEvent/RecurrenceUnit/Month: month
 Modal/CreateEvent/RecurrenceUnit/Year: year
+Modal/CreateEvent/RecurrenceUnit/Days: days
+Modal/CreateEvent/RecurrenceUnit/Weeks: weeks
+Modal/CreateEvent/RecurrenceUnit/Months: months
+Modal/CreateEvent/RecurrenceUnit/Years: years
 Modal/CreateEvent/Label/Interval: Interval
 Modal/CreateEvent/Label/ApplyInterval: Apply
 Modal/CreateEvent/Label/Count: Count
@@ -41,21 +45,102 @@ Modal/CreateEvent/Label/Times: times
 Modal/CreateEvent/Label/Advanced: Advanced
 Modal/CreateEvent/Label/HideAdvanced: Hide Advanced
 Modal/CreateEvent/Label/RawRRule: Raw RRULE
+Modal/CreateEvent/Placeholder/Title: Enter event title
+Modal/CreateEvent/Placeholder/Description: Add description...
+Modal/CreateEvent/MoreSettings/Show: More settings
+Modal/CreateEvent/MoreSettings/Hide: Hide settings
+Modal/CreateEvent/RecurrenceSummary/Every: Every
+Modal/CreateEvent/RecurrenceSummary/CountPrefix: Total
+Modal/CreateEvent/RecurrenceSummary/Separator: ,&#32;
 Modal/CreateEvent/AlarmSource/Show: Edit alarm source
 Modal/CreateEvent/AlarmSource/Hide: Hide alarm source
 Modal/CreateEvent/AlarmSource/Label: Alarm source
 Modal/CreateEvent/AlarmSource/Description: Advanced: edit the alarms field directly. Use one list item per alarm in the format frequency;date;time;message. Wrap entries containing spaces in double square brackets.
+Modal/CreateEvent/AlarmSource/Placeholder: [[yearly;....-08-26;09:00:00;Anniversary]]
 Modal/CreateEvent/AlarmFrequency/Once: Once
 Modal/CreateEvent/AlarmFrequency/Yearly: Yearly
 Modal/CreateEvent/AlarmFrequency/Monthly: Monthly
 Modal/CreateEvent/AlarmFrequency/Daily: Daily
 Modal/CreateEvent/AlarmSummary/Add: Add a reminder
 Modal/CreateEvent/AlarmSummary/Configured: Reminder configured
+Modal/CreateEvent/Alarm/Form/At: at
+Modal/CreateEvent/Alarm/Form/On: on
+Modal/CreateEvent/Alarm/Form/MonthlyPrefix: on the
+Modal/CreateEvent/Alarm/Form/MonthlySuffix: day of the month
+Modal/CreateEvent/Alarm/Form/YearlyPrefix: on
+Modal/CreateEvent/Alarm/Form/YearlySuffix: every year
+Modal/CreateEvent/Alarm/Form/MessagePlaceholder: Enter a message
+Modal/CreateEvent/Alarm/Heading: Alarms
+Modal/CreateEvent/Alarm/DefaultMessage: Alarm!
+Modal/CreateEvent/Alarm/Action: Action:
+Modal/CreateEvent/Alarm/Display/Every: Every
+Modal/CreateEvent/Alarm/Display/EveryDay: Every day
+Modal/CreateEvent/Alarm/Display/EveryMonthOn: Every month on
+Modal/CreateEvent/Alarm/Display/EveryYearOn: Every year on
+Modal/CreateEvent/Alarm/Display/At: at
+Modal/CreateEvent/Alarm/Display/Startup: startup
+Modal/CreateEvent/Alarm/Tooltip/Add: Add alarm
+Modal/CreateEvent/Alarm/Tooltip/Update: Update alarm
+Modal/CreateEvent/Alarm/Tooltip/Reset: Reset input
+Modal/CreateEvent/Alarm/Tooltip/Edit: Edit this alarm
+Modal/CreateEvent/Alarm/Tooltip/Delete: Delete this alarm
+Modal/CreateEvent/Alarm/Tooltip/DeleteAll: Delete all alarms
+Modal/CreateEvent/Alarm/Tooltip/Pause: This alarm is active; click to pause
+Modal/CreateEvent/Alarm/Tooltip/Resume: This alarm is paused; click to resume
+Modal/CreateEvent/Alarm/Tooltip/EditExpired: This alarm has expired; click to edit
+Modal/CreateEvent/Alarm/Tooltip/Open: Open
+Modal/CreateEvent/Alarm/Delete/Title: Confirm: delete alarm
+Modal/CreateEvent/Alarm/Delete/Prompt: Are you sure you want to delete this alarm?
+Modal/CreateEvent/Alarm/DeleteAll/Title: Confirm: delete all alarms
+Modal/CreateEvent/Alarm/DeleteAll/Prompt: Are you sure you want to delete all alarms?
+Modal/CreateEvent/Alarm/Button/Cancel: Cancel
+Modal/CreateEvent/Alarm/Button/Delete: Delete
+Modal/CreateEvent/Alarm/Button/View: View
+Modal/CreateEvent/Alarm/Button/Close: Close
+CalendarView/ThreeDay/Short: 3d
+CalendarView/ThreeDay/Long: 3 day
+CalendarView/Day/Short: 1d
+CalendarView/Day/Long: day
+Tentative/Status: Tentative event
+Tentative/Mark: Mark as tentative
+Tentative/Confirm: Confirm event
+Tentative/Description: This event is still being planned and has not been confirmed.
+TentativeCleanup/Title: Manage tentative events
+TentativeCleanup/Config/Caption: Tentative events
+TentativeCleanup/Config/Description: Review and remove tentative calendar events that are no longer needed.
+TentativeCleanup/Config/CountPrefix: Tentative events:&#32;
+TentativeCleanup/Config/CountSuffix:
+TentativeCleanup/Config/Open: Manage tentative events...
+TentativeCleanup/SelectAll: Select all
+TentativeCleanup/ClearSelection: Clear selection
+TentativeCleanup/Empty: No tentative events.
+TentativeCleanup/List/AriaLabel: Tentative event list
+TentativeCleanup/List/SelectAriaLabel: Select event for deletion
+TentativeCleanup/Preview/AriaLabel: Event preview
+TentativeCleanup/Preview/Empty: Select an event to preview.
+TentativeCleanup/Preview/Start: Start
+TentativeCleanup/Preview/End: End
+TentativeCleanup/Preview/Tags: Tags
+TentativeCleanup/Preview/Recurrence: Recurrence
+TentativeCleanup/DeleteSelectedPrefix: Delete selected (
+TentativeCleanup/DeleteSelectedSuffix: )
+TentativeCleanup/Close: Close
+EventContent/PreviewTooLarge: preview unavailable because the content is too large
+PopularTags/HourAbbreviation: h
+Buttons/GoToEventsCalendar/Caption: Events Calendar
+Buttons/GoToEventsCalendar/Hint: Go to Events Calendar Layout
+Buttons/GoToEventsCalendar/Description: Open the Events Calendar layout without normal tiddlers.
+Buttons/GoToTiddlersCalendar/Caption: Tiddlers Calendar
+Buttons/GoToTiddlersCalendar/Hint: Go to Tiddlers Calendar Layout
+Buttons/GoToTiddlersCalendar/Description: Open all tiddlers in an agenda or calendar using their date fields.
 EventsCalendar/Sidebar/HelpMessage: You can add tiddlers with tag `$:/tags/EventCalendarSideBarSegment` to appear here (or install community plugins that have such tiddlers). Draggable content can be added to the entry like this: `<$draggable data-event='{ "duration": "01:00" }' data-tags="Tags">`. The `data-event` attribute can set information like duration for the event created by dragging, and the `data-tags` attribute can automatically add tags to the created event.
 EventsCalendar/Sidebar/HelpMessageCreateButton: Click to create a calendar sidebar tiddler
 EventsCalendar/Sidebar/ExampleNewTiddlerContent: `<$draggable data-event='{ "duration": "02:00" }' data-tags=" Tag1 Tag2">`* Drag me to calendar to create a new event with 2 hour duration and tags "Tag1" and "Tag2"`</$draggable>`
 FrequentlyUsedTags/Caption: Frequently Used Tags
 FrequentlyUsedTags/Description: Add tags to be displayed on the create event tiddler popup, so you can click on them to add tag to new tiddler quickly. Tags can have `caption` field as displayed name. And if tags here form a tag tree, they will be displayed as a tree.
+FrequentlyUsedTags/EmptyPrefix: Go to
+FrequentlyUsedTags/SettingsLink: Plugin Settings
+FrequentlyUsedTags/EmptySuffix: in the control panel or plugin page to add frequently used tags.
 Prefix/Caption: Prefix
 Prefix/Description: Auto add prefix to all created event.
 Appearance/Caption: Appearance

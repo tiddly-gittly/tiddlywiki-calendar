@@ -89,7 +89,7 @@ export function getEventContent(context: IContext): CustomContentGenerator<Event
     const tiddlerType = tiddler.getFieldString('type', '');
     const textElement = allowedTiddlerTypeToPreview.includes(tiddlerType)
       ? createElement('div', {}, tiddlerText.substring(0, 2000))
-      : createElement('div', {}, `(${tiddler.fields.type} too large)`);
+      : createElement('div', {}, `(${lingo('EventContent/PreviewTooLarge')})`);
     const tagsElement = createElement('div', { class: 'fc-event-main-tags' }, tiddler.getFieldList('tags').map((tag) => createElement('span', {}, tag)));
     const contents = createElement('div', {}, [captionElement, tagsElement, timeElement, durationElement, textElement]);
     if (duration >= DURATION_THRESHOLD_FOR_SHOWING_TIME_AT_BOTTOM) {

@@ -1,0 +1,30 @@
+title: $:/plugins/linonetwo/tw-calendar/tiddlywiki-ui/popup/TentativeCleanup/Styles.variables.css
+tags: $:/tags/Stylesheet
+type: text/vnd.tiddlywiki
+
+.tw-calendar-tentative-cleanup-list-pane,
+.tw-calendar-tentative-cleanup-preview-pane {
+	border: 1px solid <<colour modal-border>>;
+	background: <<colour modal-background>>;
+}
+
+.tw-calendar-tentative-cleanup-row {
+	border-bottom: 1px solid <<colour very-muted-foreground>>;
+}
+
+.tw-calendar-tentative-cleanup-row.is-previewing {
+	background: <<colour tiddler-controls-foreground>>;
+	color: <<colour background>>;
+}
+
+.tw-calendar-tentative-cleanup-preview-text {
+	border-top: 1px solid <<colour very-muted-foreground>>;
+}
+
+.tw-calendar-tentative-cleanup-empty {
+	color: <<colour muted-foreground>>;
+}
+
+.tw-calendar-tentative-cleanup-delete {
+	color: <<colour alert-highlight>>;
+}

@@ -1,0 +1,84 @@
+title: $:/plugins/linonetwo/tw-calendar/tiddlywiki-ui/popup/TentativeCleanup/Modal
+subtitle: <<lingo "TentativeCleanup/Title" "$:/plugins/linonetwo/tw-calendar/language/">>
+footer: {{$:/plugins/linonetwo/tw-calendar/tiddlywiki-ui/popup/TentativeCleanup/ModalFooter}}
+class: tw-calendar-tentative-cleanup-modal
+mask-closable: no
+
+\procedure lingo-base() $:/plugins/linonetwo/tw-calendar/language/
+
+<$let
+	tentativeCleanupState="$:/temp/tw-calendar/tentative-cleanup"
+	tentativeEventFilter="[all[tiddlers]!is[system]!has[draft.of]field:calendarEntry[yes]field:status[tentative]]"
+>
+<div class="tw-calendar-tentative-cleanup-toolbar">
+	<$button class="tc-btn-invisible tc-tiddlylink">
+		<<lingo "TentativeCleanup/SelectAll">>
+		<$action-listops
+			$tiddler=<<tentativeCleanupState>>
+			$field="selection"
+			$filter="[all[tiddlers]!is[system]!has[draft.of]field:calendarEntry[yes]field:status[tentative]]"
+		/>
+	</$button>
+	<$button class="tc-btn-invisible tc-tiddlylink">
+		<<lingo "TentativeCleanup/ClearSelection">>
+		<$action-setfield $tiddler=<<tentativeCleanupState>> selection="" />
+	</$button>
+</div>
+
+<div class="tw-calendar-tentative-cleanup-layout">
+	<section class="tw-calendar-tentative-cleanup-list-pane" aria-label=<<lingo "TentativeCleanup/List/AriaLabel">>>
+		<$list filter=<<tentativeEventFilter>> variable="tentativeEvent" emptyMessage="<div class='tw-calendar-tentative-cleanup-empty'><<lingo 'TentativeCleanup/Empty'>></div>">
+			<div class={{{ [<tentativeCleanupState>get[preview]match<tentativeEvent>then[tw-calendar-tentative-cleanup-row is-previewing]else[tw-calendar-tentative-cleanup-row]] }}}>
+				<$checkbox
+					tiddler=<<tentativeCleanupState>>
+					listField="selection"
+					checked=<<tentativeEvent>>
+					class="tw-calendar-tentative-cleanup-checkbox"
+				>
+					<span class="tc-visually-hidden"><<lingo "TentativeCleanup/List/SelectAriaLabel">>: <$text text=<<tentativeEvent>> /></span>
+				</$checkbox>
+				<$button class="tc-btn-invisible tw-calendar-tentative-cleanup-row-button">
+					<$action-setfield $tiddler=<<tentativeCleanupState>> preview=<<tentativeEvent>> />
+					<span class="tw-calendar-tentative-cleanup-row-title">
+						<$view tiddler=<<tentativeEvent>> field="caption" format="text" />
+						<% if [<tentativeEvent>!has[caption]] %><$text text=<<tentativeEvent>> /><% endif %>
+					</span>
+					<span class="tw-calendar-tentative-cleanup-row-time">
+						<$view tiddler=<<tentativeEvent>> field="startDate" format="date" template={{$:/language/DateFormat}} />
+					</span>
+				</$button>
+			</div>
+		</$list>
+	</section>
+
+	<section class="tw-calendar-tentative-cleanup-preview-pane" aria-label=<<lingo "TentativeCleanup/Preview/AriaLabel">>>
+		<$list filter="[<tentativeCleanupState>get[preview]is[tiddler]field:calendarEntry[yes]field:status[tentative]]" variable="previewEvent" emptyMessage="<div class='tw-calendar-tentative-cleanup-empty'><<lingo 'TentativeCleanup/Preview/Empty'>></div>">
+			<$tiddler tiddler=<<previewEvent>>>
+				<h3 class="tw-calendar-tentative-cleanup-preview-title">
+					<$view field="caption" format="text" />
+					<% if [<currentTiddler>!has[caption]] %><$text text=<<currentTiddler>> /><% endif %>
+				</h3>
+				<dl class="tw-calendar-tentative-cleanup-preview-fields">
+					<dt><<lingo "TentativeCleanup/Preview/Start">></dt>
+					<dd><$view field="startDate" format="date" template={{$:/language/DateFormat}} /></dd>
+					<dt><<lingo "TentativeCleanup/Preview/End">></dt>
+					<dd><$view field="endDate" format="date" template={{$:/language/DateFormat}} /></dd>
+					<% if [<currentTiddler>tags[]limit[1]] %>
+						<dt><<lingo "TentativeCleanup/Preview/Tags">></dt>
+						<dd class="tw-calendar-tentative-cleanup-preview-tags">
+							<$list filter="[<currentTiddler>tags[]sort[]]" variable="eventTag"><span class="tc-tag-label"><$text text=<<eventTag>> /></span></$list>
+						</dd>
+					<% endif %>
+					<% if [<currentTiddler>has[rrule]] %>
+						<dt><<lingo "TentativeCleanup/Preview/Recurrence">></dt>
+						<dd><$macrocall $name="rrule-summary-macro" rrule={{!!rrule}} /></dd>
+					<% endif %>
+				</dl>
+				<% if [<currentTiddler>has[text]] %>
+					<div class="tw-calendar-tentative-cleanup-preview-text"><$transclude field="text" /></div>
+				<% endif %>
+			</$tiddler>
+		</$list>
+	</section>
+</div>
+</$let>

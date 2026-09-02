@@ -79,7 +79,7 @@ export function getSettings(context: IContext): CalendarOptions {
     firstDay: Number($tw.wiki.getTiddlerText('$:/plugins/linonetwo/tw-calendar/settings/firstDay') || '1') || 1,
     eventSources: [{ events: searchMode ? getEventByFilter(context) : getEventOnFullCalendarViewChange(context), id: tiddlerEventSourceID }],
     plugins: [momentTimezonePlugin, dayGridPlugin, timeGridPlugin, listPlugin, adaptivePlugin, interactionPlugin, rrulePlugin],
-    views: getCustomViews(locale),
+    views: getCustomViews(),
     initialView: context.initialView ??
       (getIsSmallScreen() ? 'timeGridThreeDay' : ($tw.wiki.getTiddlerText('$:/plugins/linonetwo/tw-calendar/settings/wideScreenDefaultView') || 'timeGridWeek')),
     now,
