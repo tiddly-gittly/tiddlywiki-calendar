@@ -51,6 +51,11 @@ class CalendarWidget extends Widget {
   }
 
   refresh(changedTiddlers: IChangedTiddlers): boolean {
+    const changedAttributes = this.computeAttributes();
+    if (['filter', 'eventFilter', 'eventSources'].some(attribute => attribute in changedAttributes)) {
+      this.refreshTiddlerEventCalendar(true);
+      return true;
+    }
     let refreshed = false;
     const context = this.getContext();
     const startDateKey = context.startDateFields?.[0] ?? 'startDate';
@@ -63,7 +68,11 @@ class CalendarWidget extends Widget {
         shouldRefreshImmediately = true;
         break;
       }
-      if (changedTiddlerTitle.startsWith('$:/state/')) continue;
+      if (changedTiddlerTitle.startsWith('$:/state/') || changedTiddlerTitle.startsWith('$:/temp/')) continue;
+      if (context.eventFilter || context.eventSources !== '') {
+        shouldRefreshChangedTiddlers = true;
+        break;
+      }
       if (changedTiddlers[changedTiddlerTitle].modified === true) {
         if (changedTiddlerInViewRange(changedTiddlerTitle, this.#calendar, endDateKey, startDateKey)) {
           shouldRefreshChangedTiddlers = true;
@@ -87,6 +96,7 @@ class CalendarWidget extends Widget {
     }
     if (
       Object.keys(changedTiddlers).some((changedTiddlerTitle) => {
+        if (changedTiddlerTitle === '$:/plugins/linonetwo/tw-calendar/settings/disabledEventSources') return false;
         // if setting changed, refresh the whole calendar, to make options take effect
         if (changedTiddlerTitle.startsWith('$:/plugins/linonetwo/tw-calendar/settings')) return true;
         return false;
@@ -177,6 +187,8 @@ class CalendarWidget extends Widget {
     return {
       endDateFields: this.getAttribute('endDateFields')?.split(','),
       filter: this.getAttribute('filter'),
+      eventFilter: this.getAttribute('eventFilter'),
+      eventSources: this.getAttribute('eventSources') ?? (getIsSearchMode() ? '' : undefined),
       obscureFilter: this.getAttribute('obscureFilter'),
       hideToolbar: this.getAttribute('hideToolbar') === 'yes',
       initialDate: this.getAttribute('initialDate') || undefined,

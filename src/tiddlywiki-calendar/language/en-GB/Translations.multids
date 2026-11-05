@@ -176,3 +176,10 @@ DaysOfWeek/Saturday: Saturday
 PopularTags/Caption: Popular Tags (Recent 7 Days)
 PopularTags/EmptyMessage: No tagged calendar entries in the recent 7 days
 Occupied: Duration occupied
+DataSources/Caption: Calendar data sources
+DataSources/RegisteredDescription: Data sources provided by plugins are enabled automatically. Select the sources to display on the calendar.
+DataSources/Empty: No plugins have registered calendar data sources.
+DataSources/Tiddlers: Event tiddler filter
+DataSources/TiddlersDescription: Select tiddlers for Events Calendar. The default selects non-system tiddlers with calendarEntry set to yes.
+DataSources/Events: Additional event filter
+DataSources/EventsDescription: Add events alongside enabled data sources. Return event JSON and use calendarStart and calendarEnd for the visible range.

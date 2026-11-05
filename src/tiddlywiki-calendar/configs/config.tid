@@ -71,12 +71,30 @@ caption: <<lingo "Name" "$:/plugins/linonetwo/tw-calendar/language/">>
 </div>
 </$let>
 
+!! <<lingo "DataSources/Caption">>
+
+<<lingo "DataSources/RegisteredDescription">>
+
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/Calendar/EventSource]]" emptyMessage="<<lingo DataSources/Empty $:/plugins/linonetwo/tw-calendar/language/>>">
+
+* <$checkbox tiddler="$:/plugins/linonetwo/tw-calendar/settings/disabledEventSources" listField="list" unchecked=<<currentTiddler>>><$transclude field="caption"/></$checkbox> — <$transclude field="description"/>
+
+</$list>
+
+;<<lingo "DataSources/Tiddlers">>
+:<<lingo "DataSources/TiddlersDescription">>
+:<$edit-text tiddler="$:/plugins/linonetwo/tw-calendar/settings/eventTiddlerFilter" tag="textarea" rows="2"/>
+;<<lingo "DataSources/Events">>
+:<<lingo "DataSources/EventsDescription">>
+:<$edit-text tiddler="$:/plugins/linonetwo/tw-calendar/settings/eventFilter" tag="textarea" rows="3"/>
+
 !! <<lingo "Appearance/Caption">>
 
 ;<<lingo "Appearance/24HourFormat">>:
 :<$checkbox tiddler="$:/plugins/linonetwo/tw-calendar/settings/24hour" field="text" checked="yes" unchecked=""> <<lingo "Appearance/24HourFormatDescription">></$checkbox>
 ;<<lingo "Appearance/WideScreenDefaultView">>: <<lingo "Appearance/WideScreenDefaultViewDescription">>
 :<$select tiddler='$:/plugins/linonetwo/tw-calendar/settings/wideScreenDefaultView'>
+	<option value='timeGridDay'><<lingo "CalendarView/Day/Long">></option>
 	<option value='timeGridThreeDay'><<lingo "Appearance/WideScreenDefaultView/ThreeDay">></option>
 	<option value='timeGridWeek'><<lingo "Appearance/WideScreenDefaultView/Week">></option>
 </$select>

@@ -35,6 +35,35 @@
   cursor: pointer;
 }
 
+/* Timed check-ins reuse FullCalendar's dot and its compact event layout. */
+.fc .fc-timegrid-event.tw-calendar-event-point {
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  font-size: inherit;
+}
+
+.fc .tw-calendar-event-point .fc-event-main {
+  padding: 0;
+}
+
+.fc .tw-calendar-event-point .fc-event-main-frame {
+  display: flex;
+  align-items: center;
+  line-height: 1;
+}
+
+.fc .tw-calendar-event-point .fc-daygrid-event-dot {
+  border-color: currentColor;
+}
+
+.fc .tw-calendar-event-point .fc-event-title {
+  font-size: inherit;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 /** Tentative calendar entries use an outlined treatment in grid and time views. */
 .fc .fc-event.tw-calendar-event-tentative {
   background: transparent !important;

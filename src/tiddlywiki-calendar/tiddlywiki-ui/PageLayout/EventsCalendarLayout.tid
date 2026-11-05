@@ -32,7 +32,8 @@ tc-page-container tc-language-$(languageTitle)$ tw-calendar-layout-container
 					<div class="event-calendar-container">
 						<$calendar
 							height="100%"
-							filter="[all[tiddlers]!is[system]field:calendarEntry[yes]]"
+							filter={{$:/plugins/linonetwo/tw-calendar/settings/eventTiddlerFilter}}
+							eventFilter={{$:/plugins/linonetwo/tw-calendar/settings/eventFilter}}
 							initialView={{$:/state/Calendar/PageLayout/EventCalendar/initialParams!!initialView}}
 							initialDate={{$:/state/Calendar/PageLayout/EventCalendar/initialParams!!initialDate}}
 							draggableContainer=".event-calendar-sidebar.tc-sidebar-scrollable"

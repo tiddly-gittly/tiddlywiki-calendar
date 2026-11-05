@@ -50,6 +50,15 @@ export function getHandlers(context: IContext): CalendarOptions {
 
   const handlers: CalendarOptions = {
     eventDidMount: (info) => {
+      if (info.event.extendedProps.activityLog && !info.event.allDay && info.view.type.startsWith('list')) {
+        const use24HourFormat = $tw.wiki.getTiddlerText('$:/plugins/linonetwo/tw-calendar/settings/24hour') === 'yes';
+        const timeCell = info.el.querySelector('.fc-list-event-time')!;
+        timeCell.textContent = info.view.calendar.formatDate(info.event.start!, {
+          hour: 'numeric',
+          minute: '2-digit',
+          ...(use24HourFormat ? { hour12: false } : {}),
+        });
+      }
       // In searchResultList, we want to reverse the DOM order so newest days appear first
       // We do this reliably by deferring it to a microtask after events finish rendering
       if (getIsSearchMode() && info.view.type === 'searchResultList') {
@@ -155,6 +164,10 @@ export function getHandlers(context: IContext): CalendarOptions {
     },
     eventClick: async (info) => {
       if (!context.widget) return;
+      if (info.event.extendedProps.activityLog) {
+        context.widget.dispatchEvent({ type: 'tm-navigate', navigateTo: info.event.title });
+        return;
+      }
       const previewWidgetDataName = 'tiddlywiki-calendar-widget-event-preview';
       const recurrenceEditorStateTitle = `$:/temp/tw-calendar/recurrence-editor/${info.event.title}`;
       $tw.wiki.deleteTiddler(recurrenceEditorStateTitle);
