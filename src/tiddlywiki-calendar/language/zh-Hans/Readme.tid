@@ -17,3 +17,39 @@ title: $:/plugins/linonetwo/tw-calendar/language/zh-Hans/Readme
 !! 开发子插件
 
 参阅[[官方知识库|https://tiddly-gittly.github.io/tiddlywiki-calendar/]]。
+
+
+!! 筛选器提供事件记录
+
+使用 `eventFilter` 提供 FullCalendar 事件 JSON 列表，无需为每次事件创建条目。组件提供当前可见范围的 `calendarStart`、`calendarEnd` 变量，采用 UTC 太微时间戳，包含开始、不包含结束。
+
+安装活动日志工具后：
+
+```wikitext
+<$calendar filter="[all[]limit[0]]" eventSources="" eventFilter="[tag[$:/Tags/ActivityLog]activityevents<calendarStart>,<calendarEnd>]" />
+```
+
+时间戳、时间间隔日志显示具体时刻；每日次数、游程编码日志显示全天次数。点击打卡事件打开日志，日志修改后自动刷新日历。
+
+
+!! 在标准日程中显示药物打卡
+
+安装活动日志工具和健康记录插件后，“药物打卡”数据源自动启用。打开控制面板 → 设置 → 日历 → 日历数据源，可以勾选或关闭它。日志无需添加 `calendarEntry` 字段。
+
+顶部切换“1日”即可查看时间点；也可在“外观”的默认视图中选择“1日”。每日次数及只有日期的历史记录显示在全天栏。
+
+!! 注册日历数据源
+
+插件提供带有 `$:/tags/Calendar/EventSource` 标签的条目。`caption`、`description` 显示在设置列表中，支持维基文本；`filter` 返回 FullCalendar 事件 JSON 列表。例如：
+
+```wikitext
+title: $:/my-plugin/calendar/Checkins
+tags: $:/tags/Calendar/EventSource
+caption: 打卡记录
+description: 显示每天的打卡记录。
+filter: [tag[$:/Tags/ActivityLog]activityevents<calendarStart>,<calendarEnd>]
+```
+
+日历自动发现普通条目和插件影子条目中的数据源。筛选器执行时，`currentTiddler` 为数据源条目，`calendarStart`、`calendarEnd` 为当前可见范围。开关保存在 `$:/plugins/linonetwo/tw-calendar/settings/disabledEventSources` 的 `list` 字段中；未关闭的数据源默认启用。
+
+`<$calendar />` 默认加载已启用的数据源。嵌入日历可用 `eventSources=""` 关闭自动加载，或用 `eventSources` 筛选器选择数据源条目。“补充事件筛选器”仍可添加自定义事件；“日程条目筛选器”控制普通日程。搜索视图只显示搜索结果。

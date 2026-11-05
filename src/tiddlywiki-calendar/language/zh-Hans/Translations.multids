@@ -176,3 +176,10 @@ DaysOfWeek/Saturday: 星期六
 PopularTags/Caption: 热门标签（最近7天）
 PopularTags/EmptyMessage: 最近7天没有带标签的日历条目
 Occupied: 时间段已占用
+DataSources/Caption: 日历数据源
+DataSources/RegisteredDescription: 插件提供的数据源会自动启用。勾选要在日历中显示的数据源。
+DataSources/Empty: 尚无插件注册日历数据源。
+DataSources/Tiddlers: 日程条目筛选器
+DataSources/TiddlersDescription: 选择在日程中显示的条目。默认显示 calendarEntry 为 yes 的非系统条目。
+DataSources/Events: 补充事件筛选器
+DataSources/EventsDescription: 在已启用的数据源之外补充事件。筛选器返回事件 JSON，可使用 calendarStart、calendarEnd 获取当前可见范围。

@@ -33,6 +33,10 @@ export interface IContext {
   endDateFields?: string[];
   /** a custom filter to replace the default `[all[tiddlers]!is[system]]` filter */
   filter?: string;
+  /** Filter returning JSON event records; calendarStart/calendarEnd contain the visible range as UTC wiki dates. */
+  eventFilter?: string;
+  /** Filter selecting registered event source tiddlers. Defaults to enabled $:/tags/Calendar/EventSource entries. */
+  eventSources?: string;
   /** hide toolbar buttons and title, only show the pure calendar content. So it can be used as a small calendar widget, for example. */
   hideToolbar?: boolean;
   /** when calendar open, the initial start date it shows */
@@ -85,6 +89,7 @@ export function getSettings(context: IContext): CalendarOptions {
     now,
     editable: context.readonly !== true,
     eventContent: getEventContent(context),
+    eventClassNames: ({ event, view }) => event.extendedProps.activityLog && !event.allDay && view.type.startsWith('timeGrid') ? ['tw-calendar-event-point'] : [],
     timeZone: context.timeZone ?? moment.tz.guess(),
     navLinks: true,
     selectable: true,

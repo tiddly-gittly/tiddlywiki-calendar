@@ -3,6 +3,7 @@
 import type { EventInput, EventSourceFunc, EventSourceFuncArg } from '@fullcalendar/core';
 import type { ITiddlerFields, Tiddler } from 'tiddlywiki';
 import { draftTiddlerTitle, getIsSearchMode } from './constants';
+import { getEventSourceTitles } from './eventSources';
 import type { IContext } from './initCalendar';
 import { allDayDateLength, isAllDaySpan, normalizeRRule, parseTwDate, toDurationInput } from './rrule';
 
@@ -37,20 +38,43 @@ export const getEventOnFullCalendarViewChange = (context: IContext): EventSource
     return array.indexOf(value) === index;
   });
   const eventsOnPeriod = getEvents(titles, context);
-  return eventsOnPeriod;
+  return [...eventsOnPeriod, ...getEventsFromFilter(context, argument)];
 };
 
 /**
  * Get event only based on filter.
  */
-export const getEventByFilter = (context: IContext): EventSourceFunc => async (_argument: EventSourceFuncArg) => {
+export const getEventByFilter = (context: IContext): EventSourceFunc => async (argument: EventSourceFuncArg) => {
   const { filter, widget } = context;
-  if (!filter) return [];
+  if (!filter) return getEventsFromFilter(context, argument);
   // no need to uniq here, let filter itself do the uniq.
   const titles = $tw.wiki.filterTiddlers(filter, widget);
   const eventsOnPeriod = getEvents(titles, context);
-  return eventsOnPeriod;
+  return [...eventsOnPeriod, ...getEventsFromFilter(context, argument)];
 };
+
+/** Additional event records, without creating one tiddler per occurrence. */
+export function getEventsFromFilter(context: IContext, range: EventSourceFuncArg): EventInput[] {
+  const widget = (context.widget ?? $tw.rootWidget).makeFakeWidgetWithVariables({
+    calendarStart: $tw.utils.stringifyDate(range.start),
+    calendarEnd: $tw.utils.stringifyDate(range.end),
+  });
+  const registeredEvents = getEventSourceTitles(context).flatMap((title) => {
+    const sourceWidget = widget.makeFakeWidgetWithVariables({ currentTiddler: title });
+    const filter = $tw.wiki.getTiddler(title)!.getFieldString('filter');
+    return $tw.wiki.filterTiddlers(filter, sourceWidget);
+  });
+  const additionalEvents = context.eventFilter ? $tw.wiki.filterTiddlers(context.eventFilter, widget) : [];
+  return [...registeredEvents, ...additionalEvents].map((record) => {
+    const event = JSON.parse(record) as EventInput;
+    if (event.extendedProps?.activityLog && !event.allDay) {
+      // FullCalendar replaces a missing or zero-length end with one hour. One millisecond
+      // keeps the point in its minimum-height layout; the stored check-in has no duration.
+      return { ...event, display: 'list-item', end: new Date(Date.parse(event.start as string) + 1).toISOString() };
+    }
+    return event;
+  });
+}
 
 export function getEvents(tiddlerTitles: string[], context: IContext): EventInput[] {
   const currentPalette: Record<string, string> = $tw.wiki.getTiddlerData($tw.wiki.getTiddlerText('$:/palette') ?? '$:/palettes/Vanilla');

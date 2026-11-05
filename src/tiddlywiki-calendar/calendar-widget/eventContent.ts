@@ -16,6 +16,18 @@ const getDateDuration = dateDurationMacro.run;
  */
 export function getEventContent(context: IContext): CustomContentGenerator<EventContentArg> {
   return (argument, createElement: typeof h) => {
+    if (argument.event.extendedProps.activityLog) {
+      const { activityLabel, activityCount } = argument.event.extendedProps;
+      const count = activityCount > 1 ? ` ×${activityCount}` : '';
+      if (!argument.event.allDay && argument.view.type.startsWith('timeGrid')) {
+        const label = `${argument.timeText} ${String(activityLabel)}${count}`;
+        return createElement('div', { className: 'fc-event-main-frame' }, [
+          createElement('span', { className: 'fc-daygrid-event-dot', 'aria-hidden': true }),
+          createElement('span', { className: 'fc-event-title', title: label }, label),
+        ]);
+      }
+      return createElement('div', {}, [argument.timeText, ' ', String(activityLabel), count]);
+    }
     // if this tiddler is calendar draft, use draft caption instead
     const titleText = argument.event.title === draftTiddlerTitle ? ($tw.wiki.getTiddler(draftTiddlerCaptionTitle)?.fields['draft.title'] ?? '...') : argument.event.title;
     const titleElement = createElement('div', {}, titleText);

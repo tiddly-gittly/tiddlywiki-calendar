@@ -17,3 +17,39 @@ title: $:/plugins/linonetwo/tw-calendar/language/en-GB/Readme
 !! Developing Sub-Plugin
 
 See [[Official wiki|https://tiddly-gittly.github.io/tiddlywiki-calendar/]].
+
+
+!! Event records from a filter
+
+Use `eventFilter` to supply FullCalendar event JSON records without creating one tiddler per event. The widget provides `calendarStart` and `calendarEnd` as UTC TiddlyWiki timestamps for the visible range (start inclusive, end exclusive).
+
+With Activity Log Tools installed:
+
+```wikitext
+<$calendar filter="[all[]limit[0]]" eventSources="" eventFilter="[tag[$:/Tags/ActivityLog]activityevents<calendarStart>,<calendarEnd>]" />
+```
+
+Timestamp and interval logs display recorded times; daily count and RLE logs display all-day counts. Clicking a check-in opens its log. Changes to log tiddlers refresh the calendar.
+
+
+!! Medicine check-ins in Events Calendar
+
+Install Activity Log Tools and Health Tracker to enable the Medicine check-ins source automatically. In Control Panel → Settings → Calendar → Calendar data sources, select or clear its checkbox. Check-in logs do not need a `calendarEntry` field.
+
+Select the 1-day view in the toolbar or the default view setting. Daily counts and date-only history appear in the all-day section.
+
+!! Registering calendar data sources
+
+Plugins provide tiddlers tagged `$:/tags/Calendar/EventSource`. Their `caption` and `description` fields appear in settings and support WikiText; `filter` returns FullCalendar event JSON records. For example:
+
+```wikitext
+title: $:/my-plugin/calendar/Checkins
+tags: $:/tags/Calendar/EventSource
+caption: Check-ins
+description: Show daily check-in records.
+filter: [tag[$:/Tags/ActivityLog]activityevents<calendarStart>,<calendarEnd>]
+```
+
+Sources in both regular and shadow tiddlers are discovered automatically. Filters receive `currentTiddler` as the source tiddler and `calendarStart` / `calendarEnd` as the visible range. Disabled source titles are saved in the `list` field of `$:/plugins/linonetwo/tw-calendar/settings/disabledEventSources`; all other sources are enabled by default.
+
+`<$calendar />` loads enabled sources by default. An embedded calendar can set `eventSources=""` to disable discovery or use an `eventSources` filter to select source tiddlers. The additional event filter accepts custom events, and the event tiddler filter selects regular events. Search view only displays search results.

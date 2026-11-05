@@ -7,3 +7,5 @@ frequently-used-tags:
 prefix: 
 24hour: 
 wideScreenDefaultView: timeGridThreeDay
+eventTiddlerFilter: [all[tiddlers]!is[system]field:calendarEntry[yes]]
+eventFilter:
